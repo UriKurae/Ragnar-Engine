@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 121706680,
+                    "pointer": 115534224,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,9 +144,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -51.275699615478516,
+                        -37.443355560302734,
                         0,
-                        185.07192993164062
+                        157.4326171875
                     ],
                     "Quaternion": [
                         0,
@@ -184,14 +184,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        40.201366424560547,
-                        -36.546707153320312
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        9.5708490022161641e-09,
+                        0.34202012419700623,
                         0,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -210,21 +210,21 @@
                     "Vertical Fov": 0.42143398523330688,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -16.37696647644043,
-                        40.201366424560547,
-                        195.92599487304688
+                        10.302028656005859,
+                        55,
+                        172.28219604492188
                     ],
                     "Type": 3,
-                    "Zoom": 0,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -51.275699615478516,
+                        -37.443355560302734,
                         0,
-                        185.07192993164062
+                        157.4326171875
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -535,7 +535,7 @@
             "Parent UUID": 1179485366,
             "Name": "Decoration",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -702,7 +702,7 @@
             "Parent UUID": 223123506,
             "Name": "RockSmall1_low2",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -713,25 +713,25 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -47.173110961914062,
+                        -46.27764892578125,
                         1.1693505048751831,
                         26.811119079589844
                     ],
                     "Quaternion": [
                         0,
-                        0.70710676908493042,
+                        0.70710664987564087,
                         0,
-                        0.70710676908493042
+                        0.70710688829421997
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        -0,
+                        1.570451021194458,
+                        -0
                     ],
                     "Scale": [
+                        0.99999487400054932,
                         1,
-                        1,
-                        1
+                        0.99999487400054932
                     ]
                 },
                 {
@@ -766,7 +766,7 @@
             "Parent UUID": 223123506,
             "Name": "RockSmall1_low1",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -777,25 +777,25 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        22.34522819519043,
+                        22.267755508422852,
                         1.1756726503372192,
-                        -10.68670654296875
+                        -10.011272430419922
                     ],
                     "Quaternion": [
                         0,
-                        0.70710676908493042,
+                        0.70710664987564087,
                         0,
-                        0.70710676908493042
+                        0.70710688829421997
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        -0,
+                        1.570451021194458,
+                        -0
                     ],
                     "Scale": [
+                        0.99999284744262695,
                         1,
-                        1,
-                        1
+                        0.99999284744262695
                     ]
                 },
                 {
@@ -3837,7 +3837,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
-                    "fActivation": false,
+                    "fActivation": true,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -3970,7 +3970,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
-                    "fActivation": false,
+                    "fActivation": true,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -4103,7 +4103,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
-                    "fActivation": false,
+                    "fActivation": true,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -5871,7 +5871,7 @@
             "Parent UUID": 1205518201,
             "Name": "RockMedium2_low46",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -5935,7 +5935,7 @@
             "Parent UUID": 1205518201,
             "Name": "RockMedium1_low44",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -5999,7 +5999,7 @@
             "Parent UUID": 1205518201,
             "Name": "RockMedium2_low45",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6063,7 +6063,7 @@
             "Parent UUID": 1205518201,
             "Name": "RockMedium2_low44",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -7023,7 +7023,7 @@
             "Parent UUID": 1179485366,
             "Name": "Colliders",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -7087,10 +7087,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_01",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7151,10 +7151,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_02",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7215,10 +7215,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_03",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7279,10 +7279,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_04",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7343,10 +7343,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_05",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7407,10 +7407,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_06",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7471,10 +7471,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_07",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7535,10 +7535,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_08",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7599,10 +7599,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_09",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7663,10 +7663,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_10",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7727,10 +7727,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_11",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7791,10 +7791,10 @@
             "Parent UUID": 1385683866,
             "Name": "Collider_12",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7854,11 +7854,11 @@
             "UUID": 1410814962,
             "Parent UUID": 1385683866,
             "Name": "Collider_13",
-            "Active": false,
+            "Active": true,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -7918,11 +7918,11 @@
             "UUID": 1994308563,
             "Parent UUID": 1385683866,
             "Name": "Collider_14",
-            "Active": false,
+            "Active": true,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Collider",
             "layer": "Default",
             "Is Interactuable": false,
             "Components": [
@@ -8365,7 +8365,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 375565456,
+                    "pointer": 440577760,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9267,7 +9267,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
-                    "fActivation": false,
+                    "fActivation": true,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -10805,7 +10805,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10874,7 +10874,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11531,7 +11531,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11600,7 +11600,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11669,7 +11669,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -14863,7 +14863,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 434680928,
+                    "pointer": 488453728,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -19338,7 +19338,7 @@
             "Name": "DialogueLevel1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/DialogueLevel1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -19377,7 +19377,7 @@
             "Name": "DialogueTrigger3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "DialogueTrigger",
             "layer": "Default",
@@ -19441,7 +19441,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 464339768,
+                    "pointer": 501665328,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0,
@@ -19455,7 +19455,7 @@
             "Name": "DialogueTrigger0",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "DialogueTrigger",
             "layer": "Default",
@@ -19519,13 +19519,32 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 464340344,
+                    "pointer": 501665472,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0,
                     "isUsed": false
                 }
             ]
+        }
+    ],
+    "NavMesh": [
+        {
+            "cellSize": 0.30000001192092896,
+            "cellHeight": 0.20000000298023224,
+            "agentHeight": 2,
+            "agentRadius": 0.5,
+            "agentMaxClimb": 0,
+            "agentMaxSlope": 0.10000000149011612,
+            "regionMinSize": 8,
+            "regionMergeSize": 20,
+            "edgeMaxLen": 12,
+            "edgeMaxError": 1.2999999523162842,
+            "vertsPerPoly": 6,
+            "detailSampleDist": 6,
+            "detailSampleMaxError": 1,
+            "partitionType": 0,
+            "tileSize": 32
         }
     ]
 }
