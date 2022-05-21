@@ -12,9 +12,11 @@
 
 #include "Profiling.h"
 
-ComponentLight::ComponentLight()
+ComponentLight::ComponentLight(GameObject* own)
 {
 	this->type = ComponentType::LIGHT;
+	owner = own;
+	ownerTransform = owner->GetComponent<TransformComponent>();
 }
 
 ComponentLight::~ComponentLight()
@@ -41,10 +43,10 @@ bool ComponentLight::Update(float dt)
 
 	if (light->type == LightType::DIRECTIONAL)
 	{			
-		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
+		if (ownerTransform)
 		{
 			DirectionalLight* l = (DirectionalLight*)light;
-			l->dir = tr->GetRotation().CastToFloat4().Float3Part();
+			l->dir = ownerTransform->GetRotation().CastToFloat4().Float3Part();
 			l->dir.Normalize();
 			
 			Frustum frustum;
@@ -82,10 +84,10 @@ bool ComponentLight::Update(float dt)
 	}
 	else if (light->type == LightType::POINT)
 	{
-		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
+		if (ownerTransform)
 		{
 			PointLight* l = (PointLight*)light;
-			float3 pos = tr->GetGlobalPosition();
+			float3 pos = ownerTransform->GetGlobalPosition();
 			if (pos.x != l->position.x || pos.y != l->position.y || pos.z != l->position.z)
 			{
 				l->position = pos;
@@ -95,24 +97,24 @@ bool ComponentLight::Update(float dt)
 	}
 	else if (light->type == LightType::SPOT)
 	{
-		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
+		if (ownerTransform)
 		{
 			SpotLight* l = (SpotLight*)light;
-			float3 pos = tr->GetGlobalPosition();
+			float3 pos = ownerTransform->GetGlobalPosition();
 			if (pos.x != l->position.x || pos.y != l->position.y || pos.z != l->position.z)
 			{
 				l->position = pos;
 				light = l;
 			}
 			
-			float3 dir = tr->GetRotation().CastToFloat4().Float3Part();
+			float3 dir = ownerTransform->GetRotation().CastToFloat4().Float3Part();
 			if (dir.x == 0 && dir.y == 0 && dir.z == 0)
 			{
 				l->direction = { 0,-1,0 };
 			}
 			else
 			{
-				l->direction = tr->GetRotation().CastToFloat4().Float3Part();
+				l->direction = ownerTransform->GetRotation().CastToFloat4().Float3Part();
 				l->direction.Normalize();
 			}
 			
