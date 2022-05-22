@@ -476,41 +476,52 @@ void ModuleUI::CleanText(std::string& text)
 
 	for (int i = 0; i < text.length(); i++)
 	{
+		if ((text[i]) == 'Â') {
+			if ((text[i + 1]) == '¡') {
+				text.replace(i, 2, "¡");
+				continue;
+			}
+			if ((text[i + 1]) == '¿') {
+				text.replace(i, 2, "¿");
+				continue;
+			}
+		
+		}
 		if ((text[i]) != 'Ã') continue;
-
-		if ((text[i + 1]) == '±') {
-			text.replace(i, 2, "ñ");
-			continue;
+		else
+		{
+			if ((text[i + 1]) == '±') {
+				text.replace(i, 2, "ñ");
+				continue;
+			}
+			if ((text[i + 1]) == '‘'){
+				text.replace(i, 2, "Ñ");
+				continue;
+			}
+			if ((text[i + 1]) == '¡'){
+				text.replace(i, 2, "á");
+				continue;
+			}
+			if ((text[i + 1]) == '©'){
+				text.replace(i, 2, "é");
+				continue;
+			}
+			if ((text[i + 1]) == '³'){
+				text.replace(i, 2, "ó");
+				continue;
+			}
+			if ((text[i + 1]) == 'º'){
+				text.replace(i, 2, "ú");
+				continue;
+			}
+			if ((text[i + 1]) == '¼'){
+				text.replace(i, 2, "ü");
+				continue;
+			}
+			text.replace(i, 2, "í");
 		}
-		if ((text[i + 1]) == '‘'){
-			text.replace(i, 2, "Ñ");
-			continue;
-		}
-		if ((text[i + 1]) == '¡'){
-			text.replace(i, 2, "á");
-			continue;
-		}
-		if ((text[i + 1]) == '©'){
-			text.replace(i, 2, "é");
-			continue;
-		}
-		if ((text[i + 1]) == '³'){
-			text.replace(i, 2, "ó");
-			continue;
-		}
-		if ((text[i + 1]) == 'º'){
-			text.replace(i, 2, "ú");
-			continue;
-		}
-		if ((text[i + 1]) == '¼'){
-			text.replace(i, 2, "ü");
-			continue;
-		}
-		text.replace(i, 2, "í");
-
+		
 	}
-
-	
 }
 // Draw all text letters
 void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
