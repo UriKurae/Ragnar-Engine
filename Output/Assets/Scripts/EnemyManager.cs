@@ -28,6 +28,7 @@ public class EnemyManager : RagnarComponent
                     basicEnemyScript.state = enemies[i].state;
                     basicEnemyScript.enemyType = enemies[i].type;
                     basicEnemyScript.colliders = colliders;
+                    basicEnemyScript.coneRotate = enemies[i].coneRotate;
                     break;
                 case EnemyType.TANK:
                     enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy", enemies[i].spawnPoint.transform.globalPosition));
