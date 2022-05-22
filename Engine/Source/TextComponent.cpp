@@ -18,6 +18,7 @@
 
 TextComponent::TextComponent(GameObject* own)
 {
+	owner = own;
 	type = ComponentType::UI_TEXT;
 	own->isUI = true;
 	active = true;
@@ -38,6 +39,13 @@ TextComponent::TextComponent(GameObject* own)
 	savetext();
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
+
+	// Get components
+	if (owner)
+	{
+		ownerTransform2DComponent = owner->GetComponent<ComponentTransform2D>();
+		ownerMaterialComponent = owner->GetComponent<MaterialComponent>();
+	}
 }
 
 TextComponent::~TextComponent()
@@ -61,7 +69,7 @@ void TextComponent::Draw(CameraComponent* gameCam)
 		glAlphaFunc(GL_GREATER, 0.5);
 		glEnable(GL_ALPHA_TEST);
 
-		planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+		planeToDraw->DrawPlane2D(ownerMaterialComponent->GetTexture().get());
 
 		glDisable(GL_ALPHA_TEST);
 		glColor3f(255, 255, 255);
@@ -135,9 +143,9 @@ void TextComponent::OnEditor()
 
 float2 TextComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
-	float3 position = transform2D->GetPosition();
+	float3 position = ownerTransform2DComponent->GetPosition();
 	return { position.x/2, position.y/2 };
+	
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
@@ -232,7 +240,7 @@ void TextComponent::loadFont(std::string path) {
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		// load first 128 characters of ASCII set
-		for (unsigned char c = 0; c < 128; c++)
+		for (unsigned char c = 0; c < 255; c++)
 		{
 			// Load character glyph 
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))

@@ -21,36 +21,41 @@ public class EnemyManager : RagnarComponent
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Basic Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Basic Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
-                    enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<BasicEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<BasicEnemy>().enemyType = enemies[i].type;
-                    enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
+                    BasicEnemy basicEnemyScript = enemyGOs[i].GetComponent<BasicEnemy>();
+                    basicEnemyScript.waypoints = enemies[i].waypoints;
+                    basicEnemyScript.state = enemies[i].state;
+                    basicEnemyScript.enemyType = enemies[i].type;
+                    basicEnemyScript.colliders = colliders;
+                    basicEnemyScript.coneRotate = enemies[i].coneRotate;
                     break;
                 case EnemyType.TANK:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
-                    enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<TankEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<TankEnemy>().enemyType = enemies[i].type;
-                    enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
+                    TankEnemy tankEnemyScript = enemyGOs[i].GetComponent<TankEnemy>();
+                    tankEnemyScript.waypoints = enemies[i].waypoints;
+                    tankEnemyScript.state = enemies[i].state;
+                    tankEnemyScript.enemyType = enemies[i].type;
+                    tankEnemyScript.colliders = colliders;
                     break;
                 case EnemyType.UNDISTRACTABLE:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Undistractable Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Undistractable Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().enemyType = enemies[i].type;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
+                    UndistractableEnemy undistractableEnemyScript = enemyGOs[i].GetComponent<UndistractableEnemy>();
+                    undistractableEnemyScript.waypoints = enemies[i].waypoints;
+                    undistractableEnemyScript.state = enemies[i].state;
+                    undistractableEnemyScript.enemyType = enemies[i].type;
+                    undistractableEnemyScript.colliders = colliders;
                     break;
                 case EnemyType.AIR:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Air Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Air Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
-                    enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<AirEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<AirEnemy>().enemyType = enemies[i].type;
-                    enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
+                    AirEnemy airEnemyScript = enemyGOs[i].GetComponent<AirEnemy>();
+                    airEnemyScript.waypoints = enemies[i].waypoints;
+                    airEnemyScript.state = enemies[i].state;
+                    airEnemyScript.enemyType = enemies[i].type;
+                    airEnemyScript.colliders = colliders;
                     break;
             }
             enemyGOs[i].SubmitOutlineDrawing(new Vector3(1, 0, 0));
@@ -79,20 +84,23 @@ public class EnemyManager : RagnarComponent
                     {
                         case EnemyType.BASIC:
                             enemyGOs[i].ChangeMesh("1_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
-                            //TODO: Check if drone destroyed
+                        //TODO: Check if drone destroyed
                         case EnemyType.AIR:
                             enemyGOs[i].ChangeMesh("4_modeldeath");
                             break;
                         case EnemyType.TANK:
                             enemyGOs[i].ChangeMesh("3_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
                         case EnemyType.UNDISTRACTABLE:
                             enemyGOs[i].ChangeMesh("2_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
                     };
 
-                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
+                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", enemyGOs[i].transform.globalPosition, true);
                     sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
                     sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
@@ -101,6 +109,7 @@ public class EnemyManager : RagnarComponent
                     enemyGOs[i].isInteractuable = true;
                     enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
                     enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
+                    
                 }
             }
         }
@@ -108,11 +117,13 @@ public class EnemyManager : RagnarComponent
 
     private void SetEnemyPositionAndRotation(GameObject e, Enemies data)
     {
-        e.GetComponent<Rigidbody>().SetBodyPosition(data.spawnPoint.transform.globalPosition);
+        Rigidbody rb = e.GetComponent<Rigidbody>();
+        // Done when instancing prefab
+        //rb.SetBodyPosition(data.spawnPoint.transform.globalPosition);
 
         Quaternion rotation = GetFinalRotation(data);
 
-        e.GetComponent<Rigidbody>().SetBodyRotation(rotation);
+        rb.SetBodyRotation(rotation);
     }
 
     private static Quaternion GetFinalRotation(Enemies data)

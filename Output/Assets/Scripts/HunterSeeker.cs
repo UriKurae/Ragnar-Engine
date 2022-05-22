@@ -55,12 +55,20 @@ public class HunterSeeker : RagnarComponent
 			if (Attack())
 			{
                 sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
-                GameObject player = GameObject.Find("Player_2");
+				// TODO: Must check if more players need to be found, if it's only player 2, it is already stored in "player" at the start
+                // GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
 				InternalCalls.Destroy(gameObject);
 				leftParticles.Pause();
 				rightParticles.Pause();
 			}
+		}
+		if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
+		{
+			GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters[1].abilities[2].cooldown = 0;
+			leftParticles.Pause();
+			rightParticles.Pause();
+			InternalCalls.Destroy(gameObject);
 		}
 	}
 	public bool Attack()
@@ -93,9 +101,9 @@ public class HunterSeeker : RagnarComponent
 		if (other.gameObject.tag == "Enemies")
         {
 			player.GetComponent<Player>().SetControled(true);
-			InternalCalls.Destroy(gameObject);
 			leftParticles.Pause();
 			rightParticles.Pause();
+			InternalCalls.Destroy(gameObject);
 		}
 	}
 }

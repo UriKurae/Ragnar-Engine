@@ -24,6 +24,7 @@
 
 #include "GL/glew.h"
 #include "Profiling.h"
+#include <locale.h>
 
 #include FT_FREETYPE_H 
 
@@ -128,11 +129,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	DropDownComponent* theDrop = nullptr;
 
 	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
-	theDrop = own->GetComponent<DropDownComponent>();
-	theButton = own->GetComponent<ButtonComponent>();
-	theSlider = own->GetComponent<SliderComponent>();
-	theCheckbox = own->GetComponent<CheckboxComponent>();
-	theImage = own->GetComponent<ImageComponent>();
+	
 	if (texture)
 		texture->Bind();
 	shader->Use();
@@ -153,26 +150,20 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 
-
-	
-	
 	math::float4x4 model = math::float4x4::identity;
-	if (theButton)
+	if (theButton = own->GetComponent<ButtonComponent>())
 	{
-		
-		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
-		math::float3 scl = math::float3(w->GetScale().x* CONVERSION_FACTOR, w->GetScale().y* CONVERSION_FACTOR, 0.9f);
-		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		math::float3 scl = math::float3(auxTrans->GetScale().x* CONVERSION_FACTOR, auxTrans->GetScale().y* CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(auxTrans->GetPosition().x, auxTrans->GetPosition().y, 0.9f);
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		//theButton->GetAlpha()
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
-	else if (theSlider)
+	else if (theSlider = own->GetComponent<SliderComponent>())
 	{
-		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
-		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
-		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		math::float3 scl = math::float3(auxTrans->GetScale().x * CONVERSION_FACTOR, auxTrans->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(auxTrans->GetPosition().x, auxTrans->GetPosition().y, 1.0f);
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		if (theSlider->GetFirstDraw()) {
@@ -181,10 +172,11 @@ void MyPlane::DrawPlane2D(Texture* texture)
 				if (own->components[a]->type == ComponentType::TRANFORM2D)
 				{
 					cont++;
-					if (cont == 1) {
+					// What is this if man
+					//if (cont == 1) {
 
-					}
-					else
+					//}
+					if (cont != 1)
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
 
@@ -198,33 +190,28 @@ void MyPlane::DrawPlane2D(Texture* texture)
 				}
 			}
 		}
-
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, theSlider->GetAlpha());
 	}
-	else if (theCheckbox)
+	else if (theCheckbox = own->GetComponent<CheckboxComponent>())
 	{
-		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
-		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
-		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		math::float3 scl = math::float3(auxTrans->GetScale().x * CONVERSION_FACTOR, auxTrans->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(auxTrans->GetPosition().x, auxTrans->GetPosition().y, 1.0f);
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
-	else if (theImage)
+	else if (theImage = own->GetComponent<ImageComponent>())
 	{
-		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
-		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
-		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		math::float3 scl = math::float3(auxTrans->GetScale().x * CONVERSION_FACTOR, auxTrans->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(auxTrans->GetPosition().x, auxTrans->GetPosition().y, 1.0f);
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
-	if (theDrop)
+	if (theDrop = own->GetComponent<DropDownComponent>())
 	{
-
-		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
-		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 0.9f);
-		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		math::float3 scl = math::float3(auxTrans->GetScale().x * CONVERSION_FACTOR, auxTrans->GetScale().y * CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(auxTrans->GetPosition().x, auxTrans->GetPosition().y, 0.9f);
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		//theButton->GetAlpha()
@@ -345,6 +332,7 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
+	setlocale(LC_CTYPE, "Spanish");
 
 	return true;
 }
@@ -374,7 +362,7 @@ void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shad
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		// load first 128 characters of ASCII set
-		for (unsigned char c = 0; c < 128; c++)
+		for (unsigned char c = 0; c < 255; c++)
 		{
 			// Load character glyph 
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -473,13 +461,69 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 
+	CleanText(text);
+	//CleanText(text);
+
 	// iterate through all characters
 	DrawCharacters(text, x, scale, y, characters,  VAO, VBO);
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	shader->StopUse();
 }
-// Draw all text letters 
+
+void ModuleUI::CleanText(std::string& text)
+{
+
+	for (int i = 0; i < text.length(); i++)
+	{
+		if ((text[i]) == 'Â') {
+			if ((text[i + 1]) == '¡') {
+				text.replace(i, 2, "¡");
+				continue;
+			}
+			if ((text[i + 1]) == '¿') {
+				text.replace(i, 2, "¿");
+				continue;
+			}
+		
+		}
+		if ((text[i]) != 'Ã') continue;
+		else
+		{
+			if ((text[i + 1]) == '±') {
+				text.replace(i, 2, "ñ");
+				continue;
+			}
+			if ((text[i + 1]) == '‘'){
+				text.replace(i, 2, "Ñ");
+				continue;
+			}
+			if ((text[i + 1]) == '¡'){
+				text.replace(i, 2, "á");
+				continue;
+			}
+			if ((text[i + 1]) == '©'){
+				text.replace(i, 2, "é");
+				continue;
+			}
+			if ((text[i + 1]) == '³'){
+				text.replace(i, 2, "ó");
+				continue;
+			}
+			if ((text[i + 1]) == 'º'){
+				text.replace(i, 2, "ú");
+				continue;
+			}
+			if ((text[i + 1]) == '¼'){
+				text.replace(i, 2, "ü");
+				continue;
+			}
+			text.replace(i, 2, "í");
+		}
+		
+	}
+}
+// Draw all text letters
 void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	float auxX = x;
@@ -492,6 +536,7 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y,
 
 		bool newLine = false;
 		u = (*c);
+
 		if (u == "\n")
 		{
 			line++;

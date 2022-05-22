@@ -10,6 +10,8 @@ public class BackStab : RagnarComponent
 	public bool backstabed;
 	NavAgent agent;
 	public GameObject boss;
+
+	// Component list
     private GameObject sceneAudio;
 	public void Start()
 	{
@@ -35,17 +37,17 @@ public class BackStab : RagnarComponent
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
-            if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
+			if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy" && (selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.DEATH))
 			{
                 sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
                 selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
 			}
-			if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+			if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy" && (selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.DEATH))
 			{
                 sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHITSHIELD");
                 selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
 			}
-			if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
+			if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy" && (selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.DEATH))
 			{
                 sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
                 selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
@@ -64,7 +66,7 @@ public class BackStab : RagnarComponent
 		}
 		if (boss != null)
 		{
-			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 3.0f)
+			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 0.5f)
 			{
 				boss.GetComponent<Boss>().GetBackstabbed();
 			}
@@ -88,9 +90,20 @@ public class BackStab : RagnarComponent
     }
 	public GameObject CalculateDistancePlayerEnemies()
     {
-		
+
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
-		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 3) return enemy;
+		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 3)
+		{
+			switch (enemy.GetComponent<BasicEnemy>().state)
+			{
+				case EnemyState.DEATH:
+					return null;
+				case EnemyState.IS_DYING:
+					return null;
+				default:
+					return enemy;
+			}
+		}
 		return null;
 	}
 
