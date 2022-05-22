@@ -70,11 +70,7 @@ bool GameObject::Update(float dt)
 			components[i]->Update(dt);
 		}
 
-		if (components[i]->type != ComponentType::SCRIPT)
-		{
-			components[i]->Update(dt);
-		}
-		else if (app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum()->Intersects(globalAabb) || !globalAabb.IsFinite())
+		if (app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum()->Intersects(globalAabb) || !globalAabb.IsFinite())
 			components[i]->Update(dt);
 	}
 

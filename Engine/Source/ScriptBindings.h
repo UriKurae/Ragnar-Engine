@@ -430,6 +430,7 @@ MonoObject* InstancePrefab(MonoObject* name, MonoObject* position, bool begin = 
 
 	float3 pos = app->moduleMono->UnboxVector(position);
 	go->GetComponent<TransformComponent>()->SetGlobalPosition(pos);
+	go->GetComponent<TransformComponent>()->SetAABB();
 	if (RigidBodyComponent* rb = go->GetComponent<RigidBodyComponent>())
 		rb->GetBody()->getWorldTransform().setOrigin(pos);
 

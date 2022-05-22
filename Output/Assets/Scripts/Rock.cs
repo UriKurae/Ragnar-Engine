@@ -43,6 +43,15 @@ public class Rock : RagnarComponent
 	public void Update()
 	{
 		goRB.ApplyVelocity(relativePos.normalized * 25);
+
+		if (pendingToDelete)
+		{
+			cooldown -= Time.deltaTime;
+			if (cooldown < 0)
+			{
+				InternalCalls.Destroy(gameObject);
+			}
+		}
 	}
 
 	public void OnCollisionEnter(Rigidbody other)
@@ -60,14 +69,6 @@ public class Rock : RagnarComponent
 
 			cooldown = 2f;
 			pendingToDelete = true;
-		}
-		if (pendingToDelete)
-		{
-			cooldown -= Time.deltaTime;
-			if (cooldown < 0)
-			{
-				InternalCalls.Destroy(gameObject);
-			}
 		}
 	}
 }
