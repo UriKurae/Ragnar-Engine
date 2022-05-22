@@ -51,16 +51,16 @@ bool ComponentLight::Update(float dt)
 			
 			Frustum frustum;
 			float3 camPos = float3::zero;
-			if (app->sceneManager->GetGameState() != GameState::PLAYING)
+			if (app->sceneManager->GetGameState() == GameState::PLAYING)
 			{
 				TransformComponent* parentTr = app->sceneManager->GetCurrentScene()->mainCamera->owner->GetParent()->GetComponent<TransformComponent>();
 				camPos = parentTr->GetPosition();
-				frustum.pos = camPos - app->renderer3D->dirLight->dir * 50;
+				frustum.pos = camPos - app->renderer3D->dirLight->dir * 120;
 			}
 			else
 			{
 				camPos = app->camera->cameraFrustum.pos;
-				frustum.pos = camPos;
+				frustum.pos = camPos - app->renderer3D->dirLight->dir * 120;
 			}
 			
 
