@@ -86,7 +86,18 @@ public class BackStabEnemy : RagnarComponent
 	public GameObject CalculateDistancePlayerEnemies()
 	{
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
-		if ((enemy != null) && (Transform.GetDistanceBetween(enemyPlayer.transform.globalPosition, enemy.transform.globalPosition) < 3 /*&& Transform.GetDistanceBetween(enemyPlayer.transform.globalPosition, enemy.transform.globalPosition) > 0.1*/)) return enemy;
+		if (enemy != null && Transform.GetDistanceBetween(enemyPlayer.transform.globalPosition, enemy.transform.globalPosition) < 3)
+		{
+			switch (enemy.GetComponent<BasicEnemy>().state)
+			{
+				case EnemyState.DEATH:
+					return null;
+				case EnemyState.IS_DYING:
+					return null;
+				default:
+					return enemy;
+			}
+		}
 		return null;
 	}
 

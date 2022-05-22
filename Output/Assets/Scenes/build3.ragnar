@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 556068536,
+                    "pointer": 554104896,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -402,7 +402,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 556201016,
+                    "pointer": 554107784,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1204,9 +1204,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.14920353889465332,
-                        0.1999983936548233,
-                        -3.7166833877563477
+                        -46.948795318603516,
+                        0.20000854134559631,
+                        183.79302978515625
                     ],
                     "Quaternion": [
                         0,
@@ -1230,9 +1230,9 @@
                     "Active": true,
                     "Light Type": 2,
                     "Position": [
-                        0.14920353889465332,
-                        0.1999983936548233,
-                        -3.7166833877563477
+                        -46.948795318603516,
+                        0.20000854134559631,
+                        183.79302978515625
                     ],
                     "Ambient": [
                         1,
@@ -1250,8 +1250,8 @@
                         0
                     ],
                     "Intensity": 0,
-                    "Constant": 0.10000000149011612,
-                    "Linear": -0.37200000882148743,
+                    "Constant": 0.56000000238418579,
+                    "Linear": -0.18899999558925629,
                     "Quadratic": 0
                 }
             ]
@@ -21267,7 +21267,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 628856432,
+                    "pointer": 554094256,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -22089,7 +22089,7 @@
             "Name": "Boss",
             "Active": true,
             "Static": false,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Boss.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -22148,13 +22148,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 670198240,
+                    "pointer": 667979680,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 178531896,
+                    "barrelLocations": 217329208,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -22286,7 +22286,7 @@
             "Name": "StabParticlesBoss",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -22497,7 +22497,7 @@
             "Name": "BossShieldParticles",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
