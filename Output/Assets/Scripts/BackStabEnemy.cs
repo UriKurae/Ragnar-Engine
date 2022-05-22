@@ -99,7 +99,6 @@ public class BackStabEnemy : RagnarComponent
 			}
 		}
 		return null;
-		return null;
 	}
 
 }
