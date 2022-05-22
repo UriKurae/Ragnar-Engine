@@ -30,7 +30,7 @@ public class PlayerManager : RagnarComponent
 	{
         foreach (Characters c in characters)
         {
-            InternalCalls.InstancePrefab(c.prefabPath);   
+            InternalCalls.InstancePrefab(c.prefabPath, c.pos);
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -39,6 +39,15 @@ public class PlayerManager : RagnarComponent
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
             players[i].SubmitOutlineDrawing(outlineColors[i]);
+        }
+
+        // IgnoreCollision with other players
+        for (int i = 0; i < players.Length; i++)
+        {
+            for (int j = 0; j < players.Length; j++)
+            {
+                players[i].GetComponent<Rigidbody>().IgnoreCollision(players[j], true);
+            }
         }
 
         ChangeCharacter(characterSelected);
@@ -171,7 +180,7 @@ public class PlayerManager : RagnarComponent
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
         {
             radius = 0f;
-            if (playableCharacter == characters[0]) radius = 11.5f;
+            if (playableCharacter == characters[0]) radius = 13f;
             else if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
@@ -350,7 +359,7 @@ public class PlayerManager : RagnarComponent
             if (playableCharacter.state != State.CARRYING)
             {
                 // Instancia la habilidad en cuesti�n. 
-                InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
+                InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath, playableCharacter.pos);
 
                 // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
                 if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
@@ -634,5 +643,3 @@ public class PlayerManager : RagnarComponent
         }
     }
 }
-
-

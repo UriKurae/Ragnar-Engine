@@ -17,7 +17,8 @@ public enum EnemyState
     CAUTIOUS,
     SEARCHING,
     ANGRY,
-    DEATH
+    DEATH,
+    IS_DYING
 }
 
 public class Enemies
@@ -35,4 +36,6 @@ public class Enemies
 
     // Abilities
     public EnemyAbilities[] abilities;
+
+    public bool coneRotate = true;
 }

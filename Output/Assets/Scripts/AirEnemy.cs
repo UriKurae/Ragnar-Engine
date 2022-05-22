@@ -122,6 +122,7 @@ public class AirEnemy : RagnarComponent
 
             if (deathTimer >= 0)
             {
+                state = EnemyState.IS_DYING;
                 deathTimer -= Time.deltaTime;
                 if (deathTimer < 0)
                 {
@@ -191,7 +192,7 @@ public class AirEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
         {
             //// Stilgar =====================================
             if (other.gameObject.name == "Trap")
@@ -229,13 +230,12 @@ public class AirEnemy : RagnarComponent
             audioComponent.PlayClip("EDRONE_SHOOT");
             canShoot = false;
             shootCooldown = 4f;
-            //GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", true);
-            //bullet.GetComponent<EnemyBullet>().enemy = gameObject;
-            //bullet.GetComponent<EnemyBullet>().index = index;
-            //bullet.GetComponent<EnemyBullet>().offset = offset;
 
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
             bulletScript.offset = offset;

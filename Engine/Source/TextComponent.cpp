@@ -144,7 +144,8 @@ void TextComponent::OnEditor()
 float2 TextComponent::GetParentPosition()
 {
 	float3 position = ownerTransform2DComponent->GetPosition();
-	return { position.x/* - (textToShow.textt.size() * 12 * textToShow.Scale)*/, position.y/* - 5*/ };
+	return { position.x/2, position.y/2 };
+	
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
@@ -239,7 +240,7 @@ void TextComponent::loadFont(std::string path) {
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		// load first 128 characters of ASCII set
-		for (unsigned char c = 0; c < 128; c++)
+		for (unsigned char c = 0; c < 255; c++)
 		{
 			// Load character glyph 
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))

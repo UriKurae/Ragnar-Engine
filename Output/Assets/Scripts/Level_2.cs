@@ -88,12 +88,12 @@ public class Level_2 : RagnarComponent
         }; // Throwing Knife
         characters[0].abilities[3] = new Abilities
         {
-            name = "Eagle",
+            name = "Eagle Throw",
             prefabPath = "Eagle",
             transformY = 1.15f,
             intensity = 1.250f,
-            constant = 1.129f,
-            linear = -0.188f,
+            constant = 1.350f,
+            linear = -0.172f,
             quadratic = 0f,
             charges = -1,
             cooldown = 20f
@@ -866,13 +866,13 @@ public class Level_2 : RagnarComponent
         enemies[69].waypoints.Add(GameObject.Find("24"));
         ///////////////////////////////////////////////////////////////////
 
-        InternalCalls.InstancePrefab("PlayerManager");
-        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
-        InternalCalls.InstancePrefab("EnemyManager");
-        GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
+        GameObject pm = InternalCalls.InstancePrefab("PlayerManager", Vector3.zero);
+        pm.GetComponent<PlayerManager>().characters = characters;
+        GameObject em = InternalCalls.InstancePrefab("EnemyManager", Vector3.zero);
+        em.GetComponent<EnemyManager>().enemies = enemies;
 
-        InternalCalls.InstancePrefab("Dialogue");
-        InternalCalls.InstancePrefab("DialoguesLevel2");
+        InternalCalls.InstancePrefab("Dialogue", Vector3.zero);
+        InternalCalls.InstancePrefab("DialoguesLevel2", Vector3.zero);
     }
     public void Update()
 	{

@@ -54,7 +54,7 @@ public class UndistractableEnemy : RagnarComponent
     AudioSource audioSource;
 
     GameObject[] childs;
-    ParticleSystem stunPartSys;
+    public ParticleSystem stunPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -141,6 +141,7 @@ public class UndistractableEnemy : RagnarComponent
 
                 if (deathTimer >= 0)
                 {
+                    state = EnemyState.IS_DYING;
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {
@@ -187,7 +188,7 @@ public class UndistractableEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
                     Debug.Log("BackStab enemy");
-                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy", gameObject.transform.globalPosition);
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
@@ -338,8 +339,12 @@ public class UndistractableEnemy : RagnarComponent
             audioSource.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            EnemyBullet bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
             bulletScript.offset = offset;

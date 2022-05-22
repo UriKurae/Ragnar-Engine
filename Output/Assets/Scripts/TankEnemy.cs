@@ -55,7 +55,7 @@ public class TankEnemy : RagnarComponent
     AudioSource sceneAudioSource;
 
     GameObject[] childs;
-    ParticleSystem stunPartSys;
+    public ParticleSystem stunPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -142,6 +142,7 @@ public class TankEnemy : RagnarComponent
 
                 if (deathTimer >= 0)
                 {
+                    state = EnemyState.IS_DYING;
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {
@@ -188,7 +189,7 @@ public class TankEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
                     Debug.Log("BackStab enemy");
-                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy", Vector3.zero);
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
@@ -213,7 +214,7 @@ public class TankEnemy : RagnarComponent
             }
         }        
     }
-        public void SetControled(bool flag)
+    public void SetControled(bool flag)
     {
         controlled = flag;
         if (flag) controlledCooldown = 10;
@@ -260,7 +261,7 @@ public class TankEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
             if (other.gameObject.name == "SoundArea")
@@ -332,11 +333,15 @@ public class TankEnemy : RagnarComponent
             audioSource.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            EnemyBullet bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
-            bulletScript.enemy = gameObject;
-            bulletScript.index = index;
-            bulletScript.offset = offset;
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);            
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            enemyBullet.enemy = gameObject;
+            enemyBullet.index = index;
+            enemyBullet.offset = offset;
         }
 
         if (!canShoot)
