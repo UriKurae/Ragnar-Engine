@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 115534224,
+                    "pointer": 172807576,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,20 +144,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -37.443355560302734,
+                        -54.502197265625,
                         0,
-                        157.4326171875
+                        186.15153503417969
                     ],
                     "Quaternion": [
                         0,
-                        0.80528992414474487,
+                        0.1798408180475235,
                         0,
-                        -0.59288126230239868
+                        0.98369574546813965
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        -1.2692643404006958,
-                        -3.1415927410125732
+                        -0,
+                        0.36164924502372742,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -183,23 +183,23 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        3.814697265625e-06,
+                        52.040267944335938,
+                        -47.309337615966797
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
+                        3.2842220054618565e-09,
                         0,
-                        0,
-                        0.93969261646270752
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
-                        0.78539824485778809,
+                        0.80808740854263306,
                         0,
-                        -0
+                        0
                     ],
                     "Scale": [
-                        1.4142104387283325,
+                        1.414210319519043,
                         1.0000002384185791,
                         1.0000004768371582
                     ]
@@ -207,29 +207,29 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.42143398523330688,
+                    "Vertical Fov": 0.40903055667877197,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        10.302028656005859,
-                        55,
-                        172.28219604492188
+                        -71.241493225097656,
+                        52.040267944335938,
+                        141.90126037597656
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": -16,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -37.443355560302734,
+                        -54.502197265625,
                         0,
-                        157.4326171875
+                        186.15153503417969
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 252.72348022460938,
+                    "Horizontal Angle": 20.720975875854492,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -8317,7 +8317,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1976.5,
+                        2036,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8333,7 +8333,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8365,7 +8365,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 440577760,
+                    "pointer": 172807288,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8404,7 +8404,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8535,7 +8535,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8666,7 +8666,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8797,7 +8797,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8861,7 +8861,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8925,7 +8925,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8989,7 +8989,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9120,7 +9120,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9472,7 +9472,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2287,
+                        2346.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9488,7 +9488,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9552,7 +9552,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9600,7 +9600,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2077,
+                        2136.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9616,7 +9616,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9731,7 +9731,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2068.5,
+                        2128,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9747,7 +9747,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9795,7 +9795,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2295.5,
+                        2355,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9811,7 +9811,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9926,7 +9926,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9942,7 +9942,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10057,7 +10057,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10073,7 +10073,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10121,7 +10121,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10137,7 +10137,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10252,7 +10252,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10268,7 +10268,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10316,7 +10316,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10332,7 +10332,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10447,7 +10447,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2094,
+                        2153.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10463,7 +10463,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10511,7 +10511,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2183.5,
+                        2243,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -10527,7 +10527,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10595,7 +10595,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2183.5,
+                        2243,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -10611,7 +10611,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10679,7 +10679,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2183.5,
+                        2243,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -10695,7 +10695,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10763,7 +10763,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2209,
+                        2268.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -10779,7 +10779,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10805,7 +10805,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10832,7 +10832,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2209,
+                        2268.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -10848,7 +10848,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10874,7 +10874,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10901,7 +10901,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10917,7 +10917,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10926,7 +10926,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10942,7 +10942,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11010,7 +11010,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11026,7 +11026,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11035,7 +11035,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11051,7 +11051,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11119,7 +11119,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11135,7 +11135,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11144,7 +11144,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11160,7 +11160,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11228,7 +11228,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11244,7 +11244,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11253,7 +11253,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2278.5,
+                        2338,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11269,7 +11269,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11337,7 +11337,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2287,
+                        2346.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11353,7 +11353,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11489,7 +11489,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1947.5,
+                        2007,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11505,7 +11505,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11531,7 +11531,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11558,7 +11558,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1947.5,
+                        2007,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11574,7 +11574,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11600,7 +11600,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11627,7 +11627,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1947.5,
+                        2007,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11643,7 +11643,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11669,7 +11669,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -11696,7 +11696,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -11712,7 +11712,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11827,7 +11827,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -11843,7 +11843,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11958,7 +11958,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -11974,7 +11974,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12089,7 +12089,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12105,7 +12105,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12220,7 +12220,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12236,7 +12236,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12351,7 +12351,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12367,7 +12367,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12482,7 +12482,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12498,7 +12498,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12613,7 +12613,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12629,7 +12629,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12744,7 +12744,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12760,7 +12760,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12875,7 +12875,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -12891,7 +12891,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13006,7 +13006,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13022,7 +13022,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13137,7 +13137,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13153,7 +13153,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13268,7 +13268,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13284,7 +13284,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13399,7 +13399,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13415,7 +13415,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13530,7 +13530,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13546,7 +13546,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13661,7 +13661,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13677,7 +13677,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13792,7 +13792,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13808,7 +13808,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13923,7 +13923,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -13939,7 +13939,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14054,7 +14054,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -14070,7 +14070,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14185,7 +14185,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -14201,7 +14201,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14316,7 +14316,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        31.599998474121094,
+                        91.100006103515625,
                         0
                     ],
                     "Scale": [
@@ -14332,7 +14332,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14463,7 +14463,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14594,7 +14594,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14725,7 +14725,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14820,734 +14820,6 @@
                     "textPositionX": 0,
                     "textPositionY": 0,
                     "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 313844809,
-            "Parent UUID": 417171234,
-            "Name": "Quest System",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Quest System.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "QuestSystem",
-                    "pointer": 488453728,
-                    "type": 4,
-                    "componentTable": 0,
-                    "questList": 0,
-                    "completedQuestList": 0,
-                    "activeQuestList": 0,
-                    "showJournal": false,
-                    "showActive": false,
-                    "showCompleted": false
-                }
-            ]
-        },
-        {
-            "UUID": 1623510083,
-            "Parent UUID": 313844809,
-            "Name": "Boton Activas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 251935017,
-            "Parent UUID": 313844809,
-            "Name": "Boton Completadas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 2121179608,
-            "Parent UUID": 313844809,
-            "Name": "Titulo Activas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1323976613,
-            "Parent UUID": 313844809,
-            "Name": "Titulo Completadas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1186081436,
-            "Parent UUID": 313844809,
-            "Name": "Descripcion",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1474635130,
-            "Parent UUID": 313844809,
-            "Name": "Id",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 152512126,
-            "Parent UUID": 313844809,
-            "Name": "Estado",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1920113260,
-            "Parent UUID": 313844809,
-            "Name": "Tipo",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
                 }
             ]
         },
@@ -16114,7 +15386,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1856,
+                        1915.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16130,7 +15402,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16199,7 +15471,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16247,7 +15519,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -14.400001525878906,
+                        -73.900001525878906,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -16263,7 +15535,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16327,7 +15599,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16375,7 +15647,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1856,
+                        1915.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16391,7 +15663,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16506,7 +15778,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1856,
+                        1915.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16522,7 +15794,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16637,7 +15909,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1856,
+                        1915.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16653,7 +15925,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16768,7 +16040,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1856,
+                        1915.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16784,7 +16056,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16899,7 +16171,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1847.5,
+                        1907,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16915,7 +16187,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16963,7 +16235,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1847.5,
+                        1907,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16979,7 +16251,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17027,7 +16299,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1847.5,
+                        1907,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17043,7 +16315,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17091,7 +16363,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1847.5,
+                        1907,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17107,7 +16379,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17171,7 +16443,7 @@
                     "buttonWidth": 513,
                     "buttonHeight": 214,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17219,7 +16491,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -170.5,
+                        -230,
                         2.5999999046325684
                     ],
                     "Scale": [
@@ -17235,7 +16507,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17283,7 +16555,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1847.5,
+                        1907,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17299,7 +16571,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17347,7 +16619,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1840.5,
+                        1900,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17363,7 +16635,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17411,7 +16683,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.1000003814697266,
+                        68.599998474121094,
                         0
                     ],
                     "Scale": [
@@ -17427,7 +16699,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17475,7 +16747,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1906,
+                        1965.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17491,7 +16763,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17544,7 +16816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -5.3999996185302734,
+                        -64.900001525878906,
                         0
                     ],
                     "Scale": [
@@ -17560,7 +16832,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17624,7 +16896,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17672,7 +16944,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        263.5,
+                        323,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17688,7 +16960,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17819,7 +17091,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17883,7 +17155,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17931,7 +17203,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -17,
+                        -76.5,
                         -5
                     ],
                     "Scale": [
@@ -17947,7 +17219,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17995,7 +17267,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -10.899999618530273,
+                        -70.400001525878906,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -18011,7 +17283,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18075,7 +17347,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18123,7 +17395,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -10,
+                        -69.5,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -18139,7 +17411,7 @@
                     "buttonWidth": 123,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18187,7 +17459,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -159,
+                        -218.5,
                         -15
                     ],
                     "Scale": [
@@ -18203,7 +17475,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18251,7 +17523,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1937.5,
+                        1997,
                         -15
                     ],
                     "Scale": [
@@ -18267,7 +17539,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18315,7 +17587,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1937.5,
+                        1997,
                         -15
                     ],
                     "Scale": [
@@ -18331,7 +17603,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18379,7 +17651,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        15.5,
+                        75,
                         -15
                     ],
                     "Scale": [
@@ -18395,7 +17667,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18459,7 +17731,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18528,7 +17800,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18597,7 +17869,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18666,7 +17938,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18730,7 +18002,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18794,7 +18066,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18858,7 +18130,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18945,7 +18217,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        257,
+                        316.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -18961,7 +18233,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19014,7 +18286,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        107,
+                        166.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -19030,7 +18302,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19083,7 +18355,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -107,
+                        -166.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -19099,7 +18371,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19152,7 +18424,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -257,
+                        -316.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -19168,7 +18440,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19237,7 +18509,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19301,7 +18573,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
+                    "lastButtonHeight": 672.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19441,7 +18713,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 501665328,
+                    "pointer": 669714624,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0,
@@ -19519,11 +18791,867 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 501665472,
+                    "pointer": 669714192,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0,
                     "isUsed": false
+                }
+            ]
+        },
+        {
+            "UUID": 313844809,
+            "Parent UUID": 417171234,
+            "Name": "Quest System",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Quest System.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "QuestSystem",
+                    "pointer": 879653728,
+                    "type": 4,
+                    "componentTable": 0,
+                    "questList": 0,
+                    "completedQuestList": 0,
+                    "activeQuestList": 0,
+                    "showJournal": false,
+                    "showActive": false,
+                    "showCompleted": false
+                }
+            ]
+        },
+        {
+            "UUID": 1623510083,
+            "Parent UUID": 313844809,
+            "Name": "Boton Activas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 251935017,
+            "Parent UUID": 313844809,
+            "Name": "Boton Completadas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2121179608,
+            "Parent UUID": 313844809,
+            "Name": "Titulo Activas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1323976613,
+            "Parent UUID": 313844809,
+            "Name": "Titulo Completadas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1186081436,
+            "Parent UUID": 313844809,
+            "Name": "Descripcion",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1474635130,
+            "Parent UUID": 313844809,
+            "Name": "Id",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 152512126,
+            "Parent UUID": 313844809,
+            "Name": "Estado",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1920113260,
+            "Parent UUID": 313844809,
+            "Name": "Tipo",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1890946612,
+            "Parent UUID": 313844809,
+            "Name": "questBord",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1989.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        1.2200000286102295,
+                        0.82499998807907104,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 732,
+                    "buttonHeight": 495,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_layout.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 816108202,
+            "Parent UUID": 313844809,
+            "Name": "questBc",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1989.5,
+                        -11.399999618530273
+                    ],
+                    "Scale": [
+                        1.2208333015441895,
+                        0.81999999284744263,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 732.5,
+                    "buttonHeight": 492,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 672.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
                 }
             ]
         }
