@@ -41,6 +41,15 @@ public class PlayerManager : RagnarComponent
             players[i].SubmitOutlineDrawing(outlineColors[i]);
         }
 
+        // IgnoreCollision with other players
+        for (int i = 0; i < players.Length; i++)
+        {
+            for (int j = 0; j < players.Length; j++)
+            {
+                players[i].GetComponent<Rigidbody>().IgnoreCollision(players[j], true);
+            }
+        }
+
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
         for(int i = 0; i < players.Length; i++)
