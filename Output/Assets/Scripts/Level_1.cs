@@ -48,7 +48,7 @@ public class Level_1 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 3,
-            pos = new Vector3(-55f, 0f, 180f)
+            pos = new Vector3(-43.69f, 0f, 199.77f)
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -107,7 +107,7 @@ public class Level_1 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 2,
-            pos = new Vector3(-65f, 0f, 180f)
+            pos = new Vector3(-37.25f, 0f, 199.70f)
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -159,7 +159,7 @@ public class Level_1 : RagnarComponent
         }; // Spice Bomb
 
         // ENEMIES
-        enemies = new Enemies[23];
+        enemies = new Enemies[26];
         enemies[0] = new Enemies
         {
             name = "Basic Enemy 1",
@@ -355,15 +355,40 @@ public class Level_1 : RagnarComponent
         enemies[22].waypoints.Add(GameObject.Find("10"));
         enemies[22].waypoints.Add(GameObject.Find("11"));
         enemies[22].waypoints.Add(GameObject.Find("12"));
+
+        enemies[23] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_23"),
+            coneRotate = false
+        };
+        enemies[24] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_24"),
+            coneRotate = false
+        };
+        enemies[25] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_25"),
+            coneRotate = false
+        };
         /////////////////////////////////////////////////
 
-        InternalCalls.InstancePrefab("PlayerManager");
-        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
-        InternalCalls.InstancePrefab("EnemyManager");
-        GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
+        GameObject pm = InternalCalls.InstancePrefab("PlayerManager", Vector3.zero);
+        pm.GetComponent<PlayerManager>().characters = characters;
+        GameObject em = InternalCalls.InstancePrefab("EnemyManager", Vector3.zero);
+        em.GetComponent<EnemyManager>().enemies = enemies;
 
-        InternalCalls.InstancePrefab("Dialogue");
-        InternalCalls.InstancePrefab("DialogueLevel1");
+        InternalCalls.InstancePrefab("Dialogue", Vector3.zero);
+        InternalCalls.InstancePrefab("DialogueLevel1", Vector3.zero);
     }
 	public void Update()
 	{

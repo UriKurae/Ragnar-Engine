@@ -80,6 +80,7 @@ public class Boss : RagnarComponent
 	float tiredCooldown = 10.0f;
 	bool rocksAvailable = false;
 	bool throwingRocks = false;
+	bool throwing = false;
 	bool tired = false;
 	GameObject nextRock;
 	float sweepAttackCooldown = 5.0f;
@@ -134,9 +135,9 @@ public class Boss : RagnarComponent
 
 		animationComponent.PlayAnimation("SitIdle");
 
-		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(-16.25f, 9.24f, -34.92f), true);
-		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(19.59f, 9.24f, -34.92f), true);
-		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(3.36f, 9.24f, -13.44f), true);
+		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(1.60f, 9.27f, -54.91f), true);
+		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(-12.60f, 9.27f, -41.12f), true);
+		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(10.79f, 9.27f, -41.12f), true);
 
 		stabParticles.Pause();
 		shieldParticles.Pause();
@@ -194,12 +195,12 @@ public class Boss : RagnarComponent
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
-				if (!shieldInmunity)
-				{
+				//if (!shieldInmunity)
+				//{
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
 				animationComponent.PlayAnimation("Run");
-				}
-				else state--;
+				//}
+				//else state--;
 				break;
 			default:
 				state--;
@@ -211,15 +212,11 @@ public class Boss : RagnarComponent
 	{
 		animationComponent.PlayAnimation("CallBackup");
 
-		InternalCalls.InstancePrefab("Basic Enemy 16");
-		GameObject enemy1 = GameObject.Find("Basic Enemy 16");
-		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(2.07f, 6.66f, -19.0f));
+		GameObject enemy1 = InternalCalls.InstancePrefab("Basic Enemy 16", new Vector3(2.07f, 6.66f, -19.0f));
 		enemy1.GetComponent<EnemyBoss>().colliders = colliders;
 
-		InternalCalls.InstancePrefab("Basic Enemy 17");
-		enemy1 = GameObject.Find("Basic Enemy 17");
-		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(0.61f, 6.66f, -8.0f));
-		enemy1.GetComponent<EnemyBoss>().colliders = colliders;
+		GameObject enemy2 = InternalCalls.InstancePrefab("Basic Enemy 17", new Vector3(0.61f, 6.66f, -8.0f));
+		enemy2.GetComponent<EnemyBoss>().colliders = colliders;
 	}
 	public void GenerateRocks()
 	{
@@ -234,11 +231,12 @@ public class Boss : RagnarComponent
 		for (int i = 0; i < 5; ++i)
 		{
 			string rockPrefab = "Rock" + (i + 1);
-			InternalCalls.InstancePrefab(rockPrefab);
-			GameObject rock = GameObject.Find(rockPrefab);
-			Rigidbody rockRb = rock.GetComponent<Rigidbody>();
-			if (i % 2 == 0) rockRb.SetBodyPosition(new Vector3(bossPos.x, 15.0f, bossPos.z + i));
-			else rockRb.SetBodyPosition(new Vector3(bossPos.x + i, 15.0f, bossPos.z));
+
+			Vector3 pos;
+			if (i % 2 == 0) pos = new Vector3(bossPos.x, 15.0f, bossPos.z + i);
+			else pos = new Vector3(bossPos.x + i, 15.0f, bossPos.z);
+
+			InternalCalls.InstancePrefab(rockPrefab, pos);
 		}
 	}
 
@@ -362,11 +360,21 @@ public class Boss : RagnarComponent
 			}
 			else if (tired == false && rocksAvailable == true)
 			{
-				animationComponent.PlayAnimation("Throw");
-				ThrowRock();
-				throwedRocks++;
-			}
-			else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
+                if (!throwing)
+                {
+                    animationComponent.PlayAnimation("Throw");
+					throwing = true;
+                }
+				else if (animationComponent.HasFinished())
+                {
+					ThrowRock();
+					throwedRocks++;
+					Debug.Log("Finished Throwing");
+					throwing = false;
+					rocksAvailable = false;
+				}
+            }
+			else if (tired == false && throwedRocks < 5 && rocksAvailable == false && !throwing)
 			{
 				if (nextRock == null)
 				{
@@ -383,9 +391,8 @@ public class Boss : RagnarComponent
 				}
 				else
 				{
-					Debug.Log(nextRock.name);
 					Vector3 dest = nextRock.transform.localPosition;
-					//dest.y = gameObject.transform.localPosition.y;
+					dest.y = gameObject.transform.localPosition.y;
 					agent.MoveTo(dest);
 				}
 			}
@@ -408,6 +415,7 @@ public class Boss : RagnarComponent
 			}
 
 			if (!tired && sweepAttackCooldown <= 0.0f) SweepAttack();
+
 			sweepAttackCooldown -= Time.deltaTime;
 		}
 		else
@@ -419,6 +427,7 @@ public class Boss : RagnarComponent
 				if (magnitude <= 1.5f)
 				{
 					grabbedPaul = true;
+					players[0].GetComponent<Player>().stunned = true;
 				}
 			}
 			else
@@ -456,9 +465,10 @@ public class Boss : RagnarComponent
 					endDirection = (desiredLocation - gameObject.transform.globalPosition).normalized;
 
 					rb.IgnoreCollision(players[0], false);
-					players[0].GetComponent<Rigidbody>().ApplyCentralImpulse(endDirection * 100.0f);
+					players[0].GetComponent<Rigidbody>().ApplyCentralImpulse(endDirection * 50.0f);
 					throwedPaul = true;
 					animationComponent.PlayAnimation("WalkAngry");
+					players[0].GetComponent<Player>().stunned = false;
 				}
 			}
 		}
@@ -467,8 +477,17 @@ public class Boss : RagnarComponent
 	private void ThrowRock()
 	{
 		//gameObject.GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
-		InternalCalls.InstancePrefab("RockBoss");
-		rocksAvailable = false;
+		GameObject boss = GameObject.Find("Boss");
+		Vector3 pos = boss.transform.localPosition;
+		pos.y += 0.5f;
+		GameObject r = InternalCalls.InstancePrefab("RockBoss", pos);
+		r.transform.localPosition = pos;
+
+		Vector3 direction = players[0].transform.localPosition - gameObject.transform.localPosition;
+		Rigidbody rockBossRb = r.GetComponent<Rigidbody>();
+		rockBossRb.IgnoreCollision(this.gameObject, true);
+		rockBossRb.ApplyCentralForce(direction.normalized * 2000.0f);
+
 	}
 	private void GenerateBarrels()
 	{
@@ -480,9 +499,7 @@ public class Boss : RagnarComponent
 				{
 					string barrelName = "Barrel" + (i + 1);
 					// Need to know the name of the prefab
-					InternalCalls.InstancePrefab(barrelName);
-					GameObject barrel = GameObject.Find(barrelName);
-					barrel.GetComponent<Rigidbody>().SetBodyPosition(barrelLocations[i].spawnLocation);
+					GameObject barrel = InternalCalls.InstancePrefab(barrelName, barrelLocations[i].spawnLocation);
 					barrel.GetComponent<Barrel>().barrelIndex = i;
 					barrelLocations[i].isDestroyed = false;
 					barrelCount++;
@@ -494,7 +511,6 @@ public class Boss : RagnarComponent
 
 	private void ExplodeBarrels()
 	{
-		Debug.Log(stunnedHits.ToString());
 		if (stunnedHits == 3)
 		{
 			if (animationComponent.HasFinished())
@@ -560,12 +576,12 @@ public class Boss : RagnarComponent
 	}
 	public void SweepAttack()
 	{
-		if (players[0] != null && Math.Abs((players[0].transform.globalPosition - gameObject.transform.globalPosition).magnitude) <= 1.0f)
+		if (players[0] != null && Math.Abs((players[0].transform.globalPosition - gameObject.transform.globalPosition).magnitude) <= 1.5f)
 		{
 			// Play sweep attack animation
 
 			// Play sweep attack sound
-
+			Debug.Log("SWEEP ATTACK");
 			// Hit player, lower his HP
 			players[0].GetComponent<Player>().GetHit(1);
 			// Reset Cooldown
@@ -594,6 +610,7 @@ public class Boss : RagnarComponent
 		}
 		else if (other.gameObject.tag == "Rocks" && rocksAvailable == false)
 		{
+			Debug.Log("Found rock" + nextRock.name.ToString());
 			if (nextRock != null && other.gameObject.name == nextRock.name)
 			{
 				rocksAvailable = true;

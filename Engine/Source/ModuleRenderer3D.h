@@ -155,5 +155,5 @@ private:
 	unsigned int shadowsFbo;
 	
 	bool dmgFeedbackRequested;
-	
+	float damageTextureAlpha = 0.f;
 };
