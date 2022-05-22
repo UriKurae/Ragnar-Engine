@@ -21,16 +21,17 @@ public class EnemyManager : RagnarComponent
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Basic Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Basic Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
                     BasicEnemy basicEnemyScript = enemyGOs[i].GetComponent<BasicEnemy>();
                     basicEnemyScript.waypoints = enemies[i].waypoints;
                     basicEnemyScript.state = enemies[i].state;
                     basicEnemyScript.enemyType = enemies[i].type;
                     basicEnemyScript.colliders = colliders;
+                    basicEnemyScript.coneRotate = enemies[i].coneRotate;
                     break;
                 case EnemyType.TANK:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
                     TankEnemy tankEnemyScript = enemyGOs[i].GetComponent<TankEnemy>();
                     tankEnemyScript.waypoints = enemies[i].waypoints;
@@ -39,7 +40,7 @@ public class EnemyManager : RagnarComponent
                     tankEnemyScript.colliders = colliders;
                     break;
                 case EnemyType.UNDISTRACTABLE:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Undistractable Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Undistractable Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
                     UndistractableEnemy undistractableEnemyScript = enemyGOs[i].GetComponent<UndistractableEnemy>();
                     undistractableEnemyScript.waypoints = enemies[i].waypoints;
@@ -48,7 +49,7 @@ public class EnemyManager : RagnarComponent
                     undistractableEnemyScript.colliders = colliders;
                     break;
                 case EnemyType.AIR:
-                    enemyGOs.Add(InternalCalls.InstancePrefab("Air Enemy"));
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Air Enemy", enemies[i].spawnPoint.transform.globalPosition));
                     enemyGOs[i].name = enemies[i].name;
                     AirEnemy airEnemyScript = enemyGOs[i].GetComponent<AirEnemy>();
                     airEnemyScript.waypoints = enemies[i].waypoints;
@@ -99,7 +100,7 @@ public class EnemyManager : RagnarComponent
                             break;
                     };
 
-                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
+                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", enemyGOs[i].transform.globalPosition, true);
                     sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
                     sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
@@ -117,7 +118,8 @@ public class EnemyManager : RagnarComponent
     private void SetEnemyPositionAndRotation(GameObject e, Enemies data)
     {
         Rigidbody rb = e.GetComponent<Rigidbody>();
-        rb.SetBodyPosition(data.spawnPoint.transform.globalPosition);
+        // Done when instancing prefab
+        //rb.SetBodyPosition(data.spawnPoint.transform.globalPosition);
 
         Quaternion rotation = GetFinalRotation(data);
 

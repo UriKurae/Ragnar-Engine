@@ -198,7 +198,7 @@ public class BasicEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
                     Debug.Log("BackStab enemy");
-                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy", gameObject.transform.globalPosition);
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
@@ -343,7 +343,7 @@ public class BasicEnemy : RagnarComponent
 
         if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
 
-        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 19, players, players.Length, "Collider");
+        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 23, players, players.Length, "Collider");
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
@@ -389,8 +389,13 @@ public class BasicEnemy : RagnarComponent
             audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            EnemyBullet enemyBullet = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+            
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;

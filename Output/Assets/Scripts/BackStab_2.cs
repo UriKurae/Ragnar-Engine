@@ -63,7 +63,7 @@ public class BackStab_2 : RagnarComponent
 		}
 		if (boss != null)
 		{
-			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 3.0f)
+			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 0.5f)
 			{
 				boss.GetComponent<Boss>().GetBackstabbed();
 			}

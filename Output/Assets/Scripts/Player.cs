@@ -29,6 +29,7 @@ public class Player : RagnarComponent
     public bool dead = false;
     public bool isHidden = false;
     public bool godMode = false;
+    public bool stunned = false;
     private float speedBase = 0;
 
     Rigidbody rb;
@@ -65,9 +66,9 @@ public class Player : RagnarComponent
         agent.ClearPath();
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
-        sound = InternalCalls.InstancePrefab("SoundArea");
+        sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
         gameObject.AddChild(sound);
-        sound.transform.globalPosition = gameObject.transform.globalPosition;
+        //sound.transform.globalPosition = gameObject.transform.globalPosition;
 
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
@@ -162,7 +163,7 @@ public class Player : RagnarComponent
                         }
 
 
-                        if (abilityState == State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+                        if (abilityState == State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && !stunned)
                         {
                             if (agent.CalculatePath(agent.hitPosition).Length > 0)
                             {
@@ -382,6 +383,30 @@ public class Player : RagnarComponent
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
+        }
+        if (other.gameObject.name == "DialogueTrigger11")
+        {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(11);
+        }
+        if (other.gameObject.name == "DialogueTrigger12")
+        {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(12);
+        }
+        if (other.gameObject.name == "DialogueTrigger13")
+        {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(13);
+        }
+        if (other.gameObject.name == "DialogueTrigger14")
+        {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(14);
         }
         // ===================================================================
     }
