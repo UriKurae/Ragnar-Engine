@@ -64,18 +64,18 @@ void ModuleInput::LoadCursors()
 #endif
 
 	cursors.push_back(defaultCursor);
-	cursors.push_back(LoadCursorIcon(std::string(path + "paul_crysknife.ico").c_str(), 32, 32));
-	cursors.push_back(LoadCursorIcon(std::string(path + "paul_throwing_knife.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "paul_throw_stone.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "paul_voice.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "chani_crysknife.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "chani_hunter_seeker.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "chani_spice_grenade.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "chani_camouflage.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_sword.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_stunner.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_whistle.ico").c_str(), 64, 64));
-	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_trap.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throwing_knife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throw_stone.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_voice.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_hunter_seeker.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_spice_grenade.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_camouflage.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_sword.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_stunner.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_whistle.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_trap.cur").c_str()));
 }
 
 // Called every draw update
@@ -388,18 +388,6 @@ bool ModuleInput::GetAxis(int joystickId, JAxis axis)
 	return 0.0f;
 }
 
-HCURSOR ModuleInput::LoadCursorIcon(const char* iconPath, int width, int height)
-{
-	HICON i = (HICON)LoadImage(0, iconPath, IMAGE_ICON, width, height, LR_LOADFROMFILE);
-
-	ICONINFO icoInfo;
-	GetIconInfo(i, &icoInfo);
-	icoInfo.xHotspot = 0;
-	icoInfo.yHotspot = 0;
-
-	return CreateIconIndirect(&icoInfo);
-}
-
 void ModuleInput::SetCursorState(int state)
 {
 	HCURSOR hCurDef = CopyCursor(cursors[state]);
@@ -415,7 +403,7 @@ void ModuleInput::ImportToLibrary()
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
 		std::string ext = (*it).substr((*it).find_last_of("."), (*it).length());
-		if (ext == ".ico")
+		if (ext == ".cur")
 		{
 			std::string assetsPath = "Assets/Resources/Cursor/";
 			assetsPath += (*it);

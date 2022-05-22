@@ -126,7 +126,6 @@ public:
 	bool GetButtonUp(int joystickId, Button button);
 	bool GetAxis(int joystickId, JAxis axis);
 
-	HCURSOR LoadCursorIcon(const char* iconPath, int width, int height);
 	void SetCursorState(int state);
 
 	void ImportToLibrary();
