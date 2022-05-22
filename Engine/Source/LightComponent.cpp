@@ -32,6 +32,7 @@ ComponentLight::~ComponentLight()
 	default:
 		break;
 	}
+	delete light; light = nullptr;//RELEASE
 }
 
 bool ComponentLight::Update(float dt)
