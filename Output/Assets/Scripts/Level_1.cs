@@ -159,7 +159,7 @@ public class Level_1 : RagnarComponent
         }; // Spice Bomb
 
         // ENEMIES
-        enemies = new Enemies[23];
+        enemies = new Enemies[26];
         enemies[0] = new Enemies
         {
             name = "Basic Enemy 1",
@@ -355,6 +355,31 @@ public class Level_1 : RagnarComponent
         enemies[22].waypoints.Add(GameObject.Find("10"));
         enemies[22].waypoints.Add(GameObject.Find("11"));
         enemies[22].waypoints.Add(GameObject.Find("12"));
+
+        enemies[23] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_23"),
+            coneRotate = false
+        };
+        enemies[24] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_24"),
+            coneRotate = false
+        };
+        enemies[25] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            spawnPoint = GameObject.Find("basic_static_25"),
+            coneRotate = false
+        };
         /////////////////////////////////////////////////
 
         InternalCalls.InstancePrefab("PlayerManager");
