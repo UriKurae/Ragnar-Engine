@@ -12,6 +12,7 @@
 
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "ModuleNavMesh.h"
 
 //Scripting
 #include "ScriptComponent.h"
@@ -446,6 +447,14 @@ bool Scene::LoadScene(const char* path, bool fromLibrary)
 				}
 			}
 		}
+		
+		jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "NavMesh");
+		size = sceneFile.GetJsonArrayCount(jsonArray);
+		for (int i = 0; i < size; ++i)
+		{
+			app->navMesh->LoadNaviConfig(sceneFile.GetJsonArrayValue(jsonArray, i));
+		}
+
 		// TODO: This has been comented to avoid potential crash on release. Will need to be used in the future, so dont delete.
 		//for (auto i = app->sceneManager->referenceMap.begin(); i != app->sceneManager->referenceMap.end(); ++i)
 		//{
@@ -498,6 +507,11 @@ bool Scene::SaveScene(const char* name)
 	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
 	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");
 	root->OnSave(sceneFile, array);
+
+	array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "NavMesh");
+	JsonParsing navmeshFile = JsonParsing();
+	app->navMesh->SaveNaviConfig(navmeshFile);
+	sceneFile.SetValueToArray(array, navmeshFile.GetRootValue());
 
 	uint size = sceneFile.SaveFile(name);
 	
