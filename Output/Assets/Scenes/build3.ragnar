@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 503649232,
+                    "pointer": 543490112,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,9 +144,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -12.907539367675781,
+                        -17.149606704711914,
                         0,
-                        75.781036376953125
+                        75.850799560546875
                     ],
                     "Quaternion": [
                         0,
@@ -210,21 +210,21 @@
                     "Vertical Fov": 0.42143398523330688,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -47.677688598632813,
+                        -51.919754028320313,
                         55,
-                        111.71385192871094
+                        111.78361511230469
                     ],
                     "Type": 3,
-                    "Zoom": -10,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -12.907539367675781,
+                        -17.149606704711914,
                         0,
-                        75.781036376953125
+                        75.850799560546875
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -402,7 +402,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 503649952,
+                    "pointer": 543604736,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7405,13 +7405,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 524011520,
+                    "pointer": 584478352,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 219426472,
+                    "barrelLocations": 221064872,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -7870,734 +7870,6 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "UUID": 313844809,
-            "Parent UUID": 417171234,
-            "Name": "Quest System",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Quest System.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "QuestSystem",
-                    "pointer": 534443256,
-                    "type": 4,
-                    "componentTable": 0,
-                    "questList": 0,
-                    "completedQuestList": 0,
-                    "activeQuestList": 0,
-                    "showJournal": false,
-                    "showActive": false,
-                    "showCompleted": false
-                }
-            ]
-        },
-        {
-            "UUID": 1623510083,
-            "Parent UUID": 313844809,
-            "Name": "Boton Activas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 251935017,
-            "Parent UUID": 313844809,
-            "Name": "Boton Completadas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 2121179608,
-            "Parent UUID": 313844809,
-            "Name": "Titulo Activas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1323976613,
-            "Parent UUID": 313844809,
-            "Name": "Titulo Completadas",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1186081436,
-            "Parent UUID": 313844809,
-            "Name": "Descripcion",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1474635130,
-            "Parent UUID": 313844809,
-            "Name": "Id",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 152512126,
-            "Parent UUID": 313844809,
-            "Name": "Estado",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1920113260,
-            "Parent UUID": 313844809,
-            "Name": "Tipo",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1343,
-                    "lastButtonHeight": 693.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
                 }
             ]
         },
@@ -20362,9 +19634,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -0.20116615295410156,
-                        -0.23305892944335938,
-                        0.40772628784179688
+                        -0.20000000298023224,
+                        -0.27500000596046448,
+                        0.43999999761581421
                     ],
                     "Quaternion": [
                         0.20323620736598969,
@@ -20629,8 +19901,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        -0.22592926025390625,
-                        0.37525177001953125
+                        -0.2800000011920929,
+                        0.43999999761581421
                     ],
                     "Quaternion": [
                         0.20323620736598969,
@@ -21533,7 +20805,7 @@
             "Parent UUID": 1433371849,
             "Name": "Enemies",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21555,9 +20827,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -21597,7 +20869,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_1",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21661,7 +20933,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_2",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21725,7 +20997,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_3",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21789,7 +21061,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_4",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21853,7 +21125,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_5",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21917,7 +21189,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_6",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -21981,7 +21253,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_7",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22045,7 +21317,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_8",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22109,7 +21381,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_9",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22173,7 +21445,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_10",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22237,7 +21509,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_11",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22301,7 +21573,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_static_12",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22365,7 +21637,7 @@
             "Parent UUID": 1361691258,
             "Name": "undistractable_static_1",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22429,7 +21701,7 @@
             "Parent UUID": 1361691258,
             "Name": "basic_patrol_1",
             "Active": false,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -22487,6 +21759,881 @@
                     "Active": true
                 }
             ]
+        },
+        {
+            "UUID": 313844809,
+            "Parent UUID": 417171234,
+            "Name": "Quest System",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/Quest System.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "QuestSystem",
+                    "pointer": 610453384,
+                    "type": 4,
+                    "componentTable": 0,
+                    "questList": 0,
+                    "completedQuestList": 0,
+                    "activeQuestList": 0,
+                    "showJournal": false,
+                    "showActive": false,
+                    "showCompleted": false
+                }
+            ]
+        },
+        {
+            "UUID": 1623510083,
+            "Parent UUID": 313844809,
+            "Name": "Boton Activas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 251935017,
+            "Parent UUID": 313844809,
+            "Name": "Boton Completadas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_tab_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2121179608,
+            "Parent UUID": 313844809,
+            "Name": "Titulo Activas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1323976613,
+            "Parent UUID": 313844809,
+            "Name": "Titulo Completadas",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1186081436,
+            "Parent UUID": 313844809,
+            "Name": "Descripcion",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1474635130,
+            "Parent UUID": 313844809,
+            "Name": "Id",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 152512126,
+            "Parent UUID": 313844809,
+            "Name": "Estado",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1920113260,
+            "Parent UUID": 313844809,
+            "Name": "Tipo",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1890946612,
+            "Parent UUID": 313844809,
+            "Name": "questBord",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        1.2200000286102295,
+                        0.82499998807907104,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 732,
+                    "buttonHeight": 495,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_layout.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 816108202,
+            "Parent UUID": 313844809,
+            "Name": "questBc",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -11.399999618530273
+                    ],
+                    "Scale": [
+                        1.2208333015441895,
+                        0.81999999284744263,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 732.5,
+                    "buttonHeight": 492,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_journal_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        }
+    ],
+    "NavMesh": [
+        {
+            "cellSize": 0.30000001192092896,
+            "cellHeight": 0.20000000298023224,
+            "agentHeight": 2,
+            "agentRadius": 0.5,
+            "agentMaxClimb": 0.89999997615814209,
+            "agentMaxSlope": 45,
+            "regionMinSize": 8,
+            "regionMergeSize": 20,
+            "edgeMaxLen": 12,
+            "edgeMaxError": 1.2999999523162842,
+            "vertsPerPoly": 6,
+            "detailSampleDist": 6,
+            "detailSampleMaxError": 1,
+            "partitionType": 0,
+            "tileSize": 32
         }
     ]
 }
