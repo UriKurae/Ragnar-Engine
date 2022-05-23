@@ -160,6 +160,8 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject AbilityLeft;
 	GameObject AbilityRight;
+
+	int currentCursor = 0;
 	public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
@@ -339,6 +341,11 @@ public class pauseMenuButton : RagnarComponent
 		PaulBg = GameObject.Find("PaulBg");
 		ChaniBg = GameObject.Find("ChaniBg");
 		StilgarBg = GameObject.Find("StilgarBg");
+
+		UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+		PaulBg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+		ChaniBg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+		StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
 
 		Ability1Bg = GameObject.Find("Ability1Bg");
 		Ability2Bg = GameObject.Find("Ability2Bg");
@@ -1197,6 +1204,8 @@ public class pauseMenuButton : RagnarComponent
                 // Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
                 if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
+
+				Input.SetCursorState(currentCursor);
 			}
             else
 			{
@@ -1207,6 +1216,9 @@ public class pauseMenuButton : RagnarComponent
 
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
+
+				currentCursor = Input.GetCursorState();
+				Input.SetCursorState(0);
 			}
 		}
 	}
@@ -1245,6 +1257,10 @@ public class pauseMenuButton : RagnarComponent
 			AbilityBG2.isActive = false;
 			AbilityBG3.isActive = false;
 			AbilityBG4.isActive = false;
+			cd1.isActive = false;
+			cd2.isActive = false;
+			cd3.isActive = false;
+			cd4.isActive = false;
 		}
         else
         {
@@ -1278,6 +1294,10 @@ public class pauseMenuButton : RagnarComponent
 			AbilityBG2.isActive = true;
 			AbilityBG3.isActive = true;
 			AbilityBG4.isActive = true;
+			cd1.isActive = true;
+			cd2.isActive = true;
+			cd3.isActive = true;
+			cd4.isActive = true;
 		}
 
 		if(isOptions)
@@ -1542,23 +1562,23 @@ public class pauseMenuButton : RagnarComponent
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_portrait.png");
 			pos.Set(x + 150, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Paul";
-			
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
 		}
 		else if (selectedPlayer.name == "Player_2")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_portrait.png");
 			pos.Set(x + 230, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Chani";
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+			
 
-			
-			
 		}
 		else if (selectedPlayer.name == "Player_3")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
-			
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
 		}
 	}
 	void ImageShow()
@@ -1690,6 +1710,8 @@ public class pauseMenuButton : RagnarComponent
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
+
+				Input.SetCursorState(currentCursor);
 				break;
 		}
 	}
@@ -2010,11 +2032,11 @@ public class pauseMenuButton : RagnarComponent
 				
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be killed.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan't be killed.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan't be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -2068,7 +2090,7 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "The voice\n\nMind control\nan enemy.\nDrones can�t\nbe affected.";
+					CharFocusedText.GetComponent<UIText>().text = "The voice\n\nMind control\nan enemy.\nDrones can't\nbe affected.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
@@ -2076,7 +2098,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Stunner\n\nFire weapon\nthat can\npierce\nenemie�s\nshields.";
+					CharFocusedText.GetComponent<UIText>().text = "Stunner\n\nFire weapon\nthat can\npierce\nenemie's\nshields.";
 				}
 
 				break;
@@ -2127,11 +2149,11 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Throwing Knife\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn�t\naffect\nshielded\nenemies.";
+					CharFocusedText.GetComponent<UIText>().text = "Throwing Knife\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn't\naffect\nshielded\nenemies.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Hunter-Seeker\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Hunter-Seeker\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan't be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -2198,7 +2220,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Spice Grenade\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn�t affect\nshielded enemies\nnor drones.";
+					CharFocusedText.GetComponent<UIText>().text = "Spice Grenade\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn't affect\nshielded enemies\nnor drones.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
