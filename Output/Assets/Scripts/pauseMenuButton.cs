@@ -345,7 +345,7 @@ public class pauseMenuButton : RagnarComponent
 		UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
 		PaulBg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
 		ChaniBg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
-		StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+		StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
 
 		Ability1Bg = GameObject.Find("Ability1Bg");
 		Ability2Bg = GameObject.Find("Ability2Bg");
@@ -1545,10 +1545,14 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(90, 90, 0);
 		UIChaniImage.GetComponent<Transform2D>().SetSize(bounds);
 
-        if (players.Length == 2)
+        if (players.Length == 1)
         {
+			UIChaniImage.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
 			UIStilgarImage.GetComponent<UIImage>().SetImageGeneralColor(131,131,131);
 
+		}else if(players.Length == 2)
+        {
+			UIStilgarImage.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
 		}
 		pos.Set(x+500, y - 5, -10.400f);
 		UIStilgarImage.GetComponent<Transform2D>().position2D = pos;
@@ -1578,7 +1582,7 @@ public class pauseMenuButton : RagnarComponent
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
-			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
 		}
 	}
 	void ImageShow()
@@ -1937,10 +1941,10 @@ public class pauseMenuButton : RagnarComponent
 					else if (selectedPlayer.name == "Player_3")//stilgar
 					{
 
-						Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
-						Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
-						Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
-						Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+						Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
+						Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
+						Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
+						Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
 
 						Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_sword.png");
 						Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
@@ -1985,7 +1989,7 @@ public class pauseMenuButton : RagnarComponent
 			}
         }
 		
-		bounds.Set(210, 310, 0);
+		bounds.Set(260, 310, 0);
 		CharFocusedImage.GetComponent<Transform2D>().SetSize(bounds);
 		AbilityImageApmliate.GetComponent<Transform2D>().SetSize(bounds);
 		////////////////////////////////////////////////
@@ -2083,7 +2087,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-145, y + 300, -10.400f);
+				pos.Set(-135, y + 300, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(-55, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -2200,7 +2204,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(0, y + 300, -10.400f);
+				pos.Set(-20, y + 300, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(85, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
