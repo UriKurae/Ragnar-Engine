@@ -16,7 +16,6 @@ public class Trap : RagnarComponent
 		player = GameObject.Find("Player_3");
 
 		Vector3 pos = player.transform.globalPosition;
-        pos.y += gameObject.transform.globalPosition.y;
 
         gameObject.GetComponent<Rigidbody>().SetBodyPosition(pos);
 		gameObject.transform.localPosition = pos;
@@ -27,7 +26,7 @@ public class Trap : RagnarComponent
     }
 	public void Update()
 	{
-        if (!placingTrap && !canReload) ReloadCondition();
+        if (!canReload) ReloadCondition();
         if (canReload) ReloadTrap();
         if (pendingToDelete) InternalCalls.Destroy(gameObject);
     }
@@ -36,7 +35,7 @@ public class Trap : RagnarComponent
     {
         double distance = CalculateDistance();
 
-        if (distance > 3.0f)
+        if (distance > 2.0f)
         {
             canReload = true;
         }
