@@ -142,7 +142,7 @@ public class Player : RagnarComponent
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
                             }
-                            else if (action == Actions.CROUCH)
+                            else if (action == Actions.CROUCH && isHidden == false)
                             {
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
@@ -344,8 +344,14 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
         }
-        if (other.gameObject.tag == "Hidde")
+        if (other.gameObject.tag == "Hidden")
+        {
+            action = Actions.CROUCH;
+            rb.SetHeight(0.6f); // 0.6 = 60%
+            ReloadState();
+
             isHidden = true;
+        }
 
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
@@ -413,8 +419,14 @@ public class Player : RagnarComponent
 
     public void OnTriggerExit(Rigidbody other)
     {
-        if (other.gameObject.tag == "Hidde")
+        if (other.gameObject.tag == "Hidden")
+        {
+            action = Actions.NONE;
+            rb.SetHeight(1); // 1 = 100% = Reset
+            ReloadState();
+
             isHidden = false;
+        }
     }
 
     public void SetControled(bool var)
