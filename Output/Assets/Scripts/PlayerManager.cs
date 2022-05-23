@@ -38,6 +38,8 @@ public class PlayerManager : RagnarComponent
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+            if(i == 0 && SceneManager.currentSceneName == "build")
+                players[i].GetComponent<Rigidbody>().SetBodyRotation(Quaternion.RotateAroundAxis(new Vector3(0,1,0), 180));
             players[i].SubmitOutlineDrawing(outlineColors[i]);
         }
 
@@ -104,8 +106,9 @@ public class PlayerManager : RagnarComponent
             /*Cambiador de estados para saber que habilidad estas o no casteando (Basicamente hace que el personaje entre en un estado donde si clickas una tecla
             muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
             Aqu� deber�a ir la zona de rango de cada habilidad.*/
-            if(players[characterSelected].GetComponent<Player>().controled)    
+            if(players[characterSelected].GetComponent<Player>().controled)
                 AbilityStateChanger();
+            
 
             /*Contador de cooldown para cada habilidad
             Funciona en todos los casos con todos los pjs.*/
@@ -177,7 +180,7 @@ public class PlayerManager : RagnarComponent
     private void AbilityStateChanger()
     {
         // Change Condition to all players
-        if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
+        if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (players.Length != 1 && playableCharacter == characters[1] && (playableCharacter.state == State.ABILITY_4)))
         {
             radius = 0f;
             if (playableCharacter == characters[0]) radius = 13f;
@@ -323,71 +326,6 @@ public class PlayerManager : RagnarComponent
 
             switch (playableCharacter.state)
             {
-                case State.ABILITY_1:
-                    {
-                        if (playableCharacter == characters[0])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFETHROW");
-                        }
-                        else if (playableCharacter == characters[1])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CRYSKNIFESTAB");
-                        }
-                        else if (playableCharacter == characters[2])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
-                            GameObject.Find("SlashParticles").GetComponent<ParticleSystem>().Play();
-                        }
-                        break;
-                    }
-                case State.ABILITY_2:
-                    {
-                        if (playableCharacter == characters[0])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_VOICE");
-                        }
-                        else if (playableCharacter == characters[1])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
-                        }
-                        else if (playableCharacter == characters[2])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
-                        }
-                        break;
-                    }
-                case State.ABILITY_3:
-                    {
-                        if (playableCharacter == characters[0])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
-                        }
-                        else if (playableCharacter == characters[1])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
-                        }
-                        else if (playableCharacter == characters[2])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_TRAPACTIVE");
-                        }
-                        break;
-                    }
-                case State.ABILITY_4:
-                    {
-                        if (playableCharacter == characters[0])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
-                        }
-                        else if (playableCharacter == characters[1])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("SMOKEGRENADE_ACTIVATE");
-                        }
-                        else if (playableCharacter == characters[2])
-                        {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_WHISTLE");
-                        }
-                        break;
-                    }
                 case State.CARRYING:
                     {
                         if (playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
@@ -545,10 +483,11 @@ public class PlayerManager : RagnarComponent
     {
         for (int i = 0; i < players.Length; i++)
         {
+            if (area != null) area[i].GetComponent<Light>().intensity = 0f;
             players[i].GetComponent<Player>().SetControled(false);
         }
         players[id].GetComponent<Player>().SetControled(true);
-        
+        Input.SetCursorState(0);
     }
 
     public void SavePlayer()
