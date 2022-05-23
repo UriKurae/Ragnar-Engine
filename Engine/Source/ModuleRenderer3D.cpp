@@ -488,18 +488,20 @@ bool ModuleRenderer3D::CleanUp()
 	RELEASE(mainCameraFbo);
 	RELEASE(dirLight);
 	//RELEASE(defaultShader);
+	RELEASE(distVao);
+	RELEASE(distVbo);
+	RELEASE(distIbo);
+	RELEASE(vbo);
 
 	for(auto& pl : pointLights)
 	{
-		delete pl;
-		pl = nullptr;
+		RELEASE(pl);
 	}
 	pointLights.clear();
 
 	for (auto& pl : spotLights)
 	{
-		delete pl;
-		pl = nullptr;
+		RELEASE(pl);
 	}
 	spotLights.clear();
 
@@ -739,17 +741,10 @@ void ModuleRenderer3D::RemovePointLight(PointLight* light)
 {
 	for (std::vector<PointLight*>::iterator it = pointLights.begin(); it != pointLights.end(); ++it)
 	{
-		if ((*it) == light)
+		if (*it == light)
 		{
-			light->intensity = 0;
-			(*it)->toDelete = false;
-			//delete (*it);
-			//*it = nullptr;
-			//delete* it;
-			//delete light;
-			//light = 0;
-			//*it = 0;
-			//pointLights.erase(it);
+			//RemoveSpotLight same?
+			pointLights.erase(it);
 			break;
 		}
 	}
