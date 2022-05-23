@@ -35,8 +35,19 @@ public class winScren : RagnarComponent
 	bool isFirstA = false;
 	bool isFirstR = false;
 	bool isFirst = true;
+
+	GameObject[] players;
+
 	public void Start()
 	{
+		players = new GameObject[3];
+		players = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach (var item in players)
+		{
+			item.GetComponent<Animation>().PlayAnimation("Idle");
+		}
+
 		Back = GameObject.Find("Background");
 		Menu = GameObject.Find("ButtonMenu");
 		Next = GameObject.Find("ButtonNextLevel");
