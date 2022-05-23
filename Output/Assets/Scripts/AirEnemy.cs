@@ -52,7 +52,7 @@ public class AirEnemy : RagnarComponent
     float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
-    int coneMaxTime = 4;
+    int coneMaxTime = 3;
 
     GameObject[] childs;
     ParticleSystem deathPartSys;
@@ -124,6 +124,17 @@ public class AirEnemy : RagnarComponent
                         {
                             agents.speed = initialSpeed;
                             coneTimer -= Time.deltaTime;
+                            if (coneTimer < 0) coneTimer = 0;
+                        }
+                        if (!canShoot && shootCooldown >= 0)
+                        {
+                            Debug.Log(shootCooldown.ToString());
+                            shootCooldown -= Time.deltaTime;
+                            if (shootCooldown < 0)
+                            {
+                                shootCooldown = 0f;
+                                canShoot = true;
+                            }
                         }
                     }
                 }
@@ -238,7 +249,7 @@ public class AirEnemy : RagnarComponent
             //TODO_AUDIO
             audioComponent.PlayClip("EDRONE_SHOOT");
             canShoot = false;
-            shootCooldown = 4f;
+            shootCooldown = 1f;
 
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
@@ -248,19 +259,6 @@ public class AirEnemy : RagnarComponent
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
             bulletScript.offset = offset;
-        }
-
-        if (!canShoot)
-        {
-            if (shootCooldown >= 0)
-            {
-                shootCooldown -= Time.deltaTime;
-                if (shootCooldown < 0)
-                {
-                    shootCooldown = 0f;
-                    canShoot = true;
-                }
-            }
         }
     }
 

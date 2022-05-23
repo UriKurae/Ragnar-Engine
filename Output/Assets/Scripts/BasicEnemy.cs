@@ -57,7 +57,7 @@ public class BasicEnemy : RagnarComponent
     float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
-    int coneMaxTime = 1;
+    int coneMaxTime = 3;
 
     // Cone
     public bool coneRotate = true;
@@ -148,7 +148,6 @@ public class BasicEnemy : RagnarComponent
 
                             if (coneTimer >= coneMaxTime)
                             {
-                                coneTimer = 0;
                                 agents.speed = initialSpeed * 1.2f;
                                 Shoot();
                             }
@@ -156,7 +155,18 @@ public class BasicEnemy : RagnarComponent
                         else
                         {
                             agents.speed = initialSpeed;
-                            
+                            coneTimer -= Time.deltaTime;
+                            if (coneTimer < 0) coneTimer = 0;
+                        }
+                        if (!canShoot && shootCooldown >= 0)
+                        {
+                            Debug.Log(shootCooldown.ToString());
+                            shootCooldown -= Time.deltaTime;
+                            if (shootCooldown < 0)
+                            {
+                                shootCooldown = 0f;
+                                canShoot = true;
+                            }
                         }
                     }
                 }
@@ -399,7 +409,6 @@ public class BasicEnemy : RagnarComponent
             audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
-
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
             
@@ -409,19 +418,6 @@ public class BasicEnemy : RagnarComponent
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;
-        }
-
-        if (!canShoot)
-        {
-            if (shootCooldown >= 0)
-            {
-                shootCooldown -= Time.deltaTime;
-                if (shootCooldown < 0)
-                {
-                    shootCooldown = 0f;
-                    canShoot = true;
-                }
-            }
         }
     }
 
