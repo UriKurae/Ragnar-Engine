@@ -47,7 +47,7 @@ public class Level_2 : RagnarComponent
             prefabPath = "Player",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 3,
+            hitPoints = 4,
             pos = new Vector3(-90.12f, 1f, 95.10f)
         };
         characters[0].abilities[0] = new Abilities
@@ -106,7 +106,7 @@ public class Level_2 : RagnarComponent
             prefabPath = "Player_2",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 2,
+            hitPoints = 3,
             pos = new Vector3(-92.83f, 1f, 89.41f)
         };
         characters[1].abilities[0] = new Abilities
