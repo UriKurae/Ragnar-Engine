@@ -233,6 +233,9 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
+	if (light.intensity == 0)
+		return vec3(0);
+
 	vec3 lightDir = normalize(-light.direction);
 
 	// Diffuse shading
@@ -264,6 +267,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
+	if (light.intensity == 0)
+		return vec3(0);
+
 	vec3 lightDir = normalize(light.position - fragPos);
 
 	// Diffuse shading
@@ -301,6 +307,9 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {	
+	if (light.intensity == 0)
+		return vec3(0);
+
 	vec3 lightDir = normalize(light.position - fragPos);
 	
 	float diff = max(dot(normal, lightDir), 0.0);
