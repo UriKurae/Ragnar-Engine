@@ -128,6 +128,7 @@ public:
 
 	void SetCursorState(int state);
 	int GetCursorState() { return (int)currentCursor; };
+	std::vector<HCURSOR>* GetCursors() { return &cursors; };
 
 	void ImportToLibrary();
 

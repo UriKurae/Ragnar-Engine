@@ -72,6 +72,43 @@ int GetCursorState()
 		return app->input->GetCursorState();
 }
 
+void SetEagleCursor(bool ret)
+{
+	if (app != nullptr)
+	{
+		if (ret)
+		{
+			int i = 0;
+			for (std::vector<HCURSOR>::iterator it = app->input->GetCursors()->begin(); it != app->input->GetCursors()->end(); ++it)
+			{
+				if (i == 4)
+				{
+					std::string path = "Library/Cursors/";
+					app->input->GetCursors()->erase(it);
+					app->input->GetCursors()->insert(it, LoadCursorFromFileA(std::string(path + "ui_eagle.cur").c_str()));
+					break;
+				}
+				i++;
+			}
+		}
+		else
+		{
+			int i = 0;
+			for (std::vector<HCURSOR>::iterator it = app->input->GetCursors()->begin(); it != app->input->GetCursors()->end(); ++it)
+			{
+				if (i == 4)
+				{
+					std::string path = "Library/Cursors/";
+					app->input->GetCursors()->erase(it);
+					app->input->GetCursors()->insert(it, LoadCursorFromFileA(std::string(path + "paul_throw_stone.cur").c_str()));
+					break;
+				}
+				i++;
+			}
+		}		
+	}
+}
+
 // Input bindings ===============================================================================
 
 // Component bindings ===============================================================================

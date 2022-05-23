@@ -90,6 +90,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetCursorState();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetEagleCursor(bool ret);
     }
 
     public partial class Debug

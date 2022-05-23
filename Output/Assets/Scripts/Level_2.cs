@@ -16,6 +16,7 @@ public class Level_2 : RagnarComponent
     private Transform camera;
     public void Start()
 	{
+        Input.SetEagleCursor(true);
         //Play Level Soundtrack
         SceneAudio = GameObject.Find("AudioLevel1");
         SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");

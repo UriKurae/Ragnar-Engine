@@ -53,6 +53,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
 	mono_add_internal_call("RagnarEngine.Input::SetCursorState", SetCursorState);
 	mono_add_internal_call("RagnarEngine.Input::GetCursorState", GetCursorState);
+	mono_add_internal_call("RagnarEngine.Input::SetEagleCursor", SetEagleCursor);
 	// Input =====================
 
 	// Transform =================
