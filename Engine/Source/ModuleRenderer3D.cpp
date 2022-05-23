@@ -842,43 +842,20 @@ void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, Cam
 
 	if (!gameCam)
 	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			OBB obb = (*it)->GetOOB();
-			obb.Scale(obb.CenterPoint(), 2);
-			shadowsAABB.Enclose(obb);
-		}
-		AABB camAABB = app->camera->cameraFrustum.MinimalEnclosingAABB();
-		camAABB.Scale(camAABB.CenterPoint(), 2);
-		AABB intersectionAABB = shadowsAABB.Intersection(camAABB);
-
 		if (app->camera->visualizeFrustum)
 		{
 			for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 			{
-				if ((*it) != objSelected && intersectionAABB.Contains((*it)->GetAABB()))
-					(*it)->Draw(nullptr);
+				(*it)->Draw(nullptr);
 			}
 		}
-		else app->sceneManager->GetCurrentScene()->Draw(&intersectionAABB);
+		else app->sceneManager->GetCurrentScene()->Draw();
 	}
 	else
 	{		
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			OBB obb = (*it)->GetOOB();
-			obb.Scale(obb.CenterPoint(), 2);
-			shadowsAABB.Enclose(obb);
-		}
-		
-		AABB camAABB = gameCam->GetFrustum()->MinimalEnclosingAABB();
-		camAABB.Scale(camAABB.CenterPoint(), 2.f);
-		AABB intersectionAABB = shadowsAABB.Intersection(camAABB);
-
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			if (intersectionAABB.Contains((*it)->GetAABB()))
-				(*it)->Draw(gameCam);
+			(*it)->Draw(gameCam);
 		}
 	}
 
