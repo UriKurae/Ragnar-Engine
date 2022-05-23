@@ -748,6 +748,7 @@ void SetDirectionParticle(MonoObject* go, MonoObject* direction)
 // Scene Manager
 void NextScene()
 {
+	app->input->SetCursorState(0);
 	app->sceneManager->NextScene();
 	app->renderer3D->gosToDrawOutline.clear();
 	app->renderer3D->ClearPointLights();
@@ -761,6 +762,7 @@ void SaveScene(MonoString* string)
 
 void LoadScene(MonoString* string)
 {
+	app->input->SetCursorState(0);
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
 	app->renderer3D->gosToDrawOutline.clear();
