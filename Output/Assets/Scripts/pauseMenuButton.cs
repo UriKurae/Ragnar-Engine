@@ -1547,11 +1547,14 @@ public class pauseMenuButton : RagnarComponent
 
         if (players.Length == 1)
         {
+			ChaniBg.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
+			StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131); 
 			UIChaniImage.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
 			UIStilgarImage.GetComponent<UIImage>().SetImageGeneralColor(131,131,131);
 
 		}else if(players.Length == 2)
         {
+			StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
 			UIStilgarImage.GetComponent<UIImage>().SetImageGeneralColor(131, 131, 131);
 		}
 		pos.Set(x+500, y - 5, -10.400f);
@@ -1914,7 +1917,7 @@ public class pauseMenuButton : RagnarComponent
 						Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_crysknife.png");
 						Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_voice.png");
 						Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
-						if (players.Length == 2)
+						if (players.Length == 1)
 						{
 							Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
 						}
@@ -2027,7 +2030,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-265, y + 300, -10.400f);
+				pos.Set(-285, y + 300, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(-175, y + 200, -10.400f);
@@ -2087,7 +2090,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-135, y + 300, -10.400f);
+				pos.Set(-155, y + 300, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(-55, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -2146,7 +2149,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-50, y + 300, -10.400f);
+				pos.Set(-70, y + 300, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(40, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -2212,7 +2215,7 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-                    if (players.Length == 2)
+                    if (players.Length == 1)
                     {
 						CharFocusedText.GetComponent<UIText>().text = "Stone\n\nThrow a stone\nto make noise\nwithin the\narea.";
                     }
