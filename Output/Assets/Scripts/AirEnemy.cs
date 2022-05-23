@@ -98,7 +98,7 @@ public class AirEnemy : RagnarComponent
 
     public void Update()
     {
-        if(state != EnemyState.DEATH)
+        if(state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (!pendingToDelete && deathTimer == -1)
             {
@@ -140,18 +140,6 @@ public class AirEnemy : RagnarComponent
                 }
             }
 
-            if (deathTimer >= 0)
-            {
-                state = EnemyState.IS_DYING;
-                deathTimer -= Time.deltaTime;
-                if (deathTimer < 0)
-                {
-                    audioComponent.PlayClip("EDRONE_DESTROYED");
-                    deathTimer = -1f;
-                    pendingToDelete = true;
-                }
-            }
-
             if (stunnedTimer >= 0)
             {
                 stunnedTimer -= Time.deltaTime;
@@ -170,6 +158,17 @@ public class AirEnemy : RagnarComponent
                     distracted = false;
                     distractedTimer = -1f;
                 }
+            }
+        }
+        if (deathTimer >= 0)
+        {
+            state = EnemyState.IS_DYING;
+            deathTimer -= Time.deltaTime;
+            if (deathTimer < 0)
+            {
+                audioComponent.PlayClip("EDRONE_DESTROYED");
+                deathTimer = -1f;
+                pendingToDelete = true;
             }
         }
     }
@@ -212,7 +211,7 @@ public class AirEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Stilgar =====================================
             if (other.gameObject.name == "Trap")

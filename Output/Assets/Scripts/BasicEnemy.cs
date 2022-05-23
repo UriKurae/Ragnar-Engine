@@ -121,7 +121,7 @@ public class BasicEnemy : RagnarComponent
 
     public void Update()
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (!controlled)
             {
@@ -168,17 +168,6 @@ public class BasicEnemy : RagnarComponent
                                 canShoot = true;
                             }
                         }
-                    }
-                }
-
-                if (deathTimer >= 0)
-                {
-                    state = EnemyState.IS_DYING;
-                    deathTimer -= Time.deltaTime;
-                    if (deathTimer < 0)
-                    {
-                        deathTimer = -1f;
-                        pendingToDelete = true;
                     }
                 }
 
@@ -241,6 +230,17 @@ public class BasicEnemy : RagnarComponent
                 }
             }
         }
+
+        if (deathTimer >= 0)
+        {
+            state = EnemyState.IS_DYING;
+            deathTimer -= Time.deltaTime;
+            if (deathTimer < 0)
+            {
+                deathTimer = -1f;
+                pendingToDelete = true;
+            }
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -299,7 +299,7 @@ public class BasicEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
             if (other.gameObject.name == "SoundArea")

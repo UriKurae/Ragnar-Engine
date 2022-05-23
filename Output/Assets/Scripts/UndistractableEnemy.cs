@@ -109,7 +109,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void Update()
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (!controlled)
             {
@@ -156,18 +156,6 @@ public class UndistractableEnemy : RagnarComponent
                                 canShoot = true;
                             }
                         }
-                    }
-                }
-
-                if (deathTimer >= 0)
-                {
-                    state = EnemyState.IS_DYING;
-                    deathTimer -= Time.deltaTime;
-                    if (deathTimer < 0)
-                    {
-                        audioSource.PlayClip("EMALE_DEATH3");
-                        deathTimer = -1f;
-                        pendingToDelete = true;
                     }
                 }
 
@@ -229,6 +217,17 @@ public class UndistractableEnemy : RagnarComponent
                     if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
                     else returning = true;
                 }
+            }
+        }
+        if (deathTimer >= 0)
+        {
+            state = EnemyState.IS_DYING;
+            deathTimer -= Time.deltaTime;
+            if (deathTimer < 0)
+            {
+                audioSource.PlayClip("EMALE_DEATH3");
+                deathTimer = -1f;
+                pendingToDelete = true;
             }
         }
     }
@@ -293,7 +292,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Chani =======================================
             if (other.gameObject.name == "SpiceGrenade")

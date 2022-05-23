@@ -110,7 +110,7 @@ public class TankEnemy : RagnarComponent
 
     public void Update()
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (!controlled)
             {
@@ -157,18 +157,6 @@ public class TankEnemy : RagnarComponent
                                 canShoot = true;
                             }
                         }
-                    }
-                }
-
-                if (deathTimer >= 0)
-                {
-                    state = EnemyState.IS_DYING;
-                    deathTimer -= Time.deltaTime;
-                    if (deathTimer < 0)
-                    {
-                        audioSource.PlayClip("EMALE_DEATH4");
-                        deathTimer = -1f;
-                        pendingToDelete = true;
                     }
                 }
 
@@ -232,7 +220,18 @@ public class TankEnemy : RagnarComponent
                 }
 
             }
-        }        
+        }
+        if (deathTimer >= 0)
+        {
+            state = EnemyState.IS_DYING;
+            deathTimer -= Time.deltaTime;
+            if (deathTimer < 0)
+            {
+                audioSource.PlayClip("EMALE_DEATH4");
+                deathTimer = -1f;
+                pendingToDelete = true;
+            }
+        }
     }
     public void SetControled(bool flag)
     {
@@ -281,7 +280,7 @@ public class TankEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
             if (other.gameObject.name == "SoundArea")
