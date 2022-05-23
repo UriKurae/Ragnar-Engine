@@ -65,17 +65,17 @@ void ModuleInput::LoadCursors()
 
 	cursors.push_back(defaultCursor);
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_voice.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throwing_knife.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throw_stone.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_voice.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_camouflage.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_hunter_seeker.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_spice_grenade.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_camouflage.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_sword.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_stunner.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_whistle.cur").c_str()));
 	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_trap.cur").c_str()));
+	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_whistle.cur").c_str()));
 }
 
 // Called every draw update
