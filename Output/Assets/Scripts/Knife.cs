@@ -3,17 +3,19 @@ using RagnarEngine;
 
 public class Knife : RagnarComponent
 {
+	public GameObject player;
 	// Components
 	private AudioSource audioSourceComponent;
 	private ParticleSystem particleComponent;
 
-	private float force = 1500;
+	private float force = 1700;
 	public bool canReload = false;
 	private bool pendingToDelete = false;
 	private bool grabOnce = false;
 	
 	public void Start()
     {
+        player = GameObject.Find("Player");
         AimMethod();
 
 		// Get components
@@ -21,11 +23,12 @@ public class Knife : RagnarComponent
 		audioSourceComponent = gameObject.GetComponent<AudioSource>();
 
 		particleComponent.Play();
+
+		player.GetComponent<Player>().PlayAudioClip("WPN_THORWINGKNIFETHROW");
 	}
 
     private void AimMethod()
     {
-        GameObject player = GameObject.Find("Player");
         NavAgent agent = player.GetComponent<NavAgent>();
 
         Vector3 pos = player.transform.globalPosition;

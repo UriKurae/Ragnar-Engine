@@ -31,6 +31,7 @@ public class Eagle : RagnarComponent
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
 
+        player.GetComponent<Player>().PlayAudioClip("EBOSS_THROWOBJECT");
         leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
         rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
         leftParticles.Play();
