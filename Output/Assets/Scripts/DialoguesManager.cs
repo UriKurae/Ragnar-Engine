@@ -16,11 +16,12 @@ public class DialogueManager : RagnarComponent
     // 0=Paul / 1=Chani / 2=Rehen Fremen / 3=Rabban / 
     // 4=Soldado Harkonnen / 5=Soldado / 
     // 6=Lady Jessica / 7=Stilgar
-    //int idDialogue;
 	bool firstTime;
-
 	bool endDialogue;
     bool inDialogue;
+
+    int pressedSkip;
+
     public GameObject[] triggerColliders;
     public void Start()
 	{
@@ -38,6 +39,8 @@ public class DialogueManager : RagnarComponent
 		endDialogue = false;
         firstTime = true;
         inDialogue = false;
+		
+		pressedSkip = 0;
         DisableDialogue();
         // Hay que actualizar todos los prefabs y hacer que se instancien por codigo
         // en su levelManager por cada nivel
@@ -88,12 +91,18 @@ public class DialogueManager : RagnarComponent
         {
             SceneAudio.GetComponent<AudioSource>().PlayClip("UI_DIALOGUEPASS");
             NextLine();
+            pressedSkip = 0;
         }
         //End Dialogue
-        if (Input.GetKey(KeyCode.P) == KeyState.KEY_UP)
+        if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_REPEAT)
         {
-            SceneAudio.GetComponent<AudioSource>().PlayClip("UI_DIALOGUEPASS");
-            EndDialogue();
+            pressedSkip++;
+            if (pressedSkip >= 30)
+            {
+                SceneAudio.GetComponent<AudioSource>().PlayClip("UI_DIALOGUEPASS");
+                EndDialogue();
+                pressedSkip = 0;
+            }
         }
         /*
         // Active Dialogue ID = 0 (firt dialogue)
