@@ -38,6 +38,8 @@ public class PlayerManager : RagnarComponent
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+            if(i == 0 && SceneManager.currentSceneName == "build")
+                players[i].GetComponent<Rigidbody>().SetBodyRotation(Quaternion.RotateAroundAxis(new Vector3(0,1,0), 180));
             players[i].SubmitOutlineDrawing(outlineColors[i]);
         }
 
@@ -549,7 +551,7 @@ public class PlayerManager : RagnarComponent
             players[i].GetComponent<Player>().SetControled(false);
         }
         players[id].GetComponent<Player>().SetControled(true);
-
+        Input.SetCursorState(0);
     }
 
     public void SavePlayer()
