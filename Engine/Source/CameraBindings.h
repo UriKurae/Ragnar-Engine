@@ -3,6 +3,7 @@
 #include "CameraComponent.h"
 #include "ModuleCamera3D.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleNavMesh.h"
 #include "Viewport.h"

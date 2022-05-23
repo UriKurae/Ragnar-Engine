@@ -477,7 +477,6 @@ bool ModuleRenderer3D::CleanUp()
 	RELEASE(distVao);
 	RELEASE(distVbo);
 	RELEASE(distIbo);
-	RELEASE(vbo);
 
 	for(auto& pl : pointLights)
 	{
