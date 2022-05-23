@@ -60,10 +60,10 @@ int MouseY()
 
 	return 0;
 }
-void SetCursorState(MonoObject* x)
+void SetCursorState(int x)
 {
 	if (app != nullptr)
-		app->input->SetCursorState(*(int*)mono_object_unbox(x));
+		app->input->SetCursorState(x);
 }
 
 // Input bindings ===============================================================================

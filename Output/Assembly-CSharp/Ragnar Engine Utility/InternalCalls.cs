@@ -86,7 +86,7 @@ namespace RagnarEngine
         public static extern int GetMouseY();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void SetCursorState(object state);
+        public static extern void SetCursorState(int state);
     }
 
     public partial class Debug

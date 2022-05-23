@@ -248,55 +248,55 @@ public class PlayerManager : RagnarComponent
             case 0:
                 if (ability == State.ABILITY_1)
                 {
-                    Input.SetCursorState(CursorState.PAUL_1);
+                    Input.SetCursorState((int)CursorState.PAUL_1);
                 }
                 else if (ability == State.ABILITY_2)
                 {
-                    Input.SetCursorState(CursorState.PAUL_2);
+                    Input.SetCursorState((int)CursorState.PAUL_2);
                 }
                 else if (ability == State.ABILITY_3)
                 {
-                    Input.SetCursorState(CursorState.PAUL_3);
+                    Input.SetCursorState((int)CursorState.PAUL_3);
                 }
                 else if (ability == State.ABILITY_4)
                 {
-                    Input.SetCursorState(CursorState.PAUL_4);
+                    Input.SetCursorState((int)CursorState.PAUL_4);
                 }
                 break;
             case 1:
                 if (ability == State.ABILITY_1)
                 {
-                    Input.SetCursorState(CursorState.CHANI_1);
+                    Input.SetCursorState((int)CursorState.CHANI_1);
                 }
                 else if (ability == State.ABILITY_2)
                 {
-                    Input.SetCursorState(CursorState.CHANI_2);
+                    Input.SetCursorState((int)CursorState.CHANI_2);
                 }
                 else if (ability == State.ABILITY_3)
                 {
-                    Input.SetCursorState(CursorState.CHANI_3);
+                    Input.SetCursorState((int)CursorState.CHANI_3);
                 }
                 else if (ability == State.ABILITY_4)
                 {
-                    Input.SetCursorState(CursorState.CHANI_4);
+                    Input.SetCursorState((int)CursorState.CHANI_4);
                 }
                 break;
             case 2:
                 if (ability == State.ABILITY_1)
                 {
-                    Input.SetCursorState(CursorState.STILGAR_1);
+                    Input.SetCursorState((int)CursorState.STILGAR_1);
                 }
                 else if (ability == State.ABILITY_2)
                 {
-                    Input.SetCursorState(CursorState.STILGAR_2);
+                    Input.SetCursorState((int)CursorState.STILGAR_2);
                 }
                 else if (ability == State.ABILITY_3)
                 {
-                    Input.SetCursorState(CursorState.STILGAR_3);
+                    Input.SetCursorState((int)CursorState.STILGAR_3);
                 }
                 else if (ability == State.ABILITY_4)
                 {
-                    Input.SetCursorState(CursorState.STILGAR_4);
+                    Input.SetCursorState((int)CursorState.STILGAR_4);
                 }
                 break;
             default:
@@ -319,7 +319,7 @@ public class PlayerManager : RagnarComponent
 
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
-            Input.SetCursorState(CursorState.NORMAL);
+            Input.SetCursorState((int)CursorState.NORMAL);
 
             switch (playableCharacter.state)
             {
@@ -467,7 +467,7 @@ public class PlayerManager : RagnarComponent
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
-            Input.SetCursorState(CursorState.NORMAL);
+            Input.SetCursorState((int)CursorState.NORMAL);
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
