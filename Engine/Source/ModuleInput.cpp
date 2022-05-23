@@ -390,6 +390,7 @@ bool ModuleInput::GetAxis(int joystickId, JAxis axis)
 
 void ModuleInput::SetCursorState(int state)
 {
+	currentCursor = (CursorState)state;
 	HCURSOR hCurDef = CopyCursor(cursors[state]);
 	SetSystemCursor(hCurDef, OCR_NORMAL);
 	DestroyCursor(hCurDef);

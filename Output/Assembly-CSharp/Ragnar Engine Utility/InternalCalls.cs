@@ -87,6 +87,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void SetCursorState(int state);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetCursorState();
     }
 
     public partial class Debug

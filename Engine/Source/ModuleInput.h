@@ -127,6 +127,7 @@ public:
 	bool GetAxis(int joystickId, JAxis axis);
 
 	void SetCursorState(int state);
+	int GetCursorState() { return (int)currentCursor; };
 
 	void ImportToLibrary();
 
