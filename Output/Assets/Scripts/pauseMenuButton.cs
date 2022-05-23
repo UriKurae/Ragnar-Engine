@@ -1252,6 +1252,10 @@ public class pauseMenuButton : RagnarComponent
 			AbilityBG2.isActive = false;
 			AbilityBG3.isActive = false;
 			AbilityBG4.isActive = false;
+			cd1.isActive = false;
+			cd2.isActive = false;
+			cd3.isActive = false;
+			cd4.isActive = false;
 		}
         else
         {
@@ -1285,6 +1289,10 @@ public class pauseMenuButton : RagnarComponent
 			AbilityBG2.isActive = true;
 			AbilityBG3.isActive = true;
 			AbilityBG4.isActive = true;
+			cd1.isActive = true;
+			cd2.isActive = true;
+			cd3.isActive = true;
+			cd4.isActive = true;
 		}
 
 		if(isOptions)
