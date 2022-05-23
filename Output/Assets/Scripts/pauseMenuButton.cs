@@ -342,6 +342,11 @@ public class pauseMenuButton : RagnarComponent
 		ChaniBg = GameObject.Find("ChaniBg");
 		StilgarBg = GameObject.Find("StilgarBg");
 
+		UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+		PaulBg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+		ChaniBg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+		StilgarBg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+
 		Ability1Bg = GameObject.Find("Ability1Bg");
 		Ability2Bg = GameObject.Find("Ability2Bg");
 		Ability3Bg = GameObject.Find("Ability3Bg");
@@ -1557,23 +1562,23 @@ public class pauseMenuButton : RagnarComponent
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_portrait.png");
 			pos.Set(x + 150, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Paul";
-			
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
 		}
 		else if (selectedPlayer.name == "Player_2")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_portrait.png");
 			pos.Set(x + 230, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Chani";
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+			
 
-			
-			
 		}
 		else if (selectedPlayer.name == "Player_3")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
-			
+			UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
 		}
 	}
 	void ImageShow()
@@ -2027,11 +2032,11 @@ public class pauseMenuButton : RagnarComponent
 				
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be killed.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan't be killed.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan't be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -2085,7 +2090,7 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "The voice\n\nMind control\nan enemy.\nDrones can�t\nbe affected.";
+					CharFocusedText.GetComponent<UIText>().text = "The voice\n\nMind control\nan enemy.\nDrones can't\nbe affected.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
@@ -2093,7 +2098,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Stunner\n\nFire weapon\nthat can\npierce\nenemie�s\nshields.";
+					CharFocusedText.GetComponent<UIText>().text = "Stunner\n\nFire weapon\nthat can\npierce\nenemie's\nshields.";
 				}
 
 				break;
@@ -2144,11 +2149,11 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Throwing Knife\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn�t\naffect\nshielded\nenemies.";
+					CharFocusedText.GetComponent<UIText>().text = "Throwing Knife\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn't\naffect\nshielded\nenemies.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Hunter-Seeker\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Hunter-Seeker\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan't be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -2215,7 +2220,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Spice Grenade\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn�t affect\nshielded enemies\nnor drones.";
+					CharFocusedText.GetComponent<UIText>().text = "Spice Grenade\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn't affect\nshielded enemies\nnor drones.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
