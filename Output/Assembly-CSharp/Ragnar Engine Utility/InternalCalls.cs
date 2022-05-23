@@ -66,7 +66,7 @@ namespace RagnarEngine
         public static extern GameObject HitToTag(Vector3 initPos, Vector3 endPos, object tag);
         
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern int PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] players, int size, string tag);
+        public static extern int PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] players, int size, string tag, float time);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 ReturnHitpoint();
@@ -84,6 +84,15 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetMouseY();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetCursorState(int state);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetCursorState();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetEagleCursor(bool ret);
     }
 
     public partial class Debug
@@ -411,6 +420,29 @@ namespace RagnarEngine
         }
     }
 }
+
+enum CursorState
+{
+    NORMAL = 0,
+
+    //Paul abilitites
+    PAUL_1,
+    PAUL_2,
+    PAUL_3,
+    PAUL_4,
+
+    //Chani abilities
+    CHANI_1,
+    CHANI_2,
+    CHANI_3,
+    CHANI_4,
+
+    //Stilgar abilities
+    STILGAR_1,
+    STILGAR_2,
+    STILGAR_3,
+    STILGAR_4,
+};
 
 public enum KeyCode
 {

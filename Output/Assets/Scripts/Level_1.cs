@@ -17,6 +17,7 @@ public class Level_1 : RagnarComponent
     private Transform camera;
     public void Start()
 	{
+        Input.SetEagleCursor(false);
         // Camera Starting Position
         //GameObject.Find("cameraController").transform.globalPosition = new Vector3(-52.79f, 0f, 89.05f);
         GameObject.Find("UI Counter").GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) -28, 0);
@@ -39,7 +40,7 @@ public class Level_1 : RagnarComponent
         }
 
         // PLAYERS
-        characters = new Characters[2];
+        characters = new Characters[1];
         // Player 1
         characters[0] = new Characters
         {
@@ -47,7 +48,7 @@ public class Level_1 : RagnarComponent
             prefabPath = "Player",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 3,
+            hitPoints = 4,
             pos = new Vector3(-43.69f, 0f, 199.77f)
         };
         characters[0].abilities[0] = new Abilities
@@ -98,65 +99,6 @@ public class Level_1 : RagnarComponent
             charges = -1,
             cooldown = 20f
         }; // Rock/Eagle
-
-        // Player 2
-        characters[1] = new Characters
-        {
-            name = "Chani",
-            prefabPath = "Player_2",
-            state = State.NONE,
-            abilities = new Abilities[4],
-            hitPoints = 2,
-            pos = new Vector3(-37.25f, 0f, 199.70f)
-        };
-        characters[1].abilities[0] = new Abilities
-        {
-            name = "Backstab",
-            prefabPath = "BackStab",
-            transformY = 0.2f,
-            intensity = 1.250f,
-            constant = 0.1f,
-            linear = -0.574f,
-            quadratic = 0f,
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-        characters[1].abilities[1] = new Abilities
-        {
-            name = "Camouflage",
-            prefabPath = "Camouflage",
-            transformY = 0.2f,
-            intensity = 1.250f,
-            constant = 0.1f,
-            linear = -0.574f,
-            quadratic = 0f,
-            charges = -1,
-            cooldown = 30f
-        }; // Camouflage
-        characters[1].abilities[2] = new Abilities
-        {
-            name = "Hunter Seeker",
-            prefabPath = "HunterSeeker",
-            transformY = 1.32f,
-            intensity = 1.250f,
-            constant = 1.232f,
-            linear = -0.172f,
-            quadratic = 0f,
-            charges = 3,
-            cooldown = 40f
-        }; // Hunter Seeker
-        characters[1].abilities[3] = new Abilities
-        {
-            name = "Spice Grenade",
-            prefabPath = "SpiceGrenade",
-            transformY = 1.32f,
-            intensity = 1.250f,
-            constant = 1.232f,
-            linear = -0.172f,
-            quadratic = 0f,
-            charges = -1,
-            cooldown = 30f
-        }; // Spice Bomb
 
         // ENEMIES
         enemies = new Enemies[26];

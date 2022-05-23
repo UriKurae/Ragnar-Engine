@@ -60,6 +60,54 @@ int MouseY()
 
 	return 0;
 }
+void SetCursorState(int x)
+{
+	if (app != nullptr)
+		app->input->SetCursorState(x);
+}
+
+int GetCursorState()
+{
+	if (app != nullptr)
+		return app->input->GetCursorState();
+}
+
+void SetEagleCursor(bool ret)
+{
+	if (app != nullptr)
+	{
+		if (ret)
+		{
+			int i = 0;
+			for (std::vector<HCURSOR>::iterator it = app->input->GetCursors()->begin(); it != app->input->GetCursors()->end(); ++it)
+			{
+				if (i == 4)
+				{
+					std::string path = "Library/Cursors/";
+					app->input->GetCursors()->erase(it);
+					app->input->GetCursors()->insert(it, LoadCursorFromFileA(std::string(path + "ui_eagle.cur").c_str()));
+					break;
+				}
+				i++;
+			}
+		}
+		else
+		{
+			int i = 0;
+			for (std::vector<HCURSOR>::iterator it = app->input->GetCursors()->begin(); it != app->input->GetCursors()->end(); ++it)
+			{
+				if (i == 4)
+				{
+					std::string path = "Library/Cursors/";
+					app->input->GetCursors()->erase(it);
+					app->input->GetCursors()->insert(it, LoadCursorFromFileA(std::string(path + "paul_throw_stone.cur").c_str()));
+					break;
+				}
+				i++;
+			}
+		}		
+	}
+}
 
 // Input bindings ===============================================================================
 
@@ -737,6 +785,7 @@ void SetDirectionParticle(MonoObject* go, MonoObject* direction)
 // Scene Manager
 void NextScene()
 {
+	app->input->SetCursorState(0);
 	app->sceneManager->NextScene();
 	app->renderer3D->gosToDrawOutline.clear();
 	app->renderer3D->ClearPointLights();
@@ -750,6 +799,7 @@ void SaveScene(MonoString* string)
 
 void LoadScene(MonoString* string)
 {
+	app->input->SetCursorState(0);
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
 	app->renderer3D->gosToDrawOutline.clear();

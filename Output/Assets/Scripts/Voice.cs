@@ -8,6 +8,7 @@ public class Voice : RagnarComponent
 	public GameObject[] enemies;
 	public PlayerManager playerManager;
 	NavAgent agent;
+	bool check = false;
 
 	public void Start()
 	{
@@ -22,6 +23,11 @@ public class Voice : RagnarComponent
 		selectedEnemy = EnemyFound();
 		if (selectedEnemy != null && selectedEnemy.GetComponent<AirEnemy>().enemyType != EnemyType.AIR)
 		{
+			if(!check)
+            {
+				player.GetComponent<Player>().PlayAudioClip("WPN_VOICE");
+				check = true;
+            }
 			BasicEnemy enemyScript = selectedEnemy.GetComponent<BasicEnemy>();
 			ActivateVoice();
 			enemyScript.initialPos = selectedEnemy.transform.globalPosition;
