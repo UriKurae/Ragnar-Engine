@@ -66,10 +66,10 @@ void SetCursorState(int x)
 		app->input->SetCursorState(x);
 }
 
-void GetCursorState()
+int GetCursorState()
 {
 	if (app != nullptr)
-		app->input->GetCursorState();
+		return app->input->GetCursorState();
 }
 
 // Input bindings ===============================================================================
