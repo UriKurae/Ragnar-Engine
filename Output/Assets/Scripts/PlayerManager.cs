@@ -366,7 +366,7 @@ public class PlayerManager : RagnarComponent
                     obj.transform.localPosition = new Vector3(0, 2, 0);
                     obj.transform.localRotation = Quaternion.identity;
 
-                    obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
+                    obj.GetComponent<Animation>().PlayAnimation("Picked");
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
 
                     playableCharacter.pickedEnemy = obj;
@@ -403,7 +403,7 @@ public class PlayerManager : RagnarComponent
 
                     if (playableCharacter.pickedEnemy != null)
                     {
-                        playableCharacter.pickedEnemy.GetComponent<Animation>().PlayAnimation("CorpseCarry");
+                        playableCharacter.pickedEnemy.GetComponent<Animation>().PlayAnimation("Carried");
                         players[characterSelected].GetComponent<Player>().SetAction(2);
                     }
                     else
