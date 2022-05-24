@@ -236,7 +236,7 @@ bool ModuleRenderer3D::PostUpdate()
 	std::set<GameObject*> objects;
 
 	// TODO: wtf quadtree man.
-	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera, 1.75f);
 	
 	AABB shadowsAABB;
 #ifndef DIST
@@ -825,6 +825,7 @@ void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, Cam
 	AABB shadowsAABB = shadAABB;
 	shadowsAABB.SetNegativeInfinity();
 
+	std::vector<GameObject*> gos;
 	if (!gameCam)
 	{
 		if (app->camera->visualizeFrustum)
@@ -837,7 +838,7 @@ void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, Cam
 		else app->sceneManager->GetCurrentScene()->Draw();
 	}
 	else
-	{		
+	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
 			(*it)->Draw(gameCam);

@@ -26,7 +26,11 @@ public class HunterSeeker : RagnarComponent
 		Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 		rb.SetBodyRotation(rot);
 		rb.SetBodyPosition(pos);
-		rb.IgnoreCollision(player, true);
+
+        for (int i = 0; i < GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters.Length; i++)
+        {
+			rb.IgnoreCollision(GameObject.Find("PlayerManager").GetComponent<PlayerManager>().players[i], true);
+		}
 
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
