@@ -136,7 +136,7 @@ public class PlayerManager : RagnarComponent
                     {  
                         CooldownTimer(i);
                     }
-                        if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
+                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
                     {
                         characters[j].abilities[i].onCooldown = false;
                         characters[j].abilities[i].counter = 0f;

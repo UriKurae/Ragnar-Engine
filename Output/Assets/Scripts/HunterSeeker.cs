@@ -69,7 +69,7 @@ public class HunterSeeker : RagnarComponent
 		}
 		if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
 		{
-			GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters[1].abilities[2].cooldown = 0;
+			GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters[1].abilities[2].counter = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters[1].abilities[2].cooldown;
 			leftParticles.Pause();
 			rightParticles.Pause();
 			InternalCalls.Destroy(gameObject);
