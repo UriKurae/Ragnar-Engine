@@ -38,6 +38,8 @@ public class Player : RagnarComponent
     DialogueManager dialogue;
     GameObject sound;
 
+    GameObject uiCrouch;
+
     ParticleSystem walkPartSys;
     ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
@@ -69,6 +71,8 @@ public class Player : RagnarComponent
         sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
         gameObject.AddChild(sound);
         //sound.transform.globalPosition = gameObject.transform.globalPosition;
+
+        uiCrouch = GameObject.Find("UICrouch");
 
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
@@ -141,12 +145,16 @@ public class Player : RagnarComponent
                                 action = Actions.CROUCH;
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
+
+                                uiCrouch.isActive = true;
                             }
                             else if (action == Actions.CROUCH)
                             {
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
+
+                                uiCrouch.isActive = false;
                             }
                         }
 
