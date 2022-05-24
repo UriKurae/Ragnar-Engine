@@ -930,7 +930,7 @@ public class mainMenuBackScreen : RagnarComponent
 
 		
 
-		pos.Set(-sum + 470, y - 990, 36.1f);
+		pos.Set(-sum + 470, y - 890, 36.1f);
 		optionsControl19.GetComponent<Transform2D>().position2D = pos;
 
 
