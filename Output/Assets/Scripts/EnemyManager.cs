@@ -165,52 +165,56 @@ public class EnemyManager : RagnarComponent
 
     public void LoadEnemy()
     {
-        for (int i = 0; i < enemies.Length; ++i)
+        EnemyData data = SaveSystem.LoadEnemy(enemies[0].name);
+        if(data != null)
         {
-            EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
-
-            enemies[i].state = data.state;
-            enemies[i].type = data.type;
-
-            SetEnemyPositionAndRotation(enemyGOs[i], enemies[i]);
-            switch (enemies[i].type)
+            for (int i = 0; i < enemies.Length; ++i)
             {
-                case EnemyType.BASIC:
-                    enemyGOs[i].GetComponent<BasicEnemy>().state = data.state;
-                    break;
-                case EnemyType.TANK:
-                    enemyGOs[i].GetComponent<TankEnemy>().state = data.state;
-                    break;
-                case EnemyType.UNDISTRACTABLE:
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = data.state;
-                    break;
-                case EnemyType.AIR:
-                    enemyGOs[i].GetComponent<AirEnemy>().state = data.state;
-                    break;
-            }
+                data = SaveSystem.LoadEnemy(enemies[i].name);
 
-            if (enemies[i].state == EnemyState.DEATH)
-            {
-                deadEnemies.Add(enemyGOs[i]);
-                enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
-                switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
+                enemies[i].state = data.state;
+                enemies[i].type = data.type;
+
+                SetEnemyPositionAndRotation(enemyGOs[i], enemies[i]);
+                switch (enemies[i].type)
                 {
                     case EnemyType.BASIC:
-                        enemyGOs[i].ChangeMesh("enemy1_modeldeath");
-                        break;
-                    //TODO: Check if drone destroyed
-                    case EnemyType.AIR:
-                        enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                        enemyGOs[i].GetComponent<BasicEnemy>().state = data.state;
                         break;
                     case EnemyType.TANK:
-                        enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                        enemyGOs[i].GetComponent<TankEnemy>().state = data.state;
                         break;
                     case EnemyType.UNDISTRACTABLE:
-                        enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                        enemyGOs[i].GetComponent<UndistractableEnemy>().state = data.state;
                         break;
-                };
-                enemyGOs[i].isInteractuable = true;
-                enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
+                    case EnemyType.AIR:
+                        enemyGOs[i].GetComponent<AirEnemy>().state = data.state;
+                        break;
+                }
+
+                if (enemies[i].state == EnemyState.DEATH)
+                {
+                    deadEnemies.Add(enemyGOs[i]);
+                    enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                    switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
+                    {
+                        case EnemyType.BASIC:
+                            enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                            break;
+                        //TODO: Check if drone destroyed
+                        case EnemyType.AIR:
+                            enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                            break;
+                        case EnemyType.TANK:
+                            enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                            break;
+                        case EnemyType.UNDISTRACTABLE:
+                            enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                            break;
+                    };
+                    enemyGOs[i].isInteractuable = true;
+                    enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
+                }
             }
         }
     }
