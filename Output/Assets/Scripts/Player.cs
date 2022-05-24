@@ -239,7 +239,7 @@ public class Player : RagnarComponent
     {
         agent.ClearPath();
         move = Movement.IDLE;
-        ReloadState();
+        animationComponent.PlayAnimation("Talk");
     }
 
     private void ReloadState()

@@ -143,7 +143,10 @@ public class PlayerManager : RagnarComponent
     public void Ability1()
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        {
             SpawnArea(State.ABILITY_1);
+            //players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1");
+        }
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
@@ -324,43 +327,34 @@ public class PlayerManager : RagnarComponent
         {
             Input.SetCursorState((int)CursorState.NORMAL);
 
-            switch (playableCharacter.state)
+            if (playableCharacter.state == State.CARRYING && playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
             {
-                case State.CARRYING:
-                    {
-                        if (playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
-                        {
-                            GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
+                GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
 
-                            players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
-                            playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
-                            playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
+                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
+                playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
+                playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
 
-                            //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
-                            playableCharacter.pickedEnemy = null;
-                        }
-                        else
-                        {
-                            NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
-                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+                //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
+                playableCharacter.pickedEnemy = null;
+            }
+            else
+            {
+                NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+                GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-                            if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
-                            {
-                                players[characterSelected].AddChild(obj);
+                if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                {
+                    players[characterSelected].AddChild(obj);
 
-                                obj.transform.localPosition = new Vector3(0, 2, 0);
-                                obj.transform.localRotation = Quaternion.identity;
+                    obj.transform.localPosition = new Vector3(0, 2, 0);
+                    obj.transform.localRotation = Quaternion.identity;
 
-                                obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
-                                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                    obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
 
-                                playableCharacter.pickedEnemy = obj;
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    break;
+                    playableCharacter.pickedEnemy = obj;
+                }
             }
 
             if (playableCharacter.state != State.CARRYING)
