@@ -37,11 +37,20 @@ public class winScren : RagnarComponent
 	bool isFirst = true;
 
 	GameObject[] players;
+	GameObject[] enemies;
 
 	public void Start()
 	{
 		players = new GameObject[3];
 		players = GameObject.FindGameObjectsWithTag("Player");
+
+		enemies = new GameObject[2];
+		enemies = GameObject.FindGameObjectsWithTag("Enemies");
+
+		foreach (var item in enemies)
+		{
+			item.GetComponent<Animation>().PlayAnimation("Idle");
+		}
 
 		foreach (var item in players)
 		{

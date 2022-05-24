@@ -158,7 +158,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.1161855459213257,
+                    "Vertical Fov": 1.0978162288665771,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -7.8719701766967773,
@@ -225,8 +225,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -258,7 +258,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 381414248,
+                    "pointer": 472761872,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -340,7 +340,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -586,
+                        -552.5,
                         -425,
                         36.099998474121094
                     ],
@@ -356,8 +356,8 @@
                     ],
                     "buttonWidth": 323,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -471,7 +471,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -576.5,
+                        -543,
                         -427,
                         36.099998474121094
                     ],
@@ -487,8 +487,8 @@
                     ],
                     "buttonWidth": 309,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -551,8 +551,8 @@
                     ],
                     "buttonWidth": 345.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -682,8 +682,8 @@
                     ],
                     "buttonWidth": 387,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -730,7 +730,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        599,
+                        660,
                         -425,
                         36.099998474121094
                     ],
@@ -746,8 +746,8 @@
                     ],
                     "buttonWidth": 407.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -861,7 +861,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        490,
+                        560,
                         -423,
                         36.099998474121094
                     ],
@@ -877,8 +877,8 @@
                     ],
                     "buttonWidth": 372.5,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1053,7 +1053,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.8335342407226562,
+                        -7.8335342407226563,
                         -0.94506388902664185,
                         -26.458703994750977
                     ],
@@ -1740,7 +1740,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -254.5,
+                        -248,
                         370,
                         -10.399999618530273
                     ],
@@ -1756,8 +1756,8 @@
                     ],
                     "buttonWidth": 806,
                     "buttonHeight": 175,
-                    "lastButtonWidth": 1420,
-                    "lastButtonHeight": 886.5,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 827.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1785,6 +1785,158 @@
                     "Type": 13,
                     "alpha": 1,
                     "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Basic Enemy",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/Basic Enemy Menu.rgprefab",
+            "tag": "Enemies",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.081386208534240723,
+                        -2.0444235801696777,
+                        -21.384759902954102
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.87570440769195557,
+                        0,
+                        0.48284760117530823
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000041723251343,
+                        1,
+                        1.0000041723251343
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/CharacterTex\/nme_enemy1_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Animations\/nme_enemy1_dead__Mesh.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Idle",
+                    "Animations": [
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_enemy1_dead__nme_enemy1_dead|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Basic Enemy 2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/Basic Enemy Menu.rgprefab",
+            "tag": "Enemies",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -14.315815925598145,
+                        -0.26808738708496094,
+                        -22.703975677490234
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.83715164661407471,
+                        0,
+                        0.54697084426879883
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.000032901763916,
+                        1,
+                        1.000032901763916
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/CharacterTex\/nme_enemy1_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Animations\/nme_enemy1_dead__Mesh.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Idle",
+                    "Animations": [
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_enemy1_dead__nme_enemy1_dead|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        }
+                    ]
                 }
             ]
         }
