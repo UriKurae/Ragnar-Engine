@@ -63,7 +63,7 @@ void ModuleInput::LoadCursors()
 	path = "Assets/Resources/Cursor/";
 #endif
 
-	cursors.push_back(defaultCursor);
+	cursors.push_back(LoadCursorFromFile(std::string(path + "clickable.ani").c_str()));
 
 	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_crysknife.cur").c_str()));
 	cursors.push_back(LoadCursorFromFile(std::string(path + "paul_voice.cur").c_str()));
@@ -80,7 +80,8 @@ void ModuleInput::LoadCursors()
 	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_trap.cur").c_str()));
 	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_whistle.cur").c_str()));
 
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "clickable.ani").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "clickable.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "non-clickable.cur").c_str()));
 }
 
 // Called every draw update
@@ -410,7 +411,7 @@ void ModuleInput::ImportToLibrary()
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
 		std::string ext = (*it).substr((*it).find_last_of("."), (*it).length());
-		if (ext == ".cur")
+		if (ext == ".cur" || ext == ".ani")
 		{
 			std::string assetsPath = "Assets/Resources/Cursor/";
 			assetsPath += (*it);
