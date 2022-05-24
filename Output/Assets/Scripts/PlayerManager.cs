@@ -405,8 +405,6 @@ public class PlayerManager : RagnarComponent
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
-
-            
         }
     }
 
