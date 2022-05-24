@@ -236,7 +236,7 @@ bool ModuleRenderer3D::PostUpdate()
 	std::set<GameObject*> objects;
 
 	// TODO: wtf quadtree man.
-	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera, 1.25);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera, 1.75f);
 	
 	AABB shadowsAABB;
 #ifndef DIST
