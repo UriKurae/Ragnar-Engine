@@ -209,25 +209,6 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 
 	vec4 result = mix(vec4(1), normalize(colorSum) * 1.25, shadow);
 
-	//for (int i = 0; i < 3; ++i)
-	//{
-	//	for (int j = 0; j < 3; ++j)
-	//	{
-	//		texCoord += vec2(dx * i, dy * j);
-	//		colorSum += texture(tex, texCoord);
-	//
-	//		float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
-	//		shadow += currentDepth + bias > pcfDepth ? 1 : 0;
-	//	}
-	//}
-	//
-	//colorSum = colorSum / 9;
-	//shadow = shadow / 9;
-	//shadow = smoothstep(0, 2, shadow);
-	//// ========================
-	//
-	//vec4 result = mix(vec4(1), normalize(colorSum), shadow);
-
 	return result;	
 }
 

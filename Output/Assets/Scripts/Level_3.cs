@@ -37,6 +37,11 @@ public class Level_3 : RagnarComponent
             TimerData data = SaveSystem.LoadTimer();
             timer.timer = data.timer;
         }
+        else
+        {
+            SaveSystem.SaveScene();
+            SaveSystem.SaveTimer(timer.timer);
+        }
 
         // PLAYERS
         characters = new Characters[3];

@@ -10,6 +10,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": []
         },
         {
@@ -22,6 +23,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -87,6 +89,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -125,6 +128,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -154,7 +158,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.046697735786438,
+                    "Vertical Fov": 1.0263923406600952,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -166,6 +170,7 @@
                     "Zoom Min": 0,
                     "Zoom Max": 0,
                     "Zoom Speed": 0,
+                    "Lock": true,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -198,6 +203,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
@@ -219,8 +225,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -229,7 +235,20 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_losescreen.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -239,7 +258,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 388268912,
+                    "pointer": 451186784,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -255,12 +274,13 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -521,
+                        -584,
                         -100.5,
                         36.099998474121094
                     ],
@@ -276,8 +296,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -286,32 +306,84 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Restart",
+                    "buttonText": "Restart Level",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
@@ -333,12 +405,13 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -523.5,
+                        -586.5,
                         -196,
                         36.099998474121094
                     ],
@@ -354,8 +427,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -364,28 +437,80 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -411,12 +536,13 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -533,
+                        -596,
                         -206,
                         36.099998474121094
                     ],
@@ -432,8 +558,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -442,7 +568,20 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -461,12 +600,13 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -530,
+                        -593,
                         -109.5,
                         36.099998474121094
                     ],
@@ -482,8 +622,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -492,7 +632,20 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -511,12 +664,13 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -364,
+                        -427,
                         132.5,
                         36.099998474121094
                     ],
@@ -532,8 +686,8 @@
                     ],
                     "buttonWidth": 376,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1227,
-                    "lastButtonHeight": 708,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 762.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -542,7 +696,20 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_game_over_text.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -561,6 +728,7 @@
             "Prefab Path": "Assets\/Prefabs\/AudioLoseScene.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -606,6 +774,25 @@
                     "Active": true
                 }
             ]
+        }
+    ],
+    "NavMesh": [
+        {
+            "cellSize": 0.30000001192092896,
+            "cellHeight": 0.20000000298023224,
+            "agentHeight": 2,
+            "agentRadius": 0.5,
+            "agentMaxClimb": 0,
+            "agentMaxSlope": 0.10000000149011612,
+            "regionMinSize": 8,
+            "regionMergeSize": 20,
+            "edgeMaxLen": 12,
+            "edgeMaxError": 1.2999999523162842,
+            "vertsPerPoly": 6,
+            "detailSampleDist": 6,
+            "detailSampleMaxError": 1,
+            "partitionType": 0,
+            "tileSize": 32
         }
     ]
 }
