@@ -158,7 +158,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.97676968574523926,
+                    "Vertical Fov": 1.1161855459213257,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -7.8719701766967773,
@@ -225,8 +225,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -258,7 +258,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 573987880,
+                    "pointer": 381414248,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -340,8 +340,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -594.5,
-                        -280.5,
+                        -586,
+                        -425,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -356,8 +356,8 @@
                     ],
                     "buttonWidth": 323,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -449,7 +449,7 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -27,
+                    "textPositionX": -31.399999618530273,
                     "textPositionY": -3,
                     "alpha": 1
                 }
@@ -471,8 +471,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -585,
-                        -282,
+                        -576.5,
+                        -427,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -487,8 +487,8 @@
                     ],
                     "buttonWidth": 309,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -536,7 +536,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -280,
+                        -425,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -551,8 +551,8 @@
                     ],
                     "buttonWidth": 345.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -644,7 +644,7 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -55,
+                    "textPositionX": -41.599998474121094,
                     "textPositionY": -3,
                     "alpha": 1
                 }
@@ -667,7 +667,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -278,
+                        -423,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -682,8 +682,8 @@
                     ],
                     "buttonWidth": 387,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -730,8 +730,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        600.5,
-                        -284,
+                        599,
+                        -425,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -746,8 +746,8 @@
                     ],
                     "buttonWidth": 407.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -839,7 +839,7 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -75,
+                    "textPositionX": -53.599998474121094,
                     "textPositionY": -3.4000000953674316,
                     "alpha": 1
                 }
@@ -861,8 +861,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        573.5,
-                        -282,
+                        490,
+                        -423,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -877,8 +877,8 @@
                     ],
                     "buttonWidth": 372.5,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1053,7 +1053,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.8335342407226563,
+                        -7.8335342407226562,
                         -0.94506388902664185,
                         -26.458703994750977
                     ],
@@ -1096,7 +1096,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/char_paul_win2__Mesh.001.fbx",
+                    "Path": "Assets\/Resources\/Animations\/char_paul_win__Mesh.001.fbx",
                     "Active": true
                 },
                 {
@@ -1106,7 +1106,7 @@
                     "Animations": [
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_paul_win2__char_paul_win2|char_paul_win2.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_paul_win__char_paul_win|char_paul_win.fbx",
                             "Loop": true
                         }
                     ]
@@ -1172,7 +1172,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/char_chani_win2__Mesh.fbx",
+                    "Path": "Assets\/Resources\/Animations\/char_chani_win__Mesh.fbx",
                     "Active": true
                 },
                 {
@@ -1182,7 +1182,7 @@
                     "Animations": [
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_chani_win2__char_chani_win2|char_chani_win2.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_chani_win__char_chani_win|char_chani_win.fbx",
                             "Loop": true
                         }
                     ]
@@ -1248,7 +1248,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/char_stilgar_win2__Mesh.fbx",
+                    "Path": "Assets\/Resources\/Animations\/char_stilgar_win__Mesh.fbx",
                     "Active": true
                 },
                 {
@@ -1258,83 +1258,7 @@
                     "Animations": [
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_win2__char_stilgar_win2|char_stilgar_win2.fbx",
-                            "Loop": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1963379057,
-            "Parent UUID": 1353793875,
-            "Name": "stilgar_sword",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        -1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        3.1415927410125732,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Abilities models\/wpn_stilgar_sword_texture_basecolor.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/wpn_stilgar_sword_menu__Malla.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Idle",
-                    "Animations": [
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/wpn_stilgar_sword_menu__wpn_stilgar_sword_menu|Armature|Take 001|BaseLayer.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_win__char_stilgar_win|char_stilgar_win.fbx",
                             "Loop": true
                         }
                     ]
@@ -1816,8 +1740,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -263,
-                        316,
+                        -254.5,
+                        370,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1832,8 +1756,8 @@
                     ],
                     "buttonWidth": 806,
                     "buttonHeight": 175,
-                    "lastButtonWidth": 1437,
-                    "lastButtonHeight": 763.5,
+                    "lastButtonWidth": 1420,
+                    "lastButtonHeight": 886.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
