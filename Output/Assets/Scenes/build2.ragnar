@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 410298496,
+                    "pointer": 565013936,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -80,7 +80,7 @@
                     "Position": [
                         -192.58009338378906,
                         -30.298473358154297,
-                        -86.941299438476562
+                        -86.941299438476563
                     ],
                     "Quaternion": [
                         0.67389911413192749,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -91.16741943359375,
+                        -105.99925994873047,
                         0,
-                        91.719284057617188
+                        96.478034973144531
                     ],
                     "Quaternion": [
                         0,
-                        0.82462477684020996,
+                        0.8984149694442749,
                         0,
-                        0.56568008661270142
+                        0.4391474723815918
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        1.2025154829025269,
+                        0.90929907560348511,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -183,15 +183,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        7.62939453125e-05,
+                        39.461532592773438,
+                        -35.874221801757813
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        -8.4495496821546112e-08,
+                        3.1714954218386993e-08,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -199,37 +199,37 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142122268676758,
-                        1.0000002384185791,
+                        1.4142119884490967,
+                        1.0000005960464478,
                         1.0000002384185791
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155.5,
-                    "Vertical Fov": 0.48678329586982727,
+                    "Vertical Fov": 0.49509617686271667,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -137.81602478027344,
-                        55,
-                        109.72035980224609
+                        -134.30743408203125,
+                        39.461532592773438,
+                        118.51605224609375
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": 21,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -91.16741943359375,
+                        -105.99925994873047,
                         0,
-                        91.719284057617188
+                        96.478034973144531
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 111.10093688964844,
+                    "Horizontal Angle": 127.9010009765625,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -369,8 +369,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -402,7 +402,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 410296976,
+                    "pointer": 565023968,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -440,8 +440,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -571,8 +571,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -702,8 +702,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -833,8 +833,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -897,8 +897,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -961,8 +961,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1025,8 +1025,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1156,8 +1156,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1558,7 +1558,7 @@
                     "Position": [
                         -66.622039794921875,
                         0,
-                        67.838516235351562
+                        67.838516235351563
                     ],
                     "Quaternion": [
                         0,
@@ -1675,7 +1675,7 @@
                     "Position": [
                         -27.555431365966797,
                         0,
-                        56.875198364257812
+                        56.875198364257813
                     ],
                     "Quaternion": [
                         0,
@@ -1829,7 +1829,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        66.880325317382812,
+                        66.880325317382813,
                         2.002716064453125e-05,
                         -9.6421546936035156
                     ],
@@ -1870,7 +1870,7 @@
                     "Position": [
                         58.554000854492188,
                         0,
-                        -24.225296020507812
+                        -24.225296020507813
                     ],
                     "Quaternion": [
                         0,
@@ -2063,7 +2063,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        9.0784072875976562,
+                        9.0784072875976563,
                         0,
                         -39.186546325683594
                     ],
@@ -2375,7 +2375,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -97.019607543945312,
+                        -97.019607543945313,
                         3.0279159545898438e-05,
                         -140.4071044921875
                     ],
@@ -2416,7 +2416,7 @@
                     "Position": [
                         -98.255882263183594,
                         -1.1920928955078125e-06,
-                        -197.20425415039062
+                        -197.20425415039063
                     ],
                     "Quaternion": [
                         0,
@@ -2532,7 +2532,7 @@
                     "Active": true,
                     "Position": [
                         -92.880233764648438,
-                        -7.7486038208007812e-07,
+                        -7.7486038208007813e-07,
                         -135.21586608886719
                     ],
                     "Quaternion": [
@@ -2688,7 +2688,7 @@
                     "Active": true,
                     "Position": [
                         -34.095005035400391,
-                        -3.9339065551757812e-06,
+                        -3.9339065551757813e-06,
                         -146.34735107421875
                     ],
                     "Quaternion": [
@@ -2923,7 +2923,7 @@
                     "Position": [
                         -92.313507080078125,
                         0,
-                        -260.75479125976562
+                        -260.75479125976563
                     ],
                     "Quaternion": [
                         0,
@@ -3561,8 +3561,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3625,8 +3625,8 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3689,8 +3689,8 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3820,8 +3820,8 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3884,8 +3884,8 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4015,8 +4015,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4146,8 +4146,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4210,8 +4210,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4341,8 +4341,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4405,8 +4405,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4536,8 +4536,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4600,8 +4600,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4684,8 +4684,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4768,8 +4768,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4852,8 +4852,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4921,8 +4921,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4990,8 +4990,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5015,8 +5015,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5099,8 +5099,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5124,8 +5124,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5208,8 +5208,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5233,8 +5233,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5317,8 +5317,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5342,8 +5342,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5426,8 +5426,8 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5578,8 +5578,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5647,8 +5647,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5716,8 +5716,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5785,8 +5785,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5916,8 +5916,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6047,8 +6047,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6178,8 +6178,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6309,8 +6309,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6440,8 +6440,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6571,8 +6571,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6702,8 +6702,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6833,8 +6833,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6964,8 +6964,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7095,8 +7095,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7226,8 +7226,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7357,8 +7357,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7488,8 +7488,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7619,8 +7619,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7750,8 +7750,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7881,8 +7881,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8012,8 +8012,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8143,8 +8143,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8274,8 +8274,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8405,8 +8405,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8536,8 +8536,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8667,8 +8667,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8798,8 +8798,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8968,8 +8968,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9037,8 +9037,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9101,8 +9101,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9165,8 +9165,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9229,8 +9229,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9360,8 +9360,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9491,8 +9491,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9622,8 +9622,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9753,8 +9753,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9817,8 +9817,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9881,8 +9881,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9945,8 +9945,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10009,8 +10009,8 @@
                     ],
                     "buttonWidth": 513,
                     "buttonHeight": 214,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10073,8 +10073,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 90,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10137,8 +10137,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10201,8 +10201,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10265,8 +10265,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10329,8 +10329,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10398,8 +10398,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10462,8 +10462,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10526,8 +10526,8 @@
                     ],
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10657,8 +10657,8 @@
                     ],
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10721,8 +10721,8 @@
                     ],
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10785,8 +10785,8 @@
                     ],
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10849,8 +10849,8 @@
                     ],
                     "buttonWidth": 122,
                     "buttonHeight": 83,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10913,8 +10913,8 @@
                     ],
                     "buttonWidth": 122,
                     "buttonHeight": 83,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10977,8 +10977,8 @@
                     ],
                     "buttonWidth": 123,
                     "buttonHeight": 83,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11041,8 +11041,8 @@
                     ],
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11105,8 +11105,8 @@
                     ],
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11169,8 +11169,8 @@
                     ],
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11233,8 +11233,8 @@
                     ],
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11297,8 +11297,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11366,8 +11366,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11435,8 +11435,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11504,8 +11504,8 @@
                     ],
                     "buttonWidth": 84,
                     "buttonHeight": 26,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11568,8 +11568,8 @@
                     ],
                     "buttonWidth": 84,
                     "buttonHeight": 26,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11632,8 +11632,8 @@
                     ],
                     "buttonWidth": 84,
                     "buttonHeight": 26,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11696,8 +11696,8 @@
                     ],
                     "buttonWidth": 84,
                     "buttonHeight": 26,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11799,8 +11799,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11868,8 +11868,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11937,8 +11937,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12006,8 +12006,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12075,8 +12075,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 90,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12139,8 +12139,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 90,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12211,7 +12211,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 410302600,
+                    "pointer": 554024240,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -12255,8 +12255,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12386,8 +12386,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12517,8 +12517,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12586,8 +12586,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12655,8 +12655,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12724,8 +12724,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12793,8 +12793,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12862,8 +12862,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12931,8 +12931,8 @@
                     ],
                     "buttonWidth": 732,
                     "buttonHeight": 495,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12995,8 +12995,8 @@
                     ],
                     "buttonWidth": 732.5,
                     "buttonHeight": 492,
-                    "lastButtonWidth": 1357,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonWidth": 1212,
+                    "lastButtonHeight": 739.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13121,7 +13121,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -2.792598419361492e-33,
                         -400.07757568359375
                     ],
@@ -13185,7 +13185,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -2.311115933264683e-33,
                         -266.7183837890625
                     ],
@@ -13249,7 +13249,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -1.7814851985581932e-33,
                         -133.35919189453125
                     ],
@@ -13313,7 +13313,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         1.1062060118074186e-32,
                         5.0487097934144756e-29
                     ],
@@ -13377,7 +13377,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -3.9000081373841526e-31,
                         133.35919189453125
                     ],
@@ -13441,7 +13441,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -1.5729069855810555e-30,
                         266.7183837890625
                     ],
@@ -13505,7 +13505,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        266.71817016601562,
+                        266.71817016601563,
                         -1.5729069855810555e-30,
                         400.07757568359375
                     ],
@@ -16048,7 +16048,7 @@
                     "Position": [
                         -111.17213439941406,
                         0.30091142654418945,
-                        -89.892776489257812
+                        -89.892776489257813
                     ],
                     "Quaternion": [
                         0.70382928848266602,
@@ -16110,9 +16110,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -83.430007934570312,
+                        -83.430007934570313,
                         0.30091029405593872,
-                        -85.957717895507812
+                        -85.957717895507813
                     ],
                     "Quaternion": [
                         0.64742934703826904,
@@ -16245,7 +16245,7 @@
                     "Quaternion": [
                         0.58895939588546753,
                         0.39131501317024231,
-                        -0.39131546020507812,
+                        -0.39131546020507813,
                         0.58895808458328247
                     ],
                     "RotationEditor": [
@@ -16496,7 +16496,7 @@
                     "Position": [
                         -41.685905456542969,
                         0.30092665553092957,
-                        -183.46499633789062
+                        -183.46499633789063
                     ],
                     "Quaternion": [
                         0.24716337025165558,
@@ -16622,7 +16622,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -89.529434204101562,
+                        -89.529434204101563,
                         0.30093804001808167,
                         -253.32844543457031
                     ],
@@ -16944,7 +16944,7 @@
                     "Position": [
                         -81.459274291992188,
                         0.30090802907943726,
-                        -74.919265747070312
+                        -74.919265747070313
                     ],
                     "Quaternion": [
                         -0.58333379030227661,
@@ -17006,7 +17006,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -78.520217895507812,
+                        -78.520217895507813,
                         0.30090829730033875,
                         -78.039825439453125
                     ],
@@ -17070,7 +17070,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -154.90908813476562,
+                        -154.90908813476563,
                         0.2795652449131012,
                         -200.69122314453125
                     ],
@@ -17262,7 +17262,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -170.69534301757812,
+                        -170.69534301757813,
                         0.27956989407539368,
                         -232.02275085449219
                     ],
@@ -17646,7 +17646,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -76.270401000976562,
+                        -76.270401000976563,
                         0.31540083885192871,
                         -72.448715209960938
                     ],
@@ -18158,7 +18158,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -101.12332153320312,
+                        -101.12332153320313,
                         0.31543049216270447,
                         -247.01664733886719
                     ],
@@ -18414,7 +18414,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -72.109512329101562,
+                        -72.109512329101563,
                         0.31542068719863892,
                         -188.39945983886719
                     ],
@@ -18672,7 +18672,7 @@
                     "Position": [
                         -123.44740295410156,
                         0.31540805101394653,
-                        -109.34683227539062
+                        -109.34683227539063
                     ],
                     "Quaternion": [
                         -0.56866765022277832,
@@ -18736,7 +18736,7 @@
                     "Position": [
                         -54.221401214599609,
                         0.31540882587432861,
-                        -114.00942993164062
+                        -114.00942993164063
                     ],
                     "Quaternion": [
                         -0.692008376121521,
@@ -19694,7 +19694,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -127.30117797851562,
+                        -127.30117797851563,
                         0.21425977349281311,
                         -120.09077453613281
                     ],
@@ -20014,7 +20014,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -137.07376098632812,
+                        -137.07376098632813,
                         0.89662015438079834,
                         -228.40373229980469
                     ],
@@ -20336,7 +20336,7 @@
                     "Position": [
                         -126.83236694335938,
                         0.8966134786605835,
-                        -187.24526977539062
+                        -187.24526977539063
                     ],
                     "Quaternion": [
                         -0.63506889343261719,
@@ -20654,7 +20654,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -106.35256958007812,
+                        -106.35256958007813,
                         0.89659595489501953,
                         -80.9896240234375
                     ],
@@ -20784,7 +20784,7 @@
                     "Position": [
                         -71.332809448242188,
                         0.89659386873245239,
-                        -72.813796997070312
+                        -72.813796997070313
                     ],
                     "Quaternion": [
                         -0.56394875049591064,
@@ -20974,7 +20974,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -125.51321411132812,
+                        -125.51321411132813,
                         0.23315896093845367,
                         -108.35449981689453
                     ],
@@ -21166,7 +21166,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -79.098770141601562,
+                        -79.098770141601563,
                         0.23315180838108063,
                         -71.772590637207031
                     ],
@@ -21360,7 +21360,7 @@
                     "Position": [
                         -106.41419982910156,
                         0.23315504193305969,
-                        -84.262954711914062
+                        -84.262954711914063
                     ],
                     "Quaternion": [
                         0.4180428683757782,
@@ -21614,7 +21614,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -81.191238403320312,
+                        -81.191238403320313,
                         0.21501936018466949,
                         -77.57830810546875
                     ],
@@ -21808,7 +21808,7 @@
                     "Position": [
                         -81.122665405273438,
                         0.30124193429946899,
-                        -78.622695922851562
+                        -78.622695922851563
                     ],
                     "Quaternion": [
                         0.14257678389549255,
@@ -21934,7 +21934,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -93.724990844726562,
+                        -93.724990844726563,
                         0.47944578528404236,
                         -83.149253845214844
                     ],
@@ -21998,7 +21998,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -92.543289184570312,
+                        -92.543289184570313,
                         0.4794456958770752,
                         -82.705436706542969
                     ],
@@ -22128,7 +22128,7 @@
                     "Position": [
                         -105.33729553222656,
                         0.91921377182006836,
-                        -83.980728149414062
+                        -83.980728149414063
                     ],
                     "Quaternion": [
                         0.15805818140506744,
@@ -22382,7 +22382,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -125.66433715820312,
+                        -125.66433715820313,
                         0.4794517457485199,
                         -109.60447692871094
                     ],
@@ -22640,7 +22640,7 @@
                     "Position": [
                         -81.453964233398438,
                         0.47945410013198853,
-                        -123.92849731445312
+                        -123.92849731445313
                     ],
                     "Quaternion": [
                         -0.37197160720825195,
@@ -22704,7 +22704,7 @@
                     "Position": [
                         -105.34234619140625,
                         0.73318910598754883,
-                        -83.976455688476562
+                        -83.976455688476563
                     ],
                     "Quaternion": [
                         0.15910650789737701,
@@ -22960,7 +22960,7 @@
                     "Position": [
                         -92.537399291992188,
                         0.30124258995056152,
-                        -82.699295043945312
+                        -82.699295043945313
                     ],
                     "Quaternion": [
                         0.40878835320472717,
@@ -23022,7 +23022,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -93.727188110351562,
+                        -93.727188110351563,
                         0.30124267935752869,
                         -83.143959045410156
                     ],
@@ -23086,7 +23086,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -94.745193481445312,
+                        -94.745193481445313,
                         0.30124330520629883,
                         -84.017189025878906
                     ],
@@ -23280,7 +23280,7 @@
                     "Position": [
                         -121.62654113769531,
                         0.30124741792678833,
-                        -103.50991821289062
+                        -103.50991821289063
                     ],
                     "Quaternion": [
                         0.20483873784542084,
@@ -23472,7 +23472,7 @@
                     "Position": [
                         -125.66676330566406,
                         0.30124863982200623,
-                        -109.60879516601562
+                        -109.60879516601563
                     ],
                     "Quaternion": [
                         -0.055311013013124466,
@@ -23536,7 +23536,7 @@
                     "Position": [
                         -120.68598937988281,
                         0.73439854383468628,
-                        -118.98672485351562
+                        -118.98672485351563
                     ],
                     "Quaternion": [
                         -0.62042850255966187,
@@ -23598,7 +23598,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -120.49026489257812,
+                        -120.49026489257813,
                         0.30125010013580322,
                         -118.49208068847656
                     ],
@@ -23854,7 +23854,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -81.450393676757812,
+                        -81.450393676757813,
                         0.30125075578689575,
                         -123.93239593505859
                     ],
@@ -24367,7 +24367,7 @@
                     "Active": true,
                     "Position": [
                         -37.184494018554688,
-                        0.25035476684570312,
+                        0.25035476684570313,
                         -155.88294982910156
                     ],
                     "Quaternion": [
@@ -24624,7 +24624,7 @@
                     "Position": [
                         -91.249755859375,
                         0.11449868977069855,
-                        -106.48489379882812
+                        -106.48489379882813
                     ],
                     "Quaternion": [
                         -0.59757214784622192,
@@ -24688,7 +24688,7 @@
                     "Position": [
                         -74.757720947265625,
                         0.11434424668550491,
-                        -86.316177368164062
+                        -86.316177368164063
                     ],
                     "Quaternion": [
                         0.71055197715759277,
@@ -24750,7 +24750,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -78.927322387695312,
+                        -78.927322387695313,
                         0.26382771134376526,
                         -74.800544738769531
                     ],
@@ -25136,7 +25136,7 @@
                     "Position": [
                         -35.114654541015625,
                         0.38679194450378418,
-                        -154.27554321289062
+                        -154.27554321289063
                     ],
                     "Quaternion": [
                         0.78558528423309326,
@@ -25198,7 +25198,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -34.348648071289062,
+                        -34.348648071289063,
                         0.82907456159591675,
                         -154.11793518066406
                     ],
@@ -25326,7 +25326,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -171.40554809570312,
+                        -171.40554809570313,
                         0.26722437143325806,
                         -229.28050231933594
                     ],
@@ -26288,7 +26288,7 @@
                     "Position": [
                         -54.620220184326172,
                         0.39862561225891113,
-                        -111.89053344726562
+                        -111.89053344726563
                     ],
                     "Quaternion": [
                         0.78558534383773804,
@@ -26670,7 +26670,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -114.92410278320312,
+                        -114.92410278320313,
                         2.790848970413208,
                         -166.35673522949219
                     ],
@@ -26798,7 +26798,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -100.90737915039062,
+                        -100.90737915039063,
                         2.7908234596252441,
                         -147.68336486816406
                     ],
@@ -27039,198 +27039,6 @@
             ]
         },
         {
-            "UUID": 47836346,
-            "Parent UUID": 101443549,
-            "Name": "prop_broken_market_tent.005",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -84.895538330078125,
-                        1.7379851341247559,
-                        -77.46051025390625
-                    ],
-                    "Quaternion": [
-                        -0.16142718493938446,
-                        -0.68843382596969604,
-                        0.6884341835975647,
-                        -0.16142669320106506
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        0.99999994039535522,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_broken_market_tent.005.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 566095070,
-            "Parent UUID": 101443549,
-            "Name": "prop_broken_market_tent.004",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -75.832962036132812,
-                        1.7379944324493408,
-                        -126.17104339599609
-                    ],
-                    "Quaternion": [
-                        0.70691955089569092,
-                        -0.016279909759759903,
-                        0.016279976814985275,
-                        0.70691913366317749
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_broken_market_tent.005.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 844509449,
-            "Parent UUID": 101443549,
-            "Name": "prop_broken_market_tent.002",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -117.10801696777344,
-                        1.7379887104034424,
-                        -92.362991333007812
-                    ],
-                    "Quaternion": [
-                        0.31658467650413513,
-                        0.63227719068527222,
-                        -0.63227689266204834,
-                        0.31658443808555603
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_broken_market_tent.005.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
             "UUID": 1113107267,
             "Parent UUID": 101443549,
             "Name": "prop_barricade.026",
@@ -27246,7 +27054,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -55.148391723632812,
+                        -55.148391723632813,
                         2.001755952835083,
                         -209.46040344238281
                     ],
@@ -27438,7 +27246,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -54.951065063476562,
+                        -54.951065063476563,
                         0.57447433471679688,
                         -212.91773986816406
                     ],
@@ -27546,710 +27354,6 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_barricade.025.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 623995840,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.007",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -123.07598876953125,
-                        1.9530029296875,
-                        -100.99346923828125
-                    ],
-                    "Quaternion": [
-                        -0.34575456380844116,
-                        0.6168091893196106,
-                        0.6168094277381897,
-                        0.3457547128200531
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.007.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1126450597,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.006",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -128.02706909179688,
-                        1.9530049562454224,
-                        -111.87432098388672
-                    ],
-                    "Quaternion": [
-                        -0.52875828742980957,
-                        0.46948328614234924,
-                        0.46948394179344177,
-                        0.52875804901123047
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        0.99999994039535522,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1685159122,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.005",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -119.900390625,
-                        1.9530066251754761,
-                        -122.867919921875
-                    ],
-                    "Quaternion": [
-                        -0.67843878269195557,
-                        0.19930167496204376,
-                        0.19930188357830048,
-                        0.67843824625015259
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1955845570,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.004",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -84.070358276367188,
-                        1.9530071020126343,
-                        -126.93589019775391
-                    ],
-                    "Quaternion": [
-                        -0.70710253715515137,
-                        0.002470062579959631,
-                        0.0024700628127902746,
-                        0.70710241794586182
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 68883705,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.003",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -94.113906860351562,
-                        1.9529988765716553,
-                        -80.739189147949219
-                    ],
-                    "Quaternion": [
-                        -0.12578941881656647,
-                        0.69582855701446533,
-                        0.69582802057266235,
-                        0.1257895827293396
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 383361762,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.002",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -109.46844482421875,
-                        1.9529999494552612,
-                        -83.452224731445312
-                    ],
-                    "Quaternion": [
-                        -0.29154181480407715,
-                        0.6442074179649353,
-                        0.64420759677886963,
-                        0.29154214262962341
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        0.99999994039535522,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 645693690,
-            "Parent UUID": 101443549,
-            "Name": "prop_broken_market_tent.001",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -72.066360473632812,
-                        1.7379840612411499,
-                        -69.176177978515625
-                    ],
-                    "Quaternion": [
-                        0.22028692066669464,
-                        0.67191809415817261,
-                        -0.67191779613494873,
-                        0.22028665244579315
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_broken_market_tent.005.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 903221769,
-            "Parent UUID": 101443549,
-            "Name": "prop_broken_market_tent",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        11.698402404785156,
-                        1.6344767808914185,
-                        -7.4230046272277832
-                    ],
-                    "Quaternion": [
-                        0.61645537614822388,
-                        -0.34638574719429016,
-                        0.34638610482215881,
-                        0.61645466089248657
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        0.99999994039535522,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_broken_market_tent.005.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1159705533,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        2.3257560729980469,
-                        1.848946213722229,
-                        -10.019920349121094
-                    ],
-                    "Quaternion": [
-                        -0.68449240922927856,
-                        0.17739887535572052,
-                        0.17739908397197723,
-                        0.68449205160140991
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.007.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1457753034,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.001",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        7.7701339721679688,
-                        1.8489444255828857,
-                        2.1694638729095459
-                    ],
-                    "Quaternion": [
-                        0.068829178810119629,
-                        0.70374888181686401,
-                        0.70374900102615356,
-                        -0.06882910430431366
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.007.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1722243213,
-            "Parent UUID": 101443549,
-            "Name": "prop_markettent.008",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -63.212654113769531,
-                        1.8489547967910767,
-                        -61.642116546630859
-                    ],
-                    "Quaternion": [
-                        -0.15807385742664337,
-                        0.68921166658401489,
-                        0.68921160697937012,
-                        0.15807394683361053
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        0.99999994039535522,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_decorations__prop_markettent.006.fbx",
                     "Active": true
                 }
             ]
@@ -29232,7 +28336,7 @@
                     "Position": [
                         23.065242767333984,
                         2.0028293132781982,
-                        20.751968383789062
+                        20.751968383789063
                     ],
                     "Quaternion": [
                         1.7200828494878806e-07,
@@ -29294,7 +28398,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.37178421020507812,
+                        0.37178421020507813,
                         0.47099173069000244,
                         -15.961983680725098
                     ],
@@ -29614,7 +28718,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        2.7323074340820312,
+                        2.7323074340820313,
                         1.8979842662811279,
                         -78.479850769042969
                     ],
@@ -29806,9 +28910,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        3.4006423950195312,
+                        3.4006423950195313,
                         1.8979851007461548,
-                        -80.268081665039062
+                        -80.268081665039063
                     ],
                     "Quaternion": [
                         2.6175968059760635e-07,
@@ -30064,7 +29168,7 @@
                     "Position": [
                         21.074993133544922,
                         0.53868335485458374,
-                        -74.905227661132812
+                        -74.905227661132813
                     ],
                     "Quaternion": [
                         -3.043210483610892e-07,
@@ -30446,7 +29550,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.46664810180664062,
+                        0.46664810180664063,
                         2.6872692108154297,
                         -14.690464019775391
                     ],
@@ -30576,7 +29680,7 @@
                     "Position": [
                         58.701168060302734,
                         2.687269926071167,
-                        -18.910354614257812
+                        -18.910354614257813
                     ],
                     "Quaternion": [
                         -0.70705431699752808,
@@ -30640,7 +29744,7 @@
                     "Position": [
                         40.497081756591797,
                         2.6872744560241699,
-                        -47.255996704101562
+                        -47.255996704101563
                     ],
                     "Quaternion": [
                         -0.15776081383228302,
@@ -30702,7 +29806,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -2.3590469360351562,
+                        -2.3590469360351563,
                         2.6872787475585938,
                         -72.749008178710938
                     ],
@@ -30896,7 +30000,7 @@
                     "Position": [
                         -44.410240173339844,
                         2.6872777938842773,
-                        -66.954055786132812
+                        -66.954055786132813
                     ],
                     "Quaternion": [
                         -0.51671069860458374,
@@ -31408,7 +30512,7 @@
                     "Position": [
                         61.667308807373047,
                         0.22794988751411438,
-                        -25.730606079101562
+                        -25.730606079101563
                     ],
                     "Quaternion": [
                         -0.19804036617279053,
@@ -31534,7 +30638,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -0.63171768188476562,
+                        -0.63171768188476563,
                         0.14674375951290131,
                         -76.694633483886719
                     ],
@@ -31598,7 +30702,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        4.0141372680664062,
+                        4.0141372680664063,
                         0.14674414694309235,
                         -77.57464599609375
                     ],
@@ -32174,7 +31278,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -95.372879028320312,
+                        -95.372879028320313,
                         0.14674289524555206,
                         -81.587921142578125
                     ],
@@ -32244,7 +31348,7 @@
                     ],
                     "Quaternion": [
                         -0.64043015241622925,
-                        0.10350418090820312,
+                        0.10350418090820313,
                         -0.1743200421333313,
                         0.74077576398849487
                     ],
@@ -32308,7 +31412,7 @@
                     ],
                     "Quaternion": [
                         -0.64043015241622925,
-                        0.10350418090820312,
+                        0.10350418090820313,
                         -0.1743200421333313,
                         0.74077576398849487
                     ],
@@ -32372,7 +31476,7 @@
                     ],
                     "Quaternion": [
                         -0.64043015241622925,
-                        0.10350418090820312,
+                        0.10350418090820313,
                         -0.1743200421333313,
                         0.74077576398849487
                     ],
@@ -32436,7 +31540,7 @@
                     ],
                     "Quaternion": [
                         -0.64043015241622925,
-                        0.10350418090820312,
+                        0.10350418090820313,
                         -0.1743200421333313,
                         0.74077576398849487
                     ],
@@ -32494,9 +31598,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        5.4506607055664062,
+                        5.4506607055664063,
                         0.14584158360958099,
-                        -78.125503540039062
+                        -78.125503540039063
                     ],
                     "Quaternion": [
                         -0.27121332287788391,
@@ -33390,7 +32494,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        3.4665298461914062,
+                        3.4665298461914063,
                         0.1975678950548172,
                         -7.7386784553527832
                     ],
@@ -33582,7 +32686,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        6.4290237426757812,
+                        6.4290237426757813,
                         0.37563863396644592,
                         -0.10576680302619934
                     ],
@@ -34286,7 +33390,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.72751235961914062,
+                        0.72751235961914063,
                         0.084767274558544159,
                         -6.1330037117004395
                     ],
@@ -35248,7 +34352,7 @@
                     "Position": [
                         -43.094684600830078,
                         0.12959790229797363,
-                        -69.477249145507812
+                        -69.477249145507813
                     ],
                     "Quaternion": [
                         -0.31883078813552856,
@@ -35374,7 +34478,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        2.5729751586914062,
+                        2.5729751586914063,
                         0.1295907199382782,
                         -25.336738586425781
                     ],
@@ -35502,7 +34606,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -59.722122192382812,
+                        -59.722122192382813,
                         0.12959657609462738,
                         -62.746871948242188
                     ],
@@ -36270,7 +35374,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        11.588455200195312,
+                        11.588455200195313,
                         0.11033561080694199,
                         -3.7550358772277832
                     ],
@@ -37104,7 +36208,7 @@
                     "Position": [
                         51.434192657470703,
                         0.21200987696647644,
-                        -32.680252075195312
+                        -32.680252075195313
                     ],
                     "Quaternion": [
                         -0.6940118670463562,
@@ -37936,7 +37040,7 @@
                     "Position": [
                         -49.662746429443359,
                         0.17561744153499603,
-                        -56.156204223632812
+                        -56.156204223632813
                     ],
                     "Quaternion": [
                         0.53620439767837524,
@@ -38128,7 +37232,7 @@
                     "Position": [
                         59.759052276611328,
                         0.17561180889606476,
-                        -21.591201782226562
+                        -21.591201782226563
                     ],
                     "Quaternion": [
                         0.53620439767837524,
@@ -38640,7 +37744,7 @@
                     "Position": [
                         1.8694114685058594,
                         0.19697703421115875,
-                        -76.141372680664062
+                        -76.141372680664063
                     ],
                     "Quaternion": [
                         -0.65296518802642822,
@@ -39024,7 +38128,7 @@
                     "Position": [
                         -54.497089385986328,
                         0.10072004050016403,
-                        -65.740982055664062
+                        -65.740982055664063
                     ],
                     "Quaternion": [
                         1.3781527741230093e-07,
@@ -39420,7 +38524,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -56.660049438476562,
+                        -56.660049438476563,
                         4.5598006248474121,
                         -200.43186950683594
                     ],
@@ -39484,7 +38588,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -79.321243286132812,
+                        -79.321243286132813,
                         4.5597996711730957,
                         -193.96675109863281
                     ],
@@ -39740,7 +38844,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        76.433670043945312,
+                        76.433670043945313,
                         4.3194284439086914,
                         -7.2726011276245117
                     ],
@@ -40450,7 +39554,7 @@
                     ],
                     "Quaternion": [
                         -0.70710676908493042,
-                        2.9802322387695312e-08,
+                        2.9802322387695313e-08,
                         0,
                         0.7071068286895752
                     ],
@@ -40508,9 +39612,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        36.043289184570312,
+                        36.043289184570313,
                         12.754138946533203,
-                        -47.224319458007812
+                        -47.224319458007813
                     ],
                     "Quaternion": [
                         0.46919584274291992,
@@ -41022,7 +40126,7 @@
                     "Position": [
                         6.989844799041748,
                         3.3820862770080566,
-                        -83.803543090820312
+                        -83.803543090820313
                     ],
                     "Quaternion": [
                         0.28473976254463196,
@@ -41469,7 +40573,7 @@
                     "Active": true,
                     "Position": [
                         9.099156379699707,
-                        8.2802200317382812,
+                        8.2802200317382813,
                         18.076383590698242
                     ],
                     "Quaternion": [
@@ -41724,7 +40828,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        42.630813598632812,
+                        42.630813598632813,
                         1.6781094074249268,
                         11.384458541870117
                     ],
@@ -41788,7 +40892,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        34.857864379882812,
+                        34.857864379882813,
                         1.5561292171478271,
                         8.6629571914672852
                     ],
@@ -42174,7 +41278,7 @@
                     "Position": [
                         34.625682830810547,
                         2.9662537574768066,
-                        -56.124954223632812
+                        -56.124954223632813
                     ],
                     "Quaternion": [
                         -0.63347327709197998,
@@ -42750,7 +41854,7 @@
                     "Position": [
                         -39.620445251464844,
                         1.6781243085861206,
-                        -53.038162231445312
+                        -53.038162231445313
                     ],
                     "Quaternion": [
                         0.93133997917175293,
@@ -43132,9 +42236,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -134.99404907226562,
+                        -134.99404907226563,
                         3.8703806400299072,
-                        -225.08340454101562
+                        -225.08340454101563
                     ],
                     "Quaternion": [
                         -0.40186840295791626,
@@ -43457,10 +42561,10 @@
                         -174.98435974121094
                     ],
                     "Quaternion": [
-                        -0.69923782348632812,
+                        -0.69923782348632813,
                         0.10519726574420929,
                         0.10519730299711227,
-                        0.69923782348632812
+                        0.69923782348632813
                     ],
                     "RotationEditor": [
                         0,
@@ -43902,7 +43006,7 @@
                     "Position": [
                         -155.37619018554688,
                         4.6394224166870117,
-                        -220.97256469726562
+                        -220.97256469726563
                     ],
                     "Quaternion": [
                         -0.69746643304824829,
@@ -44350,7 +43454,7 @@
                     "Position": [
                         -83.894821166992188,
                         4.1648745536804199,
-                        -220.28567504882812
+                        -220.28567504882813
                     ],
                     "Quaternion": [
                         0.5000002384185791,
@@ -44413,7 +43517,7 @@
                     "Active": true,
                     "Position": [
                         -106.56490325927734,
-                        5.1383743286132812,
+                        5.1383743286132813,
                         -151.68693542480469
                     ],
                     "Quaternion": [
@@ -44542,7 +43646,7 @@
                     "Position": [
                         -167.29670715332031,
                         3.9237849712371826,
-                        -214.38284301757812
+                        -214.38284301757813
                     ],
                     "Quaternion": [
                         0.40706804394721985,
@@ -44606,7 +43710,7 @@
                     "Position": [
                         -132.5904541015625,
                         4.6394166946411133,
-                        -179.81607055664062
+                        -179.81607055664063
                     ],
                     "Quaternion": [
                         0.69448322057723999,
@@ -44670,7 +43774,7 @@
                     "Position": [
                         -179.62982177734375,
                         4.6882514953613281,
-                        -222.75576782226562
+                        -222.75576782226563
                     ],
                     "Quaternion": [
                         -0.60450005531311035,
@@ -44734,7 +43838,7 @@
                     "Position": [
                         -121.91126251220703,
                         4.0534772872924805,
-                        -168.76577758789062
+                        -168.76577758789063
                     ],
                     "Quaternion": [
                         0.69963246583938599,
@@ -44940,7 +44044,7 @@
                     "Position": [
                         -58.126457214355469,
                         3.7540338039398193,
-                        -260.21438598632812
+                        -260.21438598632813
                     ],
                     "Quaternion": [
                         2.5424537852813955e-07,
@@ -44961,7 +44065,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45025,7 +44129,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45072,7 +44176,7 @@
                     ],
                     "Quaternion": [
                         0.016552392393350601,
-                        0.99962234497070312,
+                        0.99962234497070313,
                         0.0032199050765484571,
                         0.021698798984289169
                     ],
@@ -45089,7 +44193,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45153,7 +44257,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45217,7 +44321,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45281,7 +44385,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45345,7 +44449,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45386,7 +44490,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -141.47744750976562,
+                        -141.47744750976563,
                         6.8667793273925781,
                         -149.2657470703125
                     ],
@@ -45409,7 +44513,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45473,7 +44577,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45537,7 +44641,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45580,7 +44684,7 @@
                     "Position": [
                         -86.299407958984375,
                         3.552431583404541,
-                        -267.32913208007812
+                        -267.32913208007813
                     ],
                     "Quaternion": [
                         1.2984679642613628e-07,
@@ -45601,7 +44705,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45644,7 +44748,7 @@
                     "Position": [
                         -40.418224334716797,
                         3.7540297508239746,
-                        -235.48269653320312
+                        -235.48269653320313
                     ],
                     "Quaternion": [
                         4.32983938480902e-07,
@@ -45665,7 +44769,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45729,7 +44833,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45793,7 +44897,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45857,7 +44961,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45900,7 +45004,7 @@
                     "Position": [
                         -6.099022388458252,
                         4.6016583442687988,
-                        66.033584594726562
+                        66.033584594726563
                     ],
                     "Quaternion": [
                         1.6313900630393618e-07,
@@ -45921,7 +45025,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -45962,9 +45066,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -80.117141723632812,
+                        -80.117141723632813,
                         3.4562923908233643,
-                        86.908096313476562
+                        86.908096313476563
                     ],
                     "Quaternion": [
                         1.547599310924852e-07,
@@ -45985,7 +45089,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46049,7 +45153,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46113,7 +45217,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46165,9 +45269,9 @@
                         0.81236332654953003
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        6.7225784050606308e-07,
+                        1.2452058792114258,
+                        -4.4116274011685164e-07
                     ],
                     "Scale": [
                         1.0010859966278076,
@@ -46177,7 +45281,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46218,7 +45322,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -32.661636352539062,
+                        -32.661636352539063,
                         4.6016745567321777,
                         -30.842844009399414
                     ],
@@ -46241,7 +45345,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46305,7 +45409,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46369,7 +45473,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46511,7 +45615,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.jpg",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46552,7 +45656,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -40.869766235351562,
+                        -40.869766235351563,
                         16.543840408325195,
                         -223.98152160644531
                     ],
@@ -46575,7 +45679,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.jpg",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46639,7 +45743,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.jpg",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -46682,7 +45786,7 @@
                     "Position": [
                         47.069610595703125,
                         16.73158073425293,
-                        -63.865249633789062
+                        -63.865249633789063
                     ],
                     "Quaternion": [
                         -0.70605742931365967,
@@ -46703,7 +45807,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_wall_basecolor.jpg",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -47336,7 +46440,7 @@
                     "Position": [
                         -33.539817810058594,
                         0,
-                        36.113235473632812
+                        36.113235473632813
                     ],
                     "Quaternion": [
                         0,
@@ -47590,7 +46694,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -5.8791580200195312,
+                        -5.8791580200195313,
                         0,
                         18.691915512084961
                     ],
@@ -49704,7 +48808,7 @@
                     "Position": [
                         -54.880195617675781,
                         0,
-                        -190.07266235351562
+                        -190.07266235351563
                     ],
                     "Quaternion": [
                         0,
@@ -49768,7 +48872,7 @@
                     "Position": [
                         -77.921012878417969,
                         0,
-                        -237.34243774414062
+                        -237.34243774414063
                     ],
                     "Quaternion": [
                         0,
@@ -50024,7 +49128,7 @@
                     "Position": [
                         -66.751014709472656,
                         0,
-                        -265.88601684570312
+                        -265.88601684570313
                     ],
                     "Quaternion": [
                         0,
@@ -50088,7 +49192,7 @@
                     "Position": [
                         -96.309722900390625,
                         -1.4210854715202004e-14,
-                        -260.30300903320312
+                        -260.30300903320313
                     ],
                     "Quaternion": [
                         0,
@@ -50216,7 +49320,7 @@
                     "Position": [
                         -92.556732177734375,
                         -1.4210854715202004e-14,
-                        -255.92788696289062
+                        -255.92788696289063
                     ],
                     "Quaternion": [
                         0,
@@ -50278,7 +49382,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -96.607131958007812,
+                        -96.607131958007813,
                         -1.4210854715202004e-14,
                         -256.22314453125
                     ],
@@ -50536,7 +49640,7 @@
                     "Position": [
                         -134.07411193847656,
                         0,
-                        -216.81143188476562
+                        -216.81143188476563
                     ],
                     "Quaternion": [
                         0,
@@ -50598,7 +49702,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -138.81240844726562,
+                        -138.81240844726563,
                         0,
                         -213.97114562988281
                     ],
@@ -50918,7 +50022,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -158.75527954101562,
+                        -158.75527954101563,
                         0,
                         -236.93098449707031
                     ],
@@ -51048,7 +50152,7 @@
                     "Position": [
                         -175.75624084472656,
                         0,
-                        -211.49221801757812
+                        -211.49221801757813
                     ],
                     "Quaternion": [
                         0,
@@ -51090,6 +50194,980 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_enemies__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 178469889,
+            "Parent UUID": 1429496190,
+            "Name": "Tents",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 268698705,
+            "Parent UUID": 178469889,
+            "Name": "tents",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -57.855983734130859,
+                        1.181012749671936,
+                        -62.115711212158203
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 805337373,
+            "Parent UUID": 268698705,
+            "Name": "prop_broken_market_tent.003",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        69.166046142578125,
+                        0.25570926070213318,
+                        55.068431854248047
+                    ],
+                    "Quaternion": [
+                        0.62154966592788696,
+                        -0.33715870976448059,
+                        0.33715888857841492,
+                        0.62154954671859741
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_broken_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_broken_market_tent.003.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1368432021,
+            "Parent UUID": 268698705,
+            "Name": "prop_broken_market_tent.006",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -13.910120964050293,
+                        0.25570937991142273,
+                        -7.4759054183959961
+                    ],
+                    "Quaternion": [
+                        -0.22013895213603973,
+                        -0.67196637392044067,
+                        0.67196643352508545,
+                        -0.22013886272907257
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_broken_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_broken_market_tent.003.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1647681852,
+            "Parent UUID": 268698705,
+            "Name": "prop_broken_market_tent.007",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -26.809890747070313,
+                        0.25570949912071228,
+                        -15.754547119140625
+                    ],
+                    "Quaternion": [
+                        -0.17834167182445526,
+                        0.68424725532531738,
+                        0.68424719572067261,
+                        0.17834162712097168
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_broken_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_broken_market_tent.007.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 21659495,
+            "Parent UUID": 268698705,
+            "Name": "prop_broken_market_tent.008",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -58.990505218505859,
+                        0.25570937991142273,
+                        -30.639890670776367
+                    ],
+                    "Quaternion": [
+                        -0.30324864387512207,
+                        0.63878035545349121,
+                        0.63878017663955688,
+                        0.30324867367744446
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_broken_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_broken_market_tent.007.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 293390258,
+            "Parent UUID": 268698705,
+            "Name": "prop_broken_market_tent.009",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -17.987056732177734,
+                        0.25570940971374512,
+                        -63.505184173583984
+                    ],
+                    "Quaternion": [
+                        0.70675951242446899,
+                        -0.022159408777952194,
+                        0.022159472107887268,
+                        0.70675945281982422
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_broken_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_broken_market_tent.003.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 610792397,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.009",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        60.246421813964844,
+                        0.0064520947635173798,
+                        52.312103271484375
+                    ],
+                    "Quaternion": [
+                        -0.68649923801422119,
+                        0.16946636140346527,
+                        0.16946643590927124,
+                        0.68649917840957642
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        0.99999994039535522,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1142836079,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.010",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        65.582168579101563,
+                        0.0064521091990172863,
+                        64.034538269042969
+                    ],
+                    "Quaternion": [
+                        0.064442992210388184,
+                        0.70416402816772461,
+                        0.70416420698165894,
+                        -0.06444297730922699
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1426332791,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.011",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -5.0788693428039551,
+                        0.0064520873129367828,
+                        0.35195854306221008
+                    ],
+                    "Quaternion": [
+                        -0.1468031108379364,
+                        0.69169998168945313,
+                        0.69169998168945313,
+                        0.14680309593677521
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1724658776,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.012",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -36.173469543457031,
+                        0.0064520873129367828,
+                        -18.875175476074219
+                    ],
+                    "Quaternion": [
+                        -0.1468031108379364,
+                        0.69169998168945313,
+                        0.69169998168945313,
+                        0.14680309593677521
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2061137069,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.013",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -51.481334686279297,
+                        0.0064520817250013351,
+                        -21.384784698486328
+                    ],
+                    "Quaternion": [
+                        -0.29049584269523621,
+                        0.64467984437942505,
+                        0.6446799635887146,
+                        0.29049584269523621
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 192903253,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.014",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -65.170578002929688,
+                        0.0064520407468080521,
+                        -38.758296966552734
+                    ],
+                    "Quaternion": [
+                        -0.34228858351707458,
+                        0.61873948574066162,
+                        0.61873948574066162,
+                        0.3422885537147522
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 520470058,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.015",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -70.002861022949219,
+                        0.006452532485127449,
+                        -49.814449310302734
+                    ],
+                    "Quaternion": [
+                        -0.51887410879135132,
+                        0.48038506507873535,
+                        0.48038625717163086,
+                        0.51887273788452148
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 794776798,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.016",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -61.983341217041016,
+                        0.0064520705491304398,
+                        -60.551849365234375
+                    ],
+                    "Quaternion": [
+                        -0.67707794904708862,
+                        0.20387615263462067,
+                        0.20387619733810425,
+                        0.67707788944244385
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1151514802,
+            "Parent UUID": 268698705,
+            "Name": "prop_markettent.017",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -26.124595642089844,
+                        0.0064520649611949921,
+                        -64.648628234863281
+                    ],
+                    "Quaternion": [
+                        -0.70709419250488281,
+                        0.0042331903241574764,
+                        0.0042331907898187637,
+                        0.70709407329559326
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        0.99999994039535522,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/prop_market_tent_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_tents__prop_markettent.009.fbx",
                     "Active": true
                 }
             ]
