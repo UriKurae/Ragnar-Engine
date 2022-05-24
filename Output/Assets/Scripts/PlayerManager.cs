@@ -525,17 +525,21 @@ public class PlayerManager : RagnarComponent
 
     public void LoadPlayer()
     {
-        for (int i = 0; i < players.Length; ++i)
+        PlayerData data = SaveSystem.LoadPlayer(players[0].name);
+        if (data != null)
         {
-            PlayerData data = SaveSystem.LoadPlayer(players[i].name);
+            for (int i = 0; i < players.Length; ++i)
+            {
+                data = SaveSystem.LoadPlayer(players[i].name);
 
-            players[i].GetComponent<Player>().hitPoints = data.hitPoints;
+                players[i].GetComponent<Player>().hitPoints = data.hitPoints;
 
-            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
-            players[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+                Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+                players[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
 
-            Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
-            players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+                Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+                players[i].GetComponent<Rigidbody>().SetBodyRotation(rot);
+            }
         }
     }
 

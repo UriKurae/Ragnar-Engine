@@ -85,7 +85,7 @@ public class mainMenuBackScreen : RagnarComponent
 	GameObject optionsControl20;
 	GameObject optionsControl21;
 	GameObject optionsControl22;
-
+	GameObject gameTitle;
 	GameObject optionsControlR;
 	GameObject optionsControlL;
 	int actualControlOption = 0;
@@ -123,7 +123,7 @@ public class mainMenuBackScreen : RagnarComponent
 		creditsImage = GameObject.Find("Image Credits");
 
 
-
+		gameTitle= GameObject.Find("gameTitle");
 		back = GameObject.Find("Background");
 
 
@@ -336,7 +336,8 @@ public class mainMenuBackScreen : RagnarComponent
         {
             optionsImage.isActive = true;
             options.isActive = true;
-            int a = options.GetComponent<UIButton>().GetButtonState();
+			gameTitle.isActive = true;
+			int a = options.GetComponent<UIButton>().GetButtonState();
             switch (a)
             {
                 case 0:
@@ -381,8 +382,9 @@ public class mainMenuBackScreen : RagnarComponent
         }
         else
         {
-			
-            optionsImage.isActive = false;
+			gameTitle.isActive = false;
+
+			optionsImage.isActive = false;
             options.isActive = false;
         }
     }
