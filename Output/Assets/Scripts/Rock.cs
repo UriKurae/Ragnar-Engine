@@ -12,15 +12,16 @@ public class Rock : RagnarComponent
 
 	public void Start()
 	{
+		player = GameObject.Find("Player");
 		goRB = gameObject.GetComponent<Rigidbody>();
 		AimMethod();
 		gameObject.GetComponent<ParticleSystem>().Play();
+
+		player.GetComponent<Player>().PlayAudioClip("EBOSS_THROWOBJECT");
 	}
 
 	private void AimMethod()
 	{
-		player = GameObject.Find("Player");
-
 		Vector3 pos = player.transform.globalPosition;
 		pos.y += 1.5f;
 		goRB.SetBodyPosition(pos);
@@ -63,7 +64,7 @@ public class Rock : RagnarComponent
 			goRB.SetAsStatic();
 
 			GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
-			sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+			sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
 			//sound.transform.globalPosition = gameObject.transform.globalPosition;
 			sound.GetComponent<SoundAreaManager>().stablishedTimer = 2f;
 

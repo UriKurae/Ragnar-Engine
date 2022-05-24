@@ -37,6 +37,11 @@ public class Level_3 : RagnarComponent
             TimerData data = SaveSystem.LoadTimer();
             timer.timer = data.timer;
         }
+        else
+        {
+            SaveSystem.SaveScene();
+            SaveSystem.SaveTimer(timer.timer);
+        }
 
         // PLAYERS
         characters = new Characters[3];
@@ -47,7 +52,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Player",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 3,
+            hitPoints = 4,
             pos = new Vector3(0.0f, -2.68f, 65.58f)
         };
         characters[0].abilities[0] = new Abilities
@@ -106,7 +111,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Player_2",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 2,
+            hitPoints = 3,
             pos = new Vector3(-4.45f, -2.68f, 65.58f)
         };
         characters[1].abilities[0] = new Abilities
@@ -165,7 +170,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Player_3",
             state = State.NONE,
             abilities = new Abilities[4],
-            hitPoints = 4,
+            hitPoints = 5,
             pos = new Vector3(-1.36f, -2.68f, 68.81f)
         };
         characters[2].abilities[0] = new Abilities

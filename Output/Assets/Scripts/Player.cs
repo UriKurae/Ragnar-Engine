@@ -443,6 +443,11 @@ public class Player : RagnarComponent
         hitPoints -= dmg;
         getHitPartSys.Play();
     }
+
+    public void PlayAudioClip(string clip)
+    {
+        gameObject.GetComponent<AudioSource>().PlayClip(clip.ToString());
+    }
 }
 
 

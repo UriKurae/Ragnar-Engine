@@ -31,6 +31,7 @@ public class Eagle : RagnarComponent
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
 
+        player.GetComponent<Player>().PlayAudioClip("EBOSS_THROWOBJECT");
         leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
         rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
         leftParticles.Play();
@@ -45,7 +46,7 @@ public class Eagle : RagnarComponent
             rightParticles.Pause();
             hasArrived = true;
             GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
-            sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+            sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
             //sound.transform.globalPosition = gameObject.transform.globalPosition;
             sound.GetComponent<SoundAreaManager>().stablishedTimer = 6f;
 
