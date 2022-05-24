@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 212553176,
+                    "pointer": 342444696,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -183,9 +183,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -6.103515625e-05,
-                        43.901004791259766,
-                        -39.909992218017578
+                        6.103515625e-05,
+                        63.879196166992188,
+                        -58.072006225585938
                     ],
                     "Quaternion": [
                         0.34202015399932861,
@@ -207,15 +207,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.48816603422164917,
+                    "Vertical Fov": 0.47604075074195862,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -81.325439453125,
-                        43.901004791259766,
-                        154.15682983398438
+                        -94.105697631835938,
+                        63.879196166992188,
+                        141.25173950195312
                     ],
                     "Type": 3,
-                    "Zoom": -5,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -8701,7 +8701,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8717,7 +8717,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8749,7 +8749,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 212549680,
+                    "pointer": 342437552,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8788,7 +8788,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8919,7 +8919,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9050,7 +9050,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9181,7 +9181,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9245,7 +9245,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9309,7 +9309,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9373,7 +9373,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9504,7 +9504,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -10347,7 +10347,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 212552416,
+                    "pointer": 342437856,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -10392,7 +10392,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10523,7 +10523,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10654,7 +10654,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10723,7 +10723,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10792,7 +10792,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10861,7 +10861,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10930,7 +10930,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10999,7 +10999,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11052,7 +11052,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848,
+                        1837.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11068,7 +11068,7 @@
                     "buttonWidth": 732,
                     "buttonHeight": 495,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11116,7 +11116,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848,
+                        1837.5,
                         -11.399999618530273
                     ],
                     "Scale": [
@@ -11132,7 +11132,7 @@
                     "buttonWidth": 732.5,
                     "buttonHeight": 492,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11219,7 +11219,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11235,7 +11235,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11304,7 +11304,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11352,7 +11352,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        6.5999984741210938,
+                        -3.9000015258789062,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -11368,7 +11368,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11432,7 +11432,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11480,7 +11480,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11496,7 +11496,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11611,7 +11611,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11627,7 +11627,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11742,7 +11742,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11758,7 +11758,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11873,7 +11873,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1814,
+                        1803.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11889,7 +11889,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12004,7 +12004,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1805.5,
+                        1795,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12020,7 +12020,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12068,7 +12068,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1805.5,
+                        1795,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12084,7 +12084,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12132,7 +12132,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1805.5,
+                        1795,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12148,7 +12148,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12196,7 +12196,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1805.5,
+                        1795,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12212,7 +12212,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12276,7 +12276,7 @@
                     "buttonWidth": 513,
                     "buttonHeight": 214,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12324,7 +12324,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -128.5,
+                        -118,
                         2.5999999046325684
                     ],
                     "Scale": [
@@ -12340,7 +12340,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12388,7 +12388,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1805.5,
+                        1795,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12404,7 +12404,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12452,7 +12452,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1798.5,
+                        1788,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12468,7 +12468,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12516,7 +12516,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -259.39999389648438,
+                        -248.89999389648438,
                         0
                     ],
                     "Scale": [
@@ -12532,7 +12532,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12580,7 +12580,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1864,
+                        1853.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12596,7 +12596,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12649,7 +12649,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -251.89999389648438,
+                        -241.39999389648438,
                         -11.5
                     ],
                     "Scale": [
@@ -12665,7 +12665,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12729,7 +12729,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12777,7 +12777,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        221.5,
+                        211,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -12793,7 +12793,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12924,7 +12924,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12988,7 +12988,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13036,7 +13036,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        4,
+                        -6.5,
                         0
                     ],
                     "Scale": [
@@ -13052,7 +13052,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13100,7 +13100,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        10.100000381469727,
+                        -0.39999961853027344,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -13116,7 +13116,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13180,7 +13180,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13228,7 +13228,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -10,
+                        0.5,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -13244,7 +13244,7 @@
                     "buttonWidth": 123,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13292,7 +13292,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -117,
+                        -106.5,
                         -15
                     ],
                     "Scale": [
@@ -13308,7 +13308,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13356,7 +13356,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1895.5,
+                        1885,
                         -15
                     ],
                     "Scale": [
@@ -13372,7 +13372,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13420,7 +13420,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1895.5,
+                        1885,
                         -15
                     ],
                     "Scale": [
@@ -13436,7 +13436,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13484,7 +13484,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -5.5,
+                        5,
                         -15
                     ],
                     "Scale": [
@@ -13500,7 +13500,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13564,7 +13564,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13633,7 +13633,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13702,7 +13702,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13771,7 +13771,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13835,7 +13835,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13899,7 +13899,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13963,7 +13963,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14050,7 +14050,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        215,
+                        204.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14066,7 +14066,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14119,7 +14119,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        65,
+                        54.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14135,7 +14135,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14188,7 +14188,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -65,
+                        -54.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14204,7 +14204,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14257,7 +14257,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -215,
+                        -204.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14273,7 +14273,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14342,7 +14342,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14406,7 +14406,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14438,12 +14438,76 @@
             ]
         },
         {
+            "UUID": 1731886961,
+            "Parent UUID": 1906815624,
+            "Name": "UICrouch",
+            "Active": false,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/UICrouch.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.083333335816860199,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 50,
+                    "lastButtonWidth": 1353,
+                    "lastButtonHeight": 792.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_crouch.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
             "UUID": 1058993489,
             "Parent UUID": 417171234,
             "Name": "UIOptions",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIOptions.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14482,7 +14546,7 @@
             "Name": "optionsBack",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14493,7 +14557,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2071,
+                        2060.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14509,7 +14573,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14546,7 +14610,7 @@
             "Name": "optionsBackImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14573,7 +14637,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14610,7 +14674,7 @@
             "Name": "optionsBackButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14621,7 +14685,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1861,
+                        1850.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14637,7 +14701,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14741,7 +14805,7 @@
             "Name": "optionsTransCuad",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14752,7 +14816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1852.5,
+                        1842,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14768,7 +14832,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14805,7 +14869,7 @@
             "Name": "optionsTitle",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14816,7 +14880,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2079.5,
+                        2069,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14832,7 +14896,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14936,7 +15000,7 @@
             "Name": "optionsScreenButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14947,7 +15011,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14963,7 +15027,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15067,7 +15131,7 @@
             "Name": "optionsScreenImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15078,7 +15142,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15094,7 +15158,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15131,7 +15195,7 @@
             "Name": "optionsSoundButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15142,7 +15206,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15158,7 +15222,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15262,7 +15326,7 @@
             "Name": "optionsSoundImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15273,7 +15337,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15289,7 +15353,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15326,7 +15390,7 @@
             "Name": "optionsControlsButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15337,7 +15401,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15353,7 +15417,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15457,7 +15521,7 @@
             "Name": "optionsControlsImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15468,7 +15532,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1878,
+                        1867.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15484,7 +15548,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15521,7 +15585,7 @@
             "Name": "optionsScreenFSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15532,7 +15596,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1967.5,
+                        1957,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -15548,7 +15612,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15605,7 +15669,7 @@
             "Name": "optionsScreenVSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15616,7 +15680,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1967.5,
+                        1957,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -15632,7 +15696,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15689,7 +15753,7 @@
             "Name": "optionsScreenSDCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15700,7 +15764,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1967.5,
+                        1957,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -15716,7 +15780,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15773,7 +15837,7 @@
             "Name": "optionsSreenText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15784,7 +15848,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1993,
+                        1982.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -15800,7 +15864,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15842,7 +15906,7 @@
             "Name": "optionsSoundText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15853,7 +15917,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1993,
+                        1982.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -15869,7 +15933,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15911,7 +15975,7 @@
             "Name": "optionsGeneralSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15922,7 +15986,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15938,7 +16002,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15947,7 +16011,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15963,7 +16027,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16020,7 +16084,7 @@
             "Name": "optionsMusicSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16031,7 +16095,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16047,7 +16111,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16056,7 +16120,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16072,7 +16136,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16129,7 +16193,7 @@
             "Name": "optionsFXcSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16140,7 +16204,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16156,7 +16220,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16165,7 +16229,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16181,7 +16245,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16238,7 +16302,7 @@
             "Name": "optionsVoicesSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16249,7 +16313,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16265,7 +16329,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16274,7 +16338,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2062.5,
+                        2052,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16290,7 +16354,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16347,7 +16411,7 @@
             "Name": "optionsLanguaje",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16358,7 +16422,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2071,
+                        2060.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16374,7 +16438,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16499,7 +16563,7 @@
             "Name": "optionsControlText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16510,7 +16574,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1731.5,
+                        1721,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16526,7 +16590,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16568,7 +16632,7 @@
             "Name": "optionsControlText1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16579,7 +16643,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1731.5,
+                        1721,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16595,7 +16659,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16637,7 +16701,7 @@
             "Name": "optionsControlText2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16648,7 +16712,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1731.5,
+                        1721,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16664,7 +16728,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16706,7 +16770,7 @@
             "Name": "optionsControl22",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -16717,7 +16781,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -16733,7 +16797,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16837,7 +16901,7 @@
             "Name": "optionsControl21",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -16848,7 +16912,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -16864,7 +16928,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16968,7 +17032,7 @@
             "Name": "optionsControl20",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -16979,7 +17043,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -16995,7 +17059,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17099,7 +17163,7 @@
             "Name": "optionsControl19",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17110,7 +17174,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17126,7 +17190,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17230,7 +17294,7 @@
             "Name": "optionsControl18",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17241,7 +17305,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17257,7 +17321,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17361,7 +17425,7 @@
             "Name": "optionsControl17",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17372,7 +17436,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17388,7 +17452,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17492,7 +17556,7 @@
             "Name": "optionsControl16",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17503,7 +17567,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17519,7 +17583,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17623,7 +17687,7 @@
             "Name": "optionsControl15",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17634,7 +17698,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17650,7 +17714,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17754,7 +17818,7 @@
             "Name": "optionsControl14",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17765,7 +17829,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17781,7 +17845,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17885,7 +17949,7 @@
             "Name": "optionsControl13",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17896,7 +17960,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -17912,7 +17976,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18016,7 +18080,7 @@
             "Name": "optionsControl12",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18027,7 +18091,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18043,7 +18107,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18147,7 +18211,7 @@
             "Name": "optionsControl11",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18158,7 +18222,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18174,7 +18238,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18278,7 +18342,7 @@
             "Name": "optionsControl10",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18289,7 +18353,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18305,7 +18369,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18409,7 +18473,7 @@
             "Name": "optionsControl9",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18420,7 +18484,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18436,7 +18500,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18540,7 +18604,7 @@
             "Name": "optionsControl8",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18551,7 +18615,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18567,7 +18631,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18671,7 +18735,7 @@
             "Name": "optionsControl7",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18682,7 +18746,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18698,7 +18762,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18802,7 +18866,7 @@
             "Name": "optionsControl6",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18813,7 +18877,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18829,7 +18893,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18933,7 +18997,7 @@
             "Name": "optionsControl5",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -18944,7 +19008,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -18960,7 +19024,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19064,7 +19128,7 @@
             "Name": "optionsControl4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -19075,7 +19139,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -19091,7 +19155,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19195,7 +19259,7 @@
             "Name": "optionsControl3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -19206,7 +19270,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -19222,7 +19286,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19326,7 +19390,7 @@
             "Name": "optionsControl2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -19337,7 +19401,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.5999984741210938,
+                        -0.90000152587890625,
                         0
                     ],
                     "Scale": [
@@ -19353,7 +19417,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19457,7 +19521,7 @@
             "Name": "optionsControl1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -19484,7 +19548,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19588,7 +19652,7 @@
             "Name": "optionsControlR",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -19615,7 +19679,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19719,7 +19783,7 @@
             "Name": "optionsControlL",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -19746,7 +19810,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19850,7 +19914,7 @@
             "Name": "presetText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -19877,7 +19941,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 813.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19910,6 +19974,252 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1126257050,
+            "Parent UUID": 417171234,
+            "Name": "LockedAbTriggers",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/LockedAbTriggers.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1355589545,
+            "Parent UUID": 1126257050,
+            "Name": "Trigger1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -66.399169921875,
+                        0,
+                        117.21763610839844
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.45942530035972595,
+                        0,
+                        0.88821643590927124
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.95469510555267334,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000005960464478,
+                        1,
+                        1.0000005960464478
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        8.6000003814697266,
+                        4,
+                        4
+                    ],
+                    "Gravity": false,
+                    "Kinematic": true,
+                    "Trigger": true,
+                    "fActivation": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1523364607,
+            "Parent UUID": 1126257050,
+            "Name": "Trigger2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -28.224462509155273,
+                        0,
+                        51.864860534667969
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.20494593679904938,
+                        0,
+                        0.97877329587936401
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        2.3453836441040039,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        68.400001525878906,
+                        6,
+                        4
+                    ],
+                    "Gravity": false,
+                    "Kinematic": true,
+                    "Trigger": true,
+                    "fActivation": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 53284120,
+            "Parent UUID": 1126257050,
+            "Name": "Trigger3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -23.525646209716797,
+                        0,
+                        33.249195098876953
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.22032532095909119,
+                        0,
+                        0.97542643547058105
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.48345622420310974,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000002384185791,
+                        1,
+                        1.0000002384185791
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        58.299999237060547,
+                        5.3000001907348633,
+                        4.8000001907348633
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "fActivation": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         }
