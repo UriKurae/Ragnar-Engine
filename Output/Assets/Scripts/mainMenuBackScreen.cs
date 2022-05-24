@@ -27,8 +27,10 @@ public class mainMenuBackScreen : RagnarComponent
 
 	GameObject back;
 
-    //////////////OPTIONS//////////////
-    bool isOptions = false;
+	//////////////OPTIONS//////////////
+	float actualDt = 0;
+	bool isPlayng = false;
+	bool isOptions = false;
     bool isFirstOBackB = true;
     bool isFirstOScreenB = true;
     bool isFirstOSoundB = true;
@@ -227,6 +229,34 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsControl20.GetComponent<UIButton>().text = "L Click";
 		optionsControl21.GetComponent<UIButton>().text = "J";
 		optionsControl22.GetComponent<UIButton>().text = "Shift";
+
+		float y = (InternalCalls.GetRegionGame().y / 2);
+		float x = (InternalCalls.GetRegionGame().x / 2);
+		float sum = (lastWindowW - x);
+		pos.Set(-sum + 430, y - 810, 36.1f);
+		optionsControl9.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 430, y - 740, 36.1f);
+		optionsControl8.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 540, 36.1f);
+		optionsControl14.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 610, 36.1f);
+		optionsControl15.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 680, 36.1f);
+		optionsControl16.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 750, 36.1f);
+		optionsControl17.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 820, 36.1f);
+		optionsControl18.GetComponent<Transform2D>().position2D = pos;
+
+
+
+
 
 		presetText = GameObject.Find("presetText");
 		presetText.GetComponent<UIText>().text = "PRESET 1";
@@ -631,6 +661,11 @@ public class mainMenuBackScreen : RagnarComponent
 		}
 
 	}
+	double easeOutQuint(float x)
+	{
+
+		return 1 - Math.Pow(1 - x, 5);
+	}
 	void OptionsControlShow()
 	{
 		float y = (InternalCalls.GetRegionGame().y / 2);
@@ -692,10 +727,11 @@ public class mainMenuBackScreen : RagnarComponent
 					if (actualControlOption == 0)
 					{
 						actualControlOption = 1;
-
+						isPlayng = true;
 					}
 					else
 					{
+						isPlayng = true;
 						actualControlOption--;
 					}
 					//actualControlOption = 0;
@@ -728,10 +764,11 @@ public class mainMenuBackScreen : RagnarComponent
 					if (actualControlOption == 1)
 					{
 						actualControlOption = 0;
-
+						isPlayng = true;
 					}
 					else
 					{
+						isPlayng = true;
 						actualControlOption++;
 					}
 					AudioSource SceneAudioComponent = SceneAudio.GetComponent<AudioSource>();
@@ -745,6 +782,7 @@ public class mainMenuBackScreen : RagnarComponent
 		}
 		if (actualControlOption == 0)
 		{
+
 			optionsControl8.GetComponent<UIButton>().text = "Drag";
 			optionsControl9.GetComponent<UIButton>().text = "Crl L";
 			optionsControl14.GetComponent<UIButton>().text = "A";
@@ -756,6 +794,7 @@ public class mainMenuBackScreen : RagnarComponent
 		}
 		else if (actualControlOption == 1)
 		{
+			
 			optionsControl9.GetComponent<UIButton>().text = "Q E";
 			optionsControl8.GetComponent<UIButton>().text = "WASD";
 
@@ -766,6 +805,75 @@ public class mainMenuBackScreen : RagnarComponent
 			optionsControl18.GetComponent<UIButton>().text = "B";
 			presetText.GetComponent<UIText>().text = "PRESET 2";
 		}
+		if (isPlayng)
+		{
+			if (actualDt >= 2)
+			{
+				isPlayng = false;
+				actualDt = 0;
+			}
+			else if(actualDt < 1)
+			{
+				actualDt += Time.deltaTime;
+
+				float actualvalue = (float)easeOutQuint(actualDt);
+
+				pos.Set((optionsControl9.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl9.GetComponent<Transform2D>().position2D.x-0.5f )), optionsControl9.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl9.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl8.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl8.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl8.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl8.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl14.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl14.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl14.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl14.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl15.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl15.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl15.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl15.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl16.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl16.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl16.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl16.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl17.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl17.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl17.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl17.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl18.GetComponent<Transform2D>().position2D.x + 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl18.GetComponent<Transform2D>().position2D.x - 0.5f)), optionsControl18.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl18.GetComponent<Transform2D>().position2D = pos;
+
+
+			}
+            else
+            {
+				actualDt += Time.deltaTime;
+				float actualvalue = (float)easeOutQuint(actualDt - 1);
+
+				pos.Set(-sum - 100, optionsControl9.GetComponent<Transform2D>().position2D.y, 36.1f);
+
+				pos.Set((optionsControl9.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl9.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl9.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl9.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl8.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl8.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl8.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl8.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl14.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl14.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl14.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl14.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl15.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl15.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl15.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl15.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl16.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl16.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl16.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl16.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl17.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl17.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl17.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl17.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set((optionsControl18.GetComponent<Transform2D>().position2D.x - 0.5f) * actualvalue + ((1 - actualvalue) * (optionsControl18.GetComponent<Transform2D>().position2D.x + 0.5f)), optionsControl18.GetComponent<Transform2D>().position2D.y, 36.1f);
+				optionsControl18.GetComponent<Transform2D>().position2D = pos;
+
+
+			}
+
+		}
+
 		pos.Set(-sum - 100, y - 330, 36.1f);
 		optionsControlText.GetComponent<Transform2D>().position2D = pos;
 
@@ -800,11 +908,9 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsControl7.GetComponent<Transform2D>().position2D = pos;
 		optionsControl7.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
 
-		pos.Set(-sum + 150, y - 740, 36.1f);
-		optionsControl8.GetComponent<Transform2D>().position2D = pos;
+		
 
-		pos.Set(-sum + 150, y - 810, 36.1f);
-		optionsControl9.GetComponent<Transform2D>().position2D = pos;
+		
 
 		pos.Set(-sum + 150, y - 880, 36.1f);
 		optionsControl10.GetComponent<Transform2D>().position2D = pos;
@@ -820,20 +926,7 @@ public class mainMenuBackScreen : RagnarComponent
 		pos.Set(-sum + 470, y - 470, 36.1f);
 		optionsControl13.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 540, 36.1f);
-		optionsControl14.GetComponent<Transform2D>().position2D = pos;
-
-		pos.Set(-sum + 470, y - 610, 36.1f);
-		optionsControl15.GetComponent<Transform2D>().position2D = pos;
-
-		pos.Set(-sum + 470, y - 680, 36.1f);
-		optionsControl16.GetComponent<Transform2D>().position2D = pos;
-
-		pos.Set(-sum + 470, y - 750, 36.1f);
-		optionsControl17.GetComponent<Transform2D>().position2D = pos;
-
-		pos.Set(-sum + 470, y - 820, 36.1f);
-		optionsControl18.GetComponent<Transform2D>().position2D = pos;
+		
 
 		pos.Set(-sum + 470, y - 990, 36.1f);
 		optionsControl19.GetComponent<Transform2D>().position2D = pos;
