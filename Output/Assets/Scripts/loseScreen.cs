@@ -18,6 +18,7 @@ public class loseScreen : RagnarComponent
 	bool isFirstR = true;
 	public void Start()
 	{
+		Input.RestoreDefaultCursor();
 		players = new GameObject[3];
 		players = GameObject.FindGameObjectsWithTag("Player");
 

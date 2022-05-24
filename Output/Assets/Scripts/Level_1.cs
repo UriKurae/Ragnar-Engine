@@ -12,8 +12,6 @@ public class Level_1 : RagnarComponent
     public Vector3 hitPoint;
 
     private GameObject SceneAudio;
-    private GameObject preClick;
-    private GameObject preNonClick;
     private Transform camera;
     private pauseMenuButton pause;
 
@@ -32,8 +30,6 @@ public class Level_1 : RagnarComponent
         SceneAudio = GameObject.Find("AudioLevel1");
         SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
         SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
-        preClick = GameObject.Find("preClick");
-        preNonClick = GameObject.Find("preNonClick");
         camera = GameObject.Find("Camera").transform;
         pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
 
@@ -347,7 +343,6 @@ public class Level_1 : RagnarComponent
         chrono.text = timer.GetTimeToString();
 
         hitPoint = RayCast.ReturnHitpoint();
-        hitPoint.y -= 0.5f;
 
         //if(!pause.isSowing || !pause.isOptions)
         //{
@@ -358,9 +353,5 @@ public class Level_1 : RagnarComponent
         //    else
         //        Input.SetCursorState((int)CursorState.NON_CLICKABLE);
         //}        
-
-        hitPoint.y += 0.54f;
-        if (preClick.isActive) preClick.transform.globalPosition = hitPoint;
-        if (preNonClick.isActive) preNonClick.transform.globalPosition = hitPoint;
     }
 }
