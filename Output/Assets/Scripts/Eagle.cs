@@ -39,6 +39,8 @@ public class Eagle : RagnarComponent
         rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
         leftParticles.Play();
         rightParticles.Play();
+
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 	public void Update()
 	{

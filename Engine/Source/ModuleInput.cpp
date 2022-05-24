@@ -63,19 +63,25 @@ void ModuleInput::LoadCursors()
 	path = "Assets/Resources/Cursor/";
 #endif
 
-	cursors.push_back(defaultCursor);
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_voice.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throwing_knife.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "paul_throw_stone.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_crysknife.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_camouflage.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_hunter_seeker.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "chani_spice_grenade.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_sword.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_stunner.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_trap.cur").c_str()));
-	cursors.push_back(LoadCursorFromFileA(std::string(path + "stilgar_whistle.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "clickable.ani").c_str()));
+
+	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "paul_voice.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "paul_throwing_knife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "paul_throw_stone.cur").c_str()));
+
+	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_crysknife.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_camouflage.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_hunter_seeker.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "chani_spice_grenade.cur").c_str()));
+
+	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_sword.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_stunner.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_trap.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "stilgar_whistle.cur").c_str()));
+
+	cursors.push_back(LoadCursorFromFile(std::string(path + "clickable.cur").c_str()));
+	cursors.push_back(LoadCursorFromFile(std::string(path + "non-clickable.cur").c_str()));
 }
 
 // Called every draw update
@@ -392,6 +398,7 @@ void ModuleInput::SetCursorState(int state)
 {
 	currentCursor = (CursorState)state;
 	HCURSOR hCurDef = CopyCursor(cursors[state]);
+	LoadCursorA((HINSTANCE)cursors[0], RT_ANICURSOR);
 	SetSystemCursor(hCurDef, OCR_NORMAL);
 	DestroyCursor(hCurDef);
 }
@@ -404,7 +411,7 @@ void ModuleInput::ImportToLibrary()
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
 		std::string ext = (*it).substr((*it).find_last_of("."), (*it).length());
-		if (ext == ".cur")
+		if (ext == ".cur" || ext == ".ani")
 		{
 			std::string assetsPath = "Assets/Resources/Cursor/";
 			assetsPath += (*it);
