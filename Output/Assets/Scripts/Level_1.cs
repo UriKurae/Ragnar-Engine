@@ -344,9 +344,11 @@ public class Level_1 : RagnarComponent
         {
             preClick.isActive = true;
             preNonClick.isActive = false;
+            Input.SetCursorState((int)CursorState.CLICKABLE);
         }
         else
         {
+            Input.SetCursorState((int)CursorState.NORMAL);
             preClick.isActive = false;
             preNonClick.isActive = true;
         }
