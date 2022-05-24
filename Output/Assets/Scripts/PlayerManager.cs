@@ -4,6 +4,8 @@ using RagnarEngine;
 
 public class PlayerManager : RagnarComponent
 {
+    private Camera camComponent;
+
     public GameObject[] players;
     public int characterSelected = 0;
 
@@ -87,6 +89,8 @@ public class PlayerManager : RagnarComponent
         {
             LoadPlayer();
         }
+
+        camComponent = GameObject.Find("Camera").GetComponent<Camera>();
     }
 
 	public void Update()
@@ -434,6 +438,12 @@ public class PlayerManager : RagnarComponent
             case 4:
                 if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
+                    if (characterSelected == 3 && camComponent != null)
+                    {
+                        Vector3 pos = players[characterSelected].GetComponent<Transform>().globalPosition;
+                        camComponent.ScriptMovement(pos.x, pos.y, pos.z);
+                    }
+
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
@@ -447,6 +457,12 @@ public class PlayerManager : RagnarComponent
             case 3:
                 if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
+                    if (characterSelected == 2 && camComponent != null)
+                    {
+                        Vector3 pos = players[characterSelected].GetComponent<Transform>().globalPosition;
+                        camComponent.ScriptMovement(pos.x, pos.y, pos.z);
+                    }
+
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
@@ -460,6 +476,12 @@ public class PlayerManager : RagnarComponent
             case 2:
                 if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
+                    if (characterSelected == 1 && camComponent != null)
+                    {
+                        Vector3 pos = players[characterSelected].GetComponent<Transform>().globalPosition;
+                        camComponent.ScriptMovement(pos.x, pos.y, pos.z);
+                    }
+
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
@@ -473,6 +495,12 @@ public class PlayerManager : RagnarComponent
             case 1:
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
+                    if (characterSelected == 0 && camComponent != null)
+                    {
+                        Vector3 pos = players[characterSelected].GetComponent<Transform>().globalPosition;
+                        camComponent.ScriptMovement(pos.x, pos.y, pos.z);
+                    }
+
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
