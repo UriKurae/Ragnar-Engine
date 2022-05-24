@@ -442,6 +442,8 @@ enum CursorState
     STILGAR_2,
     STILGAR_3,
     STILGAR_4,
+
+    CLICKABLE,
 };
 
 public enum KeyCode
