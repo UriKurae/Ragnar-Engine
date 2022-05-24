@@ -132,9 +132,11 @@ public class PlayerManager : RagnarComponent
                 {
 
                     characters[j].abilities[i].counter += Time.deltaTime;
-                    if(characters[j] == playableCharacter)
+                    if (characters[j] == playableCharacter)
+                    {  
                         CooldownTimer(i);
-                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
+                    }
+                        if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
                     {
                         characters[j].abilities[i].onCooldown = false;
                         characters[j].abilities[i].counter = 0f;
@@ -551,13 +553,15 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability1UI = Ability1Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility1 == false)
+                if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility1)
+                {
                     ability1UI.SetImageGeneralColor(128, 128, 128);
-
+                    Debug.Log("ab 1 dis");
+                }
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd1.text = "";
 
-                if (!playableCharacter.abilities[abilityID].onCooldown)
+                if (!playableCharacter.abilities[abilityID].onCooldown && canDoAbility1)
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
@@ -578,13 +582,13 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability2UI = Ability2Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility2 == false)
+                if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility2)
                     ability2UI.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd2.text = "";
 
-                if (!playableCharacter.abilities[abilityID].onCooldown)
+                if (!playableCharacter.abilities[abilityID].onCooldown && canDoAbility2)
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
@@ -605,13 +609,13 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability3UI = Ability3Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility3 == false)
+                if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility3)
                     ability3UI.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd3.text = "";
 
-                if (!playableCharacter.abilities[abilityID].onCooldown)
+                if (!playableCharacter.abilities[abilityID].onCooldown && canDoAbility3)
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
@@ -632,7 +636,7 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability4UI = Ability4Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility4 == false)
+                if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility4)
                 {
                     ability4UI.SetImageGeneralColor(128, 128, 128);
                 }
@@ -642,7 +646,7 @@ public class PlayerManager : RagnarComponent
                     cd4.text = "";
                 }
 
-                if (!playableCharacter.abilities[abilityID].onCooldown)
+                if (!playableCharacter.abilities[abilityID].onCooldown && canDoAbility4)
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
