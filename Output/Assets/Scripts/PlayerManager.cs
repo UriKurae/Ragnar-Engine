@@ -155,7 +155,6 @@ public class PlayerManager : RagnarComponent
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
             SpawnArea(State.ABILITY_1);
-        }
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
@@ -163,7 +162,6 @@ public class PlayerManager : RagnarComponent
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
             SpawnArea(State.ABILITY_2);
-        }
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
@@ -171,7 +169,6 @@ public class PlayerManager : RagnarComponent
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
             SpawnArea(State.ABILITY_3);
-        }
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
@@ -179,7 +176,6 @@ public class PlayerManager : RagnarComponent
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility4)
             SpawnArea(State.ABILITY_4);
-        }
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
