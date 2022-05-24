@@ -344,11 +344,11 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
         }
-        if (other.gameObject.tag == "Hidden")
+        if (other.gameObject.tag == "Hidden" && isHidden == false)
         {
-            action = Actions.CROUCH;
-            rb.SetHeight(0.6f); // 0.6 = 60%
-            ReloadState();
+            //action = Actions.CROUCH;
+            //rb.SetHeight(0.6f); // 0.6 = 60%
+            //ReloadState();
 
             isHidden = true;
         }
@@ -419,11 +419,11 @@ public class Player : RagnarComponent
 
     public void OnTriggerExit(Rigidbody other)
     {
-        if (other.gameObject.tag == "Hidden")
+        if (other.gameObject.tag == "Hidden" && isHidden == true)
         {
-            action = Actions.NONE;
-            rb.SetHeight(1); // 1 = 100% = Reset
-            ReloadState();
+            //action = Actions.NONE;
+            //rb.SetHeight(1); // 1 = 100% = Reset
+            //ReloadState();
 
             isHidden = false;
         }
