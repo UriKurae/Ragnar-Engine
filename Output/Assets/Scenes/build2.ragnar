@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 496166200,
+                    "pointer": 496041016,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -183,9 +183,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-05,
-                        79.417709350585938,
-                        -72.197982788085938
+                        3.4332275390625e-05,
+                        46.120803833007813,
+                        -41.928009033203125
                     ],
                     "Quaternion": [
                         0.34202015399932861,
@@ -210,12 +210,12 @@
                     "Vertical Fov": 0.36894726753234863,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -103.68105316162109,
-                        79.417709350585938,
-                        182.79742431640625
+                        -96.512474060058594,
+                        46.120803833007813,
+                        153.38771057128906
                     ],
                     "Type": 3,
-                    "Zoom": -8,
+                    "Zoom": 4,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -402,7 +402,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 496167416,
+                    "pointer": 496042992,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -1255,134 +1255,6 @@
                     "Constant": 0.47499999403953552,
                     "Linear": -0.19499999284744263,
                     "Quadratic": 0
-                }
-            ]
-        },
-        {
-            "UUID": 218937624,
-            "Parent UUID": 417171234,
-            "Name": "preClick",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0.042990110814571381,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/preclick__pTorus1.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 2069130123,
-            "Parent UUID": 417171234,
-            "Name": "preNonClick",
-            "Active": false,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0.042990110814571381,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/preclick_non__pTorus2.fbx",
-                    "Active": true
                 }
             ]
         },
@@ -3532,7 +3404,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 496173952,
+                    "pointer": 496048464,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -45762,7 +45634,7 @@
             "Name": "UICrouch",
             "Active": false,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UICrouch.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -45777,8 +45649,8 @@
                         -10.399999618530273
                     ],
                     "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
+                        0.125,
+                        0.125,
                         1
                     ],
                     "rotationEuler": [
@@ -45786,8 +45658,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
+                    "buttonWidth": 75,
+                    "buttonHeight": 75,
                     "lastButtonWidth": 1353,
                     "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
