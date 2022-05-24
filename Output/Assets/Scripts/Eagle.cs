@@ -28,7 +28,10 @@ public class Eagle : RagnarComponent
         Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
         goRB.SetBodyRotation(rot);
         goRB.SetBodyPosition(pos);
-        goRB.IgnoreCollision(player, true);
+        for (int i = 0; i < GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters.Length; i++)
+        {
+            goRB.IgnoreCollision(GameObject.Find("PlayerManager").GetComponent<PlayerManager>().players[i], true);
+        }
         agent.CalculatePath(agent.hitPosition);
 
         player.GetComponent<Player>().PlayAudioClip("EBOSS_THROWOBJECT");
