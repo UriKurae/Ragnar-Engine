@@ -560,7 +560,6 @@ public class PlayerManager : RagnarComponent
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility1)
                 {
                     ability1UI.SetImageGeneralColor(128, 128, 128);
-                    Debug.Log("ab 1 dis");
                 }
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd1.text = "";
