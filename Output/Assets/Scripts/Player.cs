@@ -213,7 +213,8 @@ public class Player : RagnarComponent
             }
 
             if (pendingToDelete && animationComponent.HasFinished())
-            {                
+            {
+                Input.RestoreDefaultCursor();
                 String name = "";
                 if (gameObject.name == "Player") name = "Paul Atreides";
                 else if (gameObject.name == "Player_2") name = "Chani";

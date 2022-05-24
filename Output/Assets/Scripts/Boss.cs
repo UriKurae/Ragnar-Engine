@@ -603,6 +603,7 @@ public class Boss : RagnarComponent
 			NextState();
 			if (state == BossState.PHASE4)
 			{
+				Input.RestoreDefaultCursor();
 				SceneManager.LoadScene("WinScene");
 			}
 		}
