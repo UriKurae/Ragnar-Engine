@@ -5,7 +5,7 @@ public class SpiceGranade : RagnarComponent
 {
 	public GameObject player;
 	Rigidbody goRB;
-	public float explosionRadius = 6f;
+	public float explosionRadius = 6.7f;
 	private float cooldown = 0f;
 	private Vector3 relativePos;
 

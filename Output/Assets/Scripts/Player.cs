@@ -38,6 +38,8 @@ public class Player : RagnarComponent
     DialogueManager dialogue;
     GameObject sound;
 
+    GameObject uiCrouch;
+
     ParticleSystem walkPartSys;
     ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
@@ -69,6 +71,8 @@ public class Player : RagnarComponent
         sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
         gameObject.AddChild(sound);
         //sound.transform.globalPosition = gameObject.transform.globalPosition;
+
+        uiCrouch = GameObject.Find("UICrouch");
 
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
@@ -141,12 +145,16 @@ public class Player : RagnarComponent
                                 action = Actions.CROUCH;
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
+
+                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(1.0f);
                             }
                             else if (action == Actions.CROUCH && isHidden == false)
                             {
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
+
+                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(0.51f);
                             }
                         }
 
@@ -213,7 +221,8 @@ public class Player : RagnarComponent
             }
 
             if (pendingToDelete && animationComponent.HasFinished())
-            {                
+            {
+                Input.RestoreDefaultCursor();
                 String name = "";
                 if (gameObject.name == "Player") name = "Paul Atreides";
                 else if (gameObject.name == "Player_2") name = "Chani";
@@ -353,6 +362,18 @@ public class Player : RagnarComponent
             isHidden = true;
         }
 
+        if (other.gameObject.name == "Trigger1")
+        {
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+        }
+        if (other.gameObject.name == "Trigger2")
+        {
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+        }
+        if (other.gameObject.name == "Trigger3")
+        {
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+        }
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
         {
@@ -370,6 +391,13 @@ public class Player : RagnarComponent
         {
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
+
+
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility4 = true;
+
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
         }
         if (other.gameObject.name == "DialogueTrigger6")

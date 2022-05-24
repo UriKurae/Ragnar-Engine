@@ -10,6 +10,8 @@ public class BackStab : RagnarComponent
 	public bool backstabed;
 	NavAgent agent;
 	public GameObject boss;
+	
+	public GameObject[] barrels;
 
 	// Component list
     private GameObject sceneAudio;
@@ -90,7 +92,6 @@ public class BackStab : RagnarComponent
     }
 	public GameObject CalculateDistancePlayerEnemies()
     {
-
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 3)
 		{
@@ -104,6 +105,17 @@ public class BackStab : RagnarComponent
 					return enemy;
 			}
 		}
+
+		barrels = GameObject.FindGameObjectsWithTag("Barrels");
+		Debug.Log(barrels.Length);
+		for (int i = 0; i < barrels.Length; ++i)
+        {
+			if (Math.Abs((barrels[i].transform.globalPosition - gameObject.transform.globalPosition).magnitude) <= 3.0f)
+            {
+				barrels[i].GetComponent<Barrel>().Explode();
+			}
+        }
+
 		return null;
 	}
 

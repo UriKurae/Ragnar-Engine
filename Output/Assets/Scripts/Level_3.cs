@@ -16,6 +16,7 @@ public class Level_3 : RagnarComponent
     private Transform camera;
     public void Start()
 	{
+        Input.SetCursorState(0);
         //Play Level Soundtrack
         SceneAudio = GameObject.Find("AudioLevel1");
         SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
@@ -36,6 +37,11 @@ public class Level_3 : RagnarComponent
         {
             TimerData data = SaveSystem.LoadTimer();
             timer.timer = data.timer;
+        }
+        else
+        {
+            SaveSystem.SaveScene();
+            SaveSystem.SaveTimer(timer.timer);
         }
 
         // PLAYERS
@@ -218,7 +224,7 @@ public class Level_3 : RagnarComponent
         }; // Whistle
 
         // ENEMIES
-        enemies = new Enemies[14];
+        enemies = new Enemies[5];
 
         enemies[0] = new Enemies
         {
@@ -246,7 +252,7 @@ public class Level_3 : RagnarComponent
 
         enemies[3] = new Enemies
         {
-            name = "Tank Enemy 1",
+            name = "Basic Enemy 4",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_4")
@@ -254,85 +260,11 @@ public class Level_3 : RagnarComponent
 
         enemies[4] = new Enemies
         {
-            name = "Tank Enemy 2",
+            name = "Basic Enemy 5",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_5")
         };
-
-        enemies[5] = new Enemies
-        {
-            name = "Undistractable Enemy 1",
-            type = EnemyType.UNDISTRACTABLE,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_6")
-        };
-
-        enemies[6] = new Enemies
-        {
-            name = "Basic Enemy 4",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_7")
-        };
-
-        enemies[7] = new Enemies
-        {
-            name = "Basic Enemy 5",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_8")
-        };
-
-        enemies[8] = new Enemies
-        {
-            name = "Basic Enemy 6",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_9")
-        };
-
-        enemies[9] = new Enemies
-        {
-            name = "Basic Enemy 7",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_10")
-        };
-
-        enemies[10] = new Enemies
-        {
-            name = "Undistractable Enemy 2",
-            type = EnemyType.UNDISTRACTABLE,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_11")
-        };
-
-        enemies[11] = new Enemies
-        {
-            name = "Tank Enemy 3",
-            type = EnemyType.TANK,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_static_12")
-        };
-
-        enemies[12] = new Enemies
-        {
-            name = "Basic Enemy 8",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("undistractable_static_1")
-        };
-
-        enemies[13] = new Enemies
-        {
-            name = "Basic Enemy 9",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            spawnPoint = GameObject.Find("basic_patrol_1")
-        };
-        enemies[13].waypoints.Add(GameObject.Find("1"));
-        enemies[13].waypoints.Add(GameObject.Find("2"));
         ///////////////////////////////////////////////////////////////////
 
         GameObject pm = InternalCalls.InstancePrefab("PlayerManager", Vector3.zero);
@@ -350,17 +282,7 @@ public class Level_3 : RagnarComponent
 
         hitPoint = RayCast.ReturnHitpoint();
         hitPoint.y -= 0.5f;
-        GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
-        if (hittedGO != null)
-        {
-            preClick.isActive = true;
-            preNonClick.isActive = false;
-        }
-        else
-        {
-            preClick.isActive = false;
-            preNonClick.isActive = true;
-        }
+        //GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
 
         hitPoint.y += 0.54f;
         if (preClick.isActive) preClick.transform.globalPosition = hitPoint;

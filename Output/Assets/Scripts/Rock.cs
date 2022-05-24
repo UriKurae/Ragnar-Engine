@@ -65,7 +65,7 @@ public class Rock : RagnarComponent
 			goRB.SetAsStatic();
 
 			GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
-			sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+			sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
 			//sound.transform.globalPosition = gameObject.transform.globalPosition;
 			sound.GetComponent<SoundAreaManager>().stablishedTimer = 2f;
 

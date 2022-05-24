@@ -7,8 +7,8 @@ public class pauseMenuButton : RagnarComponent
 	Vector3 pos;
 	Vector3 mouseLastposition;
 	Vector3 bounds;
-	bool isOptions = false;
-	bool isSowing = false;
+	public bool isOptions = false;
+	public bool isSowing = false;
 	bool isFirstS = true;
 	bool isFirstE = true;
 	bool isFirstO = true;
@@ -38,6 +38,7 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstOcontrolsL = true;
 	bool isFirstOcontrolsR = true;
 	float lastWindowW = 0;
+	GameObject presetText;
 	GameObject optionsBack;
 	GameObject optionsBackImage;
 	GameObject optionsBackButton;
@@ -120,6 +121,8 @@ public class pauseMenuButton : RagnarComponent
 	GameObject cd2;
 	GameObject cd3;
 	GameObject cd4;
+
+	GameObject UICrouch;
 
 	GameObject UICharPhoto;
 	GameObject UIAbilityArray;
@@ -297,6 +300,9 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl20.GetComponent<UIButton>().text = "L Click";
 		optionsControl21.GetComponent<UIButton>().text = "J";
 		optionsControl22.GetComponent<UIButton>().text = "Shift";
+
+		presetText = GameObject.Find("presetText");
+		presetText.GetComponent<UIText>().text = "PRESET 1";
 		OptionsBackHide();
 		//////////////GAME//////////////
 		CharacterPhotoBord = GameObject.Find("Char");
@@ -312,6 +318,9 @@ public class pauseMenuButton : RagnarComponent
 		cd2 = GameObject.Find("cd2");
 		cd3 = GameObject.Find("cd3");
 		cd4 = GameObject.Find("cd4");
+
+		UICrouch = GameObject.Find("UICrouch");
+		UICrouch.GetComponent<UIImage>().SetImageAlpha(0.51f);
 
 		AbilityBord = GameObject.Find("AbilImage");
 
@@ -337,7 +346,8 @@ public class pauseMenuButton : RagnarComponent
 		litleLive1 = GameObject.Find("litleLive1");
 		litleLive2 = GameObject.Find("litleLive2");
 		litleLive3 = GameObject.Find("litleLive3");
-		litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
+		litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_chani.png");
+		litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_stilgar.png");
 		PaulBg = GameObject.Find("PaulBg");
 		ChaniBg = GameObject.Find("ChaniBg");
 		StilgarBg = GameObject.Find("StilgarBg");
@@ -401,6 +411,7 @@ public class pauseMenuButton : RagnarComponent
 		UpdatePlayerPause();
 		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
         {
+			Input.RestoreDefaultCursor();
 			SceneManager.LoadScene("WinScene");
         }
 	}
@@ -458,11 +469,13 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl22.isActive = true;
 		optionsControlR.isActive = true;
 		optionsControlL.isActive = true;
-		pos.Set(-sum + 600, y - 780, 36.1f);
+		presetText.isActive = true;
+		pos.Set(-sum + 100, y - 220, 36.1f);
 		optionsControlL.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(-sum + 800, y - 780, 36.1f);
+		pos.Set(-sum + 400, y - 220, 36.1f);
 		optionsControlR.GetComponent<Transform2D>().position2D = pos;
-
+		pos.Set(-sum + 200, y - 225, 36.1f);
+		presetText.GetComponent<Transform2D>().position2D = pos;
 		int a = optionsControlL.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -547,6 +560,7 @@ public class pauseMenuButton : RagnarComponent
 				optionsControl16.GetComponent<UIButton>().text = "D";
 				optionsControl17.GetComponent<UIButton>().text = "F";
 				optionsControl18.GetComponent<UIButton>().text = "G";
+				presetText.GetComponent<UIText>().text = "PRESET 1";
 			}
 			else if(actualControlOption == 1)
 			{
@@ -560,91 +574,92 @@ public class pauseMenuButton : RagnarComponent
 				optionsControl16.GetComponent<UIButton>().text = "C";
 				optionsControl17.GetComponent<UIButton>().text = "V";
 				optionsControl18.GetComponent<UIButton>().text = "B";
+				presetText.GetComponent<UIText>().text = "PRESET 2";
 			}
 			lastControls = actualControlOption;
 		}
 
-		pos.Set(-sum - 100, y - 230, 36.1f);
+		pos.Set(-sum - 100, y - 330, 36.1f);
 		optionsControlText.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 250, y - 230, 36.1f);
+		pos.Set(-sum + 250, y - 330, 36.1f);
 		optionsControlText1.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 550, y - 230, 36.1f);
+		pos.Set(-sum + 550, y - 330, 36.1f);
 		optionsControlText2.GetComponent<Transform2D>().position2D = pos;
 
 
-		pos.Set(-sum + 150, y - 220, 36.1f);
+		pos.Set(-sum + 150, y - 320, 36.1f);
 		optionsControl1.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 280, 36.1f);
+		pos.Set(-sum + 150, y - 380, 36.1f);
 		optionsControl2.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 340, 36.1f);
+		pos.Set(-sum + 150, y - 440, 36.1f);
 		optionsControl3.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 410, 36.1f);
+		pos.Set(-sum + 150, y - 510, 36.1f);
 		optionsControl4.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 480, 36.1f);
+		pos.Set(-sum + 150, y - 580, 36.1f);
 		optionsControl5.GetComponent<Transform2D>().position2D = pos;
 		optionsControl5.GetComponent<UIButton>().SetTextPosition(-30,-3.2f);
 
-		pos.Set(-sum + 150, y - 540, 36.1f);
+		pos.Set(-sum + 150, y - 640, 36.1f);
 		optionsControl6.GetComponent<Transform2D>().position2D = pos;
 		optionsControl6.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
 
-		pos.Set(-sum + 150, y - 585, 36.1f);
+		pos.Set(-sum + 150, y - 685, 36.1f);
 		optionsControl7.GetComponent<Transform2D>().position2D = pos;
 		optionsControl7.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
 
-		pos.Set(-sum + 150, y - 640, 36.1f);
+		pos.Set(-sum + 150, y - 740, 36.1f);
 		optionsControl8.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 710, 36.1f);
+		pos.Set(-sum + 150, y - 810, 36.1f);
 		optionsControl9.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 150, y - 780, 36.1f);
+		pos.Set(-sum + 150, y - 880, 36.1f);
 		optionsControl10.GetComponent<Transform2D>().position2D = pos;
 
 
 
-		pos.Set(-sum + 470, y - 230, 36.1f);
+		pos.Set(-sum + 470, y - 330, 36.1f);
 		optionsControl11.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 300, 36.1f);
+		pos.Set(-sum + 470, y - 400, 36.1f);
 		optionsControl12.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 370, 36.1f);
+		pos.Set(-sum + 470, y - 470, 36.1f);
 		optionsControl13.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 440, 36.1f);
+		pos.Set(-sum + 470, y - 540, 36.1f);
 		optionsControl14.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 510, 36.1f);
+		pos.Set(-sum + 470, y - 610, 36.1f);
 		optionsControl15.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 580, 36.1f);
+		pos.Set(-sum + 470, y - 680, 36.1f);
 		optionsControl16.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 650, 36.1f);
+		pos.Set(-sum + 470, y - 750, 36.1f);
 		optionsControl17.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 720, 36.1f);
+		pos.Set(-sum + 470, y - 820, 36.1f);
 		optionsControl18.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 470, y - 790, 36.1f);
+		pos.Set(-sum + 470, y - 890, 36.1f);
 		optionsControl19.GetComponent<Transform2D>().position2D = pos;
 
 
 
-		pos.Set(-sum + 750, y - 230, 36.1f);
+		pos.Set(-sum + 750, y - 330, 36.1f);
 		optionsControl20.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 750, y - 300, 36.1f);
+		pos.Set(-sum + 750, y - 400, 36.1f);
 		optionsControl21.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 750, y - 370, 36.1f);
+		pos.Set(-sum + 750, y - 470, 36.1f);
 		optionsControl22.GetComponent<Transform2D>().position2D = pos;
 	}
 	void OptionsControlHide()
@@ -677,7 +692,7 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl22.isActive = false;
 		optionsControlR.isActive = false;
 		optionsControlL.isActive = false;
-
+		presetText.isActive = false;
 	}
 	void UpdateOptions()
     {
@@ -749,10 +764,10 @@ public class pauseMenuButton : RagnarComponent
 		optionsBack.isActive = true;
 		//////////
 
-		pos.Set(X - 600, 0.0f, -10.400f);
+		pos.Set(X - 600, -50.0f, -10.400f);
 		optionsTransCuad.GetComponent<Transform2D>().position2D = pos;
 
-		bounds.Set(X, (InternalCalls.GetRegionGame().y-300), -10.400f);
+		bounds.Set(X, (InternalCalls.GetRegionGame().y-200), -10.400f);
 		optionsTransCuad.GetComponent<Transform2D>().SetSize(bounds);
 		optionsTransCuad.isActive = true;
 		//////////
@@ -1218,7 +1233,7 @@ public class pauseMenuButton : RagnarComponent
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
 
 				currentCursor = Input.GetCursorState();
-				Input.SetCursorState(0);
+				Input.RestoreDefaultCursor();
 			}
 		}
 	}
@@ -1261,6 +1276,7 @@ public class pauseMenuButton : RagnarComponent
 			cd2.isActive = false;
 			cd3.isActive = false;
 			cd4.isActive = false;
+			UICrouch.isActive = false;
 		}
         else
         {
@@ -1298,6 +1314,7 @@ public class pauseMenuButton : RagnarComponent
 			cd2.isActive = true;
 			cd3.isActive = true;
 			cd4.isActive = true;
+			UICrouch.isActive = true;
 		}
 
 		if(isOptions)
@@ -1312,91 +1329,103 @@ public class pauseMenuButton : RagnarComponent
 		
 		UpdateAbilityButton(x,y);
 
-		//UPDATE THE REST ELEMENTS
-		//pos.Set(x + 400, y - 60, -10.400f);
-		//PaulName.GetComponent<Transform2D>().position2D = pos;
-		//pos.Set(x +200, y - 60, -10.400f);
-		//ChaniName.GetComponent<Transform2D>().position2D = pos;
-		//pos.Set(x + 300, y - 60, -10.400f);
-		//StilgarName.GetComponent<Transform2D>().position2D = pos;
+        //UPDATE THE REST ELEMENTS
+        //pos.Set(x + 400, y - 60, -10.400f);
+        //PaulName.GetComponent<Transform2D>().position2D = pos;
+        //pos.Set(x +200, y - 60, -10.400f);
+        //ChaniName.GetComponent<Transform2D>().position2D = pos;
+        //pos.Set(x + 300, y - 60, -10.400f);
+        //StilgarName.GetComponent<Transform2D>().position2D = pos;
 
-		if (lastHitPoint!= selectedPlayer.GetComponent<Player>().hitPoints)
+        if (lastHitPoint != selectedPlayer.GetComponent<Player>().hitPoints)
         {
-			if(selectedPlayer.name == "Player")
+            if (selectedPlayer.name == "Player")
+            {
+                switch (selectedPlayer.GetComponent<Player>().hitPoints)
+                {
+                    case 4:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_paul.png");
+                        break;
+                    case 3:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_3_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_3_paul.png");
+                        break;
+                    case 2:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_paul.png");
+                        break;
+                    case 1:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_paul.png");
+                        break;
+                    case 0:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_paul.png");
+                        break;
+                }
+            }
+            else if (selectedPlayer.name == "Player_3")
+            {
+                switch (selectedPlayer.GetComponent<Player>().hitPoints)
+                {
+					case 5:
+						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_stilgar.png");
+						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_stilgar.png");
+						break;
+					case 4:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_4_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_4_stilgar.png");
+                        break;
+                    case 3:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_3_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_3_stilgar.png");
+                        break;
+                    case 2:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_stilgar.png");
+                        break;
+                    case 1:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_stilgar.png");
+                        break;
+                    case 0:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_stilgar.png");
+                        break;
+
+
+
+
+                }
+            }
+            else if (selectedPlayer.name == "Player_2")
             {
                 switch (selectedPlayer.GetComponent<Player>().hitPoints)
                 {
 					case 3:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
+						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_chani.png");
+						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_chani.png");
 						break;
 					case 2:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit2.png");
-						break;
-					case 1:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit4.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit4.png");
-						break;
-					case 0:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
-				}
-            }else if(selectedPlayer.name == "Player_3")
-            {
-				switch (selectedPlayer.GetComponent<Player>().hitPoints)
-				{
-					case 4:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 3:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit2.png");
-						break;
-					case 2:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit3.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit3.png");
-						break;
-					case 1:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit4.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit4.png");
-						break;
-					case 0:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_chani.png");
+                        break;
+                    case 1:
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_chani.png");
+                        break;
+                    case 0:
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_chani.png");
+                        break;
+                }
+            }
 
+            lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
 
-
-					
-				}
-			}
-			else if(selectedPlayer.name == "Player_2")
-            {
-				switch (selectedPlayer.GetComponent<Player>().hitPoints)
-				{
-					
-					case 2:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 1:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit3.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit3.png");
-						break;
-					case 0:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
-				}
-			}
-
-			lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
-
-		}
-		pos.Set(-169, y - 60, -10.400f);
+        }
+        pos.Set(-169, y - 60, -10.400f);
 		AbilityBG1.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(-61.5f, y - 60, -10.400f);
@@ -1447,6 +1476,10 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(x + 540, y - 5, -10.400f);
 		litleLive3.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(x + 630f, y - 25, -10.400f);
+		UICrouch.GetComponent<Transform2D>().position2D = pos;
+
 
 
 
@@ -2031,12 +2064,12 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-315, y + 300, -10.400f);
+				pos.Set(-310, y + 252, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(-175, y + 200, -10.400f);
+				pos.Set(-170, y + 152, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(-175, y + 210, -10.400f);
+				pos.Set(-170, y + 162, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				
 				if (selectedPlayer.name == "Player")//paul
@@ -2092,11 +2125,11 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-190, y + 300, -10.400f);
+				pos.Set(-198, y + 252, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(-55, y + 200, -10.400f);
+				pos.Set(-63, y + 152, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(-55, y + 210, -10.400f);
+				pos.Set(-63, y + 162, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
@@ -2152,11 +2185,11 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-100, y + 300, -10.400f);
+				pos.Set(-95, y + 252, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(40, y + 200, -10.400f);
+				pos.Set(45, y + 152, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(40, y + 210, -10.400f);
+				pos.Set(45, y + 162, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
@@ -2211,11 +2244,11 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-55, y + 300, -10.400f);
+				pos.Set(20, y + 252, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(85, y + 200, -10.400f);
+				pos.Set(160, y + 152, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(85, y + 210, -10.400f);
+				pos.Set(160, y + 162, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{

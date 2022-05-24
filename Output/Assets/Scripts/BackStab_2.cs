@@ -11,6 +11,8 @@ public class BackStab_2 : RagnarComponent
 	NavAgent agent;
 	public GameObject boss;
     private GameObject sceneAudio;
+
+	public GameObject[] barrels;
 	public void Start()
 	{
 		Debug.Log("Start Knife");
@@ -85,6 +87,17 @@ public class BackStab_2 : RagnarComponent
 					return enemy;
 			}
 		}
+
+		barrels = GameObject.FindGameObjectsWithTag("Barrels");
+		Debug.Log(barrels.Length);
+		for (int i = 0; i < barrels.Length; ++i)
+		{
+			if (Math.Abs((barrels[i].transform.globalPosition - gameObject.transform.globalPosition).magnitude) <= 3.0f)
+			{
+				barrels[i].GetComponent<Barrel>().Explode();
+			}
+		}
+
 		return null;
 	}
 
