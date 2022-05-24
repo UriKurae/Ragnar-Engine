@@ -102,7 +102,7 @@ public class Level_1 : RagnarComponent
             linear = -0.172f,
             quadratic = 0f,
             charges = -1,
-            cooldown = 20f
+            cooldown = 3f
         }; // Rock/Eagle
 
         // ENEMIES
