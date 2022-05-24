@@ -260,9 +260,7 @@ bool ModuleInput::CleanUp()
 {
 	DEBUG_LOG("Quitting SDL input event subsystem");
 
-	HCURSOR hCurDef = CopyCursor(defaultCursor);
-	SetSystemCursor(hCurDef, OCR_NORMAL);
-	DestroyCursor(hCurDef);
+	RestoreDefaultCursor();
 
 	cursors.clear();
 	if (pad != NULL)
@@ -273,6 +271,13 @@ bool ModuleInput::CleanUp()
 
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+void ModuleInput::RestoreDefaultCursor()
+{
+	HCURSOR hCurDef = CopyCursor(defaultCursor);
+	SetSystemCursor(hCurDef, OCR_NORMAL);
+	DestroyCursor(hCurDef);
 }
 
 bool ModuleInput::IsJoystickAvailable(int joystickId)

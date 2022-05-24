@@ -41,6 +41,7 @@ enum CursorState
 	STILGAR_4,
 
 	CLICKABLE,
+	NON_CLICKABLE,
 };
 
 enum KeyState
@@ -131,6 +132,7 @@ public:
 	void SetCursorState(int state);
 	int GetCursorState() { return (int)currentCursor; };
 	std::vector<HCURSOR>* GetCursors() { return &cursors; };
+	void RestoreDefaultCursor();
 
 	void ImportToLibrary();
 

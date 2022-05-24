@@ -632,6 +632,7 @@ public class Boss : RagnarComponent
 			hitted = true;
 			if (state == BossState.PHASE4)
 			{
+				Input.RestoreDefaultCursor();
 				SceneManager.LoadScene("WinScene");
 			}
 		}

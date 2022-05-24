@@ -158,7 +158,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.96129453182220459,
+                    "Vertical Fov": 1.0597295761108398,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -8.7986268997192383,
@@ -226,7 +226,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -258,7 +258,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 412581704,
+                    "pointer": 484084760,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -357,7 +357,7 @@
                     "buttonWidth": 323,
                     "buttonHeight": 47,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -488,7 +488,7 @@
                     "buttonWidth": 309,
                     "buttonHeight": 44,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -552,7 +552,7 @@
                     "buttonWidth": 323,
                     "buttonHeight": 47,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -638,7 +638,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Restart",
+                    "buttonText": "Replay Level",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
@@ -683,7 +683,7 @@
                     "buttonWidth": 309,
                     "buttonHeight": 44,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -796,7 +796,7 @@
                     "Position": [
                         -6.3687982559204102,
                         -0.49311873316764832,
-                        -19.400344848632813
+                        -19.400344848632812
                     ],
                     "Quaternion": [
                         0.024275230243802071,
@@ -1088,7 +1088,7 @@
                     "Position": [
                         97.659187316894531,
                         -0.12999999523162842,
-                        24.827041625976563
+                        24.827041625976562
                     ],
                     "Quaternion": [
                         0,
@@ -1546,7 +1546,7 @@
                     "Type": 19,
                     "Position": [
                         -248,
-                        350,
+                        339.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1562,7 +1562,7 @@
                     "buttonWidth": 806,
                     "buttonHeight": 175,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 705.5,
+                    "lastButtonHeight": 792.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },

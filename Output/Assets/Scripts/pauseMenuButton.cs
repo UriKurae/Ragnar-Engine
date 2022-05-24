@@ -7,8 +7,8 @@ public class pauseMenuButton : RagnarComponent
 	Vector3 pos;
 	Vector3 mouseLastposition;
 	Vector3 bounds;
-	bool isOptions = false;
-	bool isSowing = false;
+	public bool isOptions = false;
+	public bool isSowing = false;
 	bool isFirstS = true;
 	bool isFirstE = true;
 	bool isFirstO = true;
@@ -411,6 +411,7 @@ public class pauseMenuButton : RagnarComponent
 		UpdatePlayerPause();
 		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
         {
+			Input.RestoreDefaultCursor();
 			SceneManager.LoadScene("WinScene");
         }
 	}
@@ -1232,7 +1233,7 @@ public class pauseMenuButton : RagnarComponent
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
 
 				currentCursor = Input.GetCursorState();
-				Input.SetCursorState(0);
+				Input.RestoreDefaultCursor();
 			}
 		}
 	}
