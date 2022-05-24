@@ -337,7 +337,8 @@ public class pauseMenuButton : RagnarComponent
 		litleLive1 = GameObject.Find("litleLive1");
 		litleLive2 = GameObject.Find("litleLive2");
 		litleLive3 = GameObject.Find("litleLive3");
-		litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
+		litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_chani.png");
+		litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_stilgar.png");
 		PaulBg = GameObject.Find("PaulBg");
 		ChaniBg = GameObject.Find("ChaniBg");
 		StilgarBg = GameObject.Find("StilgarBg");
@@ -1312,91 +1313,103 @@ public class pauseMenuButton : RagnarComponent
 		
 		UpdateAbilityButton(x,y);
 
-		//UPDATE THE REST ELEMENTS
-		//pos.Set(x + 400, y - 60, -10.400f);
-		//PaulName.GetComponent<Transform2D>().position2D = pos;
-		//pos.Set(x +200, y - 60, -10.400f);
-		//ChaniName.GetComponent<Transform2D>().position2D = pos;
-		//pos.Set(x + 300, y - 60, -10.400f);
-		//StilgarName.GetComponent<Transform2D>().position2D = pos;
+        //UPDATE THE REST ELEMENTS
+        //pos.Set(x + 400, y - 60, -10.400f);
+        //PaulName.GetComponent<Transform2D>().position2D = pos;
+        //pos.Set(x +200, y - 60, -10.400f);
+        //ChaniName.GetComponent<Transform2D>().position2D = pos;
+        //pos.Set(x + 300, y - 60, -10.400f);
+        //StilgarName.GetComponent<Transform2D>().position2D = pos;
 
-		if (lastHitPoint!= selectedPlayer.GetComponent<Player>().hitPoints)
+        if (lastHitPoint != selectedPlayer.GetComponent<Player>().hitPoints)
         {
-			if(selectedPlayer.name == "Player")
+            if (selectedPlayer.name == "Player")
+            {
+                switch (selectedPlayer.GetComponent<Player>().hitPoints)
+                {
+                    case 4:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_paul.png");
+                        break;
+                    case 3:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_3_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_3_paul.png");
+                        break;
+                    case 2:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_paul.png");
+                        break;
+                    case 1:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_paul.png");
+                        break;
+                    case 0:
+                        litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_paul.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_paul.png");
+                        break;
+                }
+            }
+            else if (selectedPlayer.name == "Player_3")
+            {
+                switch (selectedPlayer.GetComponent<Player>().hitPoints)
+                {
+					case 5:
+						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_stilgar.png");
+						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_stilgar.png");
+						break;
+					case 4:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_4_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_4_stilgar.png");
+                        break;
+                    case 3:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_3_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_3_stilgar.png");
+                        break;
+                    case 2:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_stilgar.png");
+                        break;
+                    case 1:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_stilgar.png");
+                        break;
+                    case 0:
+                        litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_stilgar.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_stilgar.png");
+                        break;
+
+
+
+
+                }
+            }
+            else if (selectedPlayer.name == "Player_2")
             {
                 switch (selectedPlayer.GetComponent<Player>().hitPoints)
                 {
 					case 3:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
+						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full_chani.png");
+						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full_chani.png");
 						break;
 					case 2:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit2.png");
-						break;
-					case 1:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit4.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit4.png");
-						break;
-					case 0:
-						litleLive1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
-				}
-            }else if(selectedPlayer.name == "Player_3")
-            {
-				switch (selectedPlayer.GetComponent<Player>().hitPoints)
-				{
-					case 4:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 3:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit2.png");
-						break;
-					case 2:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit3.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit3.png");
-						break;
-					case 1:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit4.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit4.png");
-						break;
-					case 0:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_2_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_2_chani.png");
+                        break;
+                    case 1:
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_1_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_1_chani.png");
+                        break;
+                    case 0:
+                        litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_0_chani.png");
+                        UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_0_chani.png");
+                        break;
+                }
+            }
 
+            lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
 
-
-					
-				}
-			}
-			else if(selectedPlayer.name == "Player_2")
-            {
-				switch (selectedPlayer.GetComponent<Player>().hitPoints)
-				{
-					
-					case 2:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 1:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit3.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit3.png");
-						break;
-					case 0:
-						litleLive2.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
-						break;
-				}
-			}
-
-			lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
-
-		}
-		pos.Set(-169, y - 60, -10.400f);
+        }
+        pos.Set(-169, y - 60, -10.400f);
 		AbilityBG1.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(-61.5f, y - 60, -10.400f);
@@ -2211,11 +2224,11 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-55, y + 300, -10.400f);
+				pos.Set(15, y + 300, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(85, y + 200, -10.400f);
+				pos.Set(155, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(85, y + 210, -10.400f);
+				pos.Set(155, y + 210, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
