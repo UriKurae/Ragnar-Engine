@@ -227,17 +227,21 @@ public class DialogueManager : RagnarComponent
 
     public void LoadDialogue()
     {
-        for (int i = 0; i < triggerColliders.Length; ++i)
+        DialogueData data = SaveSystem.LoadDialogue(triggerColliders[0].name);
+        if(data != null)
         {
-            Debug.Log(triggerColliders[i].name);
-            DialogueData data = SaveSystem.LoadDialogue(triggerColliders[i].name);
-
-            triggerColliders[i].GetComponent<DialogueTrigger>().SetUsed(data.used);
-
-            if (data.used)
+            for (int i = 0; i < triggerColliders.Length; ++i)
             {
-                Debug.Log("Dialogo skippeado");
+                Debug.Log(triggerColliders[i].name);
+
+                data = SaveSystem.LoadDialogue(triggerColliders[i].name);
+                triggerColliders[i].GetComponent<DialogueTrigger>().SetUsed(data.used);
+
+                if (data.used)
+                {
+                    Debug.Log("Dialogo skippeado");
+                }
             }
-        }
+        }        
     }
 }
