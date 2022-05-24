@@ -101,6 +101,8 @@ public class HunterSeeker : RagnarComponent
 	{
 		if (other.gameObject.tag == "Enemies")
         {
+			player.GetComponent<Animation>().PlayAnimation("Ability3Drop");
+
 			player.GetComponent<Player>().SetControled(true);
 			leftParticles.Pause();
 			rightParticles.Pause();

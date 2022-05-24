@@ -145,7 +145,6 @@ public class PlayerManager : RagnarComponent
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
         {
             SpawnArea(State.ABILITY_1);
-            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
         }
     }
 
@@ -155,7 +154,6 @@ public class PlayerManager : RagnarComponent
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
         {
             SpawnArea(State.ABILITY_2);
-            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
         }
     }
 
@@ -165,7 +163,6 @@ public class PlayerManager : RagnarComponent
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
         {
             SpawnArea(State.ABILITY_3);
-            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
         }
     }
 
@@ -175,7 +172,6 @@ public class PlayerManager : RagnarComponent
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
         {
             SpawnArea(State.ABILITY_4);
-            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
         }
     }
 
@@ -264,54 +260,66 @@ public class PlayerManager : RagnarComponent
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
                 }
                 break;
             case 1:
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
                 }
                 break;
             case 2:
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
                 }
                 break;
             default:
@@ -410,7 +418,7 @@ public class PlayerManager : RagnarComponent
             Input.SetCursorState((int)CursorState.NORMAL);
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
-            players[characterSelected].GetComponent<Animation>().PlayAnimation();
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
