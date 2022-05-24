@@ -24,6 +24,7 @@ public class SwordSlash : RagnarComponent
         rb.SetAsTrigger();
 
         player.GetComponent<Player>().PlayAudioClip("WPN_SWORDHIT");
+        player.GetComponent<Animation>().PlayAnimation("Ability1");
         GameObject.Find("SlashParticles").GetComponent<ParticleSystem>().Play();
     }
 

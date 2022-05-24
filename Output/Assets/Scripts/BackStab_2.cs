@@ -31,6 +31,7 @@ public class BackStab_2 : RagnarComponent
 		if (selectedEnemy != null && backstabed == false)
 		{
 			backstabed = true;
+			player.GetComponent<Animation>().PlayAnimation("Ability1");
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;

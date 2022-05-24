@@ -145,7 +145,7 @@ public class PlayerManager : RagnarComponent
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
         {
             SpawnArea(State.ABILITY_1);
-            //players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1");
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
         }
     }
 
@@ -153,21 +153,30 @@ public class PlayerManager : RagnarComponent
     public void Ability2()
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        {
             SpawnArea(State.ABILITY_2);
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
+        }
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        {
             SpawnArea(State.ABILITY_3);
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
+        }
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
         if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        {
             SpawnArea(State.ABILITY_4);
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
+        }
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
@@ -322,7 +331,6 @@ public class PlayerManager : RagnarComponent
 
     private void CastOrCancel()
     {
-
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
             Input.SetCursorState((int)CursorState.NORMAL);
@@ -351,7 +359,7 @@ public class PlayerManager : RagnarComponent
                     obj.transform.localRotation = Quaternion.identity;
 
                     obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
-                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
 
                     playableCharacter.pickedEnemy = obj;
                 }
@@ -402,6 +410,7 @@ public class PlayerManager : RagnarComponent
             Input.SetCursorState((int)CursorState.NORMAL);
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
+            players[characterSelected].GetComponent<Animation>().PlayAnimation();
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;

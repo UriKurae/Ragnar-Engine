@@ -25,6 +25,7 @@ public class Knife : RagnarComponent
 		particleComponent.Play();
 
 		player.GetComponent<Player>().PlayAudioClip("WPN_THORWINGKNIFETHROW");
+		player.GetComponent<Animation>().PlayAnimation("Ability4");
 	}
 
     private void AimMethod()

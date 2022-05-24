@@ -30,6 +30,7 @@ public class HunterSeeker : RagnarComponent
 
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
+		player.GetComponent<Animation>().PlayAnimation("Ability3");
 
 		leftParticles = GameObject.Find("LeftHunterParticles").GetComponent<ParticleSystem>();
 		rightParticles = GameObject.Find("RightHunterParticles").GetComponent<ParticleSystem>();

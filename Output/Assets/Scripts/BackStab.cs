@@ -33,6 +33,7 @@ public class BackStab : RagnarComponent
 		if (selectedEnemy != null && backstabed == false)
         {
 			backstabed = true;
+			player.GetComponent<Animation>().PlayAnimation("Ability1");
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;
@@ -63,6 +64,7 @@ public class BackStab : RagnarComponent
 		}
 		if (boss != null)
 		{
+			player.GetComponent<Animation>().PlayAnimation("Ability1");
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
 			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 0.5f)
 			{

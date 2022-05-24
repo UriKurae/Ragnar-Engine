@@ -25,6 +25,7 @@ public class Voice : RagnarComponent
 		{
 			if(!check)
             {
+				player.GetComponent<Animation>().PlayAnimation("Ability2");
 				player.GetComponent<Player>().PlayAudioClip("WPN_VOICE");
 				check = true;
             }

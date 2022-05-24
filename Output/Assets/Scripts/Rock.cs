@@ -18,6 +18,7 @@ public class Rock : RagnarComponent
 		gameObject.GetComponent<ParticleSystem>().Play();
 
 		player.GetComponent<Player>().PlayAudioClip("EBOSS_THROWOBJECT");
+		player.GetComponent<Animation>().PlayAnimation("Ability3");
 	}
 
 	private void AimMethod()

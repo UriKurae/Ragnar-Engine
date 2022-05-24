@@ -18,6 +18,7 @@ public class StunnerShot : RagnarComponent
     {
         GameObject player = GameObject.Find("Player_3");
         NavAgent agent = player.GetComponent<NavAgent>();
+        player.GetComponent<Animation>().PlayAnimation("Ability2");
 
         Vector3 pos = player.transform.globalPosition;
         pos.y += 1;
