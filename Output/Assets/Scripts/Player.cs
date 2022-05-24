@@ -374,6 +374,12 @@ public class Player : RagnarComponent
             if(!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
+
+
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = false;
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = false;
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = false;
+
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
@@ -385,13 +391,6 @@ public class Player : RagnarComponent
         {
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
-
-
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility4 = true;
-
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
         }
         if (other.gameObject.name == "DialogueTrigger6")

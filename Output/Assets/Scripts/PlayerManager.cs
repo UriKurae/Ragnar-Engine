@@ -26,9 +26,9 @@ public class PlayerManager : RagnarComponent
     GameObject Ability3Bg;
     GameObject Ability4Bg;
 
-    public bool canDoAbility1 = false;
-    public bool canDoAbility2 = false;
-    public bool canDoAbility3 = false;
+    public bool canDoAbility1 = true;
+    public bool canDoAbility2 = true;
+    public bool canDoAbility3 = true;
     public bool canDoAbility4=  true;
 
     public float radius;
