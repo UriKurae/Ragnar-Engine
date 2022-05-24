@@ -24,6 +24,10 @@ public class PlayerManager : RagnarComponent
     GameObject Ability3Bg;
     GameObject Ability4Bg;
 
+    public bool canDoAbility1 = false;
+    public bool canDoAbility2 = false;
+    public bool canDoAbility3 = false;
+    public bool canDoAbility4=  true;
 
     public float radius;
     public void Start()
@@ -113,6 +117,7 @@ public class PlayerManager : RagnarComponent
             /*Contador de cooldown para cada habilidad
             Funciona en todos los casos con todos los pjs.*/
             CooldownCounter();
+
         }
 
     }
@@ -142,28 +147,28 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
             SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
             SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
             SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility4)
             SpawnArea(State.ABILITY_4);
     }
 
@@ -546,7 +551,7 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability1UI = Ability1Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown)
+                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility1 == false)
                     ability1UI.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
@@ -573,7 +578,7 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability2UI = Ability2Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown)
+                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility2 == false)
                     ability2UI.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
@@ -600,7 +605,7 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability3UI = Ability3Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown)
+                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility3 == false)
                     ability3UI.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
@@ -627,8 +632,10 @@ public class PlayerManager : RagnarComponent
 
                 UIImage ability4UI = Ability4Bg.GetComponent<UIImage>();
 
-                if (playableCharacter.abilities[abilityID].onCooldown)
+                if (playableCharacter.abilities[abilityID].onCooldown || canDoAbility4 == false)
+                {
                     ability4UI.SetImageGeneralColor(128, 128, 128);
+                }
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                 {
