@@ -403,7 +403,6 @@ void ModuleInput::SetCursorState(int state)
 {
 	currentCursor = (CursorState)state;
 	HCURSOR hCurDef = CopyCursor(cursors[state]);
-	LoadCursorA((HINSTANCE)cursors[0], RT_ANICURSOR);
 	SetSystemCursor(hCurDef, OCR_NORMAL);
 	DestroyCursor(hCurDef);
 }
