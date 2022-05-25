@@ -100,7 +100,8 @@ public class pauseMenuButton : RagnarComponent
 	bool isAnimating = false;
 	float actualDT = 0;
 	public GameObject selectedPlayer;
-    GameObject playerManager;
+    PlayerManager playerManager;
+	InputAction inputAction;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
@@ -375,8 +376,9 @@ public class pauseMenuButton : RagnarComponent
 		AbilityRight = GameObject.Find("AbilityRight");
 
 		players = GameObject.FindGameObjectsWithTag("Player");
-        playerManager = GameObject.Find("PlayerManager");
-		selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        inputAction = GameObject.Find("PlayerManager").GetComponent<InputAction>();
+		selectedPlayer = players[playerManager.characterSelected];
 		
 		lastPlayerSelected = selectedPlayer.name;
 		lastHitPoint= selectedPlayer.GetComponent<Player>().hitPoints;
@@ -403,7 +405,7 @@ public class pauseMenuButton : RagnarComponent
         //para pillar el hitPoint del mouse Pick
         //selectedPlayer.GetComponent<NavAgent>().hitPosition
         players = GameObject.FindGameObjectsWithTag("Player");
-        selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
+        selectedPlayer = players[playerManager.characterSelected];
 		
 		SetAllPositions();
 		UpdateMenu();
@@ -551,7 +553,7 @@ public class pauseMenuButton : RagnarComponent
 			if (actualControlOption == 0)
 			{
 			
-				playerManager.GetComponent<InputAction>().SetActionMap(1);
+				inputAction.SetActionMap(1);
 				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters1.png");
 				optionsControl8.GetComponent<UIButton>().text = "Drag";
 				optionsControl9.GetComponent<UIButton>().text = "Crl L";
@@ -564,7 +566,7 @@ public class pauseMenuButton : RagnarComponent
 			}
 			else if(actualControlOption == 1)
 			{
-				playerManager.GetComponent<InputAction>().SetActionMap(0);
+				inputAction.SetActionMap(0);
 				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters.png");
 				optionsControl9.GetComponent<UIButton>().text = "Q E";
 				optionsControl8.GetComponent<UIButton>().text = "WASD";
