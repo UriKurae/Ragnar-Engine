@@ -243,12 +243,6 @@ public class pauseMenuButton : RagnarComponent
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 		lastWindowW = (InternalCalls.GetRegionGame().x / 2);
 
-        GameData load = SaveSystem.LoadGameConfig();
-        if (load != null)
-        {
-            LoadOptions(load);
-        }
-
         optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
@@ -286,17 +280,17 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl5.GetComponent<UIButton>().text = "R Click";
 		optionsControl6.GetComponent<UIButton>().text = "L Click";
 		optionsControl7.GetComponent<UIButton>().text = "Space";
-		optionsControl8.GetComponent<UIButton>().text = "Drag";
-		optionsControl9.GetComponent<UIButton>().text = "Crl L";
+		optionsControl8.GetComponent<UIButton>().text = "WASD";
+		optionsControl9.GetComponent<UIButton>().text = "Q E";
 		optionsControl10.GetComponent<UIButton>().text = "Drag";
 		optionsControl11.GetComponent<UIButton>().text = "F1";
 		optionsControl12.GetComponent<UIButton>().text = "F5";
 		optionsControl13.GetComponent<UIButton>().text = "F6";
-		optionsControl14.GetComponent<UIButton>().text = "A";
-		optionsControl15.GetComponent<UIButton>().text = "S";
-		optionsControl16.GetComponent<UIButton>().text = "D";
-		optionsControl17.GetComponent<UIButton>().text = "F";
-		optionsControl18.GetComponent<UIButton>().text = "G";
+		optionsControl14.GetComponent<UIButton>().text = "Z";
+		optionsControl15.GetComponent<UIButton>().text = "X";
+		optionsControl16.GetComponent<UIButton>().text = "C";
+		optionsControl17.GetComponent<UIButton>().text = "V";
+		optionsControl18.GetComponent<UIButton>().text = "B";
 		optionsControl19.GetComponent<UIButton>().text = "R Click";
 		optionsControl20.GetComponent<UIButton>().text = "L Click";
 		optionsControl21.GetComponent<UIButton>().text = "J";
@@ -374,14 +368,22 @@ public class pauseMenuButton : RagnarComponent
 
 		AbilityLeft= GameObject.Find("AbilityLeft");
 		AbilityRight = GameObject.Find("AbilityRight");
-
+		GameData load = SaveSystem.LoadGameConfig();
+		if (load != null)
+		{
+			LoadOptions(load);
+		}
+		FillPlayers();
+	}
+	public void FillPlayers()
+    {
 		players = GameObject.FindGameObjectsWithTag("Player");
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        inputAction = GameObject.Find("PlayerManager").GetComponent<InputAction>();
-		selectedPlayer = players[playerManager.characterSelected];
-		
-		lastPlayerSelected = selectedPlayer.name;
-		lastHitPoint= selectedPlayer.GetComponent<Player>().hitPoints;
+		playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+		inputAction = GameObject.Find("PlayerManager").GetComponent<InputAction>();
+		ChangePresset();
+		//selectedPlayer = players[playerManager.characterSelected];
+		//lastPlayerSelected = selectedPlayer.name;
+		//lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
 	}
     void LoadOptions(GameData load)
     {
@@ -389,23 +391,27 @@ public class pauseMenuButton : RagnarComponent
         optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(load.vsync);
         optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(load.shadowsEnabled);
         optionsLanguaje.GetComponent<UIDropDown>().SetSelected(load.language);
-    }
+
+		actualControlOption = load.actualControlOption;
+		if (actualControlOption == 0)
+			presetText.GetComponent<UIText>().text = "PRESET 1";
+		else presetText.GetComponent<UIText>().text = "PRESET 2";
+	}
     void SaveOptions()
     {
         GameData ej = new GameData(
             optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked(),
             optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked(),
             optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked(),
-            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje());
+            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje(), actualControlOption);
         SaveSystem.SaveGameConfig(ej);
     }
 
     public void Update()
 	{
-        //para pillar el hitPoint del mouse Pick
-        //selectedPlayer.GetComponent<NavAgent>().hitPosition
-        players = GameObject.FindGameObjectsWithTag("Player");
-        selectedPlayer = players[playerManager.characterSelected];
+		//para pillar el hitPoint del mouse Pick
+		//selectedPlayer.GetComponent<NavAgent>().hitPosition
+		selectedPlayer = players[playerManager.characterSelected];
 		
 		SetAllPositions();
 		UpdateMenu();
@@ -549,37 +555,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 		}
 		if (actualControlOption != lastControls) 
-		{ 
-			if (actualControlOption == 0)
-			{
-			
-				inputAction.SetActionMap(1);
-				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters1.png");
-				optionsControl8.GetComponent<UIButton>().text = "Drag";
-				optionsControl9.GetComponent<UIButton>().text = "Crl L";
-				optionsControl14.GetComponent<UIButton>().text = "A";
-				optionsControl15.GetComponent<UIButton>().text = "S";
-				optionsControl16.GetComponent<UIButton>().text = "D";
-				optionsControl17.GetComponent<UIButton>().text = "F";
-				optionsControl18.GetComponent<UIButton>().text = "G";
-				presetText.GetComponent<UIText>().text = "PRESET 1";
-			}
-			else if(actualControlOption == 1)
-			{
-				inputAction.SetActionMap(0);
-				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters.png");
-				optionsControl9.GetComponent<UIButton>().text = "Q E";
-				optionsControl8.GetComponent<UIButton>().text = "WASD";
-
-				optionsControl14.GetComponent<UIButton>().text = "Z";
-				optionsControl15.GetComponent<UIButton>().text = "X";
-				optionsControl16.GetComponent<UIButton>().text = "C";
-				optionsControl17.GetComponent<UIButton>().text = "V";
-				optionsControl18.GetComponent<UIButton>().text = "B";
-				presetText.GetComponent<UIText>().text = "PRESET 2";
-			}
-			lastControls = actualControlOption;
-		}
+			ChangePresset();
 
 		pos.Set(-sum - 100, y - 330, 36.1f);
 		optionsControlText.GetComponent<Transform2D>().position2D = pos;
@@ -663,6 +639,38 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(-sum + 750, y - 470, 36.1f);
 		optionsControl22.GetComponent<Transform2D>().position2D = pos;
+	}
+
+	void ChangePresset()
+    {
+		if (actualControlOption == 0)
+		{
+			inputAction.SetActionMap(1);
+			abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters1.png");
+			optionsControl8.GetComponent<UIButton>().text = "Drag";
+			optionsControl9.GetComponent<UIButton>().text = "Crl L";
+			optionsControl14.GetComponent<UIButton>().text = "A";
+			optionsControl15.GetComponent<UIButton>().text = "S";
+			optionsControl16.GetComponent<UIButton>().text = "D";
+			optionsControl17.GetComponent<UIButton>().text = "F";
+			optionsControl18.GetComponent<UIButton>().text = "G";
+			presetText.GetComponent<UIText>().text = "PRESET 1";
+		}
+		else if (actualControlOption == 1)
+		{
+			inputAction.SetActionMap(0);
+			abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters.png");
+			optionsControl9.GetComponent<UIButton>().text = "Q E";
+			optionsControl8.GetComponent<UIButton>().text = "WASD";
+
+			optionsControl14.GetComponent<UIButton>().text = "Z";
+			optionsControl15.GetComponent<UIButton>().text = "X";
+			optionsControl16.GetComponent<UIButton>().text = "C";
+			optionsControl17.GetComponent<UIButton>().text = "V";
+			optionsControl18.GetComponent<UIButton>().text = "B";
+			presetText.GetComponent<UIText>().text = "PRESET 2";
+		}
+		lastControls = actualControlOption;
 	}
 	void OptionsControlHide()
 	{

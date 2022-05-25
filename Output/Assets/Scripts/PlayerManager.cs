@@ -91,6 +91,7 @@ public class PlayerManager : RagnarComponent
         }
 
         camComponent = GameObject.Find("Camera").GetComponent<Camera>();
+        GameObject.Find("Background").GetComponent<pauseMenuButton>().FillPlayers();
     }
 
 	public void Update()
