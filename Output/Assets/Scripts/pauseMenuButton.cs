@@ -564,7 +564,7 @@ public class pauseMenuButton : RagnarComponent
 			}
 			else if(actualControlOption == 1)
 			{
-			 playerManager.GetComponent<InputAction>().SetActionMap(0);
+				playerManager.GetComponent<InputAction>().SetActionMap(0);
 				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters.png");
 				optionsControl9.GetComponent<UIButton>().text = "Q E";
 				optionsControl8.GetComponent<UIButton>().text = "WASD";
