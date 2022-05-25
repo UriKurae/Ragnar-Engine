@@ -146,7 +146,7 @@ public class Player : RagnarComponent
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
 
-                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(1.0f);
+                                uiCrouch.isActive = true;
                             }
                             else if (action == Actions.CROUCH)
                             {
@@ -154,7 +154,7 @@ public class Player : RagnarComponent
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
 
-                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(0.51f);
+                                uiCrouch.isActive = false;
                             }
                         }
 
