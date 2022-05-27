@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 384555080,
+                    "pointer": 386724904,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -183,15 +183,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.52587890625e-05,
-                        57.219799041748047,
-                        -52.01800537109375
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        7.9287394427751678e-09,
+                        0.34202012419700623,
                         0,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -210,9 +210,9 @@
                     "Vertical Fov": 0.36894726753234863,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -89.845611572265625,
-                        57.219799041748047,
-                        145.55343627929688
+                        -88.425582885742188,
+                        55,
+                        146.98733520507812
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -8646,7 +8646,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 384532432,
+                    "pointer": 386732352,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -10118,7 +10118,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 384529696,
+                    "pointer": 386733416,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -15661,7 +15661,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -15730,7 +15730,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16387,7 +16387,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16456,7 +16456,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16525,7 +16525,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -19803,9 +19803,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -66.399169921875,
+                        -66.155487060546875,
                         0,
-                        117.21763610839844
+                        114.76383209228516
                     ],
                     "Quaternion": [
                         0,
@@ -19828,7 +19828,7 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        8.6000003814697266,
+                        12.800000190734863,
                         4,
                         4
                     ],
@@ -19872,9 +19872,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -28.224462509155273,
+                        -33.770362854003906,
                         0,
-                        51.864860534667969
+                        71.03753662109375
                     ],
                     "Quaternion": [
                         0,
@@ -19941,9 +19941,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -23.525646209716797,
+                        -25.201868057250977,
                         0,
-                        33.249195098876953
+                        49.388008117675781
                     ],
                     "Quaternion": [
                         0,
@@ -19966,7 +19966,7 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        58.299999237060547,
+                        60.099998474121094,
                         5.3000001907348633,
                         4.8000001907348633
                     ],
