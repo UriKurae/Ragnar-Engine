@@ -122,7 +122,7 @@ public class Level_1 : RagnarComponent
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_1"),
-            coneRotate = false            
+            coneRotate = true            
         };
 
         enemies[2] = new Enemies
@@ -131,7 +131,7 @@ public class Level_1 : RagnarComponent
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_2"),
-            coneRotate = false
+            coneRotate = true
         };
 
         enemies[3] = new Enemies
