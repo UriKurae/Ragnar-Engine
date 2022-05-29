@@ -407,9 +407,6 @@ public class pauseMenuButton : RagnarComponent
 		playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 		inputAction = GameObject.Find("PlayerManager").GetComponent<InputAction>();
 		ChangePresset();
-		//selectedPlayer = players[playerManager.characterSelected];
-		//lastPlayerSelected = selectedPlayer.name;
-		//lastHitPoint = selectedPlayer.GetComponent<Player>().hitPoints;
 	}
     void LoadOptions(GameData load)
     {
@@ -2032,19 +2029,21 @@ public class pauseMenuButton : RagnarComponent
 				}
                 else
                 {
-
 					if (selectedPlayer.name == "Player")//paul
 					{
-
-						Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
-						Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
-						Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
-						Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
-
+						// This only affect on lvl1 by progress system
+						if(playerManager.canDoAbility1)
+                        {
+							Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+							Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+							Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+							Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+						}						
 
 						Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_crysknife.png");
 						Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_voice.png");
 						Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
+
 						if (players.Length == 1)
 						{
 							Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
@@ -2057,12 +2056,10 @@ public class pauseMenuButton : RagnarComponent
 					}
 					else if (selectedPlayer.name == "Player_2")//chani
 					{
-
 						Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
 						Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
 						Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
 						Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
-
 
 						Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_crysknife.png");
 						Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_camouflage.png");
@@ -2071,7 +2068,6 @@ public class pauseMenuButton : RagnarComponent
 					}
 					else if (selectedPlayer.name == "Player_3")//stilgar
 					{
-
 						Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
 						Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
 						Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(83, 168, 208);
@@ -2082,6 +2078,7 @@ public class pauseMenuButton : RagnarComponent
 						Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_trap.png");
 						Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_whistle.png");
 					}
+
 					Ability1.GetComponent<UIButton>().SetButtonAlpha((2 * actualDT)-1);
 					Ability2.GetComponent<UIButton>().SetButtonAlpha((2 * actualDT) - 1);
 					Ability3.GetComponent<UIButton>().SetButtonAlpha((2 * actualDT) - 1);
@@ -2100,7 +2097,6 @@ public class pauseMenuButton : RagnarComponent
 					AbilityBG4.GetComponent<UIImage>().SetImageAlpha((2 * actualDT) - 1);
 
 					abilityLeters.GetComponent<UIImage>().SetImageAlpha((2 * actualDT) - 1);
-
 
 					pos.Set((-492 * actualDT) + 224, y - 30, -10.400f);
                     AbilityLeft.GetComponent<Transform2D>().position2D = pos;
