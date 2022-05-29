@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 412894680,
+                    "pointer": 352682816,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,9 +144,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -26.020463943481445,
+                        -20.045171737670898,
                         0,
-                        184.7574462890625
+                        174.96382141113281
                     ],
                     "Quaternion": [
                         0,
@@ -184,14 +184,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55,
-                        -50
+                        35.021816253662109,
+                        -31.837966918945312
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
                         0,
-                        0,
-                        0.93969261646270752
+                        -7.9287403309535875e-09,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -200,8 +200,8 @@
                     ],
                     "Scale": [
                         1.4142105579376221,
-                        1.0000002384185791,
-                        1.0000004768371582
+                        1.0000003576278687,
+                        1.0000005960464478
                     ]
                 },
                 {
@@ -210,21 +210,21 @@
                     "Vertical Fov": 0.36894726753234863,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -43.185691833496094,
-                        55,
-                        231.72004699707031
+                        -30.975290298461914,
+                        35.021816253662109,
+                        204.86769104003906
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": 7,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -26.020463943481445,
+                        -20.045171737670898,
                         0,
-                        184.7574462890625
+                        174.96382141113281
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -322,7 +322,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664063
+                        0.98471450805664062
                     ],
                     "RotationEditor": [
                         -0,
@@ -548,7 +548,7 @@
                     "Position": [
                         -15.136451721191406,
                         32.360797882080078,
-                        -2.4103469848632813
+                        -2.4103469848632812
                     ],
                     "Quaternion": [
                         0,
@@ -1522,7 +1522,7 @@
                     "Position": [
                         0.14367350935935974,
                         3.3142125606536865,
-                        -67.793533325195313
+                        -67.793533325195312
                     ],
                     "Quaternion": [
                         0,
@@ -1649,7 +1649,7 @@
                     "Active": true,
                     "Position": [
                         48.314388275146484,
-                        2.7870254516601563,
+                        2.7870254516601562,
                         -21.273065567016602
                     ],
                     "Quaternion": [
@@ -2480,7 +2480,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.3946304321289063,
+                        -7.3946304321289062,
                         5.3251314163208008,
                         85.330413818359375
                     ],
@@ -2672,7 +2672,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -68.188247680664063,
+                        -68.188247680664062,
                         6.4703893661499023,
                         90.2564697265625
                     ],
@@ -3576,7 +3576,7 @@
                     "Position": [
                         150.14437866210938,
                         0,
-                        -78.662551879882813
+                        -78.662551879882812
                     ],
                     "Quaternion": [
                         0,
@@ -3743,7 +3743,7 @@
                     "Position": [
                         -12.354125022888184,
                         1.3527688980102539,
-                        -52.897659301757813
+                        -52.897659301757812
                     ],
                     "Quaternion": [
                         0,
@@ -4295,7 +4295,7 @@
             "UUID": 603258286,
             "Parent UUID": 1179485366,
             "Name": "Enemies",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4359,7 +4359,7 @@
             "UUID": 585977683,
             "Parent UUID": 603258286,
             "Name": "basic_static_0",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4423,7 +4423,7 @@
             "UUID": 1270073629,
             "Parent UUID": 603258286,
             "Name": "basic_static_1",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4487,7 +4487,7 @@
             "UUID": 2069601193,
             "Parent UUID": 603258286,
             "Name": "basic_static_2",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4551,7 +4551,7 @@
             "UUID": 457781520,
             "Parent UUID": 603258286,
             "Name": "basic_static_3",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4615,7 +4615,7 @@
             "UUID": 1004584854,
             "Parent UUID": 603258286,
             "Name": "basic_static_4",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4679,7 +4679,7 @@
             "UUID": 1514767542,
             "Parent UUID": 603258286,
             "Name": "basic_static_5",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4743,7 +4743,7 @@
             "UUID": 2051127726,
             "Parent UUID": 603258286,
             "Name": "basic_static_6",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4807,7 +4807,7 @@
             "UUID": 380687171,
             "Parent UUID": 603258286,
             "Name": "basic_static_7",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4871,7 +4871,7 @@
             "UUID": 844989620,
             "Parent UUID": 603258286,
             "Name": "basic_static_8",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4935,7 +4935,7 @@
             "UUID": 1362969860,
             "Parent UUID": 603258286,
             "Name": "basic_static_9",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -4999,7 +4999,7 @@
             "UUID": 1869253772,
             "Parent UUID": 603258286,
             "Name": "undistractable_static_10",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5063,7 +5063,7 @@
             "UUID": 218724823,
             "Parent UUID": 603258286,
             "Name": "undistractable_static_11",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5127,7 +5127,7 @@
             "UUID": 718812466,
             "Parent UUID": 603258286,
             "Name": "basic_static_12",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5191,7 +5191,7 @@
             "UUID": 1300704784,
             "Parent UUID": 603258286,
             "Name": "basic_static_13",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5255,7 +5255,7 @@
             "UUID": 1854191734,
             "Parent UUID": 603258286,
             "Name": "basic_static_14",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5269,7 +5269,7 @@
                     "Position": [
                         -1.9580674171447754,
                         0,
-                        -54.288284301757813
+                        -54.288284301757812
                     ],
                     "Quaternion": [
                         0,
@@ -5319,7 +5319,7 @@
             "UUID": 228795966,
             "Parent UUID": 603258286,
             "Name": "basic_static_15",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5383,7 +5383,7 @@
             "UUID": 710991012,
             "Parent UUID": 603258286,
             "Name": "basic_patrol_16",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5447,7 +5447,7 @@
             "UUID": 1189078419,
             "Parent UUID": 603258286,
             "Name": "basic_static_17",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5511,7 +5511,7 @@
             "UUID": 1698913002,
             "Parent UUID": 603258286,
             "Name": "basic_static_18",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5575,7 +5575,7 @@
             "UUID": 49010642,
             "Parent UUID": 603258286,
             "Name": "basic_static_19",
-            "Active": false,
+            "Active": true,
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -5587,7 +5587,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -91.878311157226563,
+                        -91.878311157226562,
                         0,
                         137.60739135742188
                     ],
@@ -5653,7 +5653,7 @@
                     "Position": [
                         -15.725617408752441,
                         4.3104825019836426,
-                        64.182327270507813
+                        64.182327270507812
                     ],
                     "Quaternion": [
                         0,
@@ -5843,7 +5843,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        36.480361938476563,
+                        36.480361938476562,
                         -1.3192762136459351,
                         -63.539695739746094
                     ],
@@ -6421,7 +6421,7 @@
                     "Position": [
                         -4.3853559494018555,
                         -0.77932780981063843,
-                        13.242630004882813
+                        13.242630004882812
                     ],
                     "Quaternion": [
                         0.00037199535290710628,
@@ -6613,7 +6613,7 @@
                     "Position": [
                         -31.17762565612793,
                         -3.4515035152435303,
-                        128.08682250976563
+                        128.08682250976562
                     ],
                     "Quaternion": [
                         0,
@@ -6750,9 +6750,9 @@
                         0.34624898433685303
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        -3.1415927410125732,
+                        0.70713961124420166,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1,
@@ -7003,7 +7003,7 @@
                         0,
                         0.98829638957977295,
                         0,
-                        0.15254592895507813
+                        0.15254592895507812
                     ],
                     "RotationEditor": [
                         0,
@@ -7018,8 +7018,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7065,7 +7065,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164063,
+                        0.92880630493164062,
                         0,
                         0.37056559324264526
                     ],
@@ -7082,8 +7082,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7146,8 +7146,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7193,7 +7193,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164063,
+                        0.92880630493164062,
                         0,
                         0.37056559324264526
                     ],
@@ -7274,8 +7274,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7338,8 +7338,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7402,8 +7402,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7449,7 +7449,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164063,
+                        0.92880630493164062,
                         0,
                         0.37056559324264526
                     ],
@@ -7594,8 +7594,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7658,8 +7658,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7722,8 +7722,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7786,8 +7786,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7850,8 +7850,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7902,9 +7902,9 @@
                         0.93332159519195557
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        -0,
+                        -0.27177038788795471,
+                        0.68448066711425781
                     ],
                     "Scale": [
                         1,
@@ -7914,8 +7914,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -7978,8 +7978,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -8042,8 +8042,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -8112,7 +8112,7 @@
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -8176,7 +8176,7 @@
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -8234,8 +8234,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
                     "Cast Shadows": true,
@@ -8341,7 +8341,7 @@
                     "Position": [
                         -8.2231903076171875,
                         -0.64049720764160156,
-                        -4.1796951293945313
+                        -4.1796951293945312
                     ],
                     "Quaternion": [
                         -0.0024560873862355947,
@@ -8646,7 +8646,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 412886320,
+                    "pointer": 352683424,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -9782,7 +9782,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -41.492507934570313,
+                        -41.492507934570312,
                         -3.608570114010945e-05,
                         56.977767944335938
                     ],
@@ -9979,7 +9979,7 @@
                     "Position": [
                         12.414186477661133,
                         0,
-                        -17.509658813476563
+                        -17.509658813476562
                     ],
                     "Quaternion": [
                         0,
@@ -10118,7 +10118,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 373943216,
+                    "pointer": 352679320,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -11123,7 +11123,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -3.9000015258789063,
+                        -3.9000015258789062,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -15661,7 +15661,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -15730,7 +15730,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16387,7 +16387,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16456,7 +16456,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16525,7 +16525,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
