@@ -359,14 +359,20 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Trigger1")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger2")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger3")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
@@ -430,6 +436,9 @@ public class Player : RagnarComponent
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(14);
         }
         // ===================================================================
+
+        if(other.gameObject.tag == "DialogueTrigger" || other.gameObject.tag == "CheckPoint")
+            InternalCalls.Destroy(other.gameObject);
     }
 
     public void OnTriggerExit(Rigidbody other)
