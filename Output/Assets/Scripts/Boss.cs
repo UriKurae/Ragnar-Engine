@@ -49,6 +49,9 @@ public class Boss : RagnarComponent
 	GameObject[] players = new GameObject[3];
 	public GameObject[] colliders;
 
+	// All-purpose mechanics
+	private bool inmunity = false;
+
 	// Phase 2 mechanics
 	int indexPlayerTarget;
 	bool jumping = false;
@@ -162,8 +165,9 @@ public class Boss : RagnarComponent
 				Phase4();
 			}
 		}
-        else 
+        else
 		{
+			inmunity = true;
 			if (animationComponent.HasFinished())
 			{
 				hitted = false;
@@ -273,30 +277,37 @@ public class Boss : RagnarComponent
 				animationComponent.PlayAnimation("WalkNormal");
 				agent.MoveTo(destination);
 
-				if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f) phase2Location = true;
+				if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f)
+				{
+					Debug.Log("INmunity false phase 2");
+					inmunity = false;
+					phase2Location = true;
+				}
 			}
 		}
 		else
 		{
-			if (PerceptionCone(90))
+			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
+			if (PerceptionCone(90) && !jumping)
 			{
-				Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
 				Vector3 area = new Vector3(1.0f, 1.0f, 1.0f);
-				if (!jumping)
-				{
-					for (int i = 0; i < players.Length; ++i)
-					{
-						if (Math.Abs(players[i].transform.globalPosition.magnitude) <= Math.Abs(area.magnitude) &&
-							Math.Abs(players[i].transform.globalPosition.magnitude) < Math.Abs(jumpTo.magnitude))
-						{
-							jumpTo = players[i].transform.globalPosition;
-							indexPlayerTarget = i;
-						}
-					}
-					agent.speed = 10.0f;
-				}
 
-				if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
+				for (int i = 0; i < players.Length; ++i)
+				{
+                    if (Math.Abs(players[i].transform.globalPosition.magnitude) <= Math.Abs(area.magnitude) &&
+                        Math.Abs(players[i].transform.globalPosition.magnitude) < Math.Abs(jumpTo.magnitude))
+                    {
+                        jumpTo = players[i].transform.globalPosition;
+                        indexPlayerTarget = i;
+						agent.MoveTo(jumpTo);
+						jumping = true;
+						agent.speed = 50.0f;
+					}
+				}
+			}
+            else if (jumping)
+            {
+				if (players[indexPlayerTarget] != null)
 				{
 					agent.MoveTo(jumpTo);
 					if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
@@ -310,8 +321,7 @@ public class Boss : RagnarComponent
 					}
 				}
 			}
-
-			Patrol();
+			if (!jumping) Patrol();
 		}
 	}
 
@@ -326,7 +336,12 @@ public class Boss : RagnarComponent
             animationComponent.PlayAnimation("WalkNormal");
             agent.MoveTo(destination);
 
-            if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 2.0f) phase3Location = true;
+			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 2.0f)
+			{
+				Debug.Log("INmunity false phase 3");
+				inmunity = false;
+				phase3Location = true;
+			}
 
             shieldInmunity = true;
 		}
@@ -437,15 +452,12 @@ public class Boss : RagnarComponent
 		}
 		else
 		{
+			players[0].GetComponent<Player>().stunned = true;
 			if (!grabbedPaul)
 			{
 				FollowPlayer();
 				float magnitude = Math.Abs((players[0].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude));
-				if (magnitude <= 1.5f)
-				{
-					grabbedPaul = true;
-					players[0].GetComponent<Player>().stunned = true;
-				}
+				if (magnitude <= 1.5f) grabbedPaul = true;
 			}
 			else
 			{
@@ -470,7 +482,11 @@ public class Boss : RagnarComponent
 					agent.CalculatePath(newBossLocation);
 					agent.MovePath();
 					if (Math.Abs((newBossLocation.magnitude - gameObject.transform.globalPosition.magnitude)) <= 1.0f)
+                    {
+						players[0].GetComponent<Player>().stunned = false;
 						finishedCinematic = true;
+						inmunity = false;
+					}
 				}
 
 				if (Math.Abs((throwingLocation.magnitude - gameObject.transform.globalPosition.magnitude)) <= 1.0f)
@@ -485,7 +501,6 @@ public class Boss : RagnarComponent
 					players[0].GetComponent<Rigidbody>().ApplyCentralImpulse(endDirection * 50.0f);
 					throwedPaul = true;
 					animationComponent.PlayAnimation("WalkAngry");
-					players[0].GetComponent<Player>().stunned = false;
 				}
 			}
 		}
@@ -561,12 +576,15 @@ public class Boss : RagnarComponent
 
 	private void Patrol()
 	{
-		agent.MovePath();
 		if (!bossStop && Math.Abs((waypoints[destPoint].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude)) < 1.5f)
 		{
 			Debug.Log("Stopped");
 			bossStop = true;
 			animationComponent.PlayAnimation("Shield");
+		}
+		else if (!bossStop)
+		{
+			agent.MovePath();
 		}
 
 		if (bossStop)
@@ -609,7 +627,7 @@ public class Boss : RagnarComponent
 	}
 	public void GetBackstabbed()
 	{
-		if (!shieldInmunity)
+		if (!shieldInmunity && !inmunity)
 		{
 			if (state == BossState.PHASE4)
             {
