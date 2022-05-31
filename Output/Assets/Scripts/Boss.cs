@@ -56,6 +56,7 @@ public class Boss : RagnarComponent
 	int indexPlayerTarget;
 	bool jumping = false;
 	bool phase2Location = false;
+	bool playerDead = false;
 
 	// Phase 3 mechanics
 
@@ -269,47 +270,44 @@ public class Boss : RagnarComponent
 		// this instakills
 		if (phase2Location == false)
 		{
-			if (animationComponent.HasFinished())
+			// Move to new location as soon as phase 2 starts
+			Vector3 destination = waypoints[2].transform.globalPosition;
+
+			if (animationComponent.HasFinished()) animationComponent.PlayAnimation("WalkNormal");
+			agent.MoveTo(destination);
+
+			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f)
 			{
-				// Move to new location as soon as phase 2 starts
-				Vector3 destination = waypoints[2].transform.globalPosition;
-
-				animationComponent.PlayAnimation("WalkNormal");
-				agent.MoveTo(destination);
-
-				if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f)
-				{
-					Debug.Log("INmunity false phase 2");
-					inmunity = false;
-					phase2Location = true;
-				}
+				Debug.Log("INmunity false phase 2");
+				inmunity = false;
+				phase2Location = true;
 			}
+
 		}
 		else
 		{
-			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
 			if (PerceptionCone(90) && !jumping)
 			{
-				Vector3 area = new Vector3(1.0f, 1.0f, 1.0f);
+				float furthest = 1000.0f;
 
 				for (int i = 0; i < players.Length; ++i)
 				{
-                    if (Math.Abs(players[i].transform.globalPosition.magnitude) <= Math.Abs(area.magnitude) &&
-                        Math.Abs(players[i].transform.globalPosition.magnitude) < Math.Abs(jumpTo.magnitude))
-                    {
-                        jumpTo = players[i].transform.globalPosition;
-                        indexPlayerTarget = i;
-						agent.MoveTo(jumpTo);
-						jumping = true;
-						agent.speed = 50.0f;
+					// Calculate closest player
+					float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
+					if (distance < furthest)
+					{
+						indexPlayerTarget = i;
+						furthest = distance;
 					}
 				}
+				jumping = true;
+				agent.speed = 25.0f;
 			}
-            else if (jumping)
-            {
+			else if (jumping && !playerDead)
+			{
 				if (players[indexPlayerTarget] != null)
 				{
-					agent.MoveTo(jumpTo);
+					agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
 					if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
 					{
 						// Play sweep attack animation
@@ -318,6 +316,7 @@ public class Boss : RagnarComponent
 
 						// Hit player, lower his HP
 						players[indexPlayerTarget].GetComponent<Player>().GetHit(100);
+						playerDead = true;
 					}
 				}
 			}
@@ -566,12 +565,10 @@ public class Boss : RagnarComponent
 
 	public void GotoNextPoint()
 	{
-		//gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-		//gameObject.GetComponent<Animation>().PlayAnimation("WalkNormal");
-
-		//Debug.Log(waypoints[destPoint].transform.globalPosition.ToString());
+		Debug.Log("Before" + destPoint.ToString());
 		destPoint = (destPoint + 1) % waypoints.Length;
 		agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
+		Debug.Log("After"+ destPoint.ToString());
 	}
 
 	private void Patrol()
