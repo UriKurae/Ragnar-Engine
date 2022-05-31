@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 366160448,
+                    "pointer": 401004912,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -125,120 +125,6 @@
                     ],
                     "Intensity": 4,
                     "Shadows": true
-                }
-            ]
-        },
-        {
-            "UUID": 2128337088,
-            "Parent UUID": 417171234,
-            "Name": "cameraController",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -54.565200805664062,
-                        0,
-                        180.99156188964844
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.34137937426567078,
-                        0,
-                        0.93992561101913452
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0.69676804542541504,
-                        -0
-                    ],
-                    "Scale": [
-                        1.0000262260437012,
-                        1,
-                        1.0000262260437012
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 360238450,
-            "Parent UUID": 2128337088,
-            "Name": "Camera",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        55,
-                        -50
-                    ],
-                    "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
-                    ],
-                    "RotationEditor": [
-                        0.78539824485778809,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1.4142104387283325,
-                        1.0000002384185791,
-                        1.0000004768371582
-                    ]
-                },
-                {
-                    "Near Plane": 1,
-                    "Far Plane": 155,
-                    "Vertical Fov": 0.41723766922950745,
-                    "Horizontal Fov": 0.78539818525314331,
-                    "Camera Pos": [
-                        -86.653160095214844,
-                        55,
-                        142.64454650878906
-                    ],
-                    "Type": 3,
-                    "Zoom": -20,
-                    "Zoom Min": -20,
-                    "Zoom Max": 30,
-                    "Zoom Speed": 1,
-                    "Lock": false,
-                    "Free Movement": true,
-                    "Default Target Pos": [
-                        -54.565200805664062,
-                        0,
-                        180.99156188964844
-                    ],
-                    "Movement Speed": 0.25,
-                    "Rotation Speed": 0.80000001192092896,
-                    "Radius": 20,
-                    "Horizontal Angle": 39.921871185302734,
-                    "Shake Strength": 0.60000002384185791,
-                    "Shake Duration": 1,
-                    "Shake Smooth": 0,
-                    "Limits": [
-                        -90,
-                        -50,
-                        60,
-                        195
-                    ]
                 }
             ]
         },
@@ -322,7 +208,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -548,7 +434,7 @@
                     "Position": [
                         -15.136451721191406,
                         32.360797882080078,
-                        -2.4103469848632812
+                        -2.4103469848632813
                     ],
                     "Quaternion": [
                         0,
@@ -592,6 +478,2749 @@
                         0
                     ],
                     "Color Multiplier": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1281819882,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -21.514949798583984,
+                        -31.36082649230957,
+                        1.017143726348877
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.70266258716583252,
+                        0,
+                        0.71152323484420776
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 416823155,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -21.088897705078125,
+                        -32.360797882080078,
+                        -3.9753665924072266
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.74694794416427612,
+                        0,
+                        0.66488254070281982
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000013113021851,
+                        1,
+                        1.0000013113021851
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 479830160,
+            "Parent UUID": 416823155,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.34140777587890625,
+                        1.5499999523162842,
+                        0.39225006103515625
+                    ],
+                    "Quaternion": [
+                        -0,
+                        -0.13917320966720581,
+                        0,
+                        0.99026811122894287
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000003576278687,
+                        1,
+                        1.0000003576278687
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 966132845,
+            "Parent UUID": 416823155,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1715067656,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -64.691673278808594,
+                        -31.360771179199219,
+                        110.08879089355469
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.09573037177324295,
+                        0,
+                        0.99540728330612183
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1504495467,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -69.098800659179688,
+                        -31.360797882080078,
+                        110.92344665527344
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.12986227869987488,
+                        0,
+                        0.99153214693069458
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1251327736,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -66.919227600097656,
+                        -29.432064056396484,
+                        110.42192077636719
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.11953622102737427,
+                        0,
+                        0.99282985925674438
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 906164910,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -24.476924896240234,
+                        -32.360771179199219,
+                        180.96743774414063
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.1474878191947937,
+                        0,
+                        0.98906385898590088
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1004539383,
+            "Parent UUID": 906164910,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13917309045791626,
+                        0,
+                        0.99026811122894287
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1349650680,
+            "Parent UUID": 906164910,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1998503074,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -29.127017974853516,
+                        -32.360763549804688,
+                        178.854248046875
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.3011021614074707,
+                        0,
+                        0.95359200239181519
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000038146972656,
+                        1,
+                        1.0000038146972656
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 2058307513,
+            "Parent UUID": 1998503074,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -6.103515625e-05,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.019271541386842728,
+                        0,
+                        0.99981433153152466
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999839067459106,
+                        1,
+                        0.99999839067459106
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 250713588,
+            "Parent UUID": 1998503074,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1467414355,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        16.663347244262695,
+                        -31.360797882080078,
+                        54.643047332763672
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1642850334,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        15.756680488586426,
+                        -32.360797882080078,
+                        58.261974334716797
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.51968169212341309,
+                        0,
+                        0.85435998439788818
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1788497466,
+            "Parent UUID": 1642850334,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13917309045791626,
+                        0,
+                        0.99026811122894287
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 40707980,
+            "Parent UUID": 1642850334,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1503584552,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        59.102447509765625,
+                        -31.360797882080078,
+                        1.4352602958679199
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.88080531358718872,
+                        0,
+                        -0.47347864508628845
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000060796737671,
+                        1,
+                        1.0000060796737671
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1254675658,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -17.497509002685547,
+                        -31.360797882080078,
+                        -23.764217376708984
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.42029997706413269,
+                        0,
+                        0.90738523006439209
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999988079071045,
+                        1,
+                        0.99999988079071045
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 703898880,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -19.470832824707031,
+                        -32.360797882080078,
+                        -20.125362396240234
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.38955366611480713,
+                        0,
+                        0.92100375890731812
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 778184487,
+            "Parent UUID": 703898880,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        -9.5367431640625e-07
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.016113521531224251,
+                        0,
+                        0.9998701810836792
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000002384185791,
+                        1,
+                        1.0000002384185791
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1096143594,
+            "Parent UUID": 703898880,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1465751525,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        29.419363021850586,
+                        -32.360797882080078,
+                        -3.7210450172424316
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.16848230361938477,
+                        0,
+                        0.98570466041564941
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1594132649,
+            "Parent UUID": 1465751525,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        1.3083982467651367,
+                        1.5499999523162842,
+                        -0.40842199325561523
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.63008898496627808,
+                        0,
+                        0.7765229344367981
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1916338637,
+            "Parent UUID": 1465751525,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2086350128,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        14.510209083557129,
+                        -32.360797882080078,
+                        2.3582985401153564
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.81578612327575684,
+                        0,
+                        0.57835370302200317
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000007152557373,
+                        1,
+                        1.0000007152557373
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 17050864,
+            "Parent UUID": 2086350128,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.30061423778533936,
+                        1.5499999523162842,
+                        -0.56835287809371948
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.24086621403694153,
+                        0,
+                        0.97055834531784058
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999767541885376,
+                        1,
+                        0.99999862909317017
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 333896035,
+            "Parent UUID": 2086350128,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 919916039,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        13.658096313476563,
+                        -31.360797882080078,
+                        -34.508419036865234
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.061112251132726669,
+                        0,
+                        0.9981309175491333
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999815225601196,
+                        1,
+                        0.99999815225601196
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1141725432,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        18.711584091186523,
+                        -31.360776901245117,
+                        -34.627609252929688
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.13466906547546387,
+                        0,
+                        0.9908907413482666
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1222696462,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        23.545059204101563,
+                        -32.360797882080078,
+                        -36.015644073486328
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.071216076612472534,
+                        0,
+                        0.99746090173721313
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1308956881,
+            "Parent UUID": 1222696462,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        1.7947330474853516,
+                        2.0430936813354492,
+                        -0.46183395385742188
+                    ],
+                    "Quaternion": [
+                        0.0054600085131824017,
+                        0.093601822853088379,
+                        0.12663748860359192,
+                        0.98750787973403931
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999022483825684,
+                        0.99999904632568359,
+                        1.0000021457672119
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1658941648,
+            "Parent UUID": 1222696462,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 384073015,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        26.897148132324219,
+                        -31.360776901245117,
+                        -38.237712860107422
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.48892754316329956,
+                        0,
+                        0.87232440710067749
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000001192092896,
+                        1,
+                        1.0000001192092896
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 228244131,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        16.324857711791992,
+                        -30.407392501831055,
+                        -34.553585052490234
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 313181751,
+            "Parent UUID": 228244131,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.15352660417556763,
+                        0,
+                        0.98814451694488525
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 818630211,
+            "Parent UUID": 228244131,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 420549748,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -39.551872253417969,
+                        -31.360797882080078,
+                        41.313167572021484
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.47526928782463074,
+                        0,
+                        0.8798404335975647
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000002384185791,
+                        1,
+                        1.0000002384185791
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1034363990,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -39.528343200683594,
+                        -30.428661346435547,
+                        41.259975433349609
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.39518898725509644,
+                        0,
+                        0.91859984397888184
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000001192092896,
+                        1,
+                        1.0000001192092896
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1450279844,
+            "Parent UUID": 1034363990,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 93614415,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -42.321479797363281,
+                        -32.360797882080078,
+                        56.790077209472656
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.38693317770957947,
+                        0,
+                        0.9221077561378479
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 200273787,
+            "Parent UUID": 93614415,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13917309045791626,
+                        0,
+                        0.99026811122894287
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 586670337,
+            "Parent UUID": 93614415,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 290502038,
+            "Parent UUID": 1328822411,
+            "Name": "box2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -42.346054077148438,
+                        -32.360797882080078,
+                        59.951503753662109
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.18943385779857635,
+                        0,
+                        0.98189347982406616
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.000001072883606,
+                        1,
+                        1.000001072883606
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 722082617,
+            "Parent UUID": 290502038,
+            "Name": "CajaTop_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.5499999523162842,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.17004643380641937,
+                        0,
+                        0.9854360818862915
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999874830245972,
+                        1,
+                        0.99999874830245972
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaTop_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1234075451,
+            "Parent UUID": 290502038,
+            "Name": "CajaBottom_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.64999997615814209,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/GeneralProps\/box2_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box_2__CajaBottom_low.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1252860033,
+            "Parent UUID": 1328822411,
+            "Name": "box",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        8.2441844940185547,
+                        -31.360797882080078,
+                        27.850244522094727
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.031976982951164246,
+                        0,
+                        0.9994887113571167
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Color.tga",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level2\/Textures\/box_Normal.tga",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/GeneralProps\/box__box.fbx",
+                    "Active": true
                 }
             ]
         },
@@ -1536,7 +4165,7 @@
                     "Position": [
                         0.14367350935935974,
                         3.3142125606536865,
-                        -67.793533325195312
+                        -67.793533325195313
                     ],
                     "Quaternion": [
                         0,
@@ -1665,7 +4294,7 @@
                     "Active": true,
                     "Position": [
                         48.314388275146484,
-                        2.7870254516601562,
+                        2.7870254516601563,
                         -21.273065567016602
                     ],
                     "Quaternion": [
@@ -2509,7 +5138,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.3946304321289062,
+                        -7.3946304321289063,
                         5.3251314163208008,
                         85.330413818359375
                     ],
@@ -2704,7 +5333,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -68.188247680664062,
+                        -68.188247680664063,
                         6.4703893661499023,
                         90.2564697265625
                     ],
@@ -3621,7 +6250,7 @@
                     "Position": [
                         150.14437866210938,
                         0,
-                        -78.662551879882812
+                        -78.662551879882813
                     ],
                     "Quaternion": [
                         0,
@@ -3922,7 +6551,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        23.758987426757812,
+                        23.758987426757813,
                         1.2000030279159546,
                         -37.744167327880859
                     ],
@@ -4658,7 +7287,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -79.336990356445312,
+                        -79.336990356445313,
                         1.4033336639404297,
                         152.34800720214844
                     ],
@@ -4796,7 +7425,7 @@
                         0,
                         0.98829638957977295,
                         0,
-                        0.15254592895507812
+                        0.15254592895507813
                     ],
                     "RotationEditor": [
                         0,
@@ -4854,12 +7483,12 @@
                     "Active": true,
                     "Position": [
                         -70.791511535644531,
-                        4.1243362426757812,
+                        4.1243362426757813,
                         189.56086730957031
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164062,
+                        0.92880630493164063,
                         0,
                         0.37056559324264526
                     ],
@@ -4989,7 +7618,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164062,
+                        0.92880630493164063,
                         0,
                         0.37056559324264526
                     ],
@@ -5509,7 +8138,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.92880630493164062,
+                        0.92880630493164063,
                         0,
                         0.37056559324264526
                     ],
@@ -6935,7 +9564,7 @@
                     "Position": [
                         -1.9580674171447754,
                         0,
-                        -54.288284301757812
+                        -54.288284301757813
                     ],
                     "Quaternion": [
                         0,
@@ -7258,7 +9887,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -91.878311157226562,
+                        -91.878311157226563,
                         0,
                         137.60739135742188
                     ],
@@ -7778,7 +10407,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -36.811843872070312,
+                        -36.811843872070313,
                         3.0479776859283447,
                         48.375698089599609
                     ],
@@ -8233,7 +10862,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -65.100296020507812,
+                        -65.100296020507813,
                         3.4451334476470947,
                         157.34495544433594
                     ],
@@ -8560,7 +11189,7 @@
                     "Position": [
                         -8.2231903076171875,
                         -0.64049720764160156,
-                        -4.1796951293945312
+                        -4.1796951293945313
                     ],
                     "Quaternion": [
                         -0.0024560873862355947,
@@ -8833,7 +11462,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8866,7 +11495,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 366163488,
+                    "pointer": 400991080,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -8907,7 +11536,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9042,7 +11671,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9177,7 +11806,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9312,7 +11941,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9377,7 +12006,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9442,7 +12071,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9507,7 +12136,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -9642,7 +12271,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -10022,7 +12651,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -41.492507934570312,
+                        -41.492507934570313,
                         -3.608570114010945e-05,
                         56.977767944335938
                     ],
@@ -10219,7 +12848,7 @@
                     "Position": [
                         12.414186477661133,
                         0,
-                        -17.509658813476562
+                        -17.509658813476563
                     ],
                     "Quaternion": [
                         0,
@@ -10358,7 +12987,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 366151328,
+                    "pointer": 400997920,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -10403,7 +13032,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10538,7 +13167,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10673,7 +13302,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10743,7 +13372,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10813,7 +13442,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10883,7 +13512,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10953,7 +13582,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11023,7 +13652,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11093,7 +13722,7 @@
                     "buttonWidth": 732,
                     "buttonHeight": 495,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11158,7 +13787,7 @@
                     "buttonWidth": 732.5,
                     "buttonHeight": 492,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11262,7 +13891,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11332,7 +13961,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11397,7 +14026,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11462,7 +14091,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11527,7 +14156,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11662,7 +14291,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11797,7 +14426,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11932,7 +14561,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12067,7 +14696,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12132,7 +14761,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12197,7 +14826,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12262,7 +14891,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12327,7 +14956,7 @@
                     "buttonWidth": 513,
                     "buttonHeight": 214,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12392,7 +15021,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12457,7 +15086,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12522,7 +15151,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12587,7 +15216,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12652,7 +15281,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12722,7 +15351,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12787,7 +15416,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12852,7 +15481,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12987,7 +15616,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13052,7 +15681,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13117,7 +15746,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13182,7 +15811,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13247,7 +15876,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13312,7 +15941,7 @@
                     "buttonWidth": 123,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13377,7 +16006,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13442,7 +16071,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13507,7 +16136,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13572,7 +16201,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13637,7 +16266,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13707,7 +16336,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13777,7 +16406,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13847,7 +16476,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13912,7 +16541,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13977,7 +16606,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14042,7 +16671,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14146,7 +16775,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14216,7 +16845,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14286,7 +16915,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14356,7 +16985,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14426,7 +17055,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14491,7 +17120,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14556,7 +17185,7 @@
                     "buttonWidth": 75,
                     "buttonHeight": 75,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14660,7 +17289,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14725,7 +17354,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14790,7 +17419,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14925,7 +17554,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14990,7 +17619,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15125,7 +17754,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15260,7 +17889,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15325,7 +17954,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15460,7 +18089,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15525,7 +18154,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15660,7 +18289,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15725,7 +18354,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15811,7 +18440,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15897,7 +18526,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15983,7 +18612,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16010,7 +18639,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16053,7 +18682,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16080,7 +18709,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16123,7 +18752,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16148,7 +18777,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16234,7 +18863,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16259,7 +18888,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16345,7 +18974,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16370,7 +18999,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16456,7 +19085,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16481,7 +19110,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16567,7 +19196,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16723,7 +19352,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16750,7 +19379,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16793,7 +19422,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16820,7 +19449,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16863,7 +19492,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16890,7 +19519,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -16933,7 +19562,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17068,7 +19697,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17203,7 +19832,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17338,7 +19967,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17473,7 +20102,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17608,7 +20237,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17743,7 +20372,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17878,7 +20507,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18013,7 +20642,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18148,7 +20777,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18283,7 +20912,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18418,7 +21047,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18553,7 +21182,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18688,7 +21317,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18823,7 +21452,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -18958,7 +21587,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19093,7 +21722,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19228,7 +21857,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19363,7 +21992,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19498,7 +22127,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19633,7 +22262,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19768,7 +22397,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -19903,7 +22532,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20038,7 +22667,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20173,7 +22802,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1353,
-                    "lastButtonHeight": 691.5,
+                    "lastButtonHeight": 609.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20453,6 +23082,120 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2128337088,
+            "Parent UUID": 417171234,
+            "Name": "cameraController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -39.693775177001953,
+                        0,
+                        171.5760498046875
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.84841042757034302,
+                        0,
+                        -0.52933895587921143
+                    ],
+                    "RotationEditor": [
+                        -3.1415927410125732,
+                        -1.1156424283981323,
+                        -3.1415927410125732
+                    ],
+                    "Scale": [
+                        1.0000261068344116,
+                        1,
+                        1.0000261068344116
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        55,
+                        -50
+                    ],
+                    "Quaternion": [
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
+                    ],
+                    "RotationEditor": [
+                        0.78539824485778809,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1.4142102003097534,
+                        1.0000002384185791,
+                        1.0000004768371582
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 155,
+                    "Vertical Fov": 0.36894726753234863,
+                    "Horizontal Fov": 0.78539818525314331,
+                    "Camera Pos": [
+                        5.2170639038085938,
+                        55,
+                        193.556640625
+                    ],
+                    "Type": 3,
+                    "Zoom": -20,
+                    "Zoom Min": -20,
+                    "Zoom Max": 30,
+                    "Zoom Speed": 1,
+                    "Lock": false,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -39.693775177001953,
+                        0,
+                        171.5760498046875
+                    ],
+                    "Movement Speed": 0.25,
+                    "Rotation Speed": 0.80000001192092896,
+                    "Radius": 20,
+                    "Horizontal Angle": 243.92161560058594,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0,
+                    "Limits": [
+                        -90,
+                        -50,
+                        60,
+                        195
+                    ]
                 }
             ]
         }
