@@ -99,6 +99,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
 	mono_add_internal_call("RagnarEngine.InternalCalls::RequestDamageFeedback", RequestDamageFeedback);
+	mono_add_internal_call("RagnarEngine.InternalCalls::RequestScreenRectangle", RequestScreenRectangle);
+	mono_add_internal_call("RagnarEngine.InternalCalls::EndRequestScreenRectangle", EndRequestScreenRectangle);
 
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);

@@ -844,6 +844,16 @@ void RequestDamageFeedback()
 	app->renderer3D->RequestDamageFeedback();
 }
 
+void RequestScreenRectangle(MonoObject* color)
+{
+	app->renderer3D->RequestScreenRectangle(app->moduleMono->UnboxQuat(color).CastToFloat4());
+}
+
+void EndRequestScreenRectangle()
+{
+	app->renderer3D->EndRequestScreenRectangle();
+}
+
 // Dialogue System ======================================
 MonoString* GetDialogueLine()
 {
