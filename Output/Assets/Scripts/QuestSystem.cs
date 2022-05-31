@@ -70,11 +70,14 @@ public class QuestSystem : RagnarComponent
 	public bool showCompleted;
 	public Vector3 position;
 
-	private int captainsDefeated;
-
 	private string activeQuests;
 	private string completedQuests;
 
+	public GameObject currentScene;
+	private int level = 0;
+
+	public bool damageRecieved = false;
+	public bool hasKilledEnemies = false;
 
 	// Easing
 	float actualDt = 0;
@@ -152,6 +155,13 @@ public class QuestSystem : RagnarComponent
 		completedQuestList = new List<Quest>();
 		activeQuestList = new List<Quest>();
 
+		currentScene = GameObject.Find("LevelManager");
+		level = currentScene.GetComponent<Level_1>().level;
+		if (level == 0)
+			level = currentScene.GetComponent<Level_2>().level;
+		if (level == 0)
+			level = currentScene.GetComponent<Level_3>().level;
+
 		activeQuestNames = GameObject.Find("Titulo Activas");
 		completedQuestNames = GameObject.Find("Titulo Completadas");
 		questDescription = GameObject.Find("Descripcion");
@@ -185,18 +195,71 @@ public class QuestSystem : RagnarComponent
 		questBc.isActive = false;
 		questBord.isActive = false;
 
-		CreateQuest(0, "Elimina a los 3 capitanes", "Elimina a los 3 capitanes", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(1, "Sal de la cantera/cañon", "Sal de la cantera/cañon", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(2, "Consigue la llave para abrir el muro", "Consigue la llave para abrir el muro", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(3, "Reunete con Jessica y Stilgard en la plaza", "Reunete con Jessica y Stilgard en la plaza", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(4, "Llega al palacio", "Llega al palacio", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(5, "Busca como entrar", "Busca como entrar", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(6, "Derrota a Rabban", "Derrota a Rabban", QuestState.ACTIVE, QuestType.MAIN);
-
-		captainsDefeated = 0;
+		switch (level)
+        {
+			case 1:
+				//Main Quests
+				CreateQuest(0, "Ábrete paso a través del cañón", "Encuéntrate con Chani al final del cañón", QuestState.ACTIVE, QuestType.MAIN);
+				//Secondaries Quests
+				CreateQuest(1, "Intocable", "Completa el nivel sin recibir daño", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(2, "Pacifista", "Completa el nivel sin matar a nadie", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(3, "Azotador de mentes", "Controla mentalmente a tres enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(4, "Pilla esta!", "Acaba con 5 enemigos utilizando el cuchillo arrojadizo", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(5, "Habrá sido el viento", "Distrae a 3 enemigos con una sola piedra", QuestState.ACTIVE, QuestType.SECONDARY);
+				//Auxiliar quest (Solve a Bug)
+				CreateQuest(6, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
+				break;
+			case 2:
+				//Main Quests
+				CreateQuest(7, "Visita no grata", "Infiltrate en Arrakeen", QuestState.ACTIVE, QuestType.MAIN);
+				CreateQuest(8, "La Reunión", "Encuentra a Stilgar y Lady Jessica", QuestState.ACTIVE, QuestType.MAIN);
+				CreateQuest(9, "Cambio de planes", "Rescata a Stilgar de los soldados Harkonnen", QuestState.ACTIVE, QuestType.MAIN);
+				//Secondaries Quests
+				CreateQuest(10, "Intocable", "Completa el nivel sin recibir daño", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(11, "Pacifista", "Completa el nivel sin matar a nadie", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(12, "Desde las sombras", "Acaba con 3 enemigos mientras estás camuflado", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(13, "Detrás de ti", "Usa el Hunter-seeker contra 5 enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(14, "Toque especial", "Aturde a 2 enemigos con una sola granada", QuestState.ACTIVE, QuestType.SECONDARY);
+				//Auxiliar quest (Solve a Bug)
+				CreateQuest(15, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
+				break;
+			case 3:
+				//Main Quests
+				CreateQuest(16, "De nuevo en casa", "Rescata a Lady Jessica de los Harkonnen", QuestState.ACTIVE, QuestType.MAIN);
+				CreateQuest(17, "Yo soy la venganza", "Acaba con Rabban", QuestState.ACTIVE, QuestType.MAIN);
+				//Secondaries Quests
+				CreateQuest(18, "Intocable", "Completa el nivel sin recibir daño", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(19, "Trabajo en equipo", "Mata 1 enemigo con cada personaje", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(20, "Mano fácil", "Gasta toda la munición de la Stunner", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(21, "Atrapado", "Consigue que 3 enemigos caigan en tus trampas", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(22, "Sirena", "Atrae 2 enemigos con un uso del silbido", QuestState.ACTIVE, QuestType.SECONDARY);
+				//Auxiliar quest (Solve a Bug)
+				CreateQuest(23, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
+				break;
+        }
 	}
 	public void Update()
 	{
+		// Logic from quests
+		switch (level)
+        {
+			case 1:
+				if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
+				{
+					Quest questToComplete = GetQuestByID(5);
+					CompleteQuest(questToComplete);
+				} 
+				break;
+			case 2:
+				//TODO
+				break;
+			case 3:
+				//TODO
+				break;
+		}
+
+
+		// Drawing
 		float xCorner = (InternalCalls.GetRegionGame().x / 2);
 		float yCorner = (InternalCalls.GetRegionGame().y / 2);
 
@@ -394,8 +457,5 @@ public class QuestSystem : RagnarComponent
 				
 				break;
 		}
-
-		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN && captainsDefeated < 3) ++captainsDefeated;
-		if (captainsDefeated == 3 && GetQuestByName("Elimina a los 3 capitanes").GetQuestState() == QuestState.ACTIVE) CompleteQuest(GetQuestByName("Elimina a los 3 capitanes"));
 	}
 }

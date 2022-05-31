@@ -9,6 +9,7 @@ public class Level_3 : RagnarComponent
     public bool runGame = true;
     public UIButton chrono;
     public Vector3 hitPoint;
+    public int level = 3;
 
     private GameObject SceneAudio;
     private Transform camera;

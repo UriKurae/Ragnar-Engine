@@ -11,6 +11,7 @@ public class Level_2 : RagnarComponent
     public UIButton chrono;
     public Vector3 hitPoint;
     private Transform camera;
+    public int level = 2;
     public void Start()
 	{
         Input.SetEagleCursor(true);
