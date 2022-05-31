@@ -36,8 +36,8 @@ public class BackStab : RagnarComponent
         {
 			backstabed = true;
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
-			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
-			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
+			//Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
+			//player.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy" && (selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.DEATH))
 			{
                 selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;

@@ -35,7 +35,7 @@ public class Rock : RagnarComponent
 			relativePos.y = hitPoint.y;
 			pos.y -= 1.5f;
 			Vector3 newPos = pos + relativePos.normalized * radius;
-			pos.y += 1.5f;
+			pos.y += 1.31f;
 			relativePos = newPos - pos;
         }
 
@@ -43,7 +43,7 @@ public class Rock : RagnarComponent
 	}
 	public void Update()
 	{
-		goRB.ApplyVelocity(relativePos.normalized * 25);
+		goRB.ApplyVelocity(relativePos.normalized * 30);
 
 		if (pendingToDelete)
 		{
@@ -64,7 +64,7 @@ public class Rock : RagnarComponent
 			goRB.SetAsStatic();
 
 			GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
-			sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
+			sound.GetComponent<Rigidbody>().SetRadiusSphere(7.0f);
 			//sound.transform.globalPosition = gameObject.transform.globalPosition;
 			sound.GetComponent<SoundAreaManager>().stablishedTimer = 2f;
 

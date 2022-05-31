@@ -31,8 +31,8 @@ public class BackStabEnemy : RagnarComponent
 		if (selectedEnemy != null && backstabed == false)
 		{
 			backstabed = true;
-			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
-			enemyPlayer.GetComponent<Rigidbody>().SetBodyPosition(behind);
+			//Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
+			//enemyPlayer.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
 			{
 				selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;

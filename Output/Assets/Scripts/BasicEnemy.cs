@@ -349,7 +349,7 @@ public class BasicEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 audioComponent.PlayClip("EBASIC_SCREAM");
-                Stun(5f);
+                Stun(7f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
             }

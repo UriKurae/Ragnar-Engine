@@ -201,7 +201,7 @@ public class PlayerManager : RagnarComponent
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (players.Length != 1 && playableCharacter == characters[1] && (playableCharacter.state == State.ABILITY_4)))
         {
             radius = 0f;
-            if (playableCharacter == characters[0]) radius = 13f;
+            if (playableCharacter == characters[0]) radius = 20.2f;
             else if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
