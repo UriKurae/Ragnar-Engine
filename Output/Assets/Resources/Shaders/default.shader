@@ -100,6 +100,7 @@ uniform vec3 interCol;
 uniform float interColIntensity;
 
 uniform float opacity;
+uniform float colorMultiplier;
 
 float pi = 3.14159265359;
 
@@ -243,7 +244,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	
 	
 	//return ((ambient + shadow.rgb * shadow.a) * (diffuse + specular)) * light.intensity;
-	return (mix(ambient, shadow.rgb, 1.15) * (diffuse + specular)) * light.intensity;
+	return (mix(ambient, shadow.rgb, 1) * (diffuse + specular)) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
@@ -344,7 +345,7 @@ void main()
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
 
-	fragColor = texture(tex, vTexCoords) * vec4(result, opacity);
+	fragColor = texture(tex, vTexCoords) * vec4(result, opacity) * colorMultiplier;
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
 	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1);
