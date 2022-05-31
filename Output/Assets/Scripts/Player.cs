@@ -372,18 +372,30 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Trigger1")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+
+            PlayerPause();
+
+            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(1);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
         if (other.gameObject.name == "Trigger2")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+
+            PlayerPause();
+
+            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(3);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
         if (other.gameObject.name == "Trigger3")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+
+            PlayerPause();
+
+            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(2);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
