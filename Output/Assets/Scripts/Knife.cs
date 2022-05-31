@@ -49,6 +49,10 @@ public class Knife : RagnarComponent
 			goRB.IgnoreCollision(player, true);
 			goRB.ApplyCentralForce(newForward * force);
 		}
+        else
+        {
+			pendingToDelete = true;
+        }
 
  		agent.hitPosition = player.transform.globalPosition;
 	}
