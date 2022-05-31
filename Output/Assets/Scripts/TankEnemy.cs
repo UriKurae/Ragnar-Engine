@@ -263,6 +263,10 @@ public class TankEnemy : RagnarComponent
                     animation.PlayAnimation("Dying");
                 }
             }
+            if (other.gameObject.tag == "Player")
+            {
+                Distraction(other.gameObject.transform.globalPosition);
+            }
             if (other.gameObject.name == "HunterSeeker")
             {
                 if (deathTimer == -1f)

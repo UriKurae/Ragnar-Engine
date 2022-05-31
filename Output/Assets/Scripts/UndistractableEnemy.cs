@@ -260,6 +260,10 @@ public class UndistractableEnemy : RagnarComponent
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
+            if (other.gameObject.tag == "Player")
+            {
+                Distraction(other.gameObject.transform.globalPosition);
+            }
             if (other.gameObject.name == "StunnerShot")
             {
                 if (deathTimer == -1f)

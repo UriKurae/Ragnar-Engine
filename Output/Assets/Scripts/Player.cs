@@ -146,7 +146,6 @@ public class Player : RagnarComponent
                                 action = Actions.CROUCH;
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
-                                IgnoreNewCollision();
                                 uiCrouch.isActive = true;
                             }
                             else if (action == Actions.CROUCH)
@@ -154,7 +153,6 @@ public class Player : RagnarComponent
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
-                                IgnoreNewCollision();
                                 uiCrouch.isActive = false;
                             }
                         }
@@ -244,17 +242,7 @@ public class Player : RagnarComponent
         else
             Time.timeScale = 1.0f;
     }
-    private void IgnoreNewCollision()
-    {
-        List<GameObject> pm = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemyGOs;
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
 
-        for (int j = 0; j < pm.Count; j++)
-        {
-            rb.IgnoreCollision(pm[j], true);
-        }
-
-    }
     private void PlayerPause()
     {
         agent.ClearPath();
