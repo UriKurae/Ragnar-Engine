@@ -165,14 +165,9 @@ public class DialogueManager : RagnarComponent
 	{
 		endDialogue = Dialogue.NextLine();
 		if (endDialogue == false)
-		{
             UpdateDialogue();
-            //Debug.Log(authId.ToString());
-        }
         else
-		{
             EndDialogue();
-        }
 	}
 
     void EndDialogue()

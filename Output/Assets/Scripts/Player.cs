@@ -352,6 +352,8 @@ public class Player : RagnarComponent
             SaveSystem.SaveScene();
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.tag == "Hidde")
             isHidden = true;
@@ -436,9 +438,6 @@ public class Player : RagnarComponent
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(14);
         }
         // ===================================================================
-
-        if(other.gameObject.tag == "DialogueTrigger" || other.gameObject.tag == "CheckPoint")
-            InternalCalls.Destroy(other.gameObject);
     }
 
     public void OnTriggerExit(Rigidbody other)
