@@ -42,7 +42,7 @@ public class AirEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    bool isDying = false;
 
     float initialSpeed;
 
@@ -56,6 +56,9 @@ public class AirEnemy : RagnarComponent
 
     GameObject[] childs;
     ParticleSystem deathPartSys;
+    public bool canLookOut = false;
+    int retardedFrames;
+
     public void Start()
     {
         // Get components
@@ -94,50 +97,21 @@ public class AirEnemy : RagnarComponent
         }
 
         deathPartSys.Pause();
+        retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
 
     public void Update()
     {
         if(state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
-            if (!pendingToDelete && deathTimer == -1)
+            if (!pendingToDelete && !isDying && !stunned)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!distracted && waypoints.Count != 0)
                 {
-                    if (!stunned)
-                    {
-                        if (!distracted && waypoints.Count != 0)
-                        {
-                            Patrol();
-                        }
-                        if (PerceptionCone())
-                        {
-                            coneTimer += Time.deltaTime;
-
-                            if (coneTimer >= coneMaxTime)
-                            {
-                                agents.speed = initialSpeed * 1.2f;
-                                Shoot();
-                            }
-                        }
-                        else
-                        {
-                            agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
-                            if (coneTimer < 0) coneTimer = 0;
-                        }
-                        if (!canShoot && shootCooldown >= 0)
-                        {
-                            Debug.Log(shootCooldown.ToString());
-                            shootCooldown -= Time.deltaTime;
-                            if (shootCooldown < 0)
-                            {
-                                shootCooldown = 0f;
-                                canShoot = true;
-                            }
-                        }
-                    }
+                    Patrol();
                 }
+                if (canLookOut)
+                    LookOut();
             }
 
             if (stunnedTimer >= 0)
@@ -160,14 +134,13 @@ public class AirEnemy : RagnarComponent
                 }
             }
         }
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animationComponent.HasFinished())
             {
                 audioComponent.PlayClip("EDRONE_DESTROYED");
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
@@ -179,10 +152,10 @@ public class AirEnemy : RagnarComponent
         {
             if (other.gameObject.name == "Knife")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
                     audioComponent.PlayClip("EDRONE_GETDAMAGE");
-                    deathTimer = 4f;
+                    isDying = true;
                     deathPartSys.Play();
                     animationComponent.PlayAnimation("Dying");
                 }
@@ -192,10 +165,10 @@ public class AirEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
                     audioComponent.PlayClip("EDRONE_GETDAMAGE");
-                    deathTimer = 2f;
+                    isDying = true;
                     deathPartSys.Play();
                     animationComponent.PlayAnimation("Dying");
                 }
@@ -228,6 +201,35 @@ public class AirEnemy : RagnarComponent
         }
     }
 
+    private void LookOut()
+    {
+        if (PerceptionCone())
+        {
+            coneTimer += Time.deltaTime * retardedFrames;
+
+            if (coneTimer >= coneMaxTime)
+            {
+                agents.speed = initialSpeed * 1.2f;
+                Shoot();
+            }
+        }
+        else
+        {
+            agents.speed = initialSpeed;
+            coneTimer -= Time.deltaTime * retardedFrames;
+            if (coneTimer < 0) coneTimer = 0;
+        }
+        if (!canShoot && shootCooldown >= 0)
+        {
+            shootCooldown -= Time.deltaTime * retardedFrames;
+            if (shootCooldown < 0)
+            {
+                shootCooldown = 0f;
+                canShoot = true;
+            }
+        }
+        canLookOut = false;
+    }
     private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;

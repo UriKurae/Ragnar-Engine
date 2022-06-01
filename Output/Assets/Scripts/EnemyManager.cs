@@ -8,6 +8,8 @@ public class EnemyManager : RagnarComponent
     public List<GameObject> enemyGOs = new List<GameObject>();
     //public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
+    int frames = 0;
+    public int retardedFrames = 4;
 
     public void Start()
     {
@@ -69,6 +71,7 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
+        frames++;
         for (int i = 0; i < enemyGOs.Count; i++)
         {
             if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
@@ -106,6 +109,26 @@ public class EnemyManager : RagnarComponent
                 enemyGOs[i].isInteractuable = true;
                 enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
                 enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
+            }
+            
+            if(frames % retardedFrames == 0)
+            {
+                switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
+                {
+                    case EnemyType.BASIC:
+                        enemyGOs[i].GetComponent<BasicEnemy>().canLookOut = true;
+                        break;
+                    //TODO: Check if drone destroyed
+                    case EnemyType.AIR:
+                        enemyGOs[i].GetComponent<AirEnemy>().canLookOut = true;
+                        break;
+                    case EnemyType.TANK:
+                        enemyGOs[i].GetComponent<TankEnemy>().canLookOut = true;
+                        break;
+                    case EnemyType.UNDISTRACTABLE:
+                        enemyGOs[i].GetComponent<UndistractableEnemy>().canLookOut = true;
+                        break;
+                }
             }
         }
     }

@@ -66,6 +66,8 @@ public class BasicEnemy : RagnarComponent
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+    public bool canLookOut = false;
+    int retardedFrames;
 
     public void Start()
     {
@@ -117,6 +119,7 @@ public class BasicEnemy : RagnarComponent
         }
 
         stunPartSys.Pause();
+        retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
 
     public void Update()
@@ -125,51 +128,24 @@ public class BasicEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && !isDying)
+                if (!pendingToDelete && !isDying && !stunned)
                 {
-                    if (!stunned)
+                    if (returning)
                     {
-                        if(returning)
+                        agents.CalculatePath(initialPos);
+                        if (agents.MovePath())
                         {
-                            agents.CalculatePath(initialPos);
-                            if(agents.MovePath())
-                            {
-                                rb.SetBodyRotation(initialRot);
-                                returning = false;
-                            }
-                        }
-                        if (!distracted && waypoints.Count != 0)
-                        {
-                            Patrol();
-                        }
-                        if (PerceptionCone())
-                        {
-                            coneTimer += Time.deltaTime;
-
-                            if (coneTimer >= coneMaxTime)
-                            {
-                                agents.speed = initialSpeed * 1.2f;
-                                Shoot();
-                            }
-                        }
-                        else
-                        {
-                            agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
-                            if (coneTimer < 0) coneTimer = 0;
-                        }
-                        if (!canShoot && shootCooldown >= 0)
-                        {
-                            Debug.Log(shootCooldown.ToString());
-                            shootCooldown -= Time.deltaTime;
-                            if (shootCooldown < 0)
-                            {
-                                shootCooldown = 0f;
-                                canShoot = true;
-                            }
+                            rb.SetBodyRotation(initialRot);
+                            returning = false;
                         }
                     }
+                    if (!distracted && waypoints.Count != 0)
+                    {
+                        Patrol();
+                    }
                 }
+                if (canLookOut)
+                    LookOut();
 
                 if (stunnedTimer >= 0)
                 {
@@ -359,20 +335,50 @@ public class BasicEnemy : RagnarComponent
         }
     }
 
+    private void LookOut()
+    {
+        if (PerceptionCone())
+        {
+            coneTimer += Time.deltaTime * retardedFrames;
+
+            if (coneTimer >= coneMaxTime)
+            {
+                agents.speed = initialSpeed * 1.2f;
+                Shoot();
+            }
+        }
+        else
+        {
+            agents.speed = initialSpeed;
+            coneTimer -= Time.deltaTime * retardedFrames;
+            if (coneTimer < 0) coneTimer = 0;
+        }
+        if (!canShoot && shootCooldown >= 0)
+        {
+            shootCooldown -= Time.deltaTime * retardedFrames;
+            if (shootCooldown < 0)
+            {
+                shootCooldown = 0f;
+                canShoot = true;
+            }
+        }
+        canLookOut = false;
+    }
+
     private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
         Vector3 enemyForward = gameObject.transform.forward;
-
+        
         if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
-
         index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 23, players, players.Length, "Collider", coneTimer/coneMaxTime);
+
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
     private Vector3 RotateVector(Vector3 vec, int angles, int time)
     {
-        float w = (angles / time) / (1 / Time.deltaTime); // Angular Velocity in frames
+        float w = (angles / time) / (1 / (Time.deltaTime * retardedFrames)); // Angular Velocity in frames
 
         if (toRight)
         {

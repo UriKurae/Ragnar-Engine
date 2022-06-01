@@ -59,6 +59,9 @@ public class TankEnemy : RagnarComponent
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+    public bool canLookOut = false;
+    int retardedFrames;
+
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -106,6 +109,7 @@ public class TankEnemy : RagnarComponent
         }
 
         stunPartSys.Pause();
+        retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
 
     public void Update()
@@ -114,50 +118,23 @@ public class TankEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && !isDying)
+                if (!pendingToDelete && !isDying && !stunned)
                 {
-                    if (!stunned)
+                    if (returning)
                     {
-                        if (returning)
+                        agents.CalculatePath(initialPos);
+                        if (agents.MovePath())
                         {
-                            agents.CalculatePath(initialPos);
-                            if (agents.MovePath())
-                            {
-                                rigidbody.SetBodyRotation(initialRot);
-                                returning = false;
-                            }
-                        }
-                        if (!distracted && waypoints.Count != 0)
-                        {
-                            Patrol();
-                        }
-                        if (PerceptionCone())
-                        {
-                            coneTimer += Time.deltaTime;
-
-                            if (coneTimer >= coneMaxTime)
-                            {
-                                agents.speed = initialSpeed * 1.2f;
-                                Shoot();
-                            }
-                        }
-                        else
-                        {
-                            agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
-                            if (coneTimer < 0) coneTimer = 0;
-                        }
-                        if (!canShoot && shootCooldown >= 0)
-                        {
-                            Debug.Log(shootCooldown.ToString());
-                            shootCooldown -= Time.deltaTime;
-                            if (shootCooldown < 0)
-                            {
-                                shootCooldown = 0f;
-                                canShoot = true;
-                            }
+                            rigidbody.SetBodyRotation(initialRot);
+                            returning = false;
                         }
                     }
+                    if (!distracted && waypoints.Count != 0)
+                    {
+                        Patrol();
+                    }
+                    if (canLookOut)
+                        LookOut();
                 }
 
                 if (stunnedTimer >= 0)
@@ -334,6 +311,35 @@ public class TankEnemy : RagnarComponent
         }
     }
 
+    private void LookOut()
+    {
+        if (PerceptionCone())
+        {
+            coneTimer += Time.deltaTime * retardedFrames;
+
+            if (coneTimer >= coneMaxTime)
+            {
+                agents.speed = initialSpeed * 1.2f;
+                Shoot();
+            }
+        }
+        else
+        {
+            agents.speed = initialSpeed;
+            coneTimer -= Time.deltaTime * retardedFrames;
+            if (coneTimer < 0) coneTimer = 0;
+        }
+        if (!canShoot && shootCooldown >= 0)
+        {
+            shootCooldown -= Time.deltaTime * retardedFrames;
+            if (shootCooldown < 0)
+            {
+                shootCooldown = 0f;
+                canShoot = true;
+            }
+        }
+        canLookOut = false;
+    }
     private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
