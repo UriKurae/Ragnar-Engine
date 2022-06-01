@@ -13,7 +13,7 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstO = true;
 	GameObject[] players;
 	float genealDT = 0;
-	int abiltyfocused = 0;
+	public int abiltyfocused = 0;
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
@@ -2285,9 +2285,26 @@ public class pauseMenuButton : RagnarComponent
         if (abiltyfocused != 0)
         {
 			focusedAbilityActivate(selectedPlayer.name, abiltyfocused, y);
-			if(Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+                GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
+
+            for (int w = 0; w < players.Length; w++)
             {
+                players[w].GetComponent<Player>().paused = true;
+				
+
+			}
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            {
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 				abiltyfocused = 0;
+				
+				for (int w = 0; w < players.Length; w++)
+				{
+					players[w].GetComponent<Player>().paused = false;
+
+				}
 			}
 		}
 		
