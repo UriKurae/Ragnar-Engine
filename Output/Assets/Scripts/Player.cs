@@ -237,8 +237,9 @@ public class Player : RagnarComponent
                 abilityState = State.NONE;
         }
 
-        if (paused)
+        if (paused|| GameObject.Find("Background").GetComponent<pauseMenuButton>().abiltyfocused != 0)
             Time.timeScale = 0.0f;
+            
         else
             Time.timeScale = 1.0f;
     }
