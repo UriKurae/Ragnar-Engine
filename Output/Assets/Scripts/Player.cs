@@ -51,6 +51,8 @@ public class Player : RagnarComponent
     Actions action = Actions.NONE;
     Movement move = Movement.IDLE;
 
+    pauseMenuButton pause;
+
     /*
     DialogueManager dialogue;
     dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
@@ -98,7 +100,7 @@ public class Player : RagnarComponent
             deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
         }
         getHitPartSys.Pause();
-
+        pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
         ReloadState();
     }
 
@@ -237,7 +239,7 @@ public class Player : RagnarComponent
                 abilityState = State.NONE;
         }
 
-        if (paused|| GameObject.Find("Background").GetComponent<pauseMenuButton>().abiltyfocused != 0)
+        if (paused|| pause.abiltyfocused != 0)
             Time.timeScale = 0.0f;
             
         else
@@ -361,30 +363,24 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Trigger1")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
-
             PlayerPause();
-
-            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(1);
+            pause.SetFocusedAbility(1);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
         if (other.gameObject.name == "Trigger2")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
-
             PlayerPause();
-
-            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(3);
+            pause.SetFocusedAbility(3);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
         if (other.gameObject.name == "Trigger3")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
-
             PlayerPause();
-
-            GameObject.Find("Background").GetComponent<pauseMenuButton>().SetFocusedAbility(2);
+            pause.SetFocusedAbility(2);
             InternalCalls.Destroy(other.gameObject);
             return;
         }
