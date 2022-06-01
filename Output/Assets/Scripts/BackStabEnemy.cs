@@ -36,11 +36,11 @@ public class BackStabEnemy : RagnarComponent
 			{
 				selectedEnemy.GetComponent<BasicEnemy>().isDying = true;
 			}
-			if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+			else if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
 			{
 				selectedEnemy.GetComponent<UndistractableEnemy>().isDying = true;
 			}
-			if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
+			else if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
 			{
 				selectedEnemy.GetComponent<TankEnemy>().isDying = true;
 			}

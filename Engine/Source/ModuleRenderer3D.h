@@ -133,7 +133,7 @@ public:
 	std::vector<ConeTriangle> enemyCones;
 	
 	bool genShadows;
-
+	int frames = 0;
 private:
 	Material* defaultMaterial;
 	unsigned int defaultShader;

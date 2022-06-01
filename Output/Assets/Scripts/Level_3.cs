@@ -247,7 +247,7 @@ public class Level_3 : RagnarComponent
 
         enemies[3] = new Enemies
         {
-            name = "Basic Enemy 4",
+            name = "Tank Enemy 4",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_4")
@@ -255,7 +255,7 @@ public class Level_3 : RagnarComponent
 
         enemies[4] = new Enemies
         {
-            name = "Basic Enemy 5",
+            name = "Tank Enemy 5",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_5")

@@ -8,6 +8,10 @@ public class EnemyManager : RagnarComponent
     public List<GameObject> enemyGOs = new List<GameObject>();
     //public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
+    int frames = 0;
+    public int retardedFrames = 4;
+    public int retardedFramesOutsideFrustum = 10;
+    private int divResult = 0;
 
     public void Start()
     {
@@ -69,6 +73,8 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
+        frames++;
+        divResult = frames % retardedFrames;
         for (int i = 0; i < enemyGOs.Count; i++)
         {
             if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
@@ -106,6 +112,40 @@ public class EnemyManager : RagnarComponent
                 enemyGOs[i].isInteractuable = true;
                 enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
                 enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
+            }
+
+            // If go is on camera frustum update cone each x frames
+            if (enemyGOs[i].name.Contains("Basic"))
+            {
+                //Debug.Log("BASIC" + enemyGOs[i].name);
+                if (enemyGOs[i].hasBeenUpdate && divResult == 0)
+                    enemyGOs[i].GetComponent<BasicEnemy>().canLookOut = true;
+                else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
+                    enemyGOs[i].GetComponent<BasicEnemy>().LookOut(retardedFramesOutsideFrustum);
+            }
+            else if (enemyGOs[i].name.Contains("Undistractable"))
+            {
+                //Debug.Log("UNDISTRACTABLE" + enemyGOs[i].name);
+                if (enemyGOs[i].hasBeenUpdate && divResult == 0)
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().canLookOut = true;
+                else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().LookOut(retardedFramesOutsideFrustum);
+            }
+            else if (enemyGOs[i].name.Contains("Dron"))
+            {
+                //Debug.Log("AIR" + enemyGOs[i].name);
+                if (enemyGOs[i].hasBeenUpdate && divResult == 0)
+                    enemyGOs[i].GetComponent<AirEnemy>().canLookOut = true;
+                else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
+                    enemyGOs[i].GetComponent<AirEnemy>().LookOut(retardedFramesOutsideFrustum);
+            }
+            else if (enemyGOs[i].name.Contains("Tank"))
+            {
+                //Debug.Log("TANK" + enemyGOs[i].name);
+                if (enemyGOs[i].hasBeenUpdate && divResult == 0)
+                    enemyGOs[i].GetComponent<TankEnemy>().canLookOut = true;
+                else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
+                    enemyGOs[i].GetComponent<TankEnemy>().LookOut(retardedFramesOutsideFrustum);
             }
         }
     }
