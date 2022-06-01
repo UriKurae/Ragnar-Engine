@@ -26,7 +26,6 @@ public class UndistractableEnemy : RagnarComponent
     // Player tracker
     public GameObject[] players;
     public GameObject[] colliders;
-    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -51,7 +50,9 @@ public class UndistractableEnemy : RagnarComponent
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
-    
+    private int radius = 12;
+    private int angle = 60;
+
     Animation animation;
     Rigidbody rigidbody;
     AudioSource audioSource;
@@ -63,15 +64,9 @@ public class UndistractableEnemy : RagnarComponent
 
     public void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-
-        agents = gameObject.GetComponent<NavAgent>();
         animation = gameObject.GetComponent<Animation>();
-
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        audioSource = gameObject.GetComponent<AudioSource>();
 
         if (state != EnemyState.DEATH)
         {
@@ -111,6 +106,13 @@ public class UndistractableEnemy : RagnarComponent
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
 
+    public void OnCreation()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        agents = gameObject.GetComponent<NavAgent>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
     public void Update()
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
@@ -133,7 +135,7 @@ public class UndistractableEnemy : RagnarComponent
                         Patrol();
                     }
                     if (canLookOut)
-                        LookOut();
+                        LookOut(retardedFrames);
                 }
 
                 if (stunnedTimer >= 0)
@@ -318,12 +320,11 @@ public class UndistractableEnemy : RagnarComponent
         }
     }
 
-    private void LookOut()
+    public void LookOut(int frames)
     {
-        if (PerceptionCone())
+        if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
         {
             coneTimer += Time.deltaTime * retardedFrames;
-
             if (coneTimer >= coneMaxTime)
             {
                 agents.speed = initialSpeed * 1.2f;
@@ -358,9 +359,25 @@ public class UndistractableEnemy : RagnarComponent
         return (index == -1) ? false : true;
     }
 
+    public bool PlayerIsNear()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
+            {
+                if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
+                {
+                    if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void Shoot()
     {
-        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
+        audioSource.SetState("MUSIC", "LEVEL1_BATTLE");
 
         if (canShoot)
         {

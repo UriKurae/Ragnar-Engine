@@ -27,7 +27,6 @@ public class TankEnemy : RagnarComponent
     // Player tracker
     public GameObject[] players;
     public GameObject[] colliders;
-    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -51,11 +50,12 @@ public class TankEnemy : RagnarComponent
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
+    private int radius = 12;
+    private int angle = 60;
 
     Animation animation;
     Rigidbody rigidbody;
     AudioSource audioSource;
-    AudioSource sceneAudioSource;
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
@@ -64,15 +64,9 @@ public class TankEnemy : RagnarComponent
 
     public void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-
-        agents = gameObject.GetComponent<NavAgent>();
         animation = gameObject.GetComponent<Animation>();
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        audioSource = gameObject.GetComponent<AudioSource>();
-        sceneAudioSource = SceneAudio.GetComponent<AudioSource>();
 
         if (state != EnemyState.DEATH)
         {
@@ -112,6 +106,13 @@ public class TankEnemy : RagnarComponent
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
 
+    public void OnCreation()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        agents = gameObject.GetComponent<NavAgent>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
     public void Update()
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
@@ -134,7 +135,7 @@ public class TankEnemy : RagnarComponent
                         Patrol();
                     }
                     if (canLookOut)
-                        LookOut();
+                        LookOut(retardedFrames);
                 }
 
                 if (stunnedTimer >= 0)
@@ -311,9 +312,9 @@ public class TankEnemy : RagnarComponent
         }
     }
 
-    private void LookOut()
+    public void LookOut(int frames)
     {
-        if (PerceptionCone())
+        if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
         {
             coneTimer += Time.deltaTime * retardedFrames;
 
@@ -351,9 +352,25 @@ public class TankEnemy : RagnarComponent
         return (index == -1) ? false : true;
     }
 
+    public bool PlayerIsNear()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
+            {
+                if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
+                {
+                    if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void Shoot()
     {
-        sceneAudioSource.SetState("MUSIC", "LEVEL1_BATTLE");
+        audioSource.SetState("MUSIC", "LEVEL1_BATTLE");
 
         if (canShoot)
         {
@@ -365,8 +382,8 @@ public class TankEnemy : RagnarComponent
             pos.y += 0.5f;
 
             GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);            
-            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;

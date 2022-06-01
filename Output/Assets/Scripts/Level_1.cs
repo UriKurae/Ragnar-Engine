@@ -337,6 +337,7 @@ public class Level_1 : RagnarComponent
         InternalCalls.InstancePrefab("Dialogue", Vector3.zero);
         InternalCalls.InstancePrefab("DialogueLevel1", Vector3.zero);
     }
+
 	public void Update()
 	{
         if (runGame) timer.Update();

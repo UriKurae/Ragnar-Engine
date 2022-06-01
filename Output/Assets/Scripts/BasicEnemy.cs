@@ -63,9 +63,12 @@ public class BasicEnemy : RagnarComponent
     public bool coneRotate = true;
     private bool toRight = true;
     private float angleOffset = 0;
+    private int radius = 23;
+    private int angle = 60;
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+
     public bool canLookOut = false;
     int retardedFrames;
 
@@ -74,14 +77,9 @@ public class BasicEnemy : RagnarComponent
         // Get all Components
         animationComponent = gameObject.GetComponent<Animation>();
         rb = gameObject.GetComponent<Rigidbody>();
-        audioComponent = gameObject.GetComponent<AudioSource>();
 
-
-        players = GameObject.FindGameObjectsWithTag("Player");
         SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-
-        agents = gameObject.GetComponent<NavAgent>();
 
         if (state != EnemyState.DEATH)
         {
@@ -121,7 +119,12 @@ public class BasicEnemy : RagnarComponent
         stunPartSys.Pause();
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
     }
-
+    public void OnCreation()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        agents = gameObject.GetComponent<NavAgent>();
+        audioComponent = gameObject.GetComponent<AudioSource>();
+    }
     public void Update()
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
@@ -145,7 +148,7 @@ public class BasicEnemy : RagnarComponent
                     }
                 }
                 if (canLookOut)
-                    LookOut();
+                    LookOut(retardedFrames);
 
                 if (stunnedTimer >= 0)
                 {
@@ -182,7 +185,6 @@ public class BasicEnemy : RagnarComponent
                 }
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
-                    Debug.Log("BackStab enemy");
                     InternalCalls.InstancePrefab("BackStabEnemy", gameObject.transform.globalPosition);
                     backstab = false;
                 }
@@ -335,12 +337,11 @@ public class BasicEnemy : RagnarComponent
         }
     }
 
-    private void LookOut()
+    public void LookOut(int frames)
     {
-        if (PerceptionCone())
+        if ((frames == retardedFrames)? PerceptionCone() : PlayerIsNear())
         {
-            coneTimer += Time.deltaTime * retardedFrames;
-
+            coneTimer += Time.deltaTime * frames;
             if (coneTimer >= coneMaxTime)
             {
                 agents.speed = initialSpeed * 1.2f;
@@ -350,12 +351,12 @@ public class BasicEnemy : RagnarComponent
         else
         {
             agents.speed = initialSpeed;
-            coneTimer -= Time.deltaTime * retardedFrames;
+            coneTimer -= Time.deltaTime * frames;
             if (coneTimer < 0) coneTimer = 0;
         }
         if (!canShoot && shootCooldown >= 0)
         {
-            shootCooldown -= Time.deltaTime * retardedFrames;
+            shootCooldown -= Time.deltaTime * frames;
             if (shootCooldown < 0)
             {
                 shootCooldown = 0f;
@@ -371,11 +372,28 @@ public class BasicEnemy : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         
         if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
-        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 23, players, players.Length, "Collider", coneTimer/coneMaxTime);
+        index = RayCast.PerceptionCone(enemyPos, enemyForward, angle, 10, radius, players, players.Length, "Collider", coneTimer/coneMaxTime);
 
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
+
+    public bool PlayerIsNear()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
+            {
+                if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
+                {                    
+                    if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                        return true;
+                }                    
+            }                
+        }
+        return false;
+    }
+
     private Vector3 RotateVector(Vector3 vec, int angles, int time)
     {
         float w = (angles / time) / (1 / (Time.deltaTime * retardedFrames)); // Angular Velocity in frames

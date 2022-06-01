@@ -125,6 +125,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::get_hasBeenUpdate", GetHasBeenUpdate);
 	mono_add_internal_call("RagnarEngine.GameObject::GetActiveComponent", GetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::SetActiveComponent", SetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::GetSizeAABB", GetSizeAABB);
