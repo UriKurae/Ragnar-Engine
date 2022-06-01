@@ -385,9 +385,12 @@ public class BasicEnemy : RagnarComponent
             if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
             {
                 if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
-                {                    
+                {
                     if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
                     {
+                        if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
+                            return false;
+
                         index = i;
                         return true;
                     }
@@ -442,7 +445,7 @@ public class BasicEnemy : RagnarComponent
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
             
-            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos);
             bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
             EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;

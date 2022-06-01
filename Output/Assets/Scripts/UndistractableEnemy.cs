@@ -367,6 +367,9 @@ public class UndistractableEnemy : RagnarComponent
             {
                 if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
                 {
+                    if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
+                        return false;
+
                     if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
                         return true;
                 }
@@ -388,7 +391,7 @@ public class UndistractableEnemy : RagnarComponent
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
 
-            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos);
             bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
