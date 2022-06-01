@@ -222,11 +222,11 @@ public class Player : RagnarComponent
             if (pendingToDelete && animationComponent.HasFinished())
             {
                 Input.RestoreDefaultCursor();
-                String name = "";
-                if (gameObject.name == "Player") name = "Paul Atreides";
-                else if (gameObject.name == "Player_2") name = "Chani";
-                else if (gameObject.name == "Player_3") name = "Stilgar";
-                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
+                //String name = "";
+                //if (gameObject.name == "Player") name = "Paul Atreides";
+                //else if (gameObject.name == "Player_2") name = "Chani";
+                //else if (gameObject.name == "Player_3") name = "Stilgar";
+                //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
                 pendingToDelete = false;
                 //InternalCalls.Destroy(gameObject);

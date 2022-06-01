@@ -6,13 +6,13 @@ public class EnemyManager : RagnarComponent
 {
     public Enemies[] enemies;
     public List<GameObject> enemyGOs = new List<GameObject>();
-    public List<GameObject> deadEnemies = new List<GameObject>();
+    //public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
 
     public void Start()
     {
         enemyGOs.Clear();
-        deadEnemies.Clear();
+        //deadEnemies.Clear();
 
         colliders = GameObject.FindGameObjectsWithTag("Collider");
 
@@ -76,7 +76,7 @@ public class EnemyManager : RagnarComponent
             {
                 if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
                 {
-                    deadEnemies.Add(enemyGOs[i]);
+                    //deadEnemies.Add(enemyGOs[i]);
                     enemyGOs[i].transform.globalRotation = enemyGOs[i].GetComponent<Rigidbody>().GetBodyRotation();
                     enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
 
@@ -194,7 +194,7 @@ public class EnemyManager : RagnarComponent
 
                 if (enemies[i].state == EnemyState.DEATH)
                 {
-                    deadEnemies.Add(enemyGOs[i]);
+                    //deadEnemies.Add(enemyGOs[i]);
                     enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
                     switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
                     {
@@ -218,10 +218,10 @@ public class EnemyManager : RagnarComponent
             }
         }
     }
-    public void SaveTest(String name, Vector3 pos)
-    {
+    //public void SaveTest(String name, Vector3 pos)
+    //{
         // Change deadEnemies[] to a list, if not deadCount is not really
-        float time = GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer;
-        SceneManager.SaveTest(deadEnemies.Count, name, pos, time);
-    }
+        //float time = GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer;
+        //SceneManager.SaveTest(deadEnemies.Count, name, pos, time);
+    //}
 }
