@@ -387,7 +387,10 @@ public class BasicEnemy : RagnarComponent
                 if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
                 {                    
                     if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                    {
+                        index = i;
                         return true;
+                    }
                 }                    
             }                
         }
