@@ -305,7 +305,7 @@ public class Level_1 : RagnarComponent
 
         enemies[23] = new Enemies
         {
-            name = "Basic Enemy 17",
+            name = "Basic Enemy 19",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_23"),
@@ -313,7 +313,7 @@ public class Level_1 : RagnarComponent
         };
         enemies[24] = new Enemies
         {
-            name = "Basic Enemy 17",
+            name = "Basic Enemy 20",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_24"),
@@ -321,7 +321,7 @@ public class Level_1 : RagnarComponent
         };
         enemies[25] = new Enemies
         {
-            name = "Basic Enemy 17",
+            name = "Basic Enemy 21",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_25"),

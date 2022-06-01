@@ -46,7 +46,7 @@ public class BasicEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    public bool isDying = false;
     float controlledCooldown = 10;
 
     float initialSpeed;
@@ -125,7 +125,7 @@ public class BasicEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!pendingToDelete && !isDying)
                 {
                     if (!stunned)
                     {
@@ -231,13 +231,12 @@ public class BasicEnemy : RagnarComponent
             }
         }
 
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animationComponent.HasFinished())
             {
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
@@ -250,9 +249,9 @@ public class BasicEnemy : RagnarComponent
             //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 4f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -272,10 +271,10 @@ public class BasicEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
                     audioComponent.PlayClip("EBASIC_BULLETHIT");
-                    deathTimer = 2f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -289,9 +288,9 @@ public class BasicEnemy : RagnarComponent
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 5f;
+                    isDying = true;
                     animationComponent.PlayAnimation("Dying");
                 }
 
@@ -328,7 +327,7 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "SwordSlash")
             {
                 audioComponent.PlayClip("WPN_SWORDHIT");
-                deathTimer = 2f;
+                isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
                     if (childs[i].name == "SwordSlashParticles")

@@ -39,7 +39,7 @@ public class TankEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    public bool isDying = false;
     float controlledCooldown = 10;
 
     float initialSpeed;
@@ -114,7 +114,7 @@ public class TankEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!pendingToDelete && !isDying)
                 {
                     if (!stunned)
                     {
@@ -221,14 +221,13 @@ public class TankEnemy : RagnarComponent
 
             }
         }
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animation.HasFinished())
             {
                 audioSource.PlayClip("EMALE_DEATH4");
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
@@ -249,9 +248,9 @@ public class TankEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 2f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -269,9 +268,9 @@ public class TankEnemy : RagnarComponent
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 5f;
+                    isDying = true;
                     animation.PlayAnimation("Dying");
                 }
 
@@ -307,7 +306,7 @@ public class TankEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                deathTimer = 2f;
+                isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
                     if (childs[i].name == "SwordSlashParticles")

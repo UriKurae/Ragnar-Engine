@@ -69,48 +69,43 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
-        // Death Control
-        if(enemyGOs.Count > 0)
+        for (int i = 0; i < enemyGOs.Count; i++)
         {
-            for (int i = 0; i < enemyGOs.Count; i++)
+            if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
             {
-                if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
+                //deadEnemies.Add(enemyGOs[i]);
+                enemyGOs[i].transform.globalRotation = enemyGOs[i].GetComponent<Rigidbody>().GetBodyRotation();
+                enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+
+                switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
                 {
-                    //deadEnemies.Add(enemyGOs[i]);
-                    enemyGOs[i].transform.globalRotation = enemyGOs[i].GetComponent<Rigidbody>().GetBodyRotation();
-                    enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                    case EnemyType.BASIC:
+                        enemyGOs[i].ChangeMesh("1_modeldeath");
+                        enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
+                        break;
+                    //TODO: Check if drone destroyed
+                    case EnemyType.AIR:
+                        enemyGOs[i].ChangeMesh("4_modeldeath");
+                        break;
+                    case EnemyType.TANK:
+                        enemyGOs[i].ChangeMesh("3_modeldeath");
+                        enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
+                        break;
+                    case EnemyType.UNDISTRACTABLE:
+                        enemyGOs[i].ChangeMesh("2_modeldeath");
+                        enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
+                        break;
+                };
 
-                    switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
-                    {
-                        case EnemyType.BASIC:
-                            enemyGOs[i].ChangeMesh("1_modeldeath");
-                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
-                            break;
-                        //TODO: Check if drone destroyed
-                        case EnemyType.AIR:
-                            enemyGOs[i].ChangeMesh("4_modeldeath");
-                            break;
-                        case EnemyType.TANK:
-                            enemyGOs[i].ChangeMesh("3_modeldeath");
-                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
-                            break;
-                        case EnemyType.UNDISTRACTABLE:
-                            enemyGOs[i].ChangeMesh("2_modeldeath");
-                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
-                            break;
-                    };
+                GameObject sound = InternalCalls.InstancePrefab("SoundArea", enemyGOs[i].transform.globalPosition, true);
+                sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+                sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
-                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", enemyGOs[i].transform.globalPosition, true);
-                    sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
-                    sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
-
-                    ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
-                    enemies[i].state = EnemyState.DEATH;
-                    enemyGOs[i].isInteractuable = true;
-                    enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
-                    enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
-                    
-                }
+                ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
+                enemies[i].state = EnemyState.DEATH;
+                enemyGOs[i].isInteractuable = true;
+                enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
+                enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
             }
         }
     }

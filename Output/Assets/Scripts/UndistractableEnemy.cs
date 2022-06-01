@@ -38,7 +38,7 @@ public class UndistractableEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    public bool isDying = false;
 
     float initialSpeed;
 
@@ -113,7 +113,7 @@ public class UndistractableEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!pendingToDelete && !isDying)
                 {
                     if (!stunned)
                     {
@@ -219,14 +219,13 @@ public class UndistractableEnemy : RagnarComponent
                 }
             }
         }
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animation.HasFinished())
             {
                 audioSource.PlayClip("EMALE_DEATH3");
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
@@ -243,9 +242,9 @@ public class UndistractableEnemy : RagnarComponent
         {
             if (other.gameObject.name == "Knife")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 4f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -266,9 +265,9 @@ public class UndistractableEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 2f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -282,9 +281,9 @@ public class UndistractableEnemy : RagnarComponent
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 5f;
+                    isDying = true;
                     animation.PlayAnimation("Dying");
                 }
 
@@ -310,7 +309,7 @@ public class UndistractableEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                deathTimer = 2f;
+                isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
                     if (childs[i].name == "SwordSlashParticles")
