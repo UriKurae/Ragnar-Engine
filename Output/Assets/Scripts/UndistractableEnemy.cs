@@ -255,6 +255,8 @@ public class UndistractableEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -274,6 +276,8 @@ public class UndistractableEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -282,6 +286,8 @@ public class UndistractableEnemy : RagnarComponent
                 {
                     deathTimer = 5f;
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -316,6 +322,8 @@ public class UndistractableEnemy : RagnarComponent
                     }
                 }
                 animation.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
             }
             if (other.gameObject.name == "Whistle")
             {

@@ -76,8 +76,17 @@ public class QuestSystem : RagnarComponent
 	public GameObject currentScene;
 	private int level = 0;
 
+	//Check Quests Vars General
+	public bool levelFinished = false;
 	public bool damageRecieved = false;
 	public bool hasKilledEnemies = false;
+	//Check Quests Vars Lvl 1
+	public int enemiesControlled = 0;
+	public int enemiesThrowingKnife = 0;
+	public int enemiesDistractedStone = 0;
+	//Check Quests Vars Lvl 2
+
+	//Check Quests Vars Lvl 3
 
 	// Easing
 	float actualDt = 0;
@@ -244,11 +253,28 @@ public class QuestSystem : RagnarComponent
 		switch (level)
         {
 			case 1:
-				if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
+				if (levelFinished)
+                {
+					CompleteQuest(GetQuestByID(0));
+					if (!damageRecieved) CompleteQuest(GetQuestByID(1));
+					if (!hasKilledEnemies) CompleteQuest(GetQuestByID(2));
+					levelFinished = false;
+				}
+				if (enemiesControlled == 3)
 				{
-					Quest questToComplete = GetQuestByID(5);
-					CompleteQuest(questToComplete);
-				} 
+					CompleteQuest(GetQuestByID(3));
+					enemiesControlled = -100;
+				}
+				if (enemiesThrowingKnife == 5)
+				{
+					CompleteQuest(GetQuestByID(4));
+					enemiesThrowingKnife = -100;
+				}
+				if (enemiesDistractedStone == 5)
+				{
+					CompleteQuest(GetQuestByID(5));
+					enemiesDistractedStone = -100;
+				}
 				break;
 			case 2:
 				//TODO
@@ -381,6 +407,7 @@ public class QuestSystem : RagnarComponent
 			{
 				activeQuests += activeQuestList[i].GetQuestName().ToString() + "\n\n";
 			}
+			activeQuests += enemiesDistractedStone.ToString();
 		}
         else
         {
@@ -398,10 +425,6 @@ public class QuestSystem : RagnarComponent
         {
 			completedQuests = "No completed quests available";
         }
-
-		
-
-		
 
 		position.Set(365.5f, 69.5f, 0);
 		activeButton.GetComponent<Transform2D>().SetSize(position);

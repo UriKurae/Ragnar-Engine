@@ -67,6 +67,8 @@ public class BasicEnemy : RagnarComponent
     GameObject[] childs;
     public ParticleSystem stunPartSys;
 
+    public bool enterDistract = true;
+
     public void Start()
     {
         // Get all Components
@@ -189,6 +191,7 @@ public class BasicEnemy : RagnarComponent
                     {
                         distracted = false;
                         distractedTimer = -1f;
+                        enterDistract = true;
                     }
                 }
             }
@@ -262,6 +265,8 @@ public class BasicEnemy : RagnarComponent
                         }
                     }
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
@@ -281,6 +286,8 @@ public class BasicEnemy : RagnarComponent
                         }
                     }
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -289,6 +296,8 @@ public class BasicEnemy : RagnarComponent
                 {
                     deathTimer = 5f;
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -308,6 +317,12 @@ public class BasicEnemy : RagnarComponent
                 distracted = true;
                 distractedTimer = 5f;
                 Distraction(other.gameObject.transform.globalPosition);
+                if (enterDistract)
+                {
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.enemiesDistractedStone++;
+                    enterDistract = false;
+                }
             }
 
             //// Chani =======================================
@@ -334,6 +349,8 @@ public class BasicEnemy : RagnarComponent
                     }
                 }
                 animationComponent.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
             }
             if (other.gameObject.name == "Whistle")
             {

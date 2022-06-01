@@ -347,6 +347,13 @@ public class Player : RagnarComponent
 
     public void OnTriggerEnter(Rigidbody other)
     {
+        if (other.gameObject.name == "CheckQuests")
+        {
+            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+            system.levelFinished = true;
+            other.gameObject.isActive = false;
+        }
+
         if (other.gameObject.tag == "CheckPoint")
         {
             SaveSystem.SaveScene();
@@ -471,6 +478,9 @@ public class Player : RagnarComponent
         gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
         hitPoints -= dmg;
         getHitPartSys.Play();
+
+        QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+        system.damageRecieved = true;
     }
 
     public void PlayAudioClip(string clip)
