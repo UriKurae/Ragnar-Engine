@@ -338,7 +338,7 @@ public class Player : RagnarComponent
 
     public void OnCollision(Rigidbody other)
     {
-        if (other.gameObject.name == "Rocks")
+        if (other.gameObject.tag == "RockThrown")
             GetHit(1);
     }
     //public void OnTrigger(Rigidbody other)
