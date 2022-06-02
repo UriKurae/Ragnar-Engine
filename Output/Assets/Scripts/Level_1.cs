@@ -35,20 +35,6 @@ public class Level_1 : RagnarComponent
         cameraController = GameObject.Find("cameraController").transform;
         pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
 
-        if (SaveSystem.fromContinue)
-        {
-            LevelData data = SaveSystem.LoadLevel();
-            timer.timer = data.timer;
-            cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
-            cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
-        }
-        else
-        { 
-            SaveSystem.SaveScene();
-            bool[] ret = { false, false, false };
-            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, ret);
-        }
-
         // PLAYERS
         characters = new Characters[1];
         // Player 1
@@ -341,6 +327,24 @@ public class Level_1 : RagnarComponent
 
         InternalCalls.InstancePrefab("Dialogue", Vector3.zero);
         InternalCalls.InstancePrefab("DialogueLevel1", Vector3.zero);
+
+        if (SaveSystem.fromContinue)
+        {
+            LevelData data = SaveSystem.LoadLevel();
+            timer.timer = data.timer;
+            cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
+            cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
+            PlayerManager pmm = pm.GetComponent<PlayerManager>();
+            pmm.canDoAbility1 = data.abilities[0];
+            pmm.canDoAbility2 = data.abilities[1];
+            pmm.canDoAbility3 = data.abilities[2];
+        }
+        else
+        {
+            SaveSystem.SaveScene();
+            bool[] ret = { false, false, false };
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, ret);
+        }
     }
 
 	public void Update()

@@ -94,7 +94,7 @@ public class PlayerManager : RagnarComponent
         ability3Bg = GameObject.Find("Ability3Bg").GetComponent<UIImage>();
         ability4Bg = GameObject.Find("Ability4Bg").GetComponent<UIImage>();
 
-        if (SceneManager.currentSceneName == "build")
+        if (SceneManager.currentSceneName == "build" && !SaveSystem.fromContinue)
         {
             canDoAbility1 = false;
             ability1Bg.SetImageGeneralColor(128, 128, 128);
