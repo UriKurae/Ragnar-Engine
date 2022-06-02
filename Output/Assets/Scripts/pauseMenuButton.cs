@@ -13,7 +13,7 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstO = true;
 	GameObject[] players;
 	float genealDT = 0;
-	int abiltyfocused = 0;
+	public int abiltyfocused = 0;
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
@@ -166,10 +166,12 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject AbilityLeft;
 	GameObject AbilityRight;
+	Camera camera;
 
 	int currentCursor = 0;
 	public void Start()
 	{
+		camera = GameObject.Find("Camera").GetComponent<Camera>();
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
 		bounds = new Vector3(0.0f, 0.0f, 0.0f);
 		//////////////AUDIO//////////////
@@ -1309,9 +1311,10 @@ public class pauseMenuButton : RagnarComponent
                 if (dialogue.GetInDialogue()) { dialogue.ContinueDialogue(); }
 
                 SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				camera.lockCam = false;
 
-                // Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
-                if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
+				// Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 
 				Input.SetCursorState(currentCursor);
@@ -1322,6 +1325,7 @@ public class pauseMenuButton : RagnarComponent
                 currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
+				camera.lockCam = true;
 
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
@@ -2023,9 +2027,9 @@ public class pauseMenuButton : RagnarComponent
 
 					abilityLeters.GetComponent<UIImage>().SetImageAlpha(1 - (2 * actualDT));
 
-					pos.Set(-268+ (492 * actualDT), y - 30, -10.400f);
+					pos.Set(-268 + (492 * actualDT), y - 30, -10.400f);
 					AbilityLeft.GetComponent<Transform2D>().position2D = pos;
-					pos.Set(258-(472 * actualDT), y - 30, -10.400f);
+					pos.Set(258 - (472 * actualDT), y - 30, -10.400f);
 					AbilityRight.GetComponent<Transform2D>().position2D = pos;
 				}
                 else
@@ -2116,6 +2120,13 @@ public class pauseMenuButton : RagnarComponent
 				AbilityRight.GetComponent<Transform2D>().position2D = pos;
 			}
         }
+        else
+        {
+			pos.Set(-246, y - 30, -10.400f);
+			AbilityLeft.GetComponent<Transform2D>().position2D = pos;
+			pos.Set(236, y - 30, -10.400f);
+			AbilityRight.GetComponent<Transform2D>().position2D = pos;
+		}
 		
 		bounds.Set(300, 280, 0);
 		CharFocusedImage.GetComponent<Transform2D>().SetSize(bounds);
@@ -2153,7 +2164,7 @@ public class pauseMenuButton : RagnarComponent
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				focusedAbilityActivate(selectedPlayer.name, 1, y);
+				FocusedAbilityActivate(selectedPlayer.name, 1, y);
 				break;
 			case 3:
 				// pressed mode
@@ -2192,7 +2203,7 @@ public class pauseMenuButton : RagnarComponent
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				focusedAbilityActivate(selectedPlayer.name, 2, y);
+				FocusedAbilityActivate(selectedPlayer.name, 2, y);
 
 				break;
 			case 3:
@@ -2232,7 +2243,7 @@ public class pauseMenuButton : RagnarComponent
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				focusedAbilityActivate(selectedPlayer.name, 3, y);
+				FocusedAbilityActivate(selectedPlayer.name, 3, y);
 				break;
 			case 3:
 				// pressed mode
@@ -2271,7 +2282,7 @@ public class pauseMenuButton : RagnarComponent
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				focusedAbilityActivate(selectedPlayer.name, 4, y);
+				FocusedAbilityActivate(selectedPlayer.name, 4, y);
 
 
 				break;
@@ -2284,10 +2295,26 @@ public class pauseMenuButton : RagnarComponent
 
         if (abiltyfocused != 0)
         {
-			focusedAbilityActivate(selectedPlayer.name, abiltyfocused, y);
-			if(Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+			camera.lockCam = true;
+			FocusedAbilityActivate(selectedPlayer.name, abiltyfocused, y);
+            //if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+            GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
+
+            for (int w = 0; w < players.Length; w++)
             {
+                players[w].GetComponent<Player>().paused = true;
+			}
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            {
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 				abiltyfocused = 0;
+				camera.lockCam = false;
+
+				for (int w = 0; w < players.Length; w++)
+				{
+					players[w].GetComponent<Player>().paused = false;
+				}
 			}
 		}
 		
@@ -2295,17 +2322,15 @@ public class pauseMenuButton : RagnarComponent
 	public void SetFocusedAbility(int ability)
     {
 		abiltyfocused = ability;
-
 	}
-	void focusedAbilityActivate(string player, int Ability, float y)
+	void FocusedAbilityActivate(string player, int Ability, float y)
 	{
 		CharFocusedImage.isActive = true;
 		CharFocusedText.isActive = true;
 		AbilityImageApmliate.isActive = true;
 		switch (Ability)
         {
-			case 1:
-				
+			case 1:				
 				pos.Set(-310, y + 252, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
@@ -2326,7 +2351,6 @@ public class pauseMenuButton : RagnarComponent
 				{
 					CharFocusedText.GetComponent<UIText>().text = "          Sword\n\nKill enemies with a\nslash in front\nof you.";
 				}
-
 				break;
 			case 2:
 				pos.Set(-198, y + 252, -10.400f);
@@ -2347,7 +2371,6 @@ public class pauseMenuButton : RagnarComponent
 				{
 					CharFocusedText.GetComponent<UIText>().text = "             Stunner\n\nFire weapon that can\npierce enemie's\nshields.";
 				}
-
 				break;
 			case 3:
 				pos.Set(-95, y + 252, -10.400f);
@@ -2368,7 +2391,6 @@ public class pauseMenuButton : RagnarComponent
 				{
 					CharFocusedText.GetComponent<UIText>().text = "                Trap\n\nSet a trap to stun\nenemies and destroy\ndrones.";
 				}
-
 				break;
 			case 4:
 				pos.Set(20, y + 252, -10.400f);
@@ -2387,7 +2409,6 @@ public class pauseMenuButton : RagnarComponent
 					{
 						CharFocusedText.GetComponent<UIText>().text = "               Eagle\n\nThrow a eagle to\nmake noise within\nthe area.";
 					}
-
 				}
 				else if (player == "Player_2")//chani
 				{
@@ -2397,14 +2418,8 @@ public class pauseMenuButton : RagnarComponent
 				{
 					CharFocusedText.GetComponent<UIText>().text = "             Whistle\n\nWhistle that\nproduces sound\naround the player to\nattract enemies.";
 				}
-
 				break;
 		}
-
-
-
-
 	}
-
 }
 

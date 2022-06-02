@@ -369,7 +369,10 @@ bool ModuleRenderer3D::PostUpdate()
 	conesVbo->Unbind();
 	conesVao->Unbind();
 	coneShader->Unbind();
-    enemyCones.clear();
+
+	frames++;
+	if((frames + 1) % 4 == 0) // 4 must be to retardedFrames on EnemyManager.cs
+		enemyCones.clear();
 	glDisable(GL_BLEND);
 
 #ifndef DIST 

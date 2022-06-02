@@ -26,7 +26,6 @@ public class UndistractableEnemy : RagnarComponent
     // Player tracker
     public GameObject[] players;
     public GameObject[] colliders;
-    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -38,7 +37,7 @@ public class UndistractableEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    public bool isDying = false;
 
     float initialSpeed;
 
@@ -51,24 +50,23 @@ public class UndistractableEnemy : RagnarComponent
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
-    
+    private int radius = 12;
+    private int angle = 60;
+
     Animation animation;
     Rigidbody rigidbody;
     AudioSource audioSource;
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+    public bool canLookOut = false;
+    int retardedFrames;
+
     public void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-
-        agents = gameObject.GetComponent<NavAgent>();
         animation = gameObject.GetComponent<Animation>();
-
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        audioSource = gameObject.GetComponent<AudioSource>();
 
         if (state != EnemyState.DEATH)
         {
@@ -105,6 +103,14 @@ public class UndistractableEnemy : RagnarComponent
         }
 
         stunPartSys.Pause();
+        retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
+    }
+
+    public void OnCreation()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        agents = gameObject.GetComponent<NavAgent>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -113,50 +119,23 @@ public class UndistractableEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!pendingToDelete && !isDying && !stunned)
                 {
-                    if (!stunned)
+                    if (returning)
                     {
-                        if (returning)
+                        agents.CalculatePath(initialPos);
+                        if (agents.MovePath())
                         {
-                            agents.CalculatePath(initialPos);
-                            if (agents.MovePath())
-                            {
-                                rigidbody.SetBodyRotation(initialRot);
-                                returning = false;
-                            }
-                        }
-                        if (!distracted && waypoints.Count != 0)
-                        {
-                            Patrol();
-                        }
-                        if (PerceptionCone())
-                        {
-                            coneTimer += Time.deltaTime;
-
-                            if (coneTimer >= coneMaxTime)
-                            {
-                                agents.speed = initialSpeed * 1.2f;
-                                Shoot();
-                            }
-                        }
-                        else
-                        {
-                            agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
-                            if (coneTimer < 0) coneTimer = 0;
-                        }
-                        if (!canShoot && shootCooldown >= 0)
-                        {
-                            Debug.Log(shootCooldown.ToString());
-                            shootCooldown -= Time.deltaTime;
-                            if (shootCooldown < 0)
-                            {
-                                shootCooldown = 0f;
-                                canShoot = true;
-                            }
+                            rigidbody.SetBodyRotation(initialRot);
+                            returning = false;
                         }
                     }
+                    if (!distracted && waypoints.Count != 0)
+                    {
+                        Patrol();
+                    }
+                    if (canLookOut)
+                        LookOut(retardedFrames);
                 }
 
                 if (stunnedTimer >= 0)
@@ -219,18 +198,18 @@ public class UndistractableEnemy : RagnarComponent
                 }
             }
         }
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animation.HasFinished())
             {
                 audioSource.PlayClip("EMALE_DEATH3");
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
     }
+
     public void SetControled(bool flag)
     {
         controlled = flag;
@@ -243,9 +222,9 @@ public class UndistractableEnemy : RagnarComponent
         {
             if (other.gameObject.name == "Knife")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 4f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -266,9 +245,9 @@ public class UndistractableEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 2f;
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -282,9 +261,9 @@ public class UndistractableEnemy : RagnarComponent
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 5f;
+                    isDying = true;
                     animation.PlayAnimation("Dying");
                 }
 
@@ -294,7 +273,7 @@ public class UndistractableEnemy : RagnarComponent
         }
     }
 
-    public void OnTrigger(Rigidbody other)
+    public void OnTriggerEnter(Rigidbody other)
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
@@ -310,7 +289,7 @@ public class UndistractableEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                deathTimer = 2f;
+                isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
                     if (childs[i].name == "SwordSlashParticles")
@@ -341,6 +320,37 @@ public class UndistractableEnemy : RagnarComponent
         }
     }
 
+    public void LookOut(int frames)
+    {
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled && !stunned)
+        {
+            if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
+            {
+                coneTimer += Time.deltaTime * retardedFrames;
+                if (coneTimer >= coneMaxTime)
+                {
+                    agents.speed = initialSpeed * 1.2f;
+                    Shoot();
+                }
+            }
+            else
+            {
+                agents.speed = initialSpeed;
+                coneTimer -= Time.deltaTime * retardedFrames;
+                if (coneTimer < 0) coneTimer = 0;
+            }
+            if (!canShoot && shootCooldown >= 0)
+            {
+                shootCooldown -= Time.deltaTime * retardedFrames;
+                if (shootCooldown < 0)
+                {
+                    shootCooldown = 0f;
+                    canShoot = true;
+                }
+            }
+        }        
+        canLookOut = false;
+    }
     private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
@@ -352,9 +362,29 @@ public class UndistractableEnemy : RagnarComponent
         return (index == -1) ? false : true;
     }
 
+    public bool PlayerIsNear()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            Vector3 vecDir = players[i].transform.globalPosition - gameObject.transform.globalPosition;
+            if ((vecDir).magnitude <= radius)
+            {
+                if (Transform.GetAngleBetween(gameObject.transform.forward, vecDir) <= angle * 0.5f)
+                {
+                    if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
+                        return false;
+
+                    if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void Shoot()
     {
-        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
+        audioSource.SetState("MUSIC", "LEVEL1_BATTLE");
 
         if (canShoot)
         {
@@ -365,7 +395,7 @@ public class UndistractableEnemy : RagnarComponent
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
 
-            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos);
             bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
