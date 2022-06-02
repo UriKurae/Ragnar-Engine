@@ -35,12 +35,13 @@ public class Level_3 : RagnarComponent
             LevelData data = SaveSystem.LoadLevel();
             timer.timer = data.timer;
             cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
+            cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
         }
         else
         {
             SaveSystem.SaveScene();
             bool[] ret = { true, true, true };
-            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, ret);
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, ret);
         }
 
         // PLAYERS

@@ -537,19 +537,20 @@ public class PlayerManager : RagnarComponent
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
         bool[] ret = { true, true, true};
+        Transform cam = GameObject.Find("cameraController").transform;
         switch (SceneManager.currentSceneName)
         {
             case "build":
                 bool[] abi = { canDoAbility1, canDoAbility2 ,canDoAbility3};
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, abi);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, cam.globalPosition, cam.globalRotation, abi);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, ret);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, cam.globalPosition, cam.globalRotation, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, ret);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, cam.globalPosition, cam.globalRotation, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }

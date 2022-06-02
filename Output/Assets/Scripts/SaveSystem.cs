@@ -136,14 +136,14 @@ public static class SaveSystem
         return File.Exists(path);
     }
 
-    public static void SaveLevel(float timer, Vector3 posCam, bool[] ret)
+    public static void SaveLevel(float timer, Vector3 posCam, Quaternion rot, bool[] ret)
     {
         // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
         BinaryFormatter formatter = new BinaryFormatter();
         string path = "Library/SavedGame/Scenes/Level.ragnar";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        LevelData data = new LevelData(timer, posCam, ret);
+        LevelData data = new LevelData(timer, posCam, rot, ret);
         formatter.Serialize(stream, data);
 
         stream.Close();
