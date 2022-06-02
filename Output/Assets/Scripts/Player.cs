@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class Player : RagnarComponent
@@ -50,6 +51,8 @@ public class Player : RagnarComponent
     Actions action = Actions.NONE;
     Movement move = Movement.IDLE;
 
+    pauseMenuButton pause;
+
     /*
     DialogueManager dialogue;
     dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
@@ -97,7 +100,7 @@ public class Player : RagnarComponent
             deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
         }
         getHitPartSys.Pause();
-
+        pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
         ReloadState();
     }
 
@@ -145,7 +148,6 @@ public class Player : RagnarComponent
                                 action = Actions.CROUCH;
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
-
                                 uiCrouch.isActive = true;
                             }
                             else if (action == Actions.CROUCH)
@@ -153,7 +155,6 @@ public class Player : RagnarComponent
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
-
                                 uiCrouch.isActive = false;
                             }
                         }
@@ -223,11 +224,11 @@ public class Player : RagnarComponent
             if (pendingToDelete && animationComponent.HasFinished())
             {
                 Input.RestoreDefaultCursor();
-                String name = "";
-                if (gameObject.name == "Player") name = "Paul Atreides";
-                else if (gameObject.name == "Player_2") name = "Chani";
-                else if (gameObject.name == "Player_3") name = "Stilgar";
-                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
+                //String name = "";
+                //if (gameObject.name == "Player") name = "Paul Atreides";
+                //else if (gameObject.name == "Player_2") name = "Chani";
+                //else if (gameObject.name == "Player_3") name = "Stilgar";
+                //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
                 pendingToDelete = false;
                 //InternalCalls.Destroy(gameObject);
@@ -238,8 +239,9 @@ public class Player : RagnarComponent
                 abilityState = State.NONE;
         }
 
-        if (paused)
+        if (paused|| pause.abiltyfocused != 0)
             Time.timeScale = 0.0f;
+            
         else
             Time.timeScale = 1.0f;
     }
@@ -352,6 +354,8 @@ public class Player : RagnarComponent
             SaveSystem.SaveScene();
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.tag == "Hidde")
             isHidden = true;
@@ -359,14 +363,26 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Trigger1")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(1);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger2")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(3);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger3")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(2);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
@@ -374,12 +390,6 @@ public class Player : RagnarComponent
             if(!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
-
-
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = false;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = false;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = false;
-
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {

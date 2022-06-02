@@ -56,6 +56,10 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void RequestDamageFeedback();
 
+        // It is a quaternion because there is not a Vector4 class, but inside the engine is interpreted as a float4
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void RequestScreenRectangle(Quaternion color);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 GetMousePosition();
     }

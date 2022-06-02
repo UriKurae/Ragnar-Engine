@@ -99,6 +99,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
 	mono_add_internal_call("RagnarEngine.InternalCalls::RequestDamageFeedback", RequestDamageFeedback);
+	mono_add_internal_call("RagnarEngine.InternalCalls::RequestScreenRectangle", RequestScreenRectangle);
+	mono_add_internal_call("RagnarEngine.InternalCalls::EndRequestScreenRectangle", EndRequestScreenRectangle);
 
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
@@ -123,6 +125,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::get_hasBeenUpdate", GetHasBeenUpdate);
 	mono_add_internal_call("RagnarEngine.GameObject::GetActiveComponent", GetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::SetActiveComponent", SetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::GetSizeAABB", GetSizeAABB);
@@ -225,7 +228,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 	mono_add_internal_call("RagnarEngine.Camera::ScriptMovement", ScriptMovement);
-
+	mono_add_internal_call("RagnarEngine.Camera::get_lockCam", GetLock);
+	mono_add_internal_call("RagnarEngine.Camera::set_lockCam", SetLock);
 	// Camera ====================
 
 	// Scene Manager =============
