@@ -112,7 +112,10 @@ public class EnemyManager : RagnarComponent
                 };
 
                 GameObject sound = InternalCalls.InstancePrefab("SoundArea", enemyGOs[i].transform.globalPosition);
-                sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+                if(enemyGOs[i].name.Contains("Dron"))
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(15);
+                else
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(10);
                 sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
                 ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);

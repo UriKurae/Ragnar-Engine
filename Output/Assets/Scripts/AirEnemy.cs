@@ -155,47 +155,31 @@ public class AirEnemy : RagnarComponent
             {
                 if (!isDying)
                 {
-                    audioComponent.PlayClip("EDRONE_GETDAMAGE");
                     isDying = true;
+                    audioComponent.PlayClip("EDRONE_GETDAMAGE");
                     deathPartSys.Play();
                     animationComponent.PlayAnimation("Dying");
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // deathTimer = 0f;
+            }
+            if (other.gameObject.tag == "Player")
+            {
+                Distraction(other.gameObject.transform.globalPosition);
             }
             if (other.gameObject.name == "StunnerShot")
             {
                 if (!isDying)
                 {
-                    audioComponent.PlayClip("EDRONE_GETDAMAGE");
                     isDying = true;
+                    audioComponent.PlayClip("EDRONE_GETDAMAGE");
                     deathPartSys.Play();
                     animationComponent.PlayAnimation("Dying");
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                // WHEN RUNES FUNCTIONAL
-
-            }
-            // EXPLOSION AREA
-        }
-    }
-
-    public void OnTriggerEnter(Rigidbody other)
-    {
-        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
-        {
-            //// Stilgar =====================================
-            if (other.gameObject.name == "Trap")
-            {
-                if (pendingToDelete == false)
+                if (!isDying)
                 {
-                    audioComponent.PlayClip("EDRONE_GETDAMAGE");
-                    pendingToDelete = true;
-                    deathPartSys.Play();
-                    GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                    isDying = true;
                     animationComponent.PlayAnimation("Dying");
                 }
             }
@@ -241,7 +225,7 @@ public class AirEnemy : RagnarComponent
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
         index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 12, players, players.Length, "Collider", Time.deltaTime);
-        if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
+        if (index != -1 && (players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
 
@@ -254,7 +238,7 @@ public class AirEnemy : RagnarComponent
             {
                 if (Transform.GetAngleBetween(gameObject.transform.forward, vecDir) <= angle * 0.5f)
                 {
-                    if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
+                    if (players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
                         return false;
 
                     if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)

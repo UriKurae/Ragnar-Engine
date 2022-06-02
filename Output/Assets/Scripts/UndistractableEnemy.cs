@@ -235,9 +235,6 @@ public class UndistractableEnemy : RagnarComponent
                     }
                     animation.PlayAnimation("Dying");
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // deathTimer = 0f;
             }
             if (other.gameObject.tag == "Player")
             {
@@ -247,6 +244,7 @@ public class UndistractableEnemy : RagnarComponent
             {
                 if (!isDying)
                 {
+                    audioSource.PlayClip("EBASIC_BULLETHIT");
                     isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
@@ -266,9 +264,6 @@ public class UndistractableEnemy : RagnarComponent
                     isDying = true;
                     animation.PlayAnimation("Dying");
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // EXPLOSION AREA
             }
         }
     }
@@ -281,6 +276,7 @@ public class UndistractableEnemy : RagnarComponent
             if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
             }
@@ -289,6 +285,7 @@ public class UndistractableEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
+                audioSource.PlayClip("WPN_SWORDHIT");
                 isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
@@ -300,19 +297,10 @@ public class UndistractableEnemy : RagnarComponent
                 }
                 animation.PlayAnimation("Dying");
             }
-            if (other.gameObject.name == "Whistle")
-            {
-                // NEED TO CREATE FUNCTION TO INITIATE STOPPED TIME WHEN ARRIVES TO THE POSITION
-                patrol = false;
-                stoppedTime = 5f;
-                agents.CalculatePath(other.gameObject.transform.globalPosition);
-
-                // WHEN RUNES FUNCTIONAL
-                // STUN (BLIND) 3s
-            }
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();

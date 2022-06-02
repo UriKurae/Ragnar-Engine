@@ -223,11 +223,19 @@ public class TankEnemy : RagnarComponent
             if (other.gameObject.name == "Knife")
             {
                 // TURN TO ALERTED MODE (TYPE OF DISTRACTION)
+                distracted = true;
+                distractedTimer = 5f;
+                Distraction(Transform.RotateY(other.gameObject.transform.forward,180));
+            }
+            if (other.gameObject.tag == "Player")
+            {
+                Distraction(other.gameObject.transform.globalPosition);
             }
             if (other.gameObject.name == "StunnerShot")
             {
                 if (!isDying)
                 {
+                    audioSource.PlayClip("EBASIC_BULLETHIT");
                     isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
@@ -240,10 +248,6 @@ public class TankEnemy : RagnarComponent
                     animation.PlayAnimation("Dying");
                 }
             }
-            if (other.gameObject.tag == "Player")
-            {
-                Distraction(other.gameObject.transform.globalPosition);
-            }
             if (other.gameObject.name == "HunterSeeker")
             {
                 if (!isDying)
@@ -251,10 +255,6 @@ public class TankEnemy : RagnarComponent
                     isDying = true;
                     animation.PlayAnimation("Dying");
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // STUN (BLIND) 3s
-                // EXPLOSION AREA STUN (BLIND)
             }
         }
     }
@@ -275,15 +275,17 @@ public class TankEnemy : RagnarComponent
             //// Chani =======================================
             if (other.gameObject.name == "SpiceGrenade")
             {
-                // WHEN RUNES FUNCTIONAL
-                // SHIELD DESTROYED
-                // STUN (BLIND) 5s
+                // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
+                Stun(5f);
+                stunPartSys.Play();
             }
 
 
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
+                audioSource.PlayClip("WPN_SWORDHIT");
                 isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
@@ -305,6 +307,7 @@ public class TankEnemy : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
