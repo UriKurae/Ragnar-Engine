@@ -50,7 +50,7 @@ public class Eagle : RagnarComponent
             //leftParticles.Pause();
             //rightParticles.Pause();
             hasArrived = true;
-            GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
+            GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
             sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
             //sound.transform.globalPosition = gameObject.transform.globalPosition;
             sound.GetComponent<SoundAreaManager>().stablishedTimer = 6f;

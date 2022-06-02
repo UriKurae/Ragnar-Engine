@@ -314,31 +314,34 @@ public class TankEnemy : RagnarComponent
 
     public void LookOut(int frames)
     {
-        if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled)
         {
-            coneTimer += Time.deltaTime * retardedFrames;
+            if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
+            {
+                coneTimer += Time.deltaTime * retardedFrames;
 
-            if (coneTimer >= coneMaxTime)
-            {
-                agents.speed = initialSpeed * 1.2f;
-                Shoot();
+                if (coneTimer >= coneMaxTime)
+                {
+                    agents.speed = initialSpeed * 1.2f;
+                    Shoot();
+                }
             }
-        }
-        else
-        {
-            agents.speed = initialSpeed;
-            coneTimer -= Time.deltaTime * retardedFrames;
-            if (coneTimer < 0) coneTimer = 0;
-        }
-        if (!canShoot && shootCooldown >= 0)
-        {
-            shootCooldown -= Time.deltaTime * retardedFrames;
-            if (shootCooldown < 0)
+            else
             {
-                shootCooldown = 0f;
-                canShoot = true;
+                agents.speed = initialSpeed;
+                coneTimer -= Time.deltaTime * retardedFrames;
+                if (coneTimer < 0) coneTimer = 0;
             }
-        }
+            if (!canShoot && shootCooldown >= 0)
+            {
+                shootCooldown -= Time.deltaTime * retardedFrames;
+                if (shootCooldown < 0)
+                {
+                    shootCooldown = 0f;
+                    canShoot = true;
+                }
+            }
+        }            
         canLookOut = false;
     }
     private bool PerceptionCone()
