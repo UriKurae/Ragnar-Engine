@@ -41,6 +41,7 @@ public class Eagle : RagnarComponent
         //rightParticles.Play();
 
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        gameObject.isInteractuable = false;
     }
 	public void Update()
 	{

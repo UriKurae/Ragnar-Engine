@@ -259,7 +259,7 @@ public class TankEnemy : RagnarComponent
         }
     }
 
-    public void OnTrigger(Rigidbody other)
+    public void OnTriggerEnter(Rigidbody other)
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
@@ -314,7 +314,7 @@ public class TankEnemy : RagnarComponent
 
     public void LookOut(int frames)
     {
-        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled && !stunned)
         {
             if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
             {
@@ -359,9 +359,10 @@ public class TankEnemy : RagnarComponent
     {
         for (int i = 0; i < players.Length; i++)
         {
-            if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
+            Vector3 vecDir = players[i].transform.globalPosition - gameObject.transform.globalPosition;
+            if ((vecDir).magnitude <= radius)
             {
-                if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
+                if (Transform.GetAngleBetween(gameObject.transform.forward, vecDir) <= angle * 0.5f)
                 {
                     if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
                         return false;
