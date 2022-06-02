@@ -536,18 +536,20 @@ public class PlayerManager : RagnarComponent
     {
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
+        bool[] ret = { true, true, true};
         switch (SceneManager.currentSceneName)
         {
             case "build":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                bool[] abi = { canDoAbility1, canDoAbility2 ,canDoAbility3};
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, abi);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, GameObject.Find("cameraController").transform.globalPosition, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }

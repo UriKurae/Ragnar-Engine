@@ -13,6 +13,7 @@ public class Level_1 : RagnarComponent
 
     private GameObject SceneAudio;
     private Transform camera;
+    private Transform cameraController;
     private pauseMenuButton pause;
 
     public void Start()
@@ -31,17 +32,20 @@ public class Level_1 : RagnarComponent
         SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
         SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
         camera = GameObject.Find("Camera").transform;
+        cameraController = GameObject.Find("cameraController").transform;
         pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
 
         if (SaveSystem.fromContinue)
         {
-            TimerData data = SaveSystem.LoadTimer();
+            LevelData data = SaveSystem.LoadLevel();
             timer.timer = data.timer;
+            cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
         }
         else
         { 
             SaveSystem.SaveScene();
-            SaveSystem.SaveTimer(timer.timer);
+            bool[] ret = { false, false, false };
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, ret);
         }
 
         // PLAYERS
