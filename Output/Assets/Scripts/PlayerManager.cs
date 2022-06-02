@@ -542,15 +542,15 @@ public class PlayerManager : RagnarComponent
         {
             case "build":
                 bool[] abi = { canDoAbility1, canDoAbility2 ,canDoAbility3};
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, cam.globalPosition, cam.globalRotation, abi);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, abi);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, cam.globalPosition, cam.globalRotation, ret);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
-                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, cam.globalPosition, cam.globalRotation, ret);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }

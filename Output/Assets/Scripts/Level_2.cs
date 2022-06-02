@@ -36,12 +36,13 @@ public class Level_2 : RagnarComponent
             timer.timer = data.timer;
             cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
             cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
+            GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle = data.angle;
         }
         else
         {
             SaveSystem.SaveScene();
             bool[] ret = { true, true, true };
-            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, ret);
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle, ret);
         }
 
         // PLAYERS

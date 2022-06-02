@@ -334,16 +334,24 @@ public class Level_1 : RagnarComponent
             timer.timer = data.timer;
             cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
             cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
+            GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle = data.angle;
+
             PlayerManager pmm = pm.GetComponent<PlayerManager>();
             pmm.canDoAbility1 = data.abilities[0];
+            if (pmm.canDoAbility1)
+                InternalCalls.Destroy(GameObject.Find("Trigger1"));
             pmm.canDoAbility2 = data.abilities[1];
+            if (pmm.canDoAbility2)
+                InternalCalls.Destroy(GameObject.Find("Trigger2"));
             pmm.canDoAbility3 = data.abilities[2];
+            if (pmm.canDoAbility3)
+                InternalCalls.Destroy(GameObject.Find("Trigger3"));
         }
         else
         {
             SaveSystem.SaveScene();
             bool[] ret = { false, false, false };
-            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, ret);
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle, ret);
         }
     }
 

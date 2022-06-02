@@ -7,9 +7,10 @@ public class LevelData
     public float timer;
     public float[] posCam;
     public float[] rotCam;
+    public float angle;
     public bool[] abilities;
 
-    public LevelData(float t, Vector3 pos, Quaternion rot, bool[] ret)
+    public LevelData(float t, Vector3 pos, Quaternion rot, float horizontalAngle, bool[] ret)
     {
         timer = t;
         posCam = new float[3];
@@ -23,6 +24,7 @@ public class LevelData
         rotCam[2] = rot.z;
         rotCam[3] = rot.w;
 
+        angle = horizontalAngle;
         abilities = ret;
     }
 }
