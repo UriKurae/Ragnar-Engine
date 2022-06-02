@@ -124,6 +124,9 @@ public class Level_1 : RagnarComponent
             spawnPoint = GameObject.Find("basic_static_1"),
             coneRotate = true            
         };
+        Debug.Log("asdadsadasdasdasd");
+        Debug.Log(GameObject.Find("basic_static_1").transform.globalPosition.ToString());
+        Debug.Log("asd1111111111111111111111111111111111adsadasdasdasd");
 
         enemies[2] = new Enemies
         {
@@ -199,8 +202,8 @@ public class Level_1 : RagnarComponent
 
         enemies[10] = new Enemies
         {
-            name = "Basic Enemy 9",
-            type = EnemyType.BASIC,
+            name = "Undistractable Enemy 9",
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_static_10"),
             coneRotate = false
@@ -208,8 +211,8 @@ public class Level_1 : RagnarComponent
 
         enemies[11] = new Enemies
         {
-            name = "Basic Oficial Enemy 3",
-            type = EnemyType.BASIC,
+            name = "Undistractable Oficial Enemy 3",
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_static_11"),
             coneRotate = false
@@ -226,8 +229,8 @@ public class Level_1 : RagnarComponent
 
         enemies[13] = new Enemies
         {
-            name = "Undistractable Enemy 1",
-            type = EnemyType.UNDISTRACTABLE,
+            name = "Basic Enemy 1",
+            type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_13"),
             coneRotate = false
@@ -235,8 +238,8 @@ public class Level_1 : RagnarComponent
 
         enemies[14] = new Enemies
         {
-            name = "Undistractable Enemy 2",
-            type = EnemyType.UNDISTRACTABLE,
+            name = "Basic Enemy 2",
+            type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_14"),
             coneRotate = false

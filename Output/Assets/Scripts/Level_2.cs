@@ -292,7 +292,7 @@ public class Level_2 : RagnarComponent
 
         enemies[14] = new Enemies
         {
-            name = "Basic Enemy 16",
+            name = "Undistractable Enemy 16",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_static_15")
@@ -415,7 +415,7 @@ public class Level_2 : RagnarComponent
 
         enemies[28] = new Enemies
         {
-            name = "Basic Enemy 30",
+            name = "Undistractable Enemy 30",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_patrol_29")
@@ -425,7 +425,7 @@ public class Level_2 : RagnarComponent
 
         enemies[29] = new Enemies
         {
-            name = "Basic Enemy 31",
+            name = "Dron Enemy 31",
             type = EnemyType.AIR,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("dron_patrol_30")
@@ -536,7 +536,7 @@ public class Level_2 : RagnarComponent
 
         enemies[42] = new Enemies
         {
-            name = "Basic Enemy 43",
+            name = "Undistractable Enemy 43",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_patrol_43")
@@ -546,7 +546,7 @@ public class Level_2 : RagnarComponent
 
         enemies[43] = new Enemies
         {
-            name = "Basic Enemy 44",
+            name = "Undistractable Enemy 44",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_patrol_44")
@@ -556,7 +556,7 @@ public class Level_2 : RagnarComponent
 
         enemies[44] = new Enemies
         {
-            name = "Basic Enemy 45",
+            name = "Undistractable Enemy 45",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_patrol_45")
@@ -566,7 +566,7 @@ public class Level_2 : RagnarComponent
 
         enemies[45] = new Enemies
         {
-            name = "Basic Enemy 46",
+            name = "Undistractable Enemy 46",
             type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_patrol_46")
@@ -577,7 +577,7 @@ public class Level_2 : RagnarComponent
         enemies[46] = new Enemies
         {
             name = "Basic Enemy 47",
-            type = EnemyType.UNDISTRACTABLE,
+            type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_47")
         };
@@ -592,7 +592,7 @@ public class Level_2 : RagnarComponent
 
         enemies[48] = new Enemies
         {
-            name = "Basic Enemy 49",
+            name = "Dron Enemy 49",
             type = EnemyType.AIR,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("dron_patrol_49")
@@ -683,7 +683,7 @@ public class Level_2 : RagnarComponent
 
         enemies[57] = new Enemies
         {
-            name = "Undistractable Enemy 6",
+            name = "Basic Enemy 6",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_58")
