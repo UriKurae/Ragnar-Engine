@@ -85,7 +85,11 @@ public class QuestSystem : RagnarComponent
 	public int enemiesThrowingKnife = 0;
 	public int enemiesDistractedStone = 0;
 	//Check Quests Vars Lvl 2
-
+	public bool midLevel = false;
+	public bool camouflageActive = false;
+	public int enemiesCamouflage = 0;
+	public int enemiesHunterSeeker = 0;
+	public int enemiesGrenade = 0;
 	//Check Quests Vars Lvl 3
 
 	// Easing
@@ -214,7 +218,7 @@ public class QuestSystem : RagnarComponent
 				CreateQuest(2, "Pacifista", "Completa el nivel sin matar a nadie", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(3, "Azotador de mentes", "Controla mentalmente a tres enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(4, "Pilla esta!", "Acaba con 5 enemigos utilizando el cuchillo arrojadizo", QuestState.ACTIVE, QuestType.SECONDARY);
-				CreateQuest(5, "Habrá sido el viento", "Distrae a 3 enemigos con una sola piedra", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(5, "Habrá sido el viento", "Distrae a 5 enemigos con piedras", QuestState.ACTIVE, QuestType.SECONDARY);
 				//Auxiliar quest (Solve a Bug)
 				CreateQuest(6, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
 				break;
@@ -227,8 +231,8 @@ public class QuestSystem : RagnarComponent
 				CreateQuest(10, "Intocable", "Completa el nivel sin recibir daño", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(11, "Pacifista", "Completa el nivel sin matar a nadie", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(12, "Desde las sombras", "Acaba con 3 enemigos mientras estás camuflado", QuestState.ACTIVE, QuestType.SECONDARY);
-				CreateQuest(13, "Detrás de ti", "Usa el Hunter-seeker contra 5 enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
-				CreateQuest(14, "Toque especial", "Aturde a 2 enemigos con una sola granada", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(13, "Detrás de ti", "Usa el Hunter-seeker contra 3 enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(14, "Toque especial", "Aturde a 4 enemigos con granadas", QuestState.ACTIVE, QuestType.SECONDARY);
 				//Auxiliar quest (Solve a Bug)
 				CreateQuest(15, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
 				break;
@@ -277,7 +281,34 @@ public class QuestSystem : RagnarComponent
 				}
 				break;
 			case 2:
-				//TODO
+				if (levelFinished)
+                {
+					CompleteQuest(GetQuestByID(7));
+					CompleteQuest(GetQuestByID(9));
+					if (!damageRecieved) CompleteQuest(GetQuestByID(10));
+					if (!hasKilledEnemies) CompleteQuest(GetQuestByID(11));
+					levelFinished = false;
+				}
+				if (midLevel)
+                {
+					CompleteQuest(GetQuestByID(8));
+					midLevel = false;
+                }
+				if (enemiesCamouflage == 3)
+                {
+					CompleteQuest(GetQuestByID(12));
+					enemiesCamouflage = -100;
+				}
+				if (enemiesHunterSeeker == 3)
+				{
+					CompleteQuest(GetQuestByID(13));
+					enemiesHunterSeeker = -100;
+				}
+				if (enemiesGrenade == 4)
+				{
+					CompleteQuest(GetQuestByID(14));
+					enemiesGrenade = -100;
+				}
 				break;
 			case 3:
 				//TODO
@@ -407,7 +438,6 @@ public class QuestSystem : RagnarComponent
 			{
 				activeQuests += activeQuestList[i].GetQuestName().ToString() + "\n\n";
 			}
-			activeQuests += enemiesDistractedStone.ToString();
 		}
         else
         {
@@ -423,8 +453,14 @@ public class QuestSystem : RagnarComponent
 		}
 		else
         {
-			completedQuests = "No completed quests available";
-        }
+			//completedQuests = "No completed quests available";
+			completedQuests += "Camuflaje:";
+			completedQuests += enemiesCamouflage.ToString();
+			completedQuests += "Hunter Seeker:";
+			completedQuests += enemiesHunterSeeker.ToString();
+			completedQuests += "Granada:";
+			completedQuests += enemiesGrenade.ToString();
+		}
 
 		position.Set(365.5f, 69.5f, 0);
 		activeButton.GetComponent<Transform2D>().SetSize(position);

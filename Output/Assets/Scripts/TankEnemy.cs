@@ -59,6 +59,8 @@ public class TankEnemy : RagnarComponent
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+
+    public bool enterStunner = true;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -168,6 +170,7 @@ public class TankEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -263,6 +266,8 @@ public class TankEnemy : RagnarComponent
                     animation.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -273,6 +278,8 @@ public class TankEnemy : RagnarComponent
                     animation.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -301,6 +308,12 @@ public class TankEnemy : RagnarComponent
                 // WHEN RUNES FUNCTIONAL
                 // SHIELD DESTROYED
                 // STUN (BLIND) 5s
+                if (enterStunner)
+                {
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -319,6 +332,8 @@ public class TankEnemy : RagnarComponent
                 animation.PlayAnimation("Dying");
                 QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                 system.hasKilledEnemies = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
             if (other.gameObject.name == "Whistle")
             {

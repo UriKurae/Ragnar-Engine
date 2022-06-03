@@ -68,6 +68,7 @@ public class BasicEnemy : RagnarComponent
     public ParticleSystem stunPartSys;
 
     public bool enterDistract = true;
+    public bool enterStunner = true;
 
     public void Start()
     {
@@ -181,6 +182,7 @@ public class BasicEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -267,6 +269,8 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
@@ -288,6 +292,8 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -298,6 +304,8 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -332,6 +340,12 @@ public class BasicEnemy : RagnarComponent
                 audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
+                if (enterStunner)
+                {
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -351,6 +365,8 @@ public class BasicEnemy : RagnarComponent
                 animationComponent.PlayAnimation("Dying");
                 QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                 system.hasKilledEnemies = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
             if (other.gameObject.name == "Whistle")
             {

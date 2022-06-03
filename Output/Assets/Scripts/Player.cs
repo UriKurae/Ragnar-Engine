@@ -354,6 +354,13 @@ public class Player : RagnarComponent
             other.gameObject.isActive = false;
         }
 
+        if (other.gameObject.name == "MidLevel")
+        {
+            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+            system.midLevel = true;
+            other.gameObject.isActive = false;
+        }
+
         if (other.gameObject.tag == "CheckPoint")
         {
             SaveSystem.SaveScene();

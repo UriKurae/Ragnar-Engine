@@ -104,6 +104,8 @@ public class HunterSeeker : RagnarComponent
 	{
 		if (other.gameObject.tag == "Enemies")
         {
+			QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+			system.enemiesHunterSeeker++;
 			player.GetComponent<Player>().SetControled(true);
 			leftParticles.Pause();
 			rightParticles.Pause();

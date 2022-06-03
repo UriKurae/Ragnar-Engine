@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 406910976,
+                    "pointer": 347585584,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -145,19 +145,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -98.880355834960938,
+                        -90.69970703125,
                         0,
-                        112.21231842041016
+                        98.730262756347656
                     ],
                     "Quaternion": [
                         0,
-                        0.93939691781997681,
+                        0.98341530561447144,
                         0,
-                        0.34283149242401123
+                        0.18136782944202423
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.69985878467559814,
+                        0.364754319190979,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -184,14 +184,14 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        7.62939453125e-06,
-                        57.219799041748047,
-                        -52.018020629882812
+                        -5.7220458984375e-05,
+                        89.776725769042969,
+                        -81.615470886230469
                     ],
                     "Quaternion": [
                         0.34202015399932861,
-                        1.5857478885550336e-08,
-                        -1.5857478885550336e-08,
+                        1.0251002713346224e-08,
+                        0,
                         0.93969273567199707
                     ],
                     "RotationEditor": [
@@ -211,26 +211,26 @@
                     "Vertical Fov": 0.36894726753234863,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -132.38655090332031,
-                        57.219799041748047,
-                        152.00364685058594
+                        -119.81427764892578,
+                        89.776725769042969,
+                        174.97840881347656
                     ],
                     "Type": 3,
-                    "Zoom": 27,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -98.880355834960938,
+                        -90.69970703125,
                         0,
-                        112.21231842041016
+                        98.730262756347656
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 139.90104675292969,
+                    "Horizontal Angle": 159.10111999511719,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -46078,7 +46078,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 406910672,
+                    "pointer": 347607624,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -49100,7 +49100,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 406899880,
+                    "pointer": 347603520,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -49109,8 +49109,12 @@
                     "showJournal": false,
                     "showActive": false,
                     "showCompleted": false,
+                    "levelFinished": false,
                     "damageRecieved": false,
-                    "hasKilledEnemies": false
+                    "hasKilledEnemies": false,
+                    "enemiesControlled": 0,
+                    "enemiesThrowingKnife": 0,
+                    "enemiesDistractedStone": 0
                 }
             ]
         },
@@ -59015,7 +59019,102 @@
                 {
                     "Type": 1,
                     "Path": "Settings\/EngineResources\/__Cube.mesh",
-                    "Active": false
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "fActivation": true,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 868416661,
+            "Parent UUID": 417171234,
+            "Name": "MidLevel",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -84.58819580078125,
+                        10.853437423706055,
+                        -103.31149291992188
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        58.79486083984375,
+                        23.232254028320312,
+                        33.465511322021484
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
                 },
                 {
                     "Type": 11,
