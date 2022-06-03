@@ -72,8 +72,6 @@ public class QuestSystem : RagnarComponent
 
 	private string activeQuests;
 	private string completedQuests;
-
-	public GameObject currentScene;
 	private int level = 0;
 
 	//Check Quests Vars General
@@ -179,12 +177,12 @@ public class QuestSystem : RagnarComponent
 		completedQuestList = new List<Quest>();
 		activeQuestList = new List<Quest>();
 
-		currentScene = GameObject.Find("LevelManager");
-		level = currentScene.GetComponent<Level_1>().level;
-		if (level == 0)
-			level = currentScene.GetComponent<Level_2>().level;
-		if (level == 0)
-			level = currentScene.GetComponent<Level_3>().level;
+		if (SceneManager.currentSceneName == "build")
+			level = 1;
+		if (SceneManager.currentSceneName == "build2")
+			level = 2;
+		if (SceneManager.currentSceneName == "build3")
+			level = 3;
 
 		activeQuestNames = GameObject.Find("Titulo Activas");
 		completedQuestNames = GameObject.Find("Titulo Completadas");
