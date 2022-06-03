@@ -45,6 +45,30 @@ void ScriptMovement(MonoObject* go, float x, float y, float z)
 	cam->ScriptMovement(x, y, z);
 }
 
+void SetLock(MonoObject* go, bool ret)
+{
+	CameraComponent* cam = GetComponentMono<CameraComponent*>(go);
+	cam->lock = ret;
+}
+
+float GetLock(MonoObject* go)
+{
+	CameraComponent* cam = GetComponentMono<CameraComponent*>(go);
+	return cam->lock;
+}
+
+void SetHorizontalAngle(MonoObject* go, float ret)
+{
+	CameraComponent* cam = GetComponentMono<CameraComponent*>(go);
+	cam->horizontalAngle = ret;
+}
+
+float GetHorizontalAngle(MonoObject* go)
+{
+	CameraComponent* cam = GetComponentMono<CameraComponent*>(go);
+	return cam->horizontalAngle;
+}
+
 MonoObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);

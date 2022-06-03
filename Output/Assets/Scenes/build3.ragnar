@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 401687328,
+                    "pointer": 448538568,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -10.873706817626953,
+                        -5.0532989501953125,
                         0,
-                        70.443649291992188
+                        72.658401489257812
                     ],
                     "Quaternion": [
                         0,
-                        0.92699450254440308,
+                        0.97184222936630249,
                         0,
-                        0.37507489323616028
+                        0.23563249409198761
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.76895511150360107,
+                        0.47573864459991455,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -183,14 +183,14 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        -3.0517578125e-05,
+                        55.000034332275391,
+                        -49.999984741210938
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
                         0,
-                        0,
+                        -7.9287421073104269e-09,
                         0.93969261646270752
                     ],
                     "RotationEditor": [
@@ -210,9 +210,9 @@
                     "Vertical Fov": 0.36894726753234863,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -45.643856048583984,
-                        55,
-                        106.37646484375
+                        -27.953624725341797,
+                        55.000034332275391,
+                        117.1072998046875
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -222,14 +222,14 @@
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -10.873706817626953,
+                        -5.0532989501953125,
                         0,
-                        70.443649291992188
+                        72.658401489257812
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 135.94212341308594,
+                    "Horizontal Angle": 152.7421875,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -402,7 +402,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 401686112,
+                    "pointer": 448535224,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -4257,9 +4257,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -11845,6 +11845,70 @@
             ]
         },
         {
+            "UUID": 1488202145,
+            "Parent UUID": 1433371849,
+            "Name": "Collider",
+            "Active": false,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.080809623003005981,
+                        6.3839082717895508,
+                        34.409049987792969
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_colliders__Collider.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
             "UUID": 313844809,
             "Parent UUID": 417171234,
             "Name": "Quest System",
@@ -11884,7 +11948,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 401686264,
+                    "pointer": 391831184,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -12765,13 +12829,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 401678664,
+                    "pointer": 532920136,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 60305176,
+                    "barrelLocations": 220475160,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },

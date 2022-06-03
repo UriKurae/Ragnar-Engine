@@ -12,6 +12,7 @@ public class Level_3 : RagnarComponent
 
     private GameObject SceneAudio;
     private Transform camera;
+    private Transform cameraController;
     public void Start()
 	{
         Input.SetCursorState(0);
@@ -27,16 +28,21 @@ public class Level_3 : RagnarComponent
         chrono.SetTextPosition(-26, -4);
         timer = new Chronometer();
         camera = GameObject.Find("Camera").transform;
+        cameraController = GameObject.Find("cameraController").transform;
 
         if (SaveSystem.fromContinue)
         {
-            TimerData data = SaveSystem.LoadTimer();
+            LevelData data = SaveSystem.LoadLevel();
             timer.timer = data.timer;
+            cameraController.globalPosition = new Vector3(data.posCam[0], data.posCam[1], data.posCam[2]);
+            cameraController.globalRotation = new Quaternion(data.rotCam[0], data.rotCam[1], data.rotCam[2], data.rotCam[3]);
+            GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle = data.angle;
         }
         else
         {
             SaveSystem.SaveScene();
-            SaveSystem.SaveTimer(timer.timer);
+            bool[] ret = { true, true, true };
+            SaveSystem.SaveLevel(timer.timer, cameraController.globalPosition, cameraController.globalRotation, GameObject.Find("Camera").GetComponent<Camera>().horizontalAngle, ret);
         }
 
         // PLAYERS
@@ -49,7 +55,7 @@ public class Level_3 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 4,
-            pos = new Vector3(0.0f, -2.68f, 65.58f)
+            pos = new Vector3(0.0f, -4, 65.58f)
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -108,7 +114,7 @@ public class Level_3 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 3,
-            pos = new Vector3(-4.45f, -2.68f, 65.58f)
+            pos = new Vector3(-4.45f, -4, 65.58f)
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -167,7 +173,7 @@ public class Level_3 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 5,
-            pos = new Vector3(-1.36f, -2.68f, 68.81f)
+            pos = new Vector3(-1.36f, -4, 68.81f)
         };
         characters[2].abilities[0] = new Abilities
         {
@@ -247,7 +253,7 @@ public class Level_3 : RagnarComponent
 
         enemies[3] = new Enemies
         {
-            name = "Basic Enemy 4",
+            name = "Tank Enemy 4",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_4")
@@ -255,7 +261,7 @@ public class Level_3 : RagnarComponent
 
         enemies[4] = new Enemies
         {
-            name = "Basic Enemy 5",
+            name = "Tank Enemy 5",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_static_5")

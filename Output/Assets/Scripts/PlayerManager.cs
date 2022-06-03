@@ -94,7 +94,7 @@ public class PlayerManager : RagnarComponent
         ability3Bg = GameObject.Find("Ability3Bg").GetComponent<UIImage>();
         ability4Bg = GameObject.Find("Ability4Bg").GetComponent<UIImage>();
 
-        if (SceneManager.currentSceneName == "build")
+        if (SceneManager.currentSceneName == "build" && !SaveSystem.fromContinue)
         {
             canDoAbility1 = false;
             ability1Bg.SetImageGeneralColor(128, 128, 128);
@@ -160,29 +160,41 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
-            SpawnArea(State.ABILITY_1);
+        if(characters[characterSelected].abilities[0].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
+                SpawnArea(State.ABILITY_1);
+        }
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
-            SpawnArea(State.ABILITY_2);
+        if (characters[characterSelected].abilities[1].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
+                SpawnArea(State.ABILITY_2);
+        }
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
-            SpawnArea(State.ABILITY_3);
+        if (characters[characterSelected].abilities[2].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
+                SpawnArea(State.ABILITY_3);
+        }
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility4)
-            SpawnArea(State.ABILITY_4);
+        if (characters[characterSelected].abilities[3].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead && canDoAbility4)
+                SpawnArea(State.ABILITY_4);
+        }
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
@@ -201,7 +213,7 @@ public class PlayerManager : RagnarComponent
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (players.Length != 1 && playableCharacter == characters[1] && (playableCharacter.state == State.ABILITY_4)))
         {
             radius = 0f;
-            if (playableCharacter == characters[0]) radius = 13f;
+            if (playableCharacter == characters[0]) radius = 20.2f;
             else if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
@@ -458,7 +470,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 3;
             case 3:
@@ -477,7 +488,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 2;
             case 2:
@@ -496,7 +506,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 1;
             case 1:
@@ -515,7 +524,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 break;
         }
@@ -536,18 +544,21 @@ public class PlayerManager : RagnarComponent
     {
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
+        bool[] ret = { true, true, true};
+        Transform cam = GameObject.Find("cameraController").transform;
         switch (SceneManager.currentSceneName)
         {
             case "build":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                bool[] abi = { canDoAbility1, canDoAbility2 ,canDoAbility3};
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, abi);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }

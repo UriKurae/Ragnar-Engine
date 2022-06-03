@@ -233,6 +233,7 @@ float GetDistanceBetween(MonoObject* vector1, MonoObject* vector2)
 {
 	float3 vec1 = app->moduleMono->UnboxVector(vector1);
 	float3 vec2 = app->moduleMono->UnboxVector(vector2);
+	DEBUG_LOG("%f", vec1.Distance(vec2));
 	return vec1.Distance(vec2);
 }
 MonoObject* RotateY(MonoObject* vector, float anglesDegrees)
@@ -615,6 +616,13 @@ void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 	gameObject->EnableDisableActive(value);
 }
+
+MonoBoolean GetHasBeenUpdate(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->hasBeenUpdate;
+}
+
 MonoBoolean GetActiveComponent(MonoObject* go)
 {
 	Component* comp = GetComponentMono<Component*>(go);
@@ -842,6 +850,16 @@ MonoObject* GetRegionGame()
 void RequestDamageFeedback()
 {
 	app->renderer3D->RequestDamageFeedback();
+}
+
+void RequestScreenRectangle(MonoObject* color)
+{
+	app->renderer3D->RequestScreenRectangle(app->moduleMono->UnboxQuat(color).CastToFloat4());
+}
+
+void EndRequestScreenRectangle()
+{
+	app->renderer3D->EndRequestScreenRectangle();
 }
 
 // Dialogue System ======================================
