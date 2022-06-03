@@ -147,7 +147,7 @@ bool Physics3D::PreUpdate(float dt)
 					}
 				}	
 				else // OnTriggerExit
-				{
+				{					
 					if (obAobject->GetOnTrigger() && !obAobject->trigger && obBobject->trigger && obAobject->owner->GetComponent<ScriptComponent>())
 					{
 						script = obAobject->owner->GetComponent<ScriptComponent>();

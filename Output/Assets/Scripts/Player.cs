@@ -72,6 +72,7 @@ public class Player : RagnarComponent
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
         sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
+        rb.IgnoreCollision(sound, true);
         gameObject.AddChild(sound);
         //sound.transform.globalPosition = gameObject.transform.globalPosition;
 
@@ -157,6 +158,7 @@ public class Player : RagnarComponent
                                 ReloadState();
                                 uiCrouch.isActive = false;
                             }
+                            rb.IgnoreCollision(sound, true);
                         }
 
                         // Run
@@ -393,8 +395,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
-            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-            system.levelFinished = true;
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
@@ -407,8 +408,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger6")
         {
-            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-            system.midLevel = true;
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().midLevel = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
@@ -421,8 +421,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger10")
         {
-            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-            system.levelFinished = true;
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
