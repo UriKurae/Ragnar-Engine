@@ -121,9 +121,13 @@ public class BasicEnemy : RagnarComponent
     }
     public void OnCreation()
     {
+        Debug.Log("Hola, he llegado!!");
         players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("Hola, he llegado Player!!");
         agents = gameObject.GetComponent<NavAgent>();
+        Debug.Log("Hola, he llegado!! NavAgent");
         audioComponent = gameObject.GetComponent<AudioSource>();
+        Debug.Log("Hola, he llegado!! AudioSource");
     }
     public void Update()
     {
