@@ -362,11 +362,14 @@ public class PlayerManager : RagnarComponent
 
                     if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                     {
+                        obj.transform.localRotation = players[characterSelected].GetComponent<Rigidbody>().GetBodyRotation();
+
                         players[characterSelected].AddChild(obj);
 
                         //Position
-                        obj.transform.localPosition = new Vector3(0, 2, 0);
-                        obj.transform.localRotation = Quaternion.identity;
+                        obj.transform.localPosition = Vector3.zero;
+                        obj.transform.localRotation = Quaternion.RotateAroundAxis(new Vector3(0, 1, 0), 0.0174532925199432957f * 120);
+                        obj.transform.localPosition = new Vector3(-1.8f, 1, 0.55f);
 
                         //Animations
                         obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
