@@ -218,8 +218,6 @@ public class Player : RagnarComponent
             //SaveTest File for Debugging
             if (pendingToDelete && (animationComponent.GetLoopTime() > animationComponent.GetDuration() - 1))
             {
-                Debug.Log(animationComponent.GetLoopTime().ToString());
-                Debug.Log(animationComponent.GetDuration().ToString());
                 deadPartSys.Play();
             }
 
