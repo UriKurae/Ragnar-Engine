@@ -91,7 +91,7 @@ public class BasicEnemy : RagnarComponent
             }
         }
 
-        initialSpeed = agents.speed;
+        initialSpeed = 6;
 
         childs = gameObject.childs;
 
