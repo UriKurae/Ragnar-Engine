@@ -357,7 +357,7 @@ public class QuestSystem : RagnarComponent
 				if (enemiesTrap == 3)
                 {
 					CompleteQuest(GetQuestByID(21));
-					enemiesGrenade = -100;
+					enemiesTrap = -100;
 				}
 				if (enemiesWhistle == 3)
                 {
