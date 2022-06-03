@@ -62,6 +62,7 @@ public class TankEnemy : RagnarComponent
     public bool canLookOut = false;
     int retardedFrames;
 
+    public bool enterStunner = true;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -146,6 +147,7 @@ public class TankEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -246,6 +248,11 @@ public class TankEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -254,6 +261,11 @@ public class TankEnemy : RagnarComponent
                 {
                     isDying = true;
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithChani = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
         }
@@ -279,6 +291,12 @@ public class TankEnemy : RagnarComponent
                 audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
+                if (enterStunner)
+                {
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -296,6 +314,11 @@ public class TankEnemy : RagnarComponent
                     }
                 }
                 animation.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
+                system.killWithStilgar = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
             if (other.gameObject.name == "Whistle")
             {
@@ -303,6 +326,8 @@ public class TankEnemy : RagnarComponent
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.enemiesWhistle++;
             }
             if (other.gameObject.name == "Trap")
             {
@@ -311,6 +336,8 @@ public class TankEnemy : RagnarComponent
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.enemiesTrap++;
             }
         }
     }
