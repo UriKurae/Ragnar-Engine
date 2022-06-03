@@ -150,9 +150,9 @@ public class BasicEnemy : RagnarComponent
                     {
                         Patrol();
                     }
-                }
-                if (canLookOut)
-                    LookOut(retardedFrames);
+                    if (canLookOut)
+                        LookOut(retardedFrames);
+                }                
 
                 if (stunnedTimer >= 0)
                 {
@@ -244,8 +244,6 @@ public class BasicEnemy : RagnarComponent
                     }
                     animationComponent.PlayAnimation("Dying");
                 }
-                // WHEN RUNES FUNCTIONAL
-                // deathTimer = 0f;
             }
             if (other.gameObject.tag == "Player")
             {
@@ -275,14 +273,11 @@ public class BasicEnemy : RagnarComponent
                     isDying = true;
                     animationComponent.PlayAnimation("Dying");
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // EXPLOSION AREA
             }
         }
     }
 
-    public void OnTrigger(Rigidbody other)
+    public void OnTriggerEnter(Rigidbody other)
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
@@ -326,9 +321,6 @@ public class BasicEnemy : RagnarComponent
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
-
-                // WHEN RUNES FUNCTIONAL
-                // STUN (BLIND) 3s
             }
             if (other.gameObject.name == "Trap")
             {
@@ -343,30 +335,33 @@ public class BasicEnemy : RagnarComponent
 
     public void LookOut(int frames)
     {
-        if ((frames == retardedFrames)? PerceptionCone() : PlayerIsNear())
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled && !stunned)
         {
-            coneTimer += Time.deltaTime * frames;
-            if (coneTimer >= coneMaxTime)
+            if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
             {
-                agents.speed = initialSpeed * 1.2f;
-                Shoot();
+                coneTimer += Time.deltaTime * frames;
+                if (coneTimer >= coneMaxTime)
+                {
+                    agents.speed = initialSpeed * 1.2f;
+                    Shoot();
+                }
             }
-        }
-        else
-        {
-            agents.speed = initialSpeed;
-            coneTimer -= Time.deltaTime * frames;
-            if (coneTimer < 0) coneTimer = 0;
-        }
-        if (!canShoot && shootCooldown >= 0)
-        {
-            shootCooldown -= Time.deltaTime * frames;
-            if (shootCooldown < 0)
+            else
             {
-                shootCooldown = 0f;
-                canShoot = true;
+                agents.speed = initialSpeed;
+                coneTimer -= Time.deltaTime * frames;
+                if (coneTimer < 0) coneTimer = 0;
             }
-        }
+            if (!canShoot && shootCooldown >= 0)
+            {
+                shootCooldown -= Time.deltaTime * frames;
+                if (shootCooldown < 0)
+                {
+                    shootCooldown = 0f;
+                    canShoot = true;
+                }
+            }
+        }        
         canLookOut = false;
     }
 
@@ -386,9 +381,10 @@ public class BasicEnemy : RagnarComponent
     {
         for (int i = 0; i < players.Length; i++)
         {
-            if ((gameObject.transform.globalPosition - players[i].transform.globalPosition).magnitude <= radius)
+            Vector3 vecDir = players[i].transform.globalPosition - gameObject.transform.globalPosition;
+            if ((vecDir).magnitude <= radius)
             {
-                if (Transform.GetAngleBetween(gameObject.transform.globalPosition, players[i].transform.globalPosition) <= angle * 0.5f)
+                if (Transform.GetAngleBetween(gameObject.transform.forward, vecDir) <= angle * 0.5f)
                 {
                     if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
                     {
