@@ -248,7 +248,7 @@ public class Player : RagnarComponent
             Time.timeScale = 1.0f;
     }
 
-    private void PlayerPause()
+    public void PlayerPause()
     {
         agent.ClearPath();
         move = Movement.IDLE;

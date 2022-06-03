@@ -101,6 +101,7 @@ public class QuestSystem : RagnarComponent
 	public bool completeStunner = false;
 	public int enemiesTrap = 0;
 	public int enemiesWhistle = 0;
+	private bool changePage = false;
 
 	// Easing
 	float actualDt = 0;
@@ -263,6 +264,11 @@ public class QuestSystem : RagnarComponent
 	}
 	public void Update()
 	{
+		if(changePage)
+        {
+			changePage = false;
+			GameObject.Find("PlayerManager").GetComponent<PlayerManager>().GetPlayerSelected().PlayerPause();
+        }
 		// Logic from quests
 		switch (level)
         {
@@ -541,21 +547,20 @@ public class QuestSystem : RagnarComponent
 				activeButton.GetComponent<UIButton>().SetButtonTextColor(255, 255, 255);
 				showActive = true;
 				showCompleted = false;
-				
+				changePage = true;
 				break;
 		}
 
 		int b = completedButton.GetComponent<UIButton>().GetButtonState();
 		switch (b)
 		{
-
 			case 3:
 				// pressed mode
 				activeButton.GetComponent<UIButton>().SetButtonTextColor(81, 81, 81);
 				completedButton.GetComponent<UIButton>().SetButtonTextColor(255, 255, 255);
 				showActive = false;
 				showCompleted = true;
-				
+				changePage = true;
 				break;
 		}
 	}
