@@ -58,6 +58,9 @@ public class BackStab_2 : RagnarComponent
 				}
 			}
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
+			QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+			system.hasKilledEnemies = true;
+			system.killWithPaul = true;
 		}
 		if (boss != null)
 		{

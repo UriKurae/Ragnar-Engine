@@ -187,6 +187,7 @@ public class AirEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithPaul = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
                 }
@@ -204,6 +205,7 @@ public class AirEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
                 }
@@ -211,7 +213,6 @@ public class AirEnemy : RagnarComponent
             if (other.gameObject.name == "HunterSeeker")
             {
                 // WHEN RUNES FUNCTIONAL
-
             }
             // EXPLOSION AREA
         }
@@ -233,8 +234,11 @@ public class AirEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
+
+                    system.enemiesTrap++;
                 }
             }
         }

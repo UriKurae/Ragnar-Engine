@@ -91,6 +91,16 @@ public class QuestSystem : RagnarComponent
 	public int enemiesHunterSeeker = 0;
 	public int enemiesGrenade = 0;
 	//Check Quests Vars Lvl 3
+	public bool firstPhaseCompleted = false;
+	public bool lastPhaseCompleted = false;
+	public bool killWithPaul = false;
+	public bool killWithChani = false;
+	public bool killWithStilgar = false;
+	public bool triggerQuest = true;
+	public bool triggerStunner = true;
+	public bool completeStunner = false;
+	public int enemiesTrap = 0;
+	public int enemiesWhistle = 0;
 
 	// Easing
 	float actualDt = 0;
@@ -245,7 +255,7 @@ public class QuestSystem : RagnarComponent
 				CreateQuest(19, "Trabajo en equipo", "Mata 1 enemigo con cada personaje", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(20, "Mano fácil", "Gasta toda la munición de la Stunner", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(21, "Atrapado", "Consigue que 3 enemigos caigan en tus trampas", QuestState.ACTIVE, QuestType.SECONDARY);
-				CreateQuest(22, "Sirena", "Atrae 2 enemigos con un uso del silbido", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(22, "Sirena", "Atrae 3 enemigos con silbidos", QuestState.ACTIVE, QuestType.SECONDARY);
 				//Auxiliar quest (Solve a Bug)
 				CreateQuest(23, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
 				break;
@@ -311,7 +321,39 @@ public class QuestSystem : RagnarComponent
 				}
 				break;
 			case 3:
-				//TODO
+				if (firstPhaseCompleted)
+                {
+					CompleteQuest(GetQuestByID(16));
+					firstPhaseCompleted = false;
+				}
+				if (lastPhaseCompleted)
+				{
+					CompleteQuest(GetQuestByID(17));
+					if (!damageRecieved) CompleteQuest(GetQuestByID(18));
+
+					lastPhaseCompleted = false;
+				}
+				if (triggerQuest && (killWithChani && killWithPaul && killWithStilgar))
+                {
+					CompleteQuest(GetQuestByID(19));
+					triggerQuest = false;
+				}
+				if (triggerStunner && completeStunner)
+                {
+					CompleteQuest(GetQuestByID(20));
+					completeStunner = false;
+					triggerStunner = false;
+				}
+				if (enemiesTrap == 3)
+                {
+					CompleteQuest(GetQuestByID(21));
+					enemiesGrenade = -100;
+				}
+				if (enemiesWhistle == 3)
+                {
+					CompleteQuest(GetQuestByID(22));
+					enemiesWhistle = -100;
+				}
 				break;
 		}
 

@@ -61,6 +61,9 @@ public class BackStab : RagnarComponent
 				}
 			}
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
+			QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+			system.hasKilledEnemies = true;
+			system.killWithChani = true;
 		}
 		if (boss != null)
 		{

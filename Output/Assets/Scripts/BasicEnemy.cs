@@ -269,6 +269,7 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithPaul = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
                 }
@@ -292,6 +293,7 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
                 }
@@ -304,6 +306,7 @@ public class BasicEnemy : RagnarComponent
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
+                    system.killWithChani = true;
                     if (system.camouflageActive)
                         system.enemiesCamouflage++;
                 }
@@ -365,6 +368,7 @@ public class BasicEnemy : RagnarComponent
                 animationComponent.PlayAnimation("Dying");
                 QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                 system.hasKilledEnemies = true;
+                system.killWithStilgar = true;
                 if (system.camouflageActive)
                     system.enemiesCamouflage++;
             }
@@ -374,7 +378,8 @@ public class BasicEnemy : RagnarComponent
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
-
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.enemiesWhistle++;
                 // WHEN RUNES FUNCTIONAL
                 // STUN (BLIND) 3s
             }
@@ -385,6 +390,8 @@ public class BasicEnemy : RagnarComponent
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.enemiesTrap++;
             }
         }
     }

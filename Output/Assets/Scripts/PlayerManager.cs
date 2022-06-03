@@ -238,6 +238,11 @@ public class PlayerManager : RagnarComponent
         // Comprobador de cargas de habilidad. Si entra aqu�, significa que la habilidad no tiene cargas
         if (playableCharacter.abilities[(int)ability - 1].charges == 0)
         {
+            if (playableCharacter.abilities[(int)ability - 1].name == "Stunner")
+            {
+                QuestSystem questSystem = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                questSystem.completeStunner = true;
+            }
             playableCharacter.state = State.NONE;
         }
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
