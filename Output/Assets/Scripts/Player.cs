@@ -489,8 +489,7 @@ public class Player : RagnarComponent
         hitPoints -= dmg;
         getHitPartSys.Play();
 
-        QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-        system.damageRecieved = true;
+        GameObject.Find("Quest System").GetComponent<QuestSystem>().damageRecieved = true;
     }
 
     public void PlayAudioClip(string clip)

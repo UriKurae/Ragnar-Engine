@@ -298,8 +298,7 @@ public class UndistractableEnemy : RagnarComponent
                 stunPartSys.Play();
                 if (enterStunner)
                 {
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.enemiesGrenade++;
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesGrenade++;
                     enterStunner = false;
                 }
             }
@@ -332,8 +331,7 @@ public class UndistractableEnemy : RagnarComponent
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.enemiesTrap++;
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesTrap++;
             }
         }
     }

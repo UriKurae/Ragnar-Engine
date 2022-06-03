@@ -110,8 +110,7 @@ public class Knife : RagnarComponent
 	{
 		particleComponent.Pause();
 		canReload = true;
-		QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-		system.enemiesThrowingKnife++;
+		GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesThrowingKnife++;
 		gameObject.DeleteComponent<Rigidbody>(gameObject.GetComponent<Rigidbody>());
 	}
 

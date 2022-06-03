@@ -505,13 +505,13 @@ public class QuestSystem : RagnarComponent
 		}
 		else
         {
-			//completedQuests = "No completed quests available";
-			completedQuests += "Camuflaje:";
-			completedQuests += enemiesCamouflage.ToString();
-			completedQuests += "Hunter Seeker:";
-			completedQuests += enemiesHunterSeeker.ToString();
-			completedQuests += "Granada:";
-			completedQuests += enemiesGrenade.ToString();
+			completedQuests = "No completed quests available";
+			//completedQuests += "Camuflaje:";
+			//completedQuests += enemiesCamouflage.ToString();
+			//completedQuests += "Hunter Seeker:";
+			//completedQuests += enemiesHunterSeeker.ToString();
+			//completedQuests += "Granada:";
+			//completedQuests += enemiesGrenade.ToString();
 		}
 
 		position.Set(365.5f, 69.5f, 0);

@@ -61,6 +61,8 @@ public class BackStab_2 : RagnarComponent
 			QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
 			system.hasKilledEnemies = true;
 			system.killWithPaul = true;
+			if (system.camouflageActive)
+				system.enemiesCamouflage++;
 		}
 		if (boss != null)
 		{

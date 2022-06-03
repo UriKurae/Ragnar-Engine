@@ -64,6 +64,8 @@ public class BackStab : RagnarComponent
 			QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
 			system.hasKilledEnemies = true;
 			system.killWithChani = true;
+			if (system.camouflageActive)
+				system.enemiesCamouflage++;
 		}
 		if (boss != null)
 		{

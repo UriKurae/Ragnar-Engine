@@ -257,8 +257,7 @@ public class PlayerManager : RagnarComponent
         {
             if (playableCharacter.abilities[(int)ability - 1].name == "Stunner")
             {
-                QuestSystem questSystem = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                questSystem.completeStunner = true;
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
             }
             playableCharacter.state = State.NONE;
         }

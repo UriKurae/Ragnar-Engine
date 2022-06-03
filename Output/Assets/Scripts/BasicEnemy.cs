@@ -305,8 +305,7 @@ public class BasicEnemy : RagnarComponent
                 Distraction(other.gameObject.transform.globalPosition);
                 if (enterDistract)
                 {
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.enemiesDistractedStone++;
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesDistractedStone++;
                     enterDistract = false;
                 }
             }
@@ -320,8 +319,7 @@ public class BasicEnemy : RagnarComponent
                 stunPartSys.Play();
                 if (enterStunner)
                 {
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.enemiesGrenade++;
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesGrenade++;
                     enterStunner = false;
                 }
             }
@@ -353,8 +351,7 @@ public class BasicEnemy : RagnarComponent
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.enemiesWhistle++;
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesWhistle++;
             }
             if (other.gameObject.name == "Trap")
             {
@@ -363,8 +360,7 @@ public class BasicEnemy : RagnarComponent
                 Stun(7f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.enemiesTrap++;
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesTrap++;
             }
         }
     }
