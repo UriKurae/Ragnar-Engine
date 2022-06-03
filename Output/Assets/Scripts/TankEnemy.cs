@@ -27,7 +27,6 @@ public class TankEnemy : RagnarComponent
     // Player tracker
     public GameObject[] players;
     public GameObject[] colliders;
-    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -39,7 +38,7 @@ public class TankEnemy : RagnarComponent
 
     // Timers
     public float shootCooldown = 0f;
-    float deathTimer = -1f;
+    public bool isDying = false;
     float controlledCooldown = 10;
 
     float initialSpeed;
@@ -51,27 +50,23 @@ public class TankEnemy : RagnarComponent
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
+    private int radius = 12;
+    private int angle = 60;
 
     Animation animation;
     Rigidbody rigidbody;
     AudioSource audioSource;
-    AudioSource sceneAudioSource;
 
     GameObject[] childs;
     public ParticleSystem stunPartSys;
+    public bool canLookOut = false;
+    int retardedFrames;
 
-    public bool enterStunner = true;
     public void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-
-        agents = gameObject.GetComponent<NavAgent>();
         animation = gameObject.GetComponent<Animation>();
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        audioSource = gameObject.GetComponent<AudioSource>();
-        sceneAudioSource = SceneAudio.GetComponent<AudioSource>();
 
         if (state != EnemyState.DEATH)
         {
@@ -83,7 +78,7 @@ public class TankEnemy : RagnarComponent
             } 
         }
 
-        initialSpeed = agents.speed;
+        initialSpeed = 6;
 
         childs = gameObject.childs;
 
@@ -108,6 +103,14 @@ public class TankEnemy : RagnarComponent
         }
 
         stunPartSys.Pause();
+        retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
+    }
+
+    public void OnCreation()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        agents = gameObject.GetComponent<NavAgent>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -116,50 +119,23 @@ public class TankEnemy : RagnarComponent
         {
             if (!controlled)
             {
-                if (!pendingToDelete && deathTimer == -1)
+                if (!pendingToDelete && !isDying && !stunned)
                 {
-                    if (!stunned)
+                    if (returning)
                     {
-                        if (returning)
+                        agents.CalculatePath(initialPos);
+                        if (agents.MovePath())
                         {
-                            agents.CalculatePath(initialPos);
-                            if (agents.MovePath())
-                            {
-                                rigidbody.SetBodyRotation(initialRot);
-                                returning = false;
-                            }
-                        }
-                        if (!distracted && waypoints.Count != 0)
-                        {
-                            Patrol();
-                        }
-                        if (PerceptionCone())
-                        {
-                            coneTimer += Time.deltaTime;
-
-                            if (coneTimer >= coneMaxTime)
-                            {
-                                agents.speed = initialSpeed * 1.2f;
-                                Shoot();
-                            }
-                        }
-                        else
-                        {
-                            agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
-                            if (coneTimer < 0) coneTimer = 0;
-                        }
-                        if (!canShoot && shootCooldown >= 0)
-                        {
-                            Debug.Log(shootCooldown.ToString());
-                            shootCooldown -= Time.deltaTime;
-                            if (shootCooldown < 0)
-                            {
-                                shootCooldown = 0f;
-                                canShoot = true;
-                            }
+                            rigidbody.SetBodyRotation(initialRot);
+                            returning = false;
                         }
                     }
+                    if (!distracted && waypoints.Count != 0)
+                    {
+                        Patrol();
+                    }
+                    if (canLookOut)
+                        LookOut(retardedFrames);
                 }
 
                 if (stunnedTimer >= 0)
@@ -170,7 +146,6 @@ public class TankEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
-                        enterStunner = true;
                     }
                 }
 
@@ -224,14 +199,13 @@ public class TankEnemy : RagnarComponent
 
             }
         }
-        if (deathTimer >= 0)
+        if (isDying)
         {
             state = EnemyState.IS_DYING;
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (animation.HasFinished())
             {
                 audioSource.PlayClip("EMALE_DEATH4");
-                deathTimer = -1f;
+                isDying = false;
                 pendingToDelete = true;
             }
         }
@@ -244,17 +218,25 @@ public class TankEnemy : RagnarComponent
 
     public void OnCollision(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (other.gameObject.name == "Knife")
             {
                 // TURN TO ALERTED MODE (TYPE OF DISTRACTION)
+                distracted = true;
+                distractedTimer = 5f;
+                Distraction(Transform.RotateY(other.gameObject.transform.forward,180));
+            }
+            if (other.gameObject.tag == "Player")
+            {
+                Distraction(other.gameObject.transform.globalPosition);
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 2f;
+                    audioSource.PlayClip("EBASIC_BULLETHIT");
+                    isDying = true;
                     for (int i = 0; i < childs.Length; ++i)
                     {
                         if (childs[i].name == "KnifeParticles")
@@ -264,34 +246,20 @@ public class TankEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.hasKilledEnemies = true;
-                    system.killWithStilgar = true;
-                    if (system.camouflageActive)
-                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                if (deathTimer == -1f)
+                if (!isDying)
                 {
-                    deathTimer = 5f;
+                    isDying = true;
                     animation.PlayAnimation("Dying");
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.hasKilledEnemies = true;
-                    system.killWithChani = true;
-                    if (system.camouflageActive)
-                        system.enemiesCamouflage++;
                 }
-
-                // WHEN RUNES FUNCTIONAL
-                // STUN (BLIND) 3s
-                // EXPLOSION AREA STUN (BLIND)
             }
         }
     }
 
-    public void OnTrigger(Rigidbody other)
+    public void OnTriggerEnter(Rigidbody other)
     {
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
@@ -307,22 +275,18 @@ public class TankEnemy : RagnarComponent
             //// Chani =======================================
             if (other.gameObject.name == "SpiceGrenade")
             {
-                // WHEN RUNES FUNCTIONAL
-                // SHIELD DESTROYED
-                // STUN (BLIND) 5s
-                if (enterStunner)
-                {
-                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                    system.enemiesGrenade++;
-                    enterStunner = false;
-                }
+                // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
+                Stun(5f);
+                stunPartSys.Play();
             }
 
 
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                deathTimer = 2f;
+                audioSource.PlayClip("WPN_SWORDHIT");
+                isDying = true;
                 for (int i = 0; i < childs.Length; ++i)
                 {
                     if (childs[i].name == "SwordSlashParticles")
@@ -332,11 +296,6 @@ public class TankEnemy : RagnarComponent
                     }
                 }
                 animation.PlayAnimation("Dying");
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.hasKilledEnemies = true;
-                system.killWithStilgar = true;
-                if (system.camouflageActive)
-                    system.enemiesCamouflage++;
             }
             if (other.gameObject.name == "Whistle")
             {
@@ -344,35 +303,84 @@ public class TankEnemy : RagnarComponent
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.enemiesWhistle++;
             }
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
+                audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
-                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-                system.enemiesTrap++;
             }
         }
     }
 
+    public void LookOut(int frames)
+    {
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING && !controlled && !stunned)
+        {
+            if ((frames == retardedFrames) ? PerceptionCone() : PlayerIsNear())
+            {
+                coneTimer += Time.deltaTime * retardedFrames;
+
+                if (coneTimer >= coneMaxTime)
+                {
+                    agents.speed = initialSpeed * 1.2f;
+                    Shoot();
+                }
+            }
+            else
+            {
+                agents.speed = initialSpeed;
+                coneTimer -= Time.deltaTime * retardedFrames;
+                if (coneTimer < 0) coneTimer = 0;
+            }
+            if (!canShoot && shootCooldown >= 0)
+            {
+                shootCooldown -= Time.deltaTime * retardedFrames;
+                if (shootCooldown < 0)
+                {
+                    shootCooldown = 0f;
+                    canShoot = true;
+                }
+            }
+        }            
+        canLookOut = false;
+    }
     private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 12, players, players.Length, "Collider", Time.deltaTime);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 12, players, players.Length, "Collider", coneTimer/coneMaxTime);
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
 
+    public bool PlayerIsNear()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            Vector3 vecDir = players[i].transform.globalPosition - gameObject.transform.globalPosition;
+            if ((vecDir).magnitude <= radius)
+            {
+                if (Transform.GetAngleBetween(gameObject.transform.forward, vecDir) <= angle * 0.5f)
+                {
+                    if (players[i].GetComponent<Player>().invisible || players[i].GetComponent<Player>().dead || players[i].GetComponent<Player>().isHidden)
+                        return false;
+
+                    if (RayCast.HitToTag(gameObject.transform.globalPosition, players[i].transform.globalPosition, "Player") != null)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void Shoot()
     {
-        sceneAudioSource.SetState("MUSIC", "LEVEL1_BATTLE");
+        audioSource.SetState("MUSIC", "LEVEL1_BATTLE");
 
         if (canShoot)
         {
@@ -383,9 +391,9 @@ public class TankEnemy : RagnarComponent
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
 
-            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);            
-            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos);            
             bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;
