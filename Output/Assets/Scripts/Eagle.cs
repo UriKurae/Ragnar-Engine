@@ -42,6 +42,7 @@ public class Eagle : RagnarComponent
         //rightParticles.Play();
 
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        gameObject.isInteractuable = false;
     }
 	public void Update()
 	{
@@ -51,10 +52,9 @@ public class Eagle : RagnarComponent
             //leftParticles.Pause();
             //rightParticles.Pause();
             hasArrived = true;
-            GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition, true);
-            sound.GetComponent<Rigidbody>().SetRadiusSphere(6.7f);
-            //sound.transform.globalPosition = gameObject.transform.globalPosition;
+            GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
             sound.GetComponent<SoundAreaManager>().stablishedTimer = 6f;
+            sound.GetComponent<SoundAreaManager>().UpdateRadius(6.7f);
 
             cooldown = 6f;
             pendingToDelete = true;

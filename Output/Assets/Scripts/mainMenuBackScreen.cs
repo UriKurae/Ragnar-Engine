@@ -91,7 +91,7 @@ public class mainMenuBackScreen : RagnarComponent
 	GameObject optionsControlR;
 	GameObject optionsControlL;
 	GameObject presetText;
-	int actualControlOption = 0;
+	int actualControlOption = 1;
 
 	GameObject[] players;
 
@@ -173,12 +173,6 @@ public class mainMenuBackScreen : RagnarComponent
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 		lastWindowW= (InternalCalls.GetRegionGame().x / 2);
 
-        GameData load = SaveSystem.LoadGameConfig();
-        if (load != null)
-        {
-            LoadOptions(load);
-        }
-
         optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
@@ -216,17 +210,17 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsControl5.GetComponent<UIButton>().text = "R Click";
 		optionsControl6.GetComponent<UIButton>().text = "L Click";
 		optionsControl7.GetComponent<UIButton>().text = "Space";
-		optionsControl8.GetComponent<UIButton>().text = "Drag";
-		optionsControl9.GetComponent<UIButton>().text = "Crl L";
+		optionsControl8.GetComponent<UIButton>().text = "Q E";
+		optionsControl9.GetComponent<UIButton>().text = "WASD";
 		optionsControl10.GetComponent<UIButton>().text = "Drag";
 		optionsControl11.GetComponent<UIButton>().text = "F1";
 		optionsControl12.GetComponent<UIButton>().text = "F5";
 		optionsControl13.GetComponent<UIButton>().text = "F6";
-		optionsControl14.GetComponent<UIButton>().text = "A";
-		optionsControl15.GetComponent<UIButton>().text = "S";
-		optionsControl16.GetComponent<UIButton>().text = "D";
-		optionsControl17.GetComponent<UIButton>().text = "F";
-		optionsControl18.GetComponent<UIButton>().text = "G";
+		optionsControl14.GetComponent<UIButton>().text = "Z";
+		optionsControl15.GetComponent<UIButton>().text = "X";
+		optionsControl16.GetComponent<UIButton>().text = "C";
+		optionsControl17.GetComponent<UIButton>().text = "V";
+		optionsControl18.GetComponent<UIButton>().text = "B";
 		optionsControl19.GetComponent<UIButton>().text = "R Click";
 		optionsControl20.GetComponent<UIButton>().text = "L Click";
 		optionsControl21.GetComponent<UIButton>().text = "J";
@@ -255,13 +249,12 @@ public class mainMenuBackScreen : RagnarComponent
 
 		pos.Set(-sum + 750, y - 820, 36.1f);
 		optionsControl18.GetComponent<Transform2D>().position2D = pos;
-
-
-
-
-
 		presetText = GameObject.Find("presetText");
-		presetText.GetComponent<UIText>().text = "PRESET 1";
+		GameData load = SaveSystem.LoadGameConfig();
+		if (load != null)
+		{
+			LoadOptions(load);
+		}
 		OptionsBackHide();
     }
 
@@ -273,10 +266,15 @@ public class mainMenuBackScreen : RagnarComponent
         optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(load.shadowsEnabled);
         Light.shadowsEnabled = load.shadowsEnabled;
 
+		actualControlOption = load.actualControlOption;
+		if(actualControlOption == 0)
+			presetText.GetComponent<UIText>().text = "PRESET 1";
+		else presetText.GetComponent<UIText>().text = "PRESET 2";
+
 		UIDropDown languajeDropDown = optionsLanguaje.GetComponent<UIDropDown>();
 		languajeDropDown.SetDropDownLenguage(load.language);
 		languajeDropDown.SetSelected(load.language);
-    }
+	}
 
     void SaveOptions()
     {
@@ -284,7 +282,7 @@ public class mainMenuBackScreen : RagnarComponent
             optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked(),
             optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked(),
             optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked(),
-            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje());
+            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje(), actualControlOption);
         SaveSystem.SaveGameConfig(ej);
     }
 

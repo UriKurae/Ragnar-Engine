@@ -71,7 +71,12 @@ bool GameObject::Update(float dt)
 		}
 
 		if (app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum()->Intersects(globalAabb) || !globalAabb.IsFinite() || tag == "Player" || tag == "Ability" || components[i]->type == ComponentType::PARTICLE_SYSTEM)
+		{
+			hasBeenUpdate = true;
 			components[i]->Update(dt);
+		}
+		else
+			hasBeenUpdate = false;
 	}
 
 	for (int i = 0; i < children.size(); ++i)

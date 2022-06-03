@@ -35,21 +35,20 @@ public class BackStab_2 : RagnarComponent
 			backstabed = true;
 			player.GetComponent<Animation>().PlayAnimation("Ability1");
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
-			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
-			behind.y = -0.8f;
-			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
+			//Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
+			//player.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy" && (selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<BasicEnemy>().state != EnemyState.DEATH))
 			{ 
-                selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
-            }
-			if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy" && (selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.DEATH))
+                selectedEnemy.GetComponent<BasicEnemy>().isDying = true;
+			}
+			else if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy" && (selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<UndistractableEnemy>().state != EnemyState.DEATH))
 			{
-                selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
-            }
-			if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy" && (selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.DEATH))
+                selectedEnemy.GetComponent<UndistractableEnemy>().isDying = true;
+			}
+			else if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy" && (selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.IS_DYING || selectedEnemy.GetComponent<TankEnemy>().state != EnemyState.DEATH))
 			{
-                selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
-            }
+                selectedEnemy.GetComponent<TankEnemy>().isDying = true;
+			}
 			GameObject[] childs = selectedEnemy.childs;
 			for (int i = 0; i < childs.Length; ++i)
 			{

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class Player : RagnarComponent
@@ -37,6 +38,7 @@ public class Player : RagnarComponent
     NavAgent agent;
     DialogueManager dialogue;
     GameObject sound;
+    SoundAreaManager soundManag;
 
     GameObject uiCrouch;
 
@@ -49,6 +51,8 @@ public class Player : RagnarComponent
     State abilityState = State.NONE;
     Actions action = Actions.NONE;
     Movement move = Movement.IDLE;
+
+    pauseMenuButton pause;
 
     /*
     DialogueManager dialogue;
@@ -70,7 +74,8 @@ public class Player : RagnarComponent
 
         sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
         gameObject.AddChild(sound);
-        //sound.transform.globalPosition = gameObject.transform.globalPosition;
+        soundManag = sound.GetComponent<SoundAreaManager>();
+        soundManag.UpdateRadius(0f);
 
         uiCrouch = GameObject.Find("UICrouch");
 
@@ -97,7 +102,7 @@ public class Player : RagnarComponent
             deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
         }
         getHitPartSys.Pause();
-
+        pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
         ReloadState();
     }
 
@@ -145,16 +150,14 @@ public class Player : RagnarComponent
                                 action = Actions.CROUCH;
                                 rb.SetHeight(0.6f); // 0.6 = 60%
                                 ReloadState();
-
-                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(1.0f);
+                                uiCrouch.isActive = true;
                             }
                             else if (action == Actions.CROUCH && isHidden == false)
                             {
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
                                 ReloadState();
-
-                                uiCrouch.GetComponent<UIImage>().SetImageAlpha(0.51f);
+                                uiCrouch.isActive = false;
                             }
                         }
 
@@ -223,11 +226,11 @@ public class Player : RagnarComponent
             if (pendingToDelete && animationComponent.HasFinished())
             {
                 Input.RestoreDefaultCursor();
-                String name = "";
-                if (gameObject.name == "Player") name = "Paul Atreides";
-                else if (gameObject.name == "Player_2") name = "Chani";
-                else if (gameObject.name == "Player_3") name = "Stilgar";
-                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
+                //String name = "";
+                //if (gameObject.name == "Player") name = "Paul Atreides";
+                //else if (gameObject.name == "Player_2") name = "Chani";
+                //else if (gameObject.name == "Player_3") name = "Stilgar";
+                //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
                 pendingToDelete = false;
                 //InternalCalls.Destroy(gameObject);
@@ -238,8 +241,9 @@ public class Player : RagnarComponent
                 abilityState = State.NONE;
         }
 
-        if (paused)
+        if (paused|| pause.abiltyfocused != 0)
             Time.timeScale = 0.0f;
+            
         else
             Time.timeScale = 1.0f;
     }
@@ -271,7 +275,7 @@ public class Player : RagnarComponent
 
                 walkPartSys.Pause();
                 runPartSys.Pause();
-                sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
+                soundManag.UpdateRadius(0f);
                 audioSourceComponent.StopCurrentClip("PAUL_WALKSAND");
                 break;
 
@@ -280,15 +284,15 @@ public class Player : RagnarComponent
                 {
                     case Actions.NONE:
                         animationComponent.PlayAnimation("Walk");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
+                        soundManag.UpdateRadius(2f);
                         break;
                     case Actions.CROUCH:
                         animationComponent.PlayAnimation("CrouchWalk");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
+                        soundManag.UpdateRadius(0f);
                         break;
                     case Actions.CARRY:
                         animationComponent.PlayAnimation("CorpseWalk");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(3f);
+                        soundManag.UpdateRadius(3f);
                         break;
                 }
 
@@ -300,11 +304,11 @@ public class Player : RagnarComponent
                 {
                     case Actions.NONE:
                         animationComponent.PlayAnimation("Run");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(5f);
+                        soundManag.UpdateRadius(5f);
                         break;
                     case Actions.CROUCH:
                         //gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
-                        //sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
+                        //soundManag.UpdateRadius(2f);
 
                         move = Movement.WALK;
                         agent.speed = speedBase;
@@ -312,7 +316,7 @@ public class Player : RagnarComponent
                         break;
                     case Actions.CARRY:
                         animationComponent.PlayAnimation("CorpseRun");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+                        soundManag.UpdateRadius(6f);
                         break;
                 }
 
@@ -352,6 +356,8 @@ public class Player : RagnarComponent
             SaveSystem.SaveScene();
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.tag == "Hidden" && isHidden == false)
         {
@@ -365,14 +371,26 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Trigger1")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(1);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger2")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(3);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         if (other.gameObject.name == "Trigger3")
         {
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
+            PlayerPause();
+            pause.SetFocusedAbility(2);
+            InternalCalls.Destroy(other.gameObject);
+            return;
         }
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
@@ -380,12 +398,6 @@ public class Player : RagnarComponent
             if(!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
-
-
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = false;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = false;
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = false;
-
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {

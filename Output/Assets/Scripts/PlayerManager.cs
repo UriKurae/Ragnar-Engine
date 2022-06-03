@@ -21,15 +21,15 @@ public class PlayerManager : RagnarComponent
     UIText cd3;
     UIText cd4;
 
-    GameObject Ability1Bg;
-    GameObject Ability2Bg;
-    GameObject Ability3Bg;
-    GameObject Ability4Bg;
+    UIImage ability1Bg;
+    UIImage ability2Bg;
+    UIImage ability3Bg;
+    UIImage ability4Bg;
 
     public bool canDoAbility1 = true;
     public bool canDoAbility2 = true;
     public bool canDoAbility3 = true;
-    public bool canDoAbility4=  true;
+    public bool canDoAbility4 = true;
 
     public float radius;
     public void Start()
@@ -79,11 +79,6 @@ public class PlayerManager : RagnarComponent
         cd3 = GameObject.Find("cd3").GetComponent<UIText>();
         cd4 = GameObject.Find("cd4").GetComponent<UIText>();
 
-        Ability1Bg = GameObject.Find("Ability1Bg");
-        Ability2Bg = GameObject.Find("Ability2Bg");
-        Ability3Bg = GameObject.Find("Ability3Bg");
-        Ability4Bg = GameObject.Find("Ability4Bg");
-
         lightHab = GameObject.Find("ControllableLight");
         if (SaveSystem.fromContinue)
         {
@@ -91,6 +86,23 @@ public class PlayerManager : RagnarComponent
         }
 
         camComponent = GameObject.Find("Camera").GetComponent<Camera>();
+        GameObject.Find("Background").GetComponent<pauseMenuButton>().FillPlayers();
+
+        // Abilities UI
+        ability1Bg = GameObject.Find("Ability1Bg").GetComponent<UIImage>();
+        ability2Bg = GameObject.Find("Ability2Bg").GetComponent<UIImage>();
+        ability3Bg = GameObject.Find("Ability3Bg").GetComponent<UIImage>();
+        ability4Bg = GameObject.Find("Ability4Bg").GetComponent<UIImage>();
+
+        if (SceneManager.currentSceneName == "build" && !SaveSystem.fromContinue)
+        {
+            canDoAbility1 = false;
+            ability1Bg.SetImageGeneralColor(128, 128, 128);
+            canDoAbility2 = false;
+            ability2Bg.SetImageGeneralColor(128, 128, 128);
+            canDoAbility3 = false;
+            ability3Bg.SetImageGeneralColor(128, 128, 128);
+        }        
     }
 
 	public void Update()
@@ -134,12 +146,7 @@ public class PlayerManager : RagnarComponent
             {
                 if (characters[j].abilities[i].onCooldown == true)
                 {
-
                     characters[j].abilities[i].counter += Time.deltaTime;
-                    if (characters[j] == playableCharacter)
-                    {  
-                        CooldownTimer(i);
-                    }
                     if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
                     {
                         characters[j].abilities[i].onCooldown = false;
@@ -153,29 +160,41 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
-            SpawnArea(State.ABILITY_1);
+        if(characters[characterSelected].abilities[0].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility1)
+                SpawnArea(State.ABILITY_1);
+        }
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
-            SpawnArea(State.ABILITY_2);
+        if (characters[characterSelected].abilities[1].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility2)
+                SpawnArea(State.ABILITY_2);
+        }
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
-            SpawnArea(State.ABILITY_3);
+        if (characters[characterSelected].abilities[2].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility3)
+                SpawnArea(State.ABILITY_3);
+        }
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead&&canDoAbility4)
-            SpawnArea(State.ABILITY_4);
+        if (characters[characterSelected].abilities[3].charges != 0)
+        {
+            if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead && canDoAbility4)
+                SpawnArea(State.ABILITY_4);
+        }
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
@@ -194,7 +213,7 @@ public class PlayerManager : RagnarComponent
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (players.Length != 1 && playableCharacter == characters[1] && (playableCharacter.state == State.ABILITY_4)))
         {
             radius = 0f;
-            if (playableCharacter == characters[0]) radius = 13f;
+            if (playableCharacter == characters[0]) radius = 20.2f;
             else if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
@@ -452,7 +471,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 3;
             case 3:
@@ -471,7 +489,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 2;
             case 2:
@@ -490,7 +507,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 goto case 1;
             case 1:
@@ -509,7 +525,6 @@ public class PlayerManager : RagnarComponent
                     lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
-                    Debug.Log("Character Changed");
                 }
                 break;
         }
@@ -530,18 +545,21 @@ public class PlayerManager : RagnarComponent
     {
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
+        bool[] ret = { true, true, true};
+        Transform cam = GameObject.Find("cameraController").transform;
         switch (SceneManager.currentSceneName)
         {
             case "build":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                bool[] abi = { canDoAbility1, canDoAbility2 ,canDoAbility3};
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, abi);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
-                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                SaveSystem.SaveLevel(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer, cam.globalPosition, cam.globalRotation, camComponent.horizontalAngle, ret);
                 GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }
@@ -584,11 +602,9 @@ public class PlayerManager : RagnarComponent
             case 0:
                 cd1.text = temp.ToString();
 
-                UIImage ability1UI = Ability1Bg.GetComponent<UIImage>();
-
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility1)
                 {
-                    ability1UI.SetImageGeneralColor(128, 128, 128);
+                    ability1Bg.SetImageGeneralColor(128, 128, 128);
                 }
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd1.text = "";
@@ -597,25 +613,23 @@ public class PlayerManager : RagnarComponent
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
-                        ability1UI.SetImageGeneralColor(11, 212, 0);
+                        ability1Bg.SetImageGeneralColor(11, 212, 0);
                     }
                     else if (playableCharacter.name == "Chani")
                     {
-                        ability1UI.SetImageGeneralColor(244, 60, 255);
+                        ability1Bg.SetImageGeneralColor(244, 60, 255);
                     }
                     else if (playableCharacter.name == "Stilgar")
                     {
-                        ability1UI.SetImageGeneralColor(0, 40, 255);
+                        ability1Bg.SetImageGeneralColor(0, 40, 255);
                     }
                 }
                 break;
             case 1:
                 cd2.text = temp.ToString();
 
-                UIImage ability2UI = Ability2Bg.GetComponent<UIImage>();
-
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility2)
-                    ability2UI.SetImageGeneralColor(128, 128, 128);
+                    ability2Bg.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd2.text = "";
@@ -624,25 +638,23 @@ public class PlayerManager : RagnarComponent
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
-                        ability2UI.SetImageGeneralColor(11, 212, 0);
+                        ability2Bg.SetImageGeneralColor(11, 212, 0);
                     }
                     else if (playableCharacter.name == "Chani")
                     {
-                        ability2UI.SetImageGeneralColor(244, 60, 255);
+                        ability2Bg.SetImageGeneralColor(244, 60, 255);
                     }
                     else if (playableCharacter.name == "Stilgar")
                     {
-                        ability2UI.SetImageGeneralColor(0, 40, 255);
+                        ability2Bg.SetImageGeneralColor(0, 40, 255);
                     }
                 }
                 break;
             case 2:
                 cd3.text = temp.ToString();
 
-                UIImage ability3UI = Ability3Bg.GetComponent<UIImage>();
-
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility3)
-                    ability3UI.SetImageGeneralColor(128, 128, 128);
+                    ability3Bg.SetImageGeneralColor(128, 128, 128);
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd3.text = "";
@@ -651,26 +663,24 @@ public class PlayerManager : RagnarComponent
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
-                        ability3UI.SetImageGeneralColor(11, 212, 0);
+                        ability3Bg.SetImageGeneralColor(11, 212, 0);
                     }
                     else if (playableCharacter.name == "Chani")
                     {
-                        ability3UI.SetImageGeneralColor(244, 60, 255);
+                        ability3Bg.SetImageGeneralColor(244, 60, 255);
                     }
                     else if (playableCharacter.name == "Stilgar")
                     {
-                        ability3UI.SetImageGeneralColor(0, 40, 255);
+                        ability3Bg.SetImageGeneralColor(0, 40, 255);
                     }
                 }
                 break;
             case 3:
                 cd4.text = temp.ToString();
 
-                UIImage ability4UI = Ability4Bg.GetComponent<UIImage>();
-
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility4)
                 {
-                    ability4UI.SetImageGeneralColor(128, 128, 128);
+                    ability4Bg.SetImageGeneralColor(128, 128, 128);
                 }
 
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
@@ -682,15 +692,15 @@ public class PlayerManager : RagnarComponent
                 {
                     if (playableCharacter.name == "Paul Atreides")
                     {
-                        ability4UI.SetImageGeneralColor(11, 212, 0);
+                        ability4Bg.SetImageGeneralColor(11, 212, 0);
                     }
                     else if (playableCharacter.name == "Chani")
                     {
-                        ability4UI.SetImageGeneralColor(244, 60, 255);
+                        ability4Bg.SetImageGeneralColor(244, 60, 255);
                     }
                    else if (playableCharacter.name == "Stilgar")
                    {
-                        ability4UI.SetImageGeneralColor(0, 40, 255);
+                        ability4Bg.SetImageGeneralColor(0, 40, 255);
                    }
                 }
                 break;

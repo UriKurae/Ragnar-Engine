@@ -43,6 +43,12 @@ public class loseScreen : RagnarComponent
 		AudioManager = GameObject.Find("AudioLoseScene");
 		Pos = new Vector3(0, 0, 0);
         AudioManager.GetComponent<AudioSource>().PlayClip("UI_LOSESCREEN");
+
+		Pos.Set(MenuImage.GetComponent<Transform2D>().position2D.x - 5, MenuImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+		MenuImage.GetComponent<Transform2D>().position2D = Pos;
+
+		Pos.Set(RetryImage.GetComponent<Transform2D>().position2D.x - 5, RetryImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+		RetryImage.GetComponent<Transform2D>().position2D = Pos;
 	}
 	void MenuAction()
 	{
