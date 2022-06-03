@@ -22,6 +22,7 @@ public class EnemyManager : RagnarComponent
 
         for(int i = 0; i < enemies.Length; i++)
         {
+            Debug.Log(i.ToString());
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
