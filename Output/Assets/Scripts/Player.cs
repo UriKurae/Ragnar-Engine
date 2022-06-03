@@ -365,7 +365,7 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
             PlayerPause();
             pause.SetFocusedAbility(1);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
             return;
         }
         if (other.gameObject.name == "Trigger2")
@@ -373,7 +373,7 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
             PlayerPause();
             pause.SetFocusedAbility(3);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
             return;
         }
         if (other.gameObject.name == "Trigger3")
@@ -381,7 +381,7 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
             PlayerPause();
             pause.SetFocusedAbility(2);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
             return;
         }
         // Dialogues =========================================================
