@@ -78,7 +78,7 @@ public class UndistractableEnemy : RagnarComponent
             }
         }
 
-        initialSpeed = agents.speed;
+        initialSpeed = 6;
 
         childs = gameObject.childs;
 
@@ -218,7 +218,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void OnCollision(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             if (other.gameObject.name == "Knife")
             {

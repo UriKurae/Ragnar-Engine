@@ -101,10 +101,8 @@ public class EnemyManager : RagnarComponent
                         enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete = false;
                         break;
                     case EnemyType.TANK:
-                        Debug.Log("CASE TANK");
                         enemyGOs[i].ChangeMesh("3_modeldeath");
                         //enemyGOs[i].GetComponent<TankEnemy>().stunPartSys.Pause();
-                        Debug.Log("TANK STUNPART SYS");
                         break;
                     case EnemyType.UNDISTRACTABLE:
                         enemyGOs[i].ChangeMesh("2_modeldeath");
@@ -128,7 +126,7 @@ public class EnemyManager : RagnarComponent
             // If go is on camera frustum update cone each x frames
             if (enemyGOs[i].name.Contains("Basic"))
             {
-                Debug.Log("BASIC" + enemyGOs[i].name);
+                //Debug.Log("BASIC" + enemyGOs[i].name);
                 if (enemyGOs[i].hasBeenUpdate && divResult == 0)
                     enemyGOs[i].GetComponent<BasicEnemy>().canLookOut = true;
                 else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
@@ -136,7 +134,7 @@ public class EnemyManager : RagnarComponent
             }
             else if (enemyGOs[i].name.Contains("Undistractable"))
             {
-                Debug.Log("UNDISTRACTABLE" + enemyGOs[i].name);
+                //Debug.Log("UNDISTRACTABLE" + enemyGOs[i].name);
                 if (enemyGOs[i].hasBeenUpdate && divResult == 0)
                     enemyGOs[i].GetComponent<UndistractableEnemy>().canLookOut = true;
                 else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
@@ -144,7 +142,7 @@ public class EnemyManager : RagnarComponent
             }
             else if (enemyGOs[i].name.Contains("Dron"))
             {
-                Debug.Log("AIR" + enemyGOs[i].name);
+                //Debug.Log("AIR" + enemyGOs[i].name);
                 if (enemyGOs[i].hasBeenUpdate && divResult == 0)
                     enemyGOs[i].GetComponent<AirEnemy>().canLookOut = true;
                 else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)
@@ -152,7 +150,7 @@ public class EnemyManager : RagnarComponent
             }
             else if (enemyGOs[i].name.Contains("Tank"))
             {
-                Debug.Log("TANK" + enemyGOs[i].name);
+                //Debug.Log("TANK" + enemyGOs[i].name);
                 if (enemyGOs[i].hasBeenUpdate && divResult == 0)
                     enemyGOs[i].GetComponent<TankEnemy>().canLookOut = true;
                 else if (!enemyGOs[i].hasBeenUpdate && frames % retardedFramesOutsideFrustum == 0)

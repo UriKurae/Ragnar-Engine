@@ -91,7 +91,7 @@ public class BasicEnemy : RagnarComponent
             }
         }
 
-        initialSpeed = agents.speed;
+        initialSpeed = 6;
 
         childs = gameObject.childs;
 
@@ -121,13 +121,9 @@ public class BasicEnemy : RagnarComponent
     }
     public void OnCreation()
     {
-        Debug.Log("Hola, he llegado!!");
         players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("Hola, he llegado Player!!");
         agents = gameObject.GetComponent<NavAgent>();
-        Debug.Log("Hola, he llegado!! NavAgent");
         audioComponent = gameObject.GetComponent<AudioSource>();
-        Debug.Log("Hola, he llegado!! AudioSource");
     }
     public void Update()
     {
@@ -226,7 +222,7 @@ public class BasicEnemy : RagnarComponent
 
     public void OnCollision(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")

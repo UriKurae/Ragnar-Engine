@@ -45,7 +45,7 @@ public class Level_1 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 4,
-            pos = new Vector3(-43.69f, 0f, 199.77f)
+            pos = new Vector3(-48.28f, 0f, 196.07f)
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -115,9 +115,6 @@ public class Level_1 : RagnarComponent
             spawnPoint = GameObject.Find("basic_static_1"),
             coneRotate = true            
         };
-        Debug.Log("asdadsadasdasdasd");
-        Debug.Log(GameObject.Find("basic_static_1").transform.globalPosition.ToString());
-        Debug.Log("asd1111111111111111111111111111111111adsadasdasdasd");
 
         enemies[2] = new Enemies
         {
