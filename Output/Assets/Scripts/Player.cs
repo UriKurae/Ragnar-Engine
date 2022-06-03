@@ -349,20 +349,6 @@ public class Player : RagnarComponent
 
     public void OnTriggerEnter(Rigidbody other)
     {
-        if (other.gameObject.name == "CheckQuests")
-        {
-            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-            system.levelFinished = true;
-            other.gameObject.isActive = false;
-        }
-
-        if (other.gameObject.name == "MidLevel")
-        {
-            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
-            system.midLevel = true;
-            other.gameObject.isActive = false;
-        }
-
         if (other.gameObject.tag == "CheckPoint")
         {
             SaveSystem.SaveScene();
@@ -407,6 +393,8 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
+            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+            system.levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
@@ -419,6 +407,8 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger6")
         {
+            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+            system.midLevel = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
@@ -431,6 +421,8 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger10")
         {
+            QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+            system.levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
