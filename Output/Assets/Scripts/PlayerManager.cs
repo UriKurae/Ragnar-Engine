@@ -157,11 +157,6 @@ public class PlayerManager : RagnarComponent
         }
     }
 
-    public Player GetPlayerSelected()
-    {
-        return players[characterSelected].GetComponent<Player>();
-    }
-
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
@@ -210,6 +205,11 @@ public class PlayerManager : RagnarComponent
             playableCharacter.state = State.CARRYING;
             players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
         }
+    }
+
+    public Player GetPlayerSelected()
+    {
+        return players[characterSelected].GetComponent<Player>();
     }
 
     private void AbilityStateChanger()
