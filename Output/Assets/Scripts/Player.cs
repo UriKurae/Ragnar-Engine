@@ -384,6 +384,12 @@ public class Player : RagnarComponent
             other.gameObject.name = "www";
             return;
         }
+        if (other.gameObject.name == "Mision1")
+        {
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().doorsLevel = true;
+            other.gameObject.name = "www";
+            return;
+        }
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
         {

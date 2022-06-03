@@ -83,6 +83,7 @@ public class QuestSystem : RagnarComponent
 	public int enemiesThrowingKnife = 0;
 	public int enemiesDistractedStone = 0;
 	//Check Quests Vars Lvl 2
+	public bool doorsLevel = false;
 	public bool midLevel = false;
 	public bool camouflageActive = false;
 	public int enemiesCamouflage = 0;
@@ -302,6 +303,11 @@ public class QuestSystem : RagnarComponent
 					if (!damageRecieved) CompleteQuest(GetQuestByID(10));
 					if (!hasKilledEnemies) CompleteQuest(GetQuestByID(11));
 					levelFinished = false;
+				}
+				if (doorsLevel)
+				{
+					CompleteQuest(GetQuestByID(7));
+					doorsLevel = false;
 				}
 				if (midLevel)
                 {
