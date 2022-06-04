@@ -408,7 +408,7 @@ public class PlayerManager : RagnarComponent
                 if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
                 {
                     playableCharacter.abilities[(int)playableCharacter.state - 1].charges--;
-                    if (playableCharacter.name == "Stilgar" && playableCharacter.abilities[(int)playableCharacter.state - 1].charges == 0)
+                    if (playableCharacter.name == "Stilgar" && playableCharacter.abilities[(int)State.ABILITY_2 - 1].charges == 0)
                     {
                         GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
                     }

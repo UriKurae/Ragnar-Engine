@@ -276,7 +276,7 @@ public class TankEnemy : RagnarComponent
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
-            if (other.gameObject.name == "SoundArea")
+            if (other.gameObject.name == "SoundArea" && !stunned)
             {
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
@@ -319,7 +319,7 @@ public class TankEnemy : RagnarComponent
                 if (system.camouflageActive)
                     system.enemiesCamouflage++;
             }
-            if (other.gameObject.name == "Whistle")
+            if (other.gameObject.name == "Whistle" && !stunned)
             {
                 // NEED TO CREATE FUNCTION TO INITIATE STOPPED TIME WHEN ARRIVES TO THE POSITION
                 patrol = false;
