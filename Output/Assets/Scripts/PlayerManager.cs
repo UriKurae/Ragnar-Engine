@@ -207,6 +207,11 @@ public class PlayerManager : RagnarComponent
         }
     }
 
+    public Player GetPlayerSelected()
+    {
+        return players[characterSelected].GetComponent<Player>();
+    }
+
     private void AbilityStateChanger()
     {
         // Change Condition to all players
@@ -252,6 +257,7 @@ public class PlayerManager : RagnarComponent
         {
             playableCharacter.state = State.NONE;
         }
+        
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
@@ -401,7 +407,11 @@ public class PlayerManager : RagnarComponent
                 // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
                 if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
                 {
-                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
+                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges--;
+                    if (playableCharacter.name == "Stilgar" && playableCharacter.abilities[(int)State.ABILITY_2 - 1].charges == 0)
+                    {
+                        GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
+                    }
                 }
 
                 // Pone la habilidad en cooldown y el player en estado de NONE

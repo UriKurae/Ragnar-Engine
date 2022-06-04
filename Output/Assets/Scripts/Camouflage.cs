@@ -34,15 +34,18 @@ public class Camouflage : RagnarComponent
 		player.GetComponent<Material>().SetTexturePath(path);
 		playerScript.invisible = true;
     }
-	public bool Timer()//moltes gracies Isaac
+	public bool Timer()
 	{
+		QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
 		if (time1 > 0)
 		{
+			system.camouflageActive = true;
 			time1 -= Time.deltaTime;
 			return false;
 		}
 		else
 		{
+			system.camouflageActive = false;
 			return true;
 		}
 	}

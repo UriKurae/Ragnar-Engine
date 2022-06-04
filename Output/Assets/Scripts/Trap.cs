@@ -18,6 +18,7 @@ public class Trap : RagnarComponent
 		Vector3 pos = player.transform.globalPosition;
 
         gameObject.GetComponent<Rigidbody>().SetBodyPosition(pos);
+        gameObject.GetComponent<Rigidbody>().IgnoreCollision(player, true);
 		gameObject.transform.localPosition = pos;
 
         playerManagerScript = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();

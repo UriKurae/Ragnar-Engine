@@ -34,6 +34,7 @@ public class UndistractableEnemy : RagnarComponent
     public bool pendingToDelete = false;
     public bool controlled = false;
     public bool returning = false;
+    public bool enterStunner = true;
 
     // Timers
     public float shootCooldown = 0f;
@@ -146,6 +147,7 @@ public class UndistractableEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -236,6 +238,11 @@ public class UndistractableEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithPaul = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.tag == "Player")
@@ -257,6 +264,11 @@ public class UndistractableEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -265,6 +277,11 @@ public class UndistractableEnemy : RagnarComponent
                 {
                     isDying = true;
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithChani = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
         }
@@ -281,6 +298,11 @@ public class UndistractableEnemy : RagnarComponent
                 audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
+                if (enterStunner)
+                {
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -298,6 +320,11 @@ public class UndistractableEnemy : RagnarComponent
                     }
                 }
                 animation.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
+                system.killWithStilgar = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
             if (other.gameObject.name == "Trap")
             {
@@ -306,6 +333,7 @@ public class UndistractableEnemy : RagnarComponent
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesTrap++;
             }
         }
     }
