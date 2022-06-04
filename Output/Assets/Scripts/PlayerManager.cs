@@ -395,7 +395,7 @@ public class PlayerManager : RagnarComponent
                     obj.transform.localRotation = Quaternion.identity;
 
                     obj.GetComponent<Animation>().PlayAnimation("Picked");
-                    players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
 
                     playableCharacter.pickedEnemy = obj;
                 }
