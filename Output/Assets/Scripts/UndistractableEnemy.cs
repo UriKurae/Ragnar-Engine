@@ -165,10 +165,12 @@ public class UndistractableEnemy : RagnarComponent
             {
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
-                    agents.CalculatePath(agents.hitPosition);
-
+                    if (agents.CalculatePath(agents.hitPosition).Length > 0)
+                        animation.PlayAnimation("Walk");
                 }
-                agents.MovePath();
+                if (agents.MovePath())
+                    animation.PlayAnimation("Idle");
+
                 if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
                 {
                     backstab = true;
