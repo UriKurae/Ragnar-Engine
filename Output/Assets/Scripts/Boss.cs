@@ -57,7 +57,6 @@ public class Boss : RagnarComponent
 	int indexPlayerTarget;
 	bool jumping = false;
 	bool phase2Location = false;
-	bool playerDead = false;
 
 	// Phase 3 mechanics
 
@@ -429,12 +428,13 @@ public class Boss : RagnarComponent
 					//if (samePosition && distance <= 30.0f)
 					//{
 						cooldownCharge -= Time.deltaTime;
-						Debug.Log(cooldownCharge.ToString());
+						//Debug.Log(cooldownCharge.ToString());
 						if (cooldownCharge <= 0.0f)
 						{
 							charging = true;
 							agent.speed = 30.0f;
 							animationComponent.PlayAnimation("Run");
+							agent.CalculatePath(playerPos);
 						}
 					//}
      //               else if (!samePosition)
@@ -444,23 +444,48 @@ public class Boss : RagnarComponent
 				}
 				else if (charging && !attacking)
 				{
-					agent.MoveTo(playerPos);
-					if (Math.Abs(playerPos.magnitude - gameObject.transform.globalPosition.magnitude) <= 1.0f)
+					
+					agent.MovePath();
+					//agent.MoveTo(playerPos);
+					Vector3 playerCurrentPos = players[0].transform.globalPosition;
+					playerCurrentPos.y = 0;
+
+					Vector3 bossCurrentPos = gameObject.transform.globalPosition;
+					bossCurrentPos.y = 0;
+
+					
+					if (Math.Abs((playerCurrentPos - bossCurrentPos).magnitude) <= 3.0f)
 					{
-						agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.75f;
+						float testing2 = Math.Abs((playerCurrentPos - bossCurrentPos).magnitude);
+						Debug.Log("Grabbed Paul, distance is  " + testing2.ToString());
+						// Reset charging
 						charging = false;
 						agent.ClearPath();
 						cooldownCharge = 4.0f;
-						if (Math.Abs(players[0].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 1.0f)
-                        {
-							attacking = true;
-							animationComponent.PlayAnimation("Shield");
-                        }
+						agent.speed = players[0].GetComponent<NavAgent>().speed * 0.75f;
+
+						players[0].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
+						
+						players[0].GetComponent<Player>().stunned = true;
+						players[0].GetComponent<NavAgent>().ClearPath();
+						attacking = true;
+						animationComponent.PlayAnimation("Shield");
+					}
+					playerPos.y = 0;
+					if (Math.Abs((playerPos - bossCurrentPos).magnitude) <= 1.2f)
+					{
+						float testing = Math.Abs((playerPos - bossCurrentPos).magnitude);
+						Debug.Log("Distance is " + testing.ToString());
+						agent.speed = players[0].GetComponent<NavAgent>().speed * 0.75f;
+						charging = false;
+						agent.ClearPath();
+						cooldownCharge = 4.0f;	
 					}
 				}
 
 				if (attacking && animationComponent.HasFinished())
                 {
+					players[0].GetComponent<Player>().stunned = false;
 					attacking = false;
 					players[0].GetComponent<Player>().GetHit(1);
 				}
