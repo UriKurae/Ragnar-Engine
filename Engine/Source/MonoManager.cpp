@@ -175,6 +175,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::GetBodyRotation", GetBodyRotation);
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyVelocity", ApplyVelocity);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetRadiusSphere", SetRadiusSphere);
+	mono_add_internal_call("RagnarEngine.Rigidbody::EraseTrigger", EraseTrigger);
 	// Rigidbody =================
 
 	// Animation =================
