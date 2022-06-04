@@ -43,6 +43,8 @@ public class BasicEnemy : RagnarComponent
     public bool pendingToDelete = false;
     public bool controlled = false;
     public bool returning = false;
+    public bool enterDistract = true;
+    public bool enterStunner = true;
 
     // Timers
     public float shootCooldown = 0f;
@@ -158,6 +160,7 @@ public class BasicEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -168,6 +171,7 @@ public class BasicEnemy : RagnarComponent
                     {
                         distracted = false;
                         distractedTimer = -1f;
+                        enterDistract = true;
                     }
                 }
             }
@@ -242,6 +246,11 @@ public class BasicEnemy : RagnarComponent
                         }
                     }
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithPaul = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.tag == "Player")
@@ -263,6 +272,11 @@ public class BasicEnemy : RagnarComponent
                         }
                     }
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -271,6 +285,11 @@ public class BasicEnemy : RagnarComponent
                 {
                     isDying = true;
                     animationComponent.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithChani = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
         }
@@ -281,12 +300,17 @@ public class BasicEnemy : RagnarComponent
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
-            if (other.gameObject.name == "SoundArea")
+            if (other.gameObject.name == "SoundArea" && !stunned)
             {
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
                 distractedTimer = 5f;
                 Distraction(other.gameObject.transform.globalPosition);
+                if (enterDistract)
+                {
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesDistractedStone++;
+                    enterDistract = false;
+                }
             }
 
             //// Chani =======================================
@@ -296,6 +320,11 @@ public class BasicEnemy : RagnarComponent
                 audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
+                if (enterStunner)
+                {
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -313,13 +342,19 @@ public class BasicEnemy : RagnarComponent
                     }
                 }
                 animationComponent.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
+                system.killWithStilgar = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
-            if (other.gameObject.name == "Whistle")
+            if (other.gameObject.name == "Whistle" && !stunned)
             {
                 // NEED TO CREATE FUNCTION TO INITIATE STOPPED TIME WHEN ARRIVES TO THE POSITION
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesWhistle++;
             }
             if (other.gameObject.name == "Trap")
             {
@@ -328,6 +363,7 @@ public class BasicEnemy : RagnarComponent
                 Stun(7f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesTrap++;
             }
         }
     }

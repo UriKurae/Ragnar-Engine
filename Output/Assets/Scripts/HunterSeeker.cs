@@ -34,7 +34,6 @@ public class HunterSeeker : RagnarComponent
 
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
-		player.GetComponent<Animation>().PlayAnimation("Ability3");
 
 		leftParticles = GameObject.Find("LeftHunterParticles").GetComponent<ParticleSystem>();
 		rightParticles = GameObject.Find("RightHunterParticles").GetComponent<ParticleSystem>();
@@ -105,8 +104,7 @@ public class HunterSeeker : RagnarComponent
 	{
 		if (other.gameObject.tag == "Enemies")
         {
-			player.GetComponent<Animation>().PlayAnimation("Ability3Drop");
-
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesHunterSeeker++;
 			player.GetComponent<Player>().SetControled(true);
 			leftParticles.Pause();
 			rightParticles.Pause();

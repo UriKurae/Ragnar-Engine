@@ -73,6 +73,7 @@ public class Player : RagnarComponent
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
         sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
+        rb.IgnoreCollision(sound, true);
         gameObject.AddChild(sound);
         soundManag = sound.GetComponent<SoundAreaManager>();
         soundManag.UpdateRadius(0f);
@@ -159,6 +160,7 @@ public class Player : RagnarComponent
                                 ReloadState();
                                 uiCrouch.isActive = false;
                             }
+                            rb.IgnoreCollision(sound, true);
                         }
 
                         // Run
@@ -218,8 +220,6 @@ public class Player : RagnarComponent
             //SaveTest File for Debugging
             if (pendingToDelete && (animationComponent.GetLoopTime() > animationComponent.GetDuration() - 1))
             {
-                Debug.Log(animationComponent.GetLoopTime().ToString());
-                Debug.Log(animationComponent.GetDuration().ToString());
                 deadPartSys.Play();
             }
 
@@ -248,7 +248,7 @@ public class Player : RagnarComponent
             Time.timeScale = 1.0f;
     }
 
-    private void PlayerPause()
+    public void PlayerPause()
     {
         agent.ClearPath();
         move = Movement.IDLE;
@@ -373,7 +373,7 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility1 = true;
             PlayerPause();
             pause.SetFocusedAbility(1);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
             return;
         }
         if (other.gameObject.name == "Trigger2")
@@ -381,7 +381,7 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
             PlayerPause();
             pause.SetFocusedAbility(3);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
             return;
         }
         if (other.gameObject.name == "Trigger3")
@@ -389,7 +389,13 @@ public class Player : RagnarComponent
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility2 = true;
             PlayerPause();
             pause.SetFocusedAbility(2);
-            InternalCalls.Destroy(other.gameObject);
+            other.gameObject.name = "www";
+            return;
+        }
+        if (other.gameObject.name == "Mision1")
+        {
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().doorsLevel = true;
+            other.gameObject.name = "www";
             return;
         }
         // Dialogues =========================================================
@@ -401,6 +407,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
@@ -413,6 +420,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger6")
         {
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().midLevel = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
@@ -425,6 +433,7 @@ public class Player : RagnarComponent
         }
         if (other.gameObject.name == "DialogueTrigger10")
         {
+            GameObject.Find("Quest System").GetComponent<QuestSystem>().levelFinished = true;
             if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
@@ -493,6 +502,8 @@ public class Player : RagnarComponent
         gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
         hitPoints -= dmg;
         getHitPartSys.Play();
+
+        GameObject.Find("Quest System").GetComponent<QuestSystem>().damageRecieved = true;
     }
 
     public void PlayAudioClip(string clip)
