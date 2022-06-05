@@ -54,6 +54,9 @@ public class Player : RagnarComponent
 
     pauseMenuButton pause;
 
+    GameObject sword;
+    GameObject stunner;
+
     /*
     DialogueManager dialogue;
     dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
@@ -100,6 +103,8 @@ public class Player : RagnarComponent
             runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
             deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
+            sword = GameObject.Find("Sword");
+            stunner = GameObject.Find("Stunner");
         }
         getHitPartSys.Pause();
         pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
@@ -252,6 +257,11 @@ public class Player : RagnarComponent
         agent.ClearPath();
         move = Movement.IDLE;
         animationComponent.PlayAnimation("Talk");
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     private void ReloadState()
@@ -322,6 +332,12 @@ public class Player : RagnarComponent
                 runPartSys.Play();
                 break;
         }
+
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     private void Die()
@@ -337,6 +353,11 @@ public class Player : RagnarComponent
             InternalCalls.Destroy(GameObject.Find("Knife"));
         }
         InternalCalls.Destroy(sound);
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     public void OnCollision(Rigidbody other)

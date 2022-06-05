@@ -6,12 +6,16 @@ public class StunnerShot : RagnarComponent
     private float force = 2500;
     private bool pendingToDelete = false;
     private GameObject sceneAudio;
-
+    GameObject stunner;
     public void Start()
     {
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
         AimMethod();
+
+        stunner = GameObject.Find("Stunner");
+        stunner.isActive = true;
+        stunner.GetComponent<Animation>().PlayAnimation("Attack");
     }
 
     private void AimMethod()

@@ -32,6 +32,9 @@ public class PlayerManager : RagnarComponent
     public bool canDoAbility4 = true;
 
     public float radius;
+
+    GameObject sword;
+    GameObject stunner;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -102,7 +105,10 @@ public class PlayerManager : RagnarComponent
             ability2Bg.SetImageGeneralColor(128, 128, 128);
             canDoAbility3 = false;
             ability3Bg.SetImageGeneralColor(128, 128, 128);
-        }        
+        }
+
+        sword = GameObject.Find("Sword");
+        stunner = GameObject.Find("Stunner");
     }
 
 	public void Update()
@@ -333,21 +339,31 @@ public class PlayerManager : RagnarComponent
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_1);
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
+                    sword.isActive = true;
+                    sword.GetComponent<Animation>().PlayAnimation("Unseath");
+                    stunner.isActive = false;
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_2);
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
+                    stunner.isActive = true;
+                    stunner.GetComponent<Animation>().PlayAnimation("Unseath");
+                    sword.isActive = false;
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_3);
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
+                    sword.isActive = false;
+                    stunner.isActive = false;
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_4);
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
+                    sword.isActive = false;
+                    stunner.isActive = false;
                 }
                 break;
             default:
@@ -451,6 +467,8 @@ public class PlayerManager : RagnarComponent
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
             players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
+            sword.isActive = false;
+            stunner.isActive = false;
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;

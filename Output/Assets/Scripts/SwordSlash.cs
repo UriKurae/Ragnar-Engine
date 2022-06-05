@@ -6,6 +6,7 @@ public class SwordSlash : RagnarComponent
 	public float timeAlive = 0f;
 	public bool pendingToDelete = false;
     GameObject player;
+    GameObject sword;
 	public void Start()
     {
         timeAlive = 0.1f;
@@ -26,6 +27,8 @@ public class SwordSlash : RagnarComponent
         player.GetComponent<Player>().PlayAudioClip("WPN_SWORDHIT");
         player.GetComponent<Animation>().PlayAnimation("Ability1");
         GameObject.Find("SlashParticles").GetComponent<ParticleSystem>().Play();
+        sword = GameObject.Find("Sword");
+        sword.GetComponent<Animation>().PlayAnimation("Attack");
     }
 
     public void Update()
