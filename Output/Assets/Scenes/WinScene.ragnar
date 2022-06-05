@@ -259,7 +259,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 884442704,
+                    "pointer": 406519856,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1231,19 +1231,19 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.99702858924865723,
-                        0,
-                        -0.077032431960105896
+                        0.077032223343849182,
+                        -0,
+                        0.99702858924865723
                     ],
                     "RotationEditor": [
                         0,
-                        3.1415927410125732,
+                        0,
                         0
                     ],
                     "Scale": [
-                        1.0000081062316895,
-                        1,
-                        1.0000081062316895
+                        1.1700094938278198,
+                        1.1699999570846558,
+                        1.1700094938278198
                     ]
                 },
                 {
@@ -1269,7 +1269,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/char_stilgar_win__Mesh.fbx",
+                    "Path": "Assets\/Resources\/Animations\/char_stilgar_highpoly_win__Mesh.fbx",
                     "Active": true
                 },
                 {
@@ -1279,7 +1279,7 @@
                     "Animations": [
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_win__char_stilgar_win|char_stilgar_win.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_highpoly_win__char_stilgar_highpoly_win|Armature|mixamo.com|Layer0.fbx",
                             "Loop": true
                         }
                     ]
