@@ -368,11 +368,19 @@ void Physics3D::DeleteBody(RigidBodyComponent* body, std::string name)
 				}
 			}
 		}
-		for (std::vector<RigidBodyComponent*>::iterator i = bodies.begin(); i != bodies.end(); ++i)
+		for (std::vector<RigidBodyComponent*>::iterator it = bodies.begin(); it != bodies.end(); ++it)
 		{
-			if (*i._Ptr == body)
+			if (!(*it)->triggerList.empty())
 			{
-				bodies.erase(i);
+				if (std::find((*it)->triggerList.begin(), (*it)->triggerList.end(), body) != (*it)->triggerList.end())
+					(*it)->triggerList.erase(std::find((*it)->triggerList.begin(), (*it)->triggerList.end(), body));
+			}
+		}		
+		for (std::vector<RigidBodyComponent*>::iterator it = bodies.begin(); it != bodies.end(); ++it)
+		{
+			if (*it._Ptr == body)
+			{
+				bodies.erase(it);
 				break;
 			}
 		}
