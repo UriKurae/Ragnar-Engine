@@ -63,6 +63,9 @@ public class TankEnemy : RagnarComponent
     int retardedFrames;
 
     public bool enterStunner = true;
+
+    UIText buffCounter;
+    float buffTemp;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -105,6 +108,8 @@ public class TankEnemy : RagnarComponent
 
         stunPartSys.Pause();
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
+
+        buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
     }
 
     public void OnCreation()
@@ -191,10 +196,16 @@ public class TankEnemy : RagnarComponent
                     controlled = false;
                     returning = true;
                 }
+                buffTemp = controlledCooldown;
+                buffTemp = (float)Math.Round((double)buffTemp, 0);
+
+                buffCounter.text = buffTemp.ToString();
+
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
                     controlledCooldown = 0f;
+                    buffCounter.text = "";
                     controlled = false;
                     players[0].GetComponent<Player>().SetControled(true);
                     if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);

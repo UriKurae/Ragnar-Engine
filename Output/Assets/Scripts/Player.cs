@@ -76,7 +76,6 @@ public class Player : RagnarComponent
         rb.IgnoreCollision(sound, true);
         gameObject.AddChild(sound);
         soundManag = sound.GetComponent<SoundAreaManager>();
-        soundManag.UpdateRadius(0f);
 
         uiCrouch = GameObject.Find("UICrouch");
 

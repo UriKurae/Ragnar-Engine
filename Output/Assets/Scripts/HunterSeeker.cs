@@ -44,7 +44,11 @@ public class HunterSeeker : RagnarComponent
 	{
 		if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
 		{
-			agent.CalculatePath(agent.hitPosition);
+			GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+			if (enemy != null)
+				agent.CalculatePath(enemy.transform.globalPosition);
+			else
+				agent.CalculatePath(agent.hitPosition);
 			leftParticles.Play();
 			rightParticles.Play();
 		}

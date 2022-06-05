@@ -65,6 +65,7 @@ public class Rock : RagnarComponent
 			goRB.SetAsStatic();
 
 			GameObject sound = InternalCalls.InstancePrefab("SoundArea", gameObject.transform.globalPosition);
+			goRB.IgnoreCollision(sound, true);
 			sound.GetComponent<SoundAreaManager>().stablishedTimer = 2f;
 			sound.GetComponent<SoundAreaManager>().UpdateRadius(7.0f);
 

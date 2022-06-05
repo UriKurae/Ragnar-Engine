@@ -259,7 +259,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 377475880,
+                    "pointer": 391337112,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1031,13 +1031,13 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.99435293674468994,
+                        -0.10612443834543228,
                         0,
-                        0.1061243936419487
+                        0.99435293674468994
                     ],
                     "RotationEditor": [
                         0,
-                        3.1415927410125732,
+                        0,
                         0
                     ],
                     "Scale": [
@@ -1069,7 +1069,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/char_stilgar_lose__Mesh.fbx",
+                    "Path": "Assets\/Resources\/Animations\/char_stilgar_highpoly_lose__Mesh.fbx",
                     "Active": true
                 },
                 {
@@ -1079,7 +1079,7 @@
                     "Animations": [
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_lose__char_stilgar_lose|char_stilgar_lose.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/char_stilgar_highpoly_lose__char_stilgar_highpoly_lose|Armature|mixamo.com|Layer0.fbx",
                             "Loop": true
                         }
                     ]
