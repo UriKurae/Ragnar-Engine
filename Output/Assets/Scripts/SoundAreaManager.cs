@@ -14,7 +14,7 @@ public class SoundAreaManager : RagnarComponent
 	{
 		Light light = gameObject.childs[0].GetComponent<Light>();
 
-		light.intensity = 1f;
+		light.intensity = 0f;
 		light.constant = 0.15f;
 		light.linear = -0.2f;
 		light.quadratic = 0f;
