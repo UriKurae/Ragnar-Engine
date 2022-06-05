@@ -74,6 +74,8 @@ public class BasicEnemy : RagnarComponent
     public bool canLookOut = false;
     int retardedFrames;
 
+    UIText buffCounter;
+    float buffTemp;
     public void Start()
     {
         // Get all Components
@@ -120,6 +122,8 @@ public class BasicEnemy : RagnarComponent
 
         stunPartSys.Pause();
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
+
+        buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
     }
     public void OnCreation()
     {
@@ -204,10 +208,16 @@ public class BasicEnemy : RagnarComponent
                     controlled = false;
                     returning = true;
                 }
+                buffTemp = controlledCooldown;
+                buffTemp = (float)Math.Round((double)buffTemp, 0);
+
+                buffCounter.text = buffTemp.ToString();
+
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
                     controlledCooldown = 0f;
+                    buffCounter.text = "";
                     controlled = false;
                     players[0].GetComponent<Player>().SetControled(true);
                     if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);

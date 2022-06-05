@@ -127,6 +127,8 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject UICrouch;
 
+	GameObject UIBuff;
+
 	GameObject UICharPhoto;
 	GameObject UIAbilityArray;
 	GameObject UICharBor1;
@@ -324,6 +326,8 @@ public class pauseMenuButton : RagnarComponent
 		cd4 = GameObject.Find("cd4");
 
 		UICrouch = GameObject.Find("UICrouch");
+
+		UIBuff = GameObject.Find("UIB");
 
 		AbilityBord = GameObject.Find("AbilImage");
 
@@ -1376,6 +1380,7 @@ public class pauseMenuButton : RagnarComponent
 			cd3.isActive = false;
 			cd4.isActive = false;
 			UICrouch.isActive = false;
+			UIBuff.isActive = false;
 		}
         else
         {
@@ -1413,6 +1418,7 @@ public class pauseMenuButton : RagnarComponent
 			cd2.isActive = true;
 			cd3.isActive = true;
 			cd4.isActive = true;
+			UIBuff.isActive = true;
 		}
 
 		if(isOptions)
@@ -1578,7 +1584,8 @@ public class pauseMenuButton : RagnarComponent
 		pos.Set(x + 630f, y - 25, -10.400f);
 		UICrouch.GetComponent<Transform2D>().position2D = pos;
 
-
+		pos.Set(x + 1240f, y - 35, -10.400f);
+		UIBuff.GetComponent<Transform2D>().position2D = pos;
 
 
 
