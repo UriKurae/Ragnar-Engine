@@ -353,9 +353,11 @@ public class Boss : RagnarComponent
 						// Play sweep attack animation
 
 						// Play sweep attack sound
-
 						// Hit player, lower his HP
-						players[indexPlayerTarget].GetComponent<Player>().GetHit(1);
+						players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
+						
+						players[indexPlayerTarget].GetComponent<Player>().stunned = true;
+						players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
 						agent.ClearPath();
 						// TODO: Needs attack animation
 						animationComponent.PlayAnimation("Shield");
@@ -369,6 +371,8 @@ public class Boss : RagnarComponent
 				sweepAttackCooldown = 10.0f;
 				if (!bossStop) agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
+				players[indexPlayerTarget].GetComponent<Player>().GetHit(1);
+				players[indexPlayerTarget].GetComponent<Player>().stunned = false;
 				animationComponent.PlayAnimation("WalkNormal");
 				attacking = false;
 				jumping = false;
