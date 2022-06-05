@@ -7,6 +7,8 @@ public class SoundAreaManager : RagnarComponent
 	public float stablishedTimer = 3f;
 	private bool timerDestroy = false;
 	private float timer = 0f;
+	float destroyTimer = 0f;
+	bool destroy = false;
 
 	public void Start()
 	{
@@ -29,9 +31,17 @@ public class SoundAreaManager : RagnarComponent
 			if (timer > stablishedTimer)
 			{
 				gameObject.childs[0].GetComponent<Light>().intensity = 0f;
-				InternalCalls.Destroy(gameObject);
+				destroy = true;
 			}
 		}
+		if (destroy)
+        {
+			destroyTimer += Time.deltaTime;
+			if (destroyTimer > 0.1f)
+            {
+				InternalCalls.Destroy(gameObject);
+            }
+        }
 	}
 
 	public void UpdateRadius(float radius)
