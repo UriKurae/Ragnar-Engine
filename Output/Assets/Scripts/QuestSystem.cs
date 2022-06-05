@@ -61,10 +61,10 @@ public class QuestSystem : RagnarComponent
 
 	public GameObject questBc;
 	public GameObject questBord;
-
+	GameObject MissButton;
 	Transform2D questBcT;
 	Transform2D questBordT;
-
+	GameObject GameState;
 	public bool showJournal;
 	public bool showActive;
 	public bool showCompleted;
@@ -198,8 +198,9 @@ public class QuestSystem : RagnarComponent
 		activeButton.GetComponent<UIButton>().SetButtonTextColor(255, 255, 255);
 		questBc = GameObject.Find("questBc");
 		questBord = GameObject.Find("questBord");
-		
-		questBordT= questBord.GetComponent<Transform2D>();
+		MissButton = GameObject.Find("MissButton");
+		GameState = GameObject.Find("Background");
+		questBordT = questBord.GetComponent<Transform2D>();
 		questBcT = questBc.GetComponent<Transform2D>();
 
 		showJournal = false;
@@ -372,10 +373,23 @@ public class QuestSystem : RagnarComponent
 		float xCorner = (InternalCalls.GetRegionGame().x / 2);
 		float yCorner = (InternalCalls.GetRegionGame().y / 2);
 
-		if (Input.GetKey(KeyCode.J) == KeyState.KEY_DOWN){
-			showJournal = !showJournal;
-			isPlayng = true;
+		position.Set(xCorner-50 , yCorner-50, 1000000.0f);
+		MissButton.GetComponent<Transform2D>().position2D = position;
+		int a = MissButton.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 3:
+                // pressed mode
+                if (!isPlayng)
+                {
+					showJournal = !showJournal;
+					isPlayng = true;
+				}
+				
+
+				break;
 		}
+
 		if (showJournal)
         {
             if (isPlayng) {
@@ -391,25 +405,25 @@ public class QuestSystem : RagnarComponent
 					float actualvalue = (float)EasingFunction(actualDt);
 
 
-					position.Set((xCorner - 400) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 280, 0);
+					position.Set((xCorner - 500) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 280, 0);
 
 					questBcT.position2D = position;
 					questBordT.position2D = position;
 
-					position.Set((xCorner - 579.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner - 679.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
 					activeButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner - 220.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner - 320.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
 					completedButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner - 700) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 150, 1000000.0f);
+					position.Set((xCorner - 800) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 150, 1000000.0f);
 					activeQuestNames.GetComponent<Transform2D>().position2D = position;
 
 					completedQuestNames.GetComponent<Transform2D>().position2D = position;
 				}
 
 			}
-
+			
 			activeButton.isActive = true;
 			completedButton.isActive = true;
 			questBc.isActive = true;
@@ -460,18 +474,18 @@ public class QuestSystem : RagnarComponent
 					float actualvalue = (float)EasingFunction(actualDt);
 
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 400)), yCorner - 280, 0);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 500)), yCorner - 280, 0);
 
 					questBcT.position2D = position;
 					questBordT.position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 579.5f)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 679.5f)), yCorner - 70.5f, 1000000.0f);
 					activeButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 220.5f)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 320.5f)), yCorner - 70.5f, 1000000.0f);
 					completedButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 700)), yCorner - 150, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 800)), yCorner - 150, 1000000.0f);
 					activeQuestNames.GetComponent<Transform2D>().position2D = position;
 
 					completedQuestNames.GetComponent<Transform2D>().position2D = position;
@@ -480,7 +494,19 @@ public class QuestSystem : RagnarComponent
 			}
 			
 		}
-
+		if (GameState.GetComponent<pauseMenuButton>().isSowing || GameState.GetComponent<pauseMenuButton>().isOptions)
+		{
+			activeButton.isActive = false;
+			completedButton.isActive = false;
+			activeQuestNames.isActive = false;
+			completedQuestNames.isActive = false;
+			questDescription.isActive = false;
+			questId.isActive = false;
+			questState.isActive = false;
+			questType.isActive = false;
+			questBc.isActive = false;
+			questBord.isActive = false;
+		}
 		activeQuests = "";
 		completedQuests = "";
 
@@ -542,7 +568,7 @@ public class QuestSystem : RagnarComponent
 		else
 			completedQuestNames.GetComponent<UIText>().SetTextTextColor(255, 255, 255);
 
-		int a = activeButton.GetComponent<UIButton>().GetButtonState();
+		a = activeButton.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
 			case 3:
@@ -555,8 +581,8 @@ public class QuestSystem : RagnarComponent
 				break;
 		}
 
-		int b = completedButton.GetComponent<UIButton>().GetButtonState();
-		switch (b)
+		a = completedButton.GetComponent<UIButton>().GetButtonState();
+		switch (a)
 		{
 			case 3:
 				// pressed mode

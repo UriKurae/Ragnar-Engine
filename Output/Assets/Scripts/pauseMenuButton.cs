@@ -166,6 +166,7 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject AbilityLeft;
 	GameObject AbilityRight;
+	GameObject MissButton;
 	Camera camera;
 
 	int currentCursor = 0;
@@ -306,25 +307,25 @@ public class pauseMenuButton : RagnarComponent
 		presetText = GameObject.Find("presetText");
 		presetText.GetComponent<UIText>().text = "PRESET 1";
 
-		pos.Set(-sum +10, y - 810, 36.1f);
+		pos.Set(-sum + 430, y - 810, 36.1f);
 		optionsControl9.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum +10, y - 740, 36.1f);
+		pos.Set(-sum + 430, y - 740, 36.1f);
 		optionsControl8.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 330, y - 540, 36.1f);
+		pos.Set(-sum + 750, y - 540, 36.1f);
 		optionsControl14.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 330, y - 610, 36.1f);
+		pos.Set(-sum + 750, y - 610, 36.1f);
 		optionsControl15.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 330, y - 680, 36.1f);
+		pos.Set(-sum + 750, y - 680, 36.1f);
 		optionsControl16.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 330, y - 750, 36.1f);
+		pos.Set(-sum + 750, y - 750, 36.1f);
 		optionsControl17.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 330, y - 820, 36.1f);
+		pos.Set(-sum + 750, y - 820, 36.1f);
 		optionsControl18.GetComponent<Transform2D>().position2D = pos;
 
 
@@ -397,6 +398,7 @@ public class pauseMenuButton : RagnarComponent
 
 		AbilityLeft= GameObject.Find("AbilityLeft");
 		AbilityRight = GameObject.Find("AbilityRight");
+		MissButton = GameObject.Find("MissButton");
 		GameData load = SaveSystem.LoadGameConfig();
 		if (load != null)
 		{
@@ -1978,6 +1980,7 @@ public class pauseMenuButton : RagnarComponent
 			Ability2.isActive = false;
 			Ability3.isActive = false;
 			Ability4.isActive = false;
+			MissButton.isActive = false;
 
 		}
 		else
@@ -1988,6 +1991,7 @@ public class pauseMenuButton : RagnarComponent
 			Ability2.isActive = true;
 			Ability3.isActive = true;
 			Ability4.isActive = true;
+			MissButton.isActive = true;
 		}
 		pos.Set(0.0f, y - 30, -10.400f);
 		AbilityBord.GetComponent<Transform2D>().position2D = pos;
