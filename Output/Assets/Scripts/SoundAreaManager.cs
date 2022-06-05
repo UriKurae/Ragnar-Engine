@@ -6,21 +6,25 @@ public class SoundAreaManager : RagnarComponent
 {
 	public float stablishedTimer = 3f;
 	private bool timerDestroy = false;
+	private bool pendingDestroy = false;
 	private float timer = 0f;
 	float destroyTimer = 0f;
-	bool destroy = false;
 
 	public void Start()
 	{
 		Light light = gameObject.childs[0].GetComponent<Light>();
 
-		light.intensity = 0f;
 		light.constant = 0.15f;
-		light.linear = -0.2f;
 		light.quadratic = 0f;
 
 		if (gameObject.GetParent().name == SceneManager.currentSceneName)
 			timerDestroy = true;
+		else
+        {
+			light.intensity = 0f;
+			light.linear = -1f;
+		}
+
 	}
 
     public void Update()
@@ -31,17 +35,11 @@ public class SoundAreaManager : RagnarComponent
 			if (timer > stablishedTimer)
 			{
 				gameObject.childs[0].GetComponent<Light>().intensity = 0f;
-				destroy = true;
+				pendingDestroy = true;
 			}
-		}
-		if (destroy)
-        {
-			destroyTimer += Time.deltaTime;
-			if (destroyTimer > 0.1f)
-            {
+			else if (pendingDestroy)
 				InternalCalls.Destroy(gameObject);
-            }
-        }
+		}
 	}
 
 	public void UpdateRadius(float radius)
@@ -49,7 +47,7 @@ public class SoundAreaManager : RagnarComponent
 		gameObject.GetComponent<Rigidbody>().SetRadiusSphere(radius);
 
 		if (radius <= 0)
-			gameObject.childs[0].GetComponent<Light>().intensity = 0;
+			gameObject.childs[0].GetComponent<Light>().intensity = 0f;
 		else
 		{
 			gameObject.childs[0].GetComponent<Light>().intensity = 1f;
