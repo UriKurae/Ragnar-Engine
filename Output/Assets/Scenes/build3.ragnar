@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 101020576,
+                    "pointer": 194157240,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -183,13 +183,13 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -3.0517578125e-05,
-                        46.120819091796875,
-                        -41.928047180175781
+                        2.288818359375e-05,
+                        70.538558959960938,
+                        -64.125923156738281
                     ],
                     "Quaternion": [
                         0.34202015399932861,
-                        -7.9287456600241057e-09,
+                        -1.5857491320048211e-08,
                         0,
                         0.93969273567199707
                     ],
@@ -210,12 +210,12 @@
                     "Vertical Fov": 0.41793009638786316,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -46.892200469970703,
-                        46.120819091796875,
-                        104.52290344238281
+                        -63.609477996826172,
+                        70.538558959960938,
+                        119.12783050537109
                     ],
                     "Type": 3,
-                    "Zoom": 1,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -403,7 +403,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 101020424,
+                    "pointer": 194156480,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -1873,7 +1873,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 101019512,
+                    "pointer": 194158608,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -2793,13 +2793,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 101031672,
+                    "pointer": 194161496,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 91369128,
+                    "barrelLocations": 81604264,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -24889,8 +24889,8 @@
                         -10.399999618530273
                     ],
                     "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
+                        0.16500000655651093,
+                        0.19833333790302277,
                         1
                     ],
                     "rotationEuler": [
@@ -24898,8 +24898,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
+                    "buttonWidth": 99,
+                    "buttonHeight": 119,
                     "lastButtonWidth": 1296,
                     "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
@@ -24907,7 +24907,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_journal_icon.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -24928,7 +24928,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_journal_icon.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -24949,7 +24949,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_journal_icon.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -24970,7 +24970,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_journal_icon.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -24991,7 +24991,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Missions",
+                    "buttonText": "",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,

@@ -373,7 +373,7 @@ public class QuestSystem : RagnarComponent
 		float xCorner = (InternalCalls.GetRegionGame().x / 2);
 		float yCorner = (InternalCalls.GetRegionGame().y / 2);
 
-		position.Set(xCorner-50 , yCorner-50, 1000000.0f);
+		position.Set(xCorner-70 , yCorner-70, 1000000.0f);
 		MissButton.GetComponent<Transform2D>().position2D = position;
 		int a = MissButton.GetComponent<UIButton>().GetButtonState();
 		switch (a)
@@ -389,7 +389,14 @@ public class QuestSystem : RagnarComponent
 
 				break;
 		}
-
+		if (Input.GetKey(KeyCode.J) == KeyState.KEY_DOWN)
+		{
+			if (!isPlayng)
+			{
+				showJournal = !showJournal;
+				isPlayng = true;
+			}
+		}
 		if (showJournal)
         {
             if (isPlayng) {
