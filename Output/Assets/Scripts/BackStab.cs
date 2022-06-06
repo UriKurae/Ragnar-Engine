@@ -83,7 +83,7 @@ public class BackStab : RagnarComponent
 			player.GetComponent<Animation>().PlayAnimation("Ability1");
 
 			player.GetComponent<Player>().PlayAudioClip("WPN_CRYSKNIFESTAB");
-			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 0.5f)
+			if (Math.Abs(boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 1.5f)
 			{
 				boss.GetComponent<Boss>().GetBackstabbed();
 			}
