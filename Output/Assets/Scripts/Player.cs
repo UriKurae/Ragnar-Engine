@@ -54,6 +54,9 @@ public class Player : RagnarComponent
 
     pauseMenuButton pause;
 
+    GameObject sword;
+    GameObject stunner;
+
     /*
     DialogueManager dialogue;
     dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
@@ -100,6 +103,8 @@ public class Player : RagnarComponent
             runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
             deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
+            sword = GameObject.Find("Sword");
+            stunner = GameObject.Find("Stunner");
         }
         getHitPartSys.Pause();
         pause = GameObject.Find("Background").GetComponent<pauseMenuButton>();
@@ -152,7 +157,7 @@ public class Player : RagnarComponent
                                 ReloadState();
                                 uiCrouch.isActive = true;
                             }
-                            else if (action == Actions.CROUCH)
+                            else if (action == Actions.CROUCH && isHidden == false)
                             {
                                 action = Actions.NONE;
                                 rb.SetHeight(1); // 1 = 100% = Reset
@@ -251,7 +256,12 @@ public class Player : RagnarComponent
     {
         agent.ClearPath();
         move = Movement.IDLE;
-        ReloadState();
+        animationComponent.PlayAnimation("Talk");
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     private void ReloadState()
@@ -322,6 +332,12 @@ public class Player : RagnarComponent
                 runPartSys.Play();
                 break;
         }
+
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     private void Die()
@@ -337,6 +353,11 @@ public class Player : RagnarComponent
             InternalCalls.Destroy(GameObject.Find("Knife"));
         }
         InternalCalls.Destroy(sound);
+        if (gameObject.name == "Player_3")
+        {
+            stunner.isActive = false;
+            sword.isActive = false;
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -358,8 +379,14 @@ public class Player : RagnarComponent
             InternalCalls.Destroy(other.gameObject);
             return;
         }
-        if (other.gameObject.tag == "Hidde")
+        if (other.gameObject.tag == "Hidden" && isHidden == false)
+        {
+            //action = Actions.CROUCH;
+            //rb.SetHeight(0.6f); // 0.6 = 60%
+            //ReloadState();
+
             isHidden = true;
+        }
 
         if (other.gameObject.name == "Trigger1")
         {
@@ -460,8 +487,14 @@ public class Player : RagnarComponent
 
     public void OnTriggerExit(Rigidbody other)
     {
-        if (other.gameObject.tag == "Hidde")
+        if (other.gameObject.tag == "Hidden" && isHidden == true)
+        {
+            //action = Actions.NONE;
+            //rb.SetHeight(1); // 1 = 100% = Reset
+            //ReloadState();
+
             isHidden = false;
+        }
     }
 
     public void SetControled(bool var)

@@ -8,7 +8,6 @@ public class SoundAreaManager : RagnarComponent
 	private bool timerDestroy = false;
 	private bool pendingDestroy = false;
 	private float timer = 0f;
-	float destroyTimer = 0f;
 
 	public void Start()
 	{
