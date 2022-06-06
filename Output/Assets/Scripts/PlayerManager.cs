@@ -467,8 +467,11 @@ public class PlayerManager : RagnarComponent
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
             players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
-            sword.isActive = false;
-            stunner.isActive = false;
+            if(sword != null)
+            {
+                sword.isActive = false;
+                stunner.isActive = false;
+            }            
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
