@@ -19,6 +19,7 @@ public class Camouflage : RagnarComponent
 		playerScript = player.GetComponent<Player>();
 
 		SceneAudio = GameObject.Find("AudioLevel1");
+		player.GetComponent<Animation>().PlayAnimation("Ability2");
         player.GetComponent<Player>().PlayAudioClip("WPN_CAMOUFLAGEACTIVATE");
 		buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
     }

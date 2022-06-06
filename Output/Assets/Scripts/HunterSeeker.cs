@@ -24,6 +24,7 @@ public class HunterSeeker : RagnarComponent
 		Vector3 newForward = agent.hitPosition - pos;
 		double angle = Math.Atan2(newForward.x, newForward.z);
 		Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+		player.GetComponent<Rigidbody>().SetBodyRotation(rot);
 		rb.SetBodyRotation(rot);
 		rb.SetBodyPosition(pos);
 
@@ -32,7 +33,8 @@ public class HunterSeeker : RagnarComponent
 			rb.IgnoreCollision(GameObject.Find("PlayerManager").GetComponent<PlayerManager>().players[i], true);
 		}
 
-        sceneAudio = GameObject.Find("AudioLevel1");
+		player.GetComponent<Animation>().PlayAnimation("Ability3");
+		sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
 
 		leftParticles = GameObject.Find("LeftHunterParticles").GetComponent<ParticleSystem>();
