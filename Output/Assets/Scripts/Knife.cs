@@ -25,6 +25,7 @@ public class Knife : RagnarComponent
 		particleComponent.Play();
 
 		player.GetComponent<Player>().PlayAudioClip("WPN_THORWINGKNIFETHROW");
+		player.GetComponent<Animation>().PlayAnimation("Ability4");
 	}
 
     private void AimMethod()
@@ -45,6 +46,7 @@ public class Knife : RagnarComponent
 			double angle = Math.Atan2(newForward.x, newForward.z);
 			Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 			goRB.SetBodyRotation(rot);
+			player.GetComponent<Rigidbody>().SetBodyRotation(rot);
 
 			goRB.IgnoreCollision(player, true);
 			goRB.ApplyCentralForce(newForward * force);
@@ -110,6 +112,7 @@ public class Knife : RagnarComponent
 	{
 		particleComponent.Pause();
 		canReload = true;
+		GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesThrowingKnife++;
 		gameObject.DeleteComponent<Rigidbody>(gameObject.GetComponent<Rigidbody>());
 	}
 

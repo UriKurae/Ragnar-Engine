@@ -32,6 +32,9 @@ public class PlayerManager : RagnarComponent
     public bool canDoAbility4 = true;
 
     public float radius;
+
+    GameObject sword;
+    GameObject stunner;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -102,7 +105,10 @@ public class PlayerManager : RagnarComponent
             ability2Bg.SetImageGeneralColor(128, 128, 128);
             canDoAbility3 = false;
             ability3Bg.SetImageGeneralColor(128, 128, 128);
-        }        
+        }
+
+        sword = GameObject.Find("Sword");
+        stunner = GameObject.Find("Stunner");
     }
 
 	public void Update()
@@ -207,6 +213,11 @@ public class PlayerManager : RagnarComponent
         }
     }
 
+    public Player GetPlayerSelected()
+    {
+        return players[characterSelected].GetComponent<Player>();
+    }
+
     private void AbilityStateChanger()
     {
         // Change Condition to all players
@@ -252,6 +263,7 @@ public class PlayerManager : RagnarComponent
         {
             playableCharacter.state = State.NONE;
         }
+        
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
@@ -282,54 +294,76 @@ public class PlayerManager : RagnarComponent
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.PAUL_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
                 }
                 break;
             case 1:
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.CHANI_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
                 }
                 break;
             case 2:
                 if (ability == State.ABILITY_1)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_1);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability1Pick");
+                    sword.isActive = true;
+                    sword.GetComponent<Animation>().PlayAnimation("Unseath");
+                    stunner.isActive = false;
                 }
                 else if (ability == State.ABILITY_2)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_2);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability2Pick");
+                    stunner.isActive = true;
+                    stunner.GetComponent<Animation>().PlayAnimation("Unseath");
+                    sword.isActive = false;
                 }
                 else if (ability == State.ABILITY_3)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_3);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability3Pick");
+                    sword.isActive = false;
+                    stunner.isActive = false;
                 }
                 else if (ability == State.ABILITY_4)
                 {
                     Input.SetCursorState((int)CursorState.STILGAR_4);
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Ability4Pick");
+                    sword.isActive = false;
+                    stunner.isActive = false;
                 }
                 break;
             default:
@@ -349,48 +383,38 @@ public class PlayerManager : RagnarComponent
 
     private void CastOrCancel()
     {
-
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
             Input.SetCursorState((int)CursorState.NORMAL);
 
-            switch (playableCharacter.state)
+            if (playableCharacter.state == State.CARRYING && playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
             {
-                case State.CARRYING:
-                    {
-                        if (playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
-                        {
-                            GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
+                GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
 
-                            players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
-                            playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
-                            playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
+                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
+                playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
+                playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
 
-                            //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
-                            playableCharacter.pickedEnemy = null;
-                        }
-                        else
-                        {
-                            NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
-                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+                //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
+                playableCharacter.pickedEnemy = null;
+            }
+            else
+            {
+                NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+                GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-                            if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
-                            {
-                                players[characterSelected].AddChild(obj);
+                if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                {
+                    players[characterSelected].AddChild(obj);
 
-                                obj.transform.localPosition = new Vector3(0, 2, 0);
-                                obj.transform.localRotation = Quaternion.identity;
+                    obj.transform.localPosition = new Vector3(0, 2, 0);
+                    obj.transform.localRotation = Quaternion.identity;
 
-                                obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
-                                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                    obj.GetComponent<Animation>().PlayAnimation("Picked");
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
 
-                                playableCharacter.pickedEnemy = obj;
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    break;
+                    playableCharacter.pickedEnemy = obj;
+                }
             }
 
             if (playableCharacter.state != State.CARRYING)
@@ -401,7 +425,11 @@ public class PlayerManager : RagnarComponent
                 // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
                 if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
                 {
-                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
+                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges--;
+                    if (playableCharacter.name == "Stilgar" && playableCharacter.abilities[(int)State.ABILITY_2 - 1].charges == 0)
+                    {
+                        GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
+                    }
                 }
 
                 // Pone la habilidad en cooldown y el player en estado de NONE
@@ -423,7 +451,7 @@ public class PlayerManager : RagnarComponent
 
                     if (playableCharacter.pickedEnemy != null)
                     {
-                        playableCharacter.pickedEnemy.GetComponent<Animation>().PlayAnimation("CorpseCarry");
+                        playableCharacter.pickedEnemy.GetComponent<Animation>().PlayAnimation("Carried");
                         players[characterSelected].GetComponent<Player>().SetAction(2);
                     }
                     else
@@ -438,11 +466,15 @@ public class PlayerManager : RagnarComponent
             Input.SetCursorState((int)CursorState.NORMAL);
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
+            players[characterSelected].GetComponent<Animation>().PlayAnimation("NoSignal");
+            if(sword != null)
+            {
+                sword.isActive = false;
+                stunner.isActive = false;
+            }            
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
-
-            
         }
     }
 

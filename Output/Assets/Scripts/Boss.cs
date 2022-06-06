@@ -189,6 +189,7 @@ public class Boss : RagnarComponent
 				hitted = false;
 				if (state == BossState.PHASE4)
 				{
+					GameObject.Find("Quest System").GetComponent<QuestSystem>().lastPhaseCompleted = true;
 					SceneManager.LoadScene("WinScene");
 					InternalCalls.Destroy(gameObject);
 				}
@@ -220,6 +221,7 @@ public class Boss : RagnarComponent
 		switch (state)
 		{
 			case BossState.PHASE2:
+				GameObject.Find("Quest System").GetComponent<QuestSystem>().firstPhaseCompleted = true;
 				//GenerateEnemies();
 				players = GameObject.FindGameObjectsWithTag("Player");
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
