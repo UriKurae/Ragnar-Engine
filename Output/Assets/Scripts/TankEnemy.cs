@@ -62,6 +62,10 @@ public class TankEnemy : RagnarComponent
     public bool canLookOut = false;
     int retardedFrames;
 
+    public bool enterStunner = true;
+
+    UIText buffCounter;
+    float buffTemp;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -104,6 +108,8 @@ public class TankEnemy : RagnarComponent
 
         stunPartSys.Pause();
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
+
+        buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
     }
 
     public void OnCreation()
@@ -146,6 +152,7 @@ public class TankEnemy : RagnarComponent
                         stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
+                        enterStunner = true;
                     }
                 }
 
@@ -163,10 +170,12 @@ public class TankEnemy : RagnarComponent
             {
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
-                    agents.CalculatePath(agents.hitPosition);
-
+                    if (agents.CalculatePath(agents.hitPosition).Length > 0)
+                        animation.PlayAnimation("Walk");
                 }
-                agents.MovePath();
+                if (agents.MovePath())
+                    animation.PlayAnimation("Idle");
+
                 if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
                 {
                     backstab = true;
@@ -187,10 +196,16 @@ public class TankEnemy : RagnarComponent
                     controlled = false;
                     returning = true;
                 }
+                buffTemp = controlledCooldown;
+                buffTemp = (float)Math.Round((double)buffTemp, 0);
+
+                buffCounter.text = buffTemp.ToString();
+
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
                     controlledCooldown = 0f;
+                    buffCounter.text = "";
                     controlled = false;
                     players[0].GetComponent<Player>().SetControled(true);
                     if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
@@ -246,6 +261,11 @@ public class TankEnemy : RagnarComponent
                         }
                     }
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithStilgar = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -254,6 +274,11 @@ public class TankEnemy : RagnarComponent
                 {
                     isDying = true;
                     animation.PlayAnimation("Dying");
+                    QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                    system.hasKilledEnemies = true;
+                    system.killWithChani = true;
+                    if (system.camouflageActive)
+                        system.enemiesCamouflage++;
                 }
             }
         }
@@ -264,7 +289,7 @@ public class TankEnemy : RagnarComponent
         if (state != EnemyState.DEATH && state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
-            if (other.gameObject.name == "SoundArea")
+            if (other.gameObject.name == "SoundArea" && !stunned)
             {
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
@@ -279,6 +304,11 @@ public class TankEnemy : RagnarComponent
                 audioSource.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
+                if (enterStunner)
+                {
+                    GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesGrenade++;
+                    enterStunner = false;
+                }
             }
 
 
@@ -296,13 +326,19 @@ public class TankEnemy : RagnarComponent
                     }
                 }
                 animation.PlayAnimation("Dying");
+                QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
+                system.hasKilledEnemies = true;
+                system.killWithStilgar = true;
+                if (system.camouflageActive)
+                    system.enemiesCamouflage++;
             }
-            if (other.gameObject.name == "Whistle")
+            if (other.gameObject.name == "Whistle" && !stunned)
             {
                 // NEED TO CREATE FUNCTION TO INITIATE STOPPED TIME WHEN ARRIVES TO THE POSITION
                 patrol = false;
                 stoppedTime = 5f;
                 agents.CalculatePath(other.gameObject.transform.globalPosition);
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesWhistle++;
             }
             if (other.gameObject.name == "Trap")
             {
@@ -311,6 +347,7 @@ public class TankEnemy : RagnarComponent
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
+                GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesTrap++;
             }
         }
     }

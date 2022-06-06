@@ -63,9 +63,21 @@ public class Voice : RagnarComponent
 	public void ActivateVoice()
     {        
 		playerManager.players[playerManager.characterSelected].GetComponent<Player>().SetControled(false);
-		if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy") selectedEnemy.GetComponent<BasicEnemy>().SetControled(true);
-		if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy") selectedEnemy.GetComponent<TankEnemy>().SetControled(true);
-		if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy") selectedEnemy.GetComponent<UndistractableEnemy>().SetControled(true);
+		if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
+		{
+			selectedEnemy.GetComponent<BasicEnemy>().SetControled(true);
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+		}
+		if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
+		{
+			selectedEnemy.GetComponent<TankEnemy>().SetControled(true);
+			 GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+		}
+		if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+		{
+			selectedEnemy.GetComponent<UndistractableEnemy>().SetControled(true);
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+		}
 	}
 }
 
