@@ -22,7 +22,6 @@ public class StunnerShot : RagnarComponent
     {
         GameObject player = GameObject.Find("Player_3");
         NavAgent agent = player.GetComponent<NavAgent>();
-        player.GetComponent<Animation>().PlayAnimation("Ability2");
 
         Vector3 pos = player.transform.globalPosition;
         pos.y += 1;
@@ -36,6 +35,12 @@ public class StunnerShot : RagnarComponent
         goRB.ApplyCentralForce(direction.normalized * force);
 
         agent.hitPosition = player.transform.globalPosition;
+
+        Vector3 newForward = direction.normalized;
+        double angle = Math.Atan2(newForward.x, newForward.z);
+        Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+        player.GetComponent<Rigidbody>().SetBodyRotation(rot);
+        player.GetComponent<Animation>().PlayAnimation("Ability2");
     }
 
     public void Update()

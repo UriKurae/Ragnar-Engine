@@ -40,6 +40,11 @@ public class Rock : RagnarComponent
 			relativePos = newPos - pos;
         }
 
+		Vector3 newForward = relativePos.normalized;
+		double angle = Math.Atan2(newForward.x, newForward.z);
+		Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+		player.GetComponent<Rigidbody>().SetBodyRotation(rot);
+
 		goRB.IgnoreCollision(player, true);
 	}
 	public void Update()

@@ -26,6 +26,7 @@ public class Eagle : RagnarComponent
         Vector3 newForward = agent.hitPosition - pos;
         double angle = Math.Atan2(newForward.x, newForward.z);
         Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+        player.GetComponent<Rigidbody>().SetBodyRotation(rot);
         goRB.SetBodyRotation(rot);
         goRB.SetBodyPosition(pos);
         for (int i = 0; i < GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters.Length; i++)
