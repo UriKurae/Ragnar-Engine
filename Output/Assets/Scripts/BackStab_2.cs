@@ -73,7 +73,7 @@ public class BackStab_2 : RagnarComponent
 		}
 		if (boss != null)
 		{
-			Vector3 newForward = selectedEnemy.transform.globalPosition - player.transform.globalPosition;
+			Vector3 newForward = boss.transform.globalPosition - player.transform.globalPosition;
 			double angle = Math.Atan2(newForward.x, newForward.z);
 			Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 			player.GetComponent<Rigidbody>().SetBodyRotation(rot);

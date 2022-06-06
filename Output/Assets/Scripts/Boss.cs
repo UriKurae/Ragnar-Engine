@@ -234,13 +234,13 @@ public class Boss : RagnarComponent
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
-				//if (!shieldInmunity)
-				//{
+				if (!shieldInmunity)
+				{
 					agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 1.2f;
 					animationComponent.PlayAnimation("Run");
 					sweepAttackCooldown = 5.0f;
-				//}
-				//else state--;
+				}
+				else state--;
 				break;
 			default:
 				InternalCalls.Destroy(gameObject);
