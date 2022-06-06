@@ -393,9 +393,15 @@ public class PlayerManager : RagnarComponent
                 {
                     GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
 
+                    Vector3 direction = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint - players[characterSelected].transform.globalPosition;
+                    Vector3 newForward = direction.normalized;
+                    double angle = Math.Atan2(newForward.x, newForward.z);
+                    Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+                    players[characterSelected].GetComponent<Rigidbody>().SetBodyRotation(rot);
                     players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
-                    playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
-                    playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
+
+                    playableCharacter.pickedEnemy.transform.globalPosition = players[characterSelected].transform.globalPosition;
+                    playableCharacter.pickedEnemy.transform.globalRotation = rot;
 
                     //Setting Variables
                     playableCharacter.pickedEnemy = null;
@@ -408,6 +414,11 @@ public class PlayerManager : RagnarComponent
 
                     if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                     {
+                        Vector3 direction = (obj.transform.globalPosition + (obj.transform.forward * 1.5f)) - players[characterSelected].transform.globalPosition;
+                        Vector3 newForward = direction.normalized;
+                        double angle = Math.Atan2(newForward.x, newForward.z);
+                        Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+                        players[characterSelected].GetComponent<Rigidbody>().SetBodyRotation(rot);
                         obj.transform.localRotation = players[characterSelected].GetComponent<Rigidbody>().GetBodyRotation();
 
                         players[characterSelected].AddChild(obj);
