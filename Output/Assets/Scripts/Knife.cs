@@ -12,10 +12,13 @@ public class Knife : RagnarComponent
 	public bool canReload = false;
 	private bool pendingToDelete = false;
 	private bool grabOnce = false;
+	GameObject circle;
 	
 	public void Start()
     {
         player = GameObject.Find("Player");
+        circle = GameObject.Find("circle_ability");
+		circle.isInteractuable = false;
         AimMethod();
 
 		// Get components
@@ -114,6 +117,7 @@ public class Knife : RagnarComponent
 		canReload = true;
 		GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesThrowingKnife++;
 		gameObject.DeleteComponent<Rigidbody>(gameObject.GetComponent<Rigidbody>());
+		circle.isActive = true;
 	}
 
 }
