@@ -112,6 +112,10 @@ public class PlayerManager : RagnarComponent
 
         sword = GameObject.Find("Sword");
         stunner = GameObject.Find("Stunner");
+
+        GameObject pointer = InternalCalls.InstancePrefab("PlayerReminder", new Vector3(0, 0, 0));
+        for (int i = 0; i < players.Length; i++)
+            players[i].GetComponent<Player>().pointCharacter = pointer.childs[i];
     }
 
 	public void Update()

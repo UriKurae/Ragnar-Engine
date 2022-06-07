@@ -56,6 +56,8 @@ public class Player : RagnarComponent
 
     GameObject sword;
     GameObject stunner;
+    public GameObject pointCharacter;
+    Light pointerLight;
 
     /*
     DialogueManager dialogue;
@@ -81,7 +83,7 @@ public class Player : RagnarComponent
         soundManag = sound.GetComponent<SoundAreaManager>();
 
         uiCrouch = GameObject.Find("UICrouch");
-
+        pointerLight = pointCharacter.GetComponent<Light>();
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
         {
@@ -184,6 +186,8 @@ public class Player : RagnarComponent
                         {
                             if (agent.CalculatePath(agent.hitPosition).Length > 0)
                             {
+                                pointCharacter.transform.globalPosition = agent.hitPosition;
+                                pointerLight.intensity = 10;
                                 ReloadState();
                                 //Play audio when calculating movement to not repeat the same audio
                                 audioSourceComponent.PlayClip("PAUL_WALKSAND");
@@ -193,6 +197,7 @@ public class Player : RagnarComponent
                         {
                             agent.ClearPath();
                             move = Movement.IDLE;
+                            pointerLight.intensity = 0;
                             ReloadState();
                         }
                     }
@@ -200,6 +205,7 @@ public class Player : RagnarComponent
                 if (agent.MovePath())
                 {
                     move = Movement.IDLE;
+                    pointerLight.intensity = 0;
                     ReloadState();
                 }
                 else if (agent.PathSize() > 0)
@@ -220,6 +226,12 @@ public class Player : RagnarComponent
                 audioSourceComponent.PlayClip("WPN_RELOAD");
             }
             //////////////////////////
+
+            //Effect PointerCharacter
+            if (pointerLight.intensity > 0)
+            {
+                pointerLight.linear = Mathf.PingPongFloat(pointerLight.linear, Time.deltaTime / 5, -2.05f, -2.12f, true);
+            }
 
             //SaveTest File for Debugging
             if (pendingToDelete && (animationComponent.GetLoopTime() > animationComponent.GetDuration() - 1))

@@ -140,7 +140,7 @@ struct PointLight
 	float lin;
 	float quadratic;
 };
-#define MAX_POINT_LIGHTS 7
+#define MAX_POINT_LIGHTS 10
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 struct SpotLight

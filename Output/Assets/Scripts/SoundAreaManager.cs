@@ -8,6 +8,8 @@ public class SoundAreaManager : RagnarComponent
 	private bool timerDestroy = false;
 	private bool pendingDestroy = false;
 	private float timer = 0f;
+	private float actualRadius = 0f;
+	private float updatingRadius = 0f;
 
 	public void Start()
 	{
@@ -39,19 +41,45 @@ public class SoundAreaManager : RagnarComponent
 			else if (pendingDestroy)
 				InternalCalls.Destroy(gameObject);
 		}
+
+		if (updatingRadius != actualRadius)
+		{
+			if (updatingRadius < actualRadius)
+			{
+				updatingRadius += Time.deltaTime * 20;
+				if (updatingRadius > actualRadius) 
+					updatingRadius = actualRadius;
+			}
+			else if (updatingRadius > actualRadius)
+			{ 
+				updatingRadius -= Time.deltaTime * 20;
+				if (updatingRadius < actualRadius) 
+					updatingRadius = actualRadius;
+			}
+
+			gameObject.GetComponent<Rigidbody>().SetRadiusSphere(updatingRadius);
+
+			if (actualRadius <= 0 && updatingRadius <= 0)
+				gameObject.childs[0].GetComponent<Light>().intensity = 0f;
+			else
+			{
+				gameObject.childs[0].GetComponent<Light>().intensity = 1f;
+				gameObject.childs[0].GetComponent<Light>().linear = -1.1f / updatingRadius;
+			}
+		}
 	}
 
 	public void UpdateRadius(float radius)
     {
-		gameObject.GetComponent<Rigidbody>().SetRadiusSphere(radius);
+		actualRadius = radius;
+		//gameObject.GetComponent<Rigidbody>().SetRadiusSphere(radius);
 
-		if (radius <= 0)
-			gameObject.childs[0].GetComponent<Light>().intensity = 0f;
-		else
-		{
-			gameObject.childs[0].GetComponent<Light>().intensity = 1f;
-			gameObject.childs[0].GetComponent<Light>().linear = -1.1f / radius;
-		}
-
+		//if (radius <= 0)
+		//	gameObject.childs[0].GetComponent<Light>().intensity = 0f;
+		//else
+		//{
+		//	gameObject.childs[0].GetComponent<Light>().intensity = 1f;
+		//	gameObject.childs[0].GetComponent<Light>().linear = -1.1f / radius;
+		//}
 	}
 }
