@@ -195,7 +195,7 @@ public class UndistractableEnemy : RagnarComponent
                 buffTemp = (float)Math.Round((double)buffTemp, 0);
                 buffCounter.text = buffTemp.ToString();
 
-                if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN && players.Length > 1) || (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN && players.Length > 2))
                 {
                     controlled = false;
                     returning = true;
