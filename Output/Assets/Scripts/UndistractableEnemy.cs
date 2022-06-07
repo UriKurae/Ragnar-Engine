@@ -66,6 +66,8 @@ public class UndistractableEnemy : RagnarComponent
     UIText buffCounter;
     float buffTemp;
     public GameObject circle;
+    GameObject pointCharacter;
+    Light pointerLight;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -110,6 +112,9 @@ public class UndistractableEnemy : RagnarComponent
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
 
         buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
+
+        pointCharacter = GameObject.Find("PlayerReminder").childs[3];
+        pointerLight = pointCharacter.GetComponent<Light>();
     }
 
     public void OnCreation()
@@ -171,10 +176,17 @@ public class UndistractableEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
                     if (agents.CalculatePath(agents.hitPosition).Length > 0)
+                    {
+                        pointCharacter.transform.globalPosition = agents.hitPosition;
+                        pointerLight.intensity = 10;
                         animation.PlayAnimation("Walk");
+                    }
                 }
                 if (agents.MovePath())
+                {
+                    pointerLight.intensity = 0;
                     animation.PlayAnimation("Idle");
+                }
 
                 if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
                 {
@@ -197,6 +209,7 @@ public class UndistractableEnemy : RagnarComponent
 
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN && players.Length > 1) || (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN && players.Length > 2))
                 {
+                    pointerLight.intensity = 0;
                     controlled = false;
                     returning = true;
                     gameObject.EraseChild(circle);
@@ -206,6 +219,7 @@ public class UndistractableEnemy : RagnarComponent
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
+                    pointerLight.intensity = 0;
                     controlledCooldown = 0f;
                     buffCounter.text = "";
                     controlled = false;
@@ -218,6 +232,12 @@ public class UndistractableEnemy : RagnarComponent
                 {
                     float value = circle.GetComponent<Material>().emissiveColor.x;
                     circle.GetComponent<Material>().emissiveColor = new Vector3(Mathf.PingPongFloat(value, Time.deltaTime * 2, 1, 0.1f, false), 0, 0);
+                }
+
+                //Effect PointerCharacter
+                if (pointerLight.intensity > 0)
+                {
+                    pointerLight.linear = Mathf.PingPongFloat(pointerLight.linear, Time.deltaTime / 5, -2.05f, -2.12f, true);
                 }
             }
         }
