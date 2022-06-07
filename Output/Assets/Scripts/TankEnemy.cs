@@ -66,6 +66,7 @@ public class TankEnemy : RagnarComponent
 
     UIText buffCounter;
     float buffTemp;
+    public GameObject circle;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -191,15 +192,17 @@ public class TankEnemy : RagnarComponent
                 {
                     backstab = false;
                 }
+                buffTemp = controlledCooldown;
+                buffTemp = (float)Math.Round((double)buffTemp, 0);
+                buffCounter.text = buffTemp.ToString();
+
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
                     controlled = false;
                     returning = true;
+                    gameObject.EraseChild(circle);
+                    buffCounter.text = "";
                 }
-                buffTemp = controlledCooldown;
-                buffTemp = (float)Math.Round((double)buffTemp, 0);
-
-                buffCounter.text = buffTemp.ToString();
 
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
@@ -207,9 +210,15 @@ public class TankEnemy : RagnarComponent
                     controlledCooldown = 0f;
                     buffCounter.text = "";
                     controlled = false;
-                    players[0].GetComponent<Player>().SetControled(true);
+                    gameObject.EraseChild(circle);
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().ChangeCharacter(0);
                     if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
                     else returning = true;
+                }
+                else if (controlledCooldown < 3)
+                {
+                    float value = circle.GetComponent<Material>().emissiveColor.x;
+                    circle.GetComponent<Material>().emissiveColor = new Vector3(Mathf.PingPongFloat(value, Time.deltaTime * 2, 1, 0.1f, false), 0, 0);
                 }
 
             }

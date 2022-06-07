@@ -35,6 +35,7 @@ public class PlayerManager : RagnarComponent
 
     GameObject sword;
     GameObject stunner;
+    GameObject circle;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -60,7 +61,9 @@ public class PlayerManager : RagnarComponent
                 players[i].GetComponent<Rigidbody>().IgnoreCollision(players[j], true);
             }
         }
-
+        circle = InternalCalls.InstancePrefab("Circle", new Vector3(0, 0, 0));        
+        circle.isInteractuable = false;
+        circle.GetComponent<Material>().emissiveEnabled = true;
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
         for(int i = 0; i < players.Length; i++)
@@ -511,6 +514,7 @@ public class PlayerManager : RagnarComponent
                     }
 
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
+                    players[characterSelected].EraseChild(circle);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -529,6 +533,7 @@ public class PlayerManager : RagnarComponent
                     }
 
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
+                    players[characterSelected].EraseChild(circle);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
                     if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -547,6 +552,7 @@ public class PlayerManager : RagnarComponent
                     }
 
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
+                    players[characterSelected].EraseChild(circle);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -565,6 +571,7 @@ public class PlayerManager : RagnarComponent
                     }
 
                     players[characterSelected].GetComponent<Player>().SetState(State.NONE);
+                    players[characterSelected].EraseChild(circle);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -576,7 +583,7 @@ public class PlayerManager : RagnarComponent
         }
     }
 
-    void ChangeCharacter(int id)
+    public void ChangeCharacter(int id)
     {
         for (int i = 0; i < players.Length; i++)
         {
@@ -585,6 +592,15 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         Input.SetCursorState(0);
+        players[id].AddChild(circle);
+        if(id == 0)
+            circle.GetComponent<Material>().emissiveColor = new Vector3(0.04f, 0.83f, 0);
+        else if (id == 1)
+            circle.GetComponent<Material>().emissiveColor = new Vector3(0.95f, 0.23f, 1);
+        else if (id == 2)
+            circle.GetComponent<Material>().emissiveColor = new Vector3(0.32f, 0.65f, 0.81f);
+        circle.transform.localPosition = new Vector3(0, 0, 0);
+        circle.transform.localRotation = new Quaternion(0, 0, 0, 0);
     }
 
     public void SavePlayer()

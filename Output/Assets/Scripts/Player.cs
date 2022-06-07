@@ -352,6 +352,7 @@ public class Player : RagnarComponent
         {
             InternalCalls.Destroy(GameObject.Find("Knife"));
         }
+        soundManag.UpdateRadius(0f);
         InternalCalls.Destroy(sound);
         if (gameObject.name == "Player_3")
         {

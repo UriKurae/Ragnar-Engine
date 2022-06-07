@@ -2309,17 +2309,19 @@ public class pauseMenuButton : RagnarComponent
 			FocusedAbilityActivate(selectedPlayer.name, abiltyfocused, y);
             //if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
             GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
+			InternalCalls.RequestScreenRectangle(new Quaternion(0.5f, 0.5f, 0.5f, 0.5f));
 
             for (int w = 0; w < players.Length; w++)
             {
                 players[w].GetComponent<Player>().paused = true;
 			}
-            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP || Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP)
             {
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 				abiltyfocused = 0;
 				camera.lockCam = false;
+				InternalCalls.EndRequestScreenRectangle();
 
 				for (int w = 0; w < players.Length; w++)
 				{

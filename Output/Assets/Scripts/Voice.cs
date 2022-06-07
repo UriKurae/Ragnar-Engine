@@ -25,18 +25,16 @@ public class Voice : RagnarComponent
 		{
 			if(!check)
             {
-				Vector3 newForward = selectedEnemy.transform.globalPosition - player.transform.globalPosition;
-				double angle = Math.Atan2(newForward.x, newForward.z);
-				Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
-				player.GetComponent<Rigidbody>().SetBodyRotation(rot);
-				player.GetComponent<Animation>().PlayAnimation("Ability2");
-				player.GetComponent<Player>().PlayAudioClip("WPN_VOICE");
-				check = true;
+                Vector3 newForward = selectedEnemy.transform.globalPosition - player.transform.globalPosition;
+                double angle = Math.Atan2(newForward.x, newForward.z);
+                Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+                player.GetComponent<Rigidbody>().SetBodyRotation(rot);
+                player.GetComponent<Animation>().PlayAnimation("Ability2");
+                player.GetComponent<Player>().PlayAudioClip("WPN_VOICE");
+                EnemyCircleControl();
+                check = true;
             }
-			BasicEnemy enemyScript = selectedEnemy.GetComponent<BasicEnemy>();
 			ActivateVoice();
-			enemyScript.initialPos = selectedEnemy.transform.globalPosition;
-			enemyScript.initialRot = selectedEnemy.transform.globalRotation;
 		}
         else
         {
@@ -44,7 +42,26 @@ public class Voice : RagnarComponent
 		}
 		InternalCalls.Destroy(gameObject);
 	}
-	public GameObject EnemyFound()
+
+    private void EnemyCircleControl()
+    {
+        GameObject circle = GameObject.Find("Circle");
+        player.EraseChild(circle);
+		selectedEnemy.AddChild(circle);
+
+		if(selectedEnemy.name.Contains("Basic"))
+			selectedEnemy.GetComponent<BasicEnemy>().circle = circle;
+		else if (selectedEnemy.name.Contains("Undistractable"))
+			selectedEnemy.GetComponent<UndistractableEnemy>().circle = circle;
+		else if (selectedEnemy.name.Contains("Tank"))
+			selectedEnemy.GetComponent<TankEnemy>().circle = circle;
+
+		circle.transform.localPosition = new Vector3(0, 0, 0);
+        circle.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        circle.GetComponent<Material>().emissiveColor = new Vector3(1, 0, 0);
+    }
+
+    public GameObject EnemyFound()
 	{
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 15)
@@ -70,18 +87,27 @@ public class Voice : RagnarComponent
 		playerManager.players[playerManager.characterSelected].GetComponent<Player>().SetControled(false);
 		if (selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
 		{
-			selectedEnemy.GetComponent<BasicEnemy>().SetControled(true);
+			BasicEnemy enemy = selectedEnemy.GetComponent<BasicEnemy>();
+			enemy.SetControled(true);
 			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+			enemy.initialPos = selectedEnemy.transform.globalPosition;
+			enemy.initialRot = selectedEnemy.transform.globalRotation;
 		}
 		if (selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
 		{
-			selectedEnemy.GetComponent<TankEnemy>().SetControled(true);
-			 GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+			TankEnemy enemy = selectedEnemy.GetComponent<TankEnemy>();
+			enemy.SetControled(true);
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+			enemy.initialPos = selectedEnemy.transform.globalPosition;
+			enemy.initialRot = selectedEnemy.transform.globalRotation;
 		}
 		if (selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
 		{
-			selectedEnemy.GetComponent<UndistractableEnemy>().SetControled(true);
+			UndistractableEnemy enemy = selectedEnemy.GetComponent<UndistractableEnemy>();
+			enemy.SetControled(true);
 			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesControlled++;
+			enemy.initialPos = selectedEnemy.transform.globalPosition;
+			enemy.initialRot = selectedEnemy.transform.globalRotation;
 		}
 	}
 }
