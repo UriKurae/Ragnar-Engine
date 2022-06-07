@@ -112,12 +112,20 @@ public class Knife : RagnarComponent
 	}
 
 	public void OnCollision(Rigidbody other)
-	{
-		particleComponent.Pause();
-		canReload = true;
-		GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesThrowingKnife++;
-		gameObject.DeleteComponent<Rigidbody>(gameObject.GetComponent<Rigidbody>());
-		circle.isActive = true;
+	{		
+		if(other.gameObject.tag == "Ground")
+        {
+			gameObject.DeleteComponent<Rigidbody>(gameObject.GetComponent<Rigidbody>());
+			circle.isActive = true;
+			gameObject.transform.globalRotation = Quaternion.identity;
+			particleComponent.Pause();
+		}
+        else
+        {
+			particleComponent.Pause();
+			canReload = true;
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesThrowingKnife++;
+		}
 	}
 
 }
