@@ -1679,6 +1679,19 @@ public class pauseMenuButton : RagnarComponent
 						pos.Set(x + 80, y - 60, -10.400f);
 						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
+						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						if (actualControlOption == 0)
+						{
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys_classic.png");
+						}
+						else
+						{
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys.png");
+						}
+						//Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						//Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
 						break;
 					}
 				}
@@ -1696,6 +1709,19 @@ public class pauseMenuButton : RagnarComponent
 						pos.Set(x + 80, y - 60, -10.400f);
 						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
+						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						if (actualControlOption == 0)
+						{
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys_classic.png");
+                        }
+                        else
+                        {
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys.png");
+						}
+						//Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						//Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
 						break;
 					}
 				}
@@ -1714,6 +1740,19 @@ public class pauseMenuButton : RagnarComponent
 						pos.Set(x + 80, y - 60, -10.400f);
 						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
+						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						if (actualControlOption == 0)
+						{
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys_classic.png");
+						}
+						else
+						{
+							abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_abilities_enemy_keys.png");
+						}
+						//Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+						//Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
+						//Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(80, 80, 80);
 						break;
 					}
 				}
@@ -1724,7 +1763,14 @@ public class pauseMenuButton : RagnarComponent
 		{
 			changePlayer(x, y);
 			lastVoiceActice = false;
-			
+			if (actualControlOption == 0)
+			{
+				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters1.png");
+			}
+			else if (actualControlOption == 1)
+			{
+				abilityLeters.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_ability_letters.png");
+			}
 		}
 		//	UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
 		
@@ -2407,9 +2453,14 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void FocusedAbilityActivate(string player, int Ability, float y)
 	{
-		CharFocusedImage.isActive = true;
-		CharFocusedText.isActive = true;
-		AbilityImageApmliate.isActive = true;
+        if (!voiceActice)
+        {
+			CharFocusedImage.isActive = true;
+			CharFocusedText.isActive = true;
+			AbilityImageApmliate.isActive = true;
+		}
+		
+
 		switch (Ability)
         {
 			case 1:				
