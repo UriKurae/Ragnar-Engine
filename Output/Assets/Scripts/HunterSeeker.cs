@@ -54,7 +54,8 @@ public class HunterSeeker : RagnarComponent
 			leftParticles.Play();
 			rightParticles.Play();
 		}
-		if(agent.PathSize() == 0)
+		Debug.Log((agent.path - gameObject.transform.globalPosition).magnitude.ToString());
+		if((agent.path - gameObject.transform.globalPosition).magnitude < 1.5f)
         {
 			leftParticles.Pause();
 			rightParticles.Pause();
