@@ -14,6 +14,8 @@ public class pauseMenuButton : RagnarComponent
 	GameObject[] players;
 	float genealDT = 0;
 	public int abiltyfocused = 0;
+	bool voiceActice = false;
+	bool lastVoiceActice = false;
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
@@ -169,6 +171,8 @@ public class pauseMenuButton : RagnarComponent
 	GameObject AbilityLeft;
 	GameObject AbilityRight;
 	GameObject MissButton;
+
+	GameObject enemies;
 	Camera camera;
 
 	int currentCursor = 0;
@@ -381,6 +385,7 @@ public class pauseMenuButton : RagnarComponent
 		AbilityLeft= GameObject.Find("AbilityLeft");
 		AbilityRight = GameObject.Find("AbilityRight");
 		MissButton = GameObject.Find("MissButton");
+		enemies= GameObject.Find("EnemyManager");
 		GameData load = SaveSystem.LoadGameConfig();
 		if (load != null)
 		{
@@ -1651,6 +1656,65 @@ public class pauseMenuButton : RagnarComponent
 				pos.Set(x + 500, y + 40, -10.400f);				
 			}
 		}
+		voiceActice = false;
+		for (int i = 0; i < enemies.GetComponent<EnemyManager>().enemies.Length; i++)
+        {
+			
+            if (enemies.GetComponent<EnemyManager>().enemies[i].type == EnemyType.BASIC)
+            {
+
+                if (enemies.GetComponent<EnemyManager>().enemyGOs[i].GetComponent<BasicEnemy>().controlled)
+                {
+                    
+					voiceActice = true;
+                    if (voiceActice != lastVoiceActice)
+                    {
+						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
+						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						lastVoiceActice = true;
+						break;
+					}
+				}
+            }else if(enemies.GetComponent<EnemyManager>().enemies[i].type == EnemyType.TANK)
+            {
+
+				if (enemies.GetComponent<EnemyManager>().enemyGOs[i].GetComponent<TankEnemy>().controlled)
+				{
+
+					voiceActice = true;
+					if (voiceActice != lastVoiceActice)
+					{
+						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
+						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						lastVoiceActice = true;
+						break;
+					}
+				}
+				
+			}
+			else if (enemies.GetComponent<EnemyManager>().enemies[i].type == EnemyType.UNDISTRACTABLE)
+			{
+				if (enemies.GetComponent<EnemyManager>().enemyGOs[i].GetComponent<UndistractableEnemy>().controlled)
+				{
+
+					voiceActice = true;
+					if (voiceActice != lastVoiceActice)
+					{
+						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
+						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						lastVoiceActice = true;
+						break;
+					}
+				}
+			}
+
+		}
+		if (voiceActice==false && voiceActice != lastVoiceActice)
+		{
+			changePlayer(x, y);
+			lastVoiceActice = false;
+		}
+		//	UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
 		bounds.Set(30, 30, 0);
 		UISelector.GetComponent<Transform2D>().position2D = pos;
 		UISelector.GetComponent<Transform2D>().SetSize(bounds);
@@ -2357,7 +2421,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (player == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "           Crysknife\n\nKill an enemy at a\nmeleerange. Drones\ncan't be killed.";
+					CharFocusedText.GetComponent<UIText>().text = "           Crysknife\n\nKill an enemy at a\nmelee range. Drones\ncan't be killed.";
 				}
 				else if (player == "Player_3")//stilgar
 				{
@@ -2397,7 +2461,7 @@ public class pauseMenuButton : RagnarComponent
 				}
 				else if (player == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "       Hunter-Seeker\n\nSend a little flying\ndrone to kill an\nenemy. Dronescan't\nbe killed.";
+					CharFocusedText.GetComponent<UIText>().text = "       Hunter-Seeker\n\nSend a little flying\ndrone to kill an\nenemy. Drones can't\nbe killed.";
 				}
 				else if (player == "Player_3")//stilgar
 				{
