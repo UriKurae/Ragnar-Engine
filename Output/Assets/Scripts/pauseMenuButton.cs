@@ -1656,7 +1656,12 @@ public class pauseMenuButton : RagnarComponent
 				pos.Set(x + 500, y + 40, -10.400f);				
 			}
 		}
+		bounds.Set(30, 30, 0);
+		UISelector.GetComponent<Transform2D>().position2D = pos;
+		UISelector.GetComponent<Transform2D>().SetSize(bounds);
 		voiceActice = false;
+		pos.Set(x + 110, y - 60, -10.400f);
+		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		for (int i = 0; i < enemies.GetComponent<EnemyManager>().enemies.Length; i++)
         {
 			
@@ -1670,7 +1675,9 @@ public class pauseMenuButton : RagnarComponent
                     if (voiceActice != lastVoiceActice)
                     {
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
-						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						UICharacterName.GetComponent<UIText>().text = "Enemy";
+						pos.Set(x + 80, y - 60, -10.400f);
+						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
 						break;
 					}
@@ -1685,7 +1692,9 @@ public class pauseMenuButton : RagnarComponent
 					if (voiceActice != lastVoiceActice)
 					{
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
-						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						UICharacterName.GetComponent<UIText>().text = "Enemy";
+						pos.Set(x + 80, y - 60, -10.400f);
+						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
 						break;
 					}
@@ -1701,7 +1710,9 @@ public class pauseMenuButton : RagnarComponent
 					if (voiceActice != lastVoiceActice)
 					{
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
-						UICharacterName.GetComponent<UIText>().text = "Soldier";
+						UICharacterName.GetComponent<UIText>().text = "Enemy";
+						pos.Set(x + 80, y - 60, -10.400f);
+						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						lastVoiceActice = true;
 						break;
 					}
@@ -1713,11 +1724,10 @@ public class pauseMenuButton : RagnarComponent
 		{
 			changePlayer(x, y);
 			lastVoiceActice = false;
+			
 		}
 		//	UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
-		bounds.Set(30, 30, 0);
-		UISelector.GetComponent<Transform2D>().position2D = pos;
-		UISelector.GetComponent<Transform2D>().SetSize(bounds);
+		
 
 
 		pos.Set(x + 235, y - 69, -10.400f);
@@ -1730,10 +1740,6 @@ public class pauseMenuButton : RagnarComponent
 		pos.Set(x + 435, y - 69, -10.400f);
 		StilgarName.GetComponent<Transform2D>().position2D = pos;
 
-		
-	
-		pos.Set(x + 110, y - 60, -10.400f);
-		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
         
