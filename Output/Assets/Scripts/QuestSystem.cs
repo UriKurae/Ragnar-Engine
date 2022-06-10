@@ -44,19 +44,29 @@ public class Quest
 };
 public class QuestSystem : RagnarComponent
 {
-	// Lists
 	public List<Quest> questList;
 	public List<Quest> completedQuestList;
+	// DELETE
 	public List<Quest> activeQuestList;
-
+	// NEW
+	public List<Quest> mainQuestList;
+	public List<Quest> secondaryQuestList;
+	//DELETE
 	public GameObject activeQuestNames;
+	//NEW
+	public GameObject mainQuestNames;
+	public GameObject secondaryQuestNames;
+
 	public GameObject completedQuestNames;
 	public GameObject questDescription;
 	public GameObject questId;
 	public GameObject questType;
 	public GameObject questState;
-
+	// DELETE
 	public GameObject activeButton;
+	//NEW
+	public GameObject mainButton;
+	public GameObject secondaryButton;
 	public GameObject completedButton;
 
 	public GameObject questBc;
@@ -66,11 +76,19 @@ public class QuestSystem : RagnarComponent
 	Transform2D questBordT;
 	GameObject GameState;
 	public bool showJournal;
+	// DELETE
 	public bool showActive;
+	//NEW
+	public bool showMain;
+	public bool showSecondary;
 	public bool showCompleted;
 	public Vector3 position;
 
+	//DELETE
 	private string activeQuests;
+	//NEW
+	private string mainQuests;
+	private string secondaryQuests;
 	private string completedQuests;
 	private int level = 0;
 
@@ -132,13 +150,22 @@ public class QuestSystem : RagnarComponent
 	public void AddQuest(Quest questToAdd)
     {
 		questList.Add(questToAdd);
-		activeQuestList.Add(questToAdd);
+
+		if (questToAdd.GetQuestType() == QuestType.MAIN)
+			mainQuestList.Add(questToAdd);
+		else if (questToAdd.GetQuestType() == QuestType.SECONDARY)
+			secondaryQuestList.Add(questToAdd);
 	}
 	public void CompleteQuest(Quest questToComplete)
     {
+		QuestType auxType = questToComplete.GetQuestType();
 		completedQuestList.Add(questToComplete);
 		questToComplete.ChangeQuestState(QuestState.COMPLETED);
-		activeQuestList.Remove(questToComplete);
+
+		if (auxType == QuestType.MAIN)
+			mainQuestList.Remove(questToComplete);
+		else if (auxType == QuestType.SECONDARY)
+			secondaryQuestList.Remove(questToComplete);
 	}
 	public void RemoveQuest(Quest questToDelete)
     {
@@ -177,6 +204,8 @@ public class QuestSystem : RagnarComponent
 		questList = new List<Quest>();
 		completedQuestList = new List<Quest>();
 		activeQuestList = new List<Quest>();
+		mainQuestList = new List<Quest>();
+		secondaryQuestList = new List<Quest>();
 
 		if (SceneManager.currentSceneName == "build")
 			level = 1;
