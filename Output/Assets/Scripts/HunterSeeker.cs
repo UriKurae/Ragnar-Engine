@@ -33,7 +33,7 @@ public class HunterSeeker : RagnarComponent
 			rb.IgnoreCollision(GameObject.Find("PlayerManager").GetComponent<PlayerManager>().players[i], true);
 		}
 
-		player.GetComponent<Animation>().PlayAnimation("Ability3");
+		//player.GetComponent<Animation>().PlayAnimation("Ability3");
 		sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
 

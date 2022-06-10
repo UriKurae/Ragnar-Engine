@@ -44,7 +44,7 @@ public class Knife : RagnarComponent
 		if(direction != null)
         {
 			player.GetComponent<Player>().PlayAudioClip("WPN_THORWINGKNIFETHROW");
-			player.GetComponent<Animation>().PlayAnimation("Ability4");
+			//player.GetComponent<Animation>().PlayAnimation("Ability4");
 
 			Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
 			goRB.SetBodyPosition(pos);
