@@ -148,7 +148,41 @@ public static class SaveSystem
 
         stream.Close();
     }
+    public static void SaveQuest(Quest quest)
+    {
+        Debug.Log("hola1");
+        // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = "Library/SavedGame/Quest/" + quest.GetQuestId().ToString()+".ragnar";
+        FileStream stream = new FileStream(path, FileMode.Create);
 
+        QuestData data = new QuestData(quest);
+        formatter.Serialize(stream, data);
+
+        stream.Close();
+    }
+    public static QuestData LoadQuest(string questID)
+    {
+        string finalName = questID.Trim();
+        string path = "Library/SavedGame/Quest/" + finalName + ".ragnar";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            QuestData data = formatter.Deserialize(stream) as QuestData;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            //Debug.Log("Save file not found in " + path);
+            return null;
+        }
+    }
     public static GameData LoadGameConfig()
     {
         string path = "Library/SavedGame/GameConfig/" + "Config" + ".ragnar";

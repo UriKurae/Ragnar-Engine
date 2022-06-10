@@ -434,6 +434,7 @@ public class pauseMenuButton : RagnarComponent
 		UpdatePlayerPause();
 		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
         {
+			GameObject.Find("Quest System").GetComponent<QuestSystem>().SaveMissions();
 			Input.RestoreDefaultCursor();
 			SceneManager.LoadScene("WinScene");
         }

@@ -112,6 +112,8 @@ public class QuestSystem : RagnarComponent
 	// Easing
 	float actualDt = 0;
 	bool isPlayng = false;
+	bool isSceneWin=false;
+
 	double EasingFunction(float x)
     {
 		float c1 = 1.70158f;
@@ -197,10 +199,21 @@ public class QuestSystem : RagnarComponent
 
 		if (SceneManager.currentSceneName == "build")
 			level = 1;
-		if (SceneManager.currentSceneName == "build2")
+		else if (SceneManager.currentSceneName == "build2")
 			level = 2;
-		if (SceneManager.currentSceneName == "build3")
+		else if (SceneManager.currentSceneName == "build3")
 			level = 3;
+
+		if(level == 0)
+        {
+			isSceneWin = true;
+			if (SceneManager.lastSceneName == "build")
+				level = 1;
+			else if (SceneManager.lastSceneName == "build2")
+				level = 2;
+			else if (SceneManager.lastSceneName == "build3")
+				level = 3;
+		}
 
 		mainQuestNames = GameObject.Find("Titulo Principales");
 		secondaryQuestNames = GameObject.Find("Titulo Secundarias");
@@ -282,10 +295,20 @@ public class QuestSystem : RagnarComponent
 				CreateQuest(23, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
 				break;
         }
+        if (isSceneWin)
+        {
+			showJournal = true;
+			isPlayng = true;
+		}
+		if (SceneManager.currentSceneName== "WinScene")
+        {
+			LoadMissions();
+        }
+		
 	}
 	public void Update()
 	{
-		if(changePage)
+		if(changePage && !isSceneWin)
         {
 			changePage = false;
 			GameObject.Find("PlayerManager").GetComponent<PlayerManager>().GetPlayerSelected().PlayerPause();
@@ -389,28 +412,32 @@ public class QuestSystem : RagnarComponent
 				break;
 		}
 
-
 		// Drawing
 		float xCorner = (InternalCalls.GetRegionGame().x / 2);
 		float yCorner = (InternalCalls.GetRegionGame().y / 2);
+		int a = 0;
 
-		position.Set(xCorner-70 , yCorner-70, 1000000.0f);
-		MissButton.GetComponent<Transform2D>().position2D = position;
-		int a = MissButton.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 3:
-                // pressed mode
-                if (!isPlayng)
-                {
-					showJournal = !showJournal;
-					isPlayng = true;
-				}
-				
+		if (!isSceneWin)
+        {
+			position.Set(xCorner - 70, yCorner - 70, 1000000.0f);
+			MissButton.GetComponent<Transform2D>().position2D = position;
+			a = MissButton.GetComponent<UIButton>().GetButtonState();
+			
+			switch (a)
+			{
+				case 3:
+					// pressed mode
+					if (!isPlayng)
+					{
+						showJournal = !showJournal;
+						isPlayng = true;
+					}
 
-				break;
+
+					break;
+			}
 		}
-		if (Input.GetKey(KeyCode.J) == KeyState.KEY_DOWN)
+		if (!isSceneWin && Input.GetKey(KeyCode.J) == KeyState.KEY_DOWN)
 		{
 			if (!isPlayng)
 			{
@@ -418,6 +445,7 @@ public class QuestSystem : RagnarComponent
 				isPlayng = true;
 			}
 		}
+		
 		if (showJournal)
         {
             if (isPlayng) {
@@ -545,11 +573,10 @@ public class QuestSystem : RagnarComponent
 
 					completedQuestNames.GetComponent<Transform2D>().position2D = position;
 				}
-
-			}
-			
+			}			
 		}
-		if (GameState.GetComponent<pauseMenuButton>().isSowing || GameState.GetComponent<pauseMenuButton>().isOptions)
+		
+		if (!isSceneWin && (GameState.GetComponent<pauseMenuButton>().isSowing || GameState.GetComponent<pauseMenuButton>().isOptions))
 		{
 			mainButton.isActive = false;
 			secondaryButton.isActive = false;
@@ -682,7 +709,6 @@ public class QuestSystem : RagnarComponent
         {
 			completedQuests = "No completed quests available";
 		}
-
 		position.Set(242, 68.5f, 0);
 		mainButton.GetComponent<Transform2D>().SetSize(position);
 		UIButton mainButtonUI = mainButton.GetComponent<UIButton>();
@@ -719,7 +745,6 @@ public class QuestSystem : RagnarComponent
 			completedQuestNames.GetComponent<UIText>().SetTextTextColor(255, 0, 0);
 		else
 			completedQuestNames.GetComponent<UIText>().SetTextTextColor(255, 255, 255);
-
 		a = mainButton.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -763,6 +788,25 @@ public class QuestSystem : RagnarComponent
 				showCompleted = true;
 				changePage = true;
 				break;
+		}
+
+	}
+	public void SaveMissions()
+    {
+		for(int i = 0; i < completedQuestList.Count; i++)
+		{
+			SaveSystem.SaveQuest(completedQuestList[i]);
+        }
+    }
+	public void LoadMissions()
+	{		
+		for (int i = 0; i < questList.Count; i++)
+		{	
+			QuestData data = SaveSystem.LoadQuest(questList[i].GetQuestId().ToString());
+			if (data != null&&data.state==QuestState.COMPLETED)
+            {
+				CompleteQuest(questList[i]);
+            }
 		}
 	}
 }
