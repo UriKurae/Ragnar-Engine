@@ -36,6 +36,8 @@ public class PlayerManager : RagnarComponent
     GameObject sword;
     GameObject stunner;
     GameObject circle;
+
+    private Transform camera;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -116,6 +118,8 @@ public class PlayerManager : RagnarComponent
         GameObject pointer = InternalCalls.InstancePrefab("PlayerReminder", new Vector3(0, 0, 0));
         for (int i = 0; i < players.Length; i++)
             players[i].GetComponent<Player>().pointCharacter = pointer.childs[i];
+
+        camera = GameObject.Find("Camera").transform;
     }
 
 	public void Update()
@@ -260,7 +264,26 @@ public class PlayerManager : RagnarComponent
         }
 
         // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
-        if (playableCharacter.state != State.NONE) CastOrCancel();
+        if (playableCharacter.state != State.NONE)
+        {
+            if (playableCharacter == characters[0] && playableCharacter.state == State.ABILITY_4)
+            {
+                GameObject enemyRaycast = RayCast.HitToTag(camera.globalPosition, RayCast.ReturnHitpoint(), "Enemies");
+                if (enemyRaycast != null && enemyRaycast.name.Contains("Drone"))
+                {
+                    Debug.Log("AAAAAAAAAAAAAAAAAA");
+                }
+                if (Input.GetCursorState() != (int)CursorState.NON_CLICKABLE && enemyRaycast != null && enemyRaycast.name.Contains("Drone"))
+                {
+                    Input.SetCursorState((int)CursorState.NON_CLICKABLE);
+                }
+                else
+                {
+                    SetCursor(playableCharacter.state);
+                }
+            }
+            CastOrCancel();
+        }
     }
 
     private void SpawnArea(State ability)

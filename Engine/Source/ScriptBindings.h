@@ -74,15 +74,15 @@ int GetCursorState()
 
 void RestoreDefaultCursor()
 {
-	if (app != nullptr)
-		app->input->RestoreDefaultCursor();
+	/*if (app != nullptr)
+		app->input->RestoreDefaultCursor();*/
 }
 
 void SetEagleCursor(bool ret)
 {
 	if (app != nullptr)
 	{
-		if (ret)
+		/*if (ret)
 		{
 			int i = 0;
 			for (std::vector<HCURSOR>::iterator it = app->input->GetCursors()->begin(); it != app->input->GetCursors()->end(); ++it)
@@ -111,7 +111,7 @@ void SetEagleCursor(bool ret)
 				}
 				i++;
 			}
-		}		
+		}	*/	
 	}
 }
 

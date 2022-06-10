@@ -453,7 +453,6 @@ enum CursorState
     STILGAR_3,
     STILGAR_4,
 
-    CLICKABLE,
     NON_CLICKABLE,
 };
 
