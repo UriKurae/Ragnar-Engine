@@ -793,7 +793,8 @@ public class QuestSystem : RagnarComponent
 	}
 	public void SaveMissions()
     {
-		for(int i = 0; i < completedQuestList.Count; i++)
+		SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Quest");
+		for (int i = 0; i < completedQuestList.Count; i++)
 		{
 			SaveSystem.SaveQuest(completedQuestList[i]);
         }
