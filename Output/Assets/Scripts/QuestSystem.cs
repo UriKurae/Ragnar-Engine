@@ -249,7 +249,7 @@ public class QuestSystem : RagnarComponent
 				CreateQuest(1, "Intocable", "Completa el nivel sin recibir daño", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(2, "Pacifista", "Completa el nivel sin matar a nadie", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(3, "Azotador de mentes", "Controla mentalmente a tres enemigos", QuestState.ACTIVE, QuestType.SECONDARY);
-				CreateQuest(4, "Pilla esta!", "Acaba con 5 enemigos utilizando el cuchillo arrojadizo", QuestState.ACTIVE, QuestType.SECONDARY);
+				CreateQuest(4, "Pilla esta!", "Mata 5 enemigos utilizando el cuchillo arrojadizo", QuestState.ACTIVE, QuestType.SECONDARY);
 				CreateQuest(5, "Habrá sido el viento", "Distrae a 5 enemigos con piedras", QuestState.ACTIVE, QuestType.SECONDARY);
 				//Auxiliar quest (Solve a Bug)
 				CreateQuest(6, "", "", QuestState.ACTIVE, QuestType.SECONDARY);
@@ -573,7 +573,10 @@ public class QuestSystem : RagnarComponent
 		{
 			for (int i = 0; i < mainQuestList.Count; ++i)
 			{
-				mainQuests += mainQuestList[i].GetQuestName().ToString() + "\n\n";
+				mainQuests += (i+1).ToString();
+				mainQuests += ". ";
+				mainQuests += mainQuestList[i].GetQuestName().ToString() + "\n    ";
+				mainQuests += mainQuestList[i].GetQuestDescription().ToString() + "\n\n";
 			}
 		}
 		else
@@ -583,9 +586,13 @@ public class QuestSystem : RagnarComponent
 
 		if (secondaryQuestList.Count > 0)
 		{
-			for (int i = 0; i < secondaryQuestList.Count; ++i)
+			for (int i = 0; i < secondaryQuestList.Count-1; ++i)
 			{
-				secondaryQuests += secondaryQuestList[i].GetQuestName().ToString() + "\n\n";
+
+				secondaryQuests += (i + 1).ToString();
+				secondaryQuests += ". ";
+				secondaryQuests += secondaryQuestList[i].GetQuestName().ToString() + "\n    ";
+				secondaryQuests += secondaryQuestList[i].GetQuestDescription().ToString() + "\n\n";
 			}
 		}
 		else
@@ -597,7 +604,8 @@ public class QuestSystem : RagnarComponent
         {
 			for (int i = 0; i < completedQuestList.Count; ++i)
 			{
-				completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n\n";
+				completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n    ";
+				//completedQuests += completedQuestList[i].GetQuestDescription().ToString() + "\n\n";
 			}
 		}
 		else
