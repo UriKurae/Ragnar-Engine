@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 571933496,
+                    "pointer": 452777232,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,9 +144,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -94.742462158203125,
+                        -85.611587524414062,
                         0,
-                        84.808944702148438
+                        88.3089599609375
                     ],
                     "Quaternion": [
                         0,
@@ -210,9 +210,9 @@
                     "Vertical Fov": 0.41793009638786316,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -143.74029541015625,
+                        -134.60943603515625,
                         55,
-                        94.776023864746094
+                        98.276039123535156
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -222,9 +222,9 @@
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -94.742462158203125,
+                        -85.611587524414062,
                         0,
-                        84.808944702148438
+                        88.3089599609375
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -25456,7 +25456,7 @@
                         0
                     ],
                     "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
+                    "Outline Normals Thickness": 0.20000000298023224
                 },
                 {
                     "Type": 1,
@@ -25522,7 +25522,7 @@
                         0
                     ],
                     "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
+                    "Outline Normals Thickness": 0.20000000298023224
                 },
                 {
                     "Type": 1,
@@ -25588,7 +25588,7 @@
                         0
                     ],
                     "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
+                    "Outline Normals Thickness": 0.20000000298023224
                 },
                 {
                     "Type": 1,
@@ -46350,7 +46350,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 571933952,
+                    "pointer": 452777840,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -49393,7 +49393,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 571935472,
+                    "pointer": 452782552,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -59703,7 +59703,7 @@
             "Name": "UIB",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIB.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
