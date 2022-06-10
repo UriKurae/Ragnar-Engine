@@ -591,7 +591,42 @@ public class QuestSystem : RagnarComponent
 
 				secondaryQuests += (i + 1).ToString();
 				secondaryQuests += ". ";
-				secondaryQuests += secondaryQuestList[i].GetQuestName().ToString() + "\n    ";
+				secondaryQuests += secondaryQuestList[i].GetQuestName().ToString();
+				if(secondaryQuestList[i].GetQuestId()==3)
+                {
+					secondaryQuests += "    (" + enemiesControlled.ToString()+ "/3)"+ "\n    ";
+				}
+				else if(secondaryQuestList[i].GetQuestId() == 4) 
+				{
+					secondaryQuests +="    ("+ enemiesThrowingKnife.ToString() + "/5)" + "\n    ";
+				}else if(secondaryQuestList[i].GetQuestId() == 5)
+				{
+					secondaryQuests += "    (" + enemiesDistractedStone.ToString() + "/5)" + "\n    " ;
+                }
+				else if (secondaryQuestList[i].GetQuestId() == 12)
+				{
+					secondaryQuests += "    (" + enemiesCamouflage.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 13)
+				{
+					secondaryQuests += "    (" + enemiesHunterSeeker.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 14)
+				{
+					secondaryQuests += "    (" + enemiesGrenade.ToString() + "/4)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 21)
+				{
+					secondaryQuests += "    (" + enemiesTrap.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 22)
+				{
+					secondaryQuests += "    (" + enemiesWhistle.ToString() + "/3)" + "\n    ";
+				}
+				else
+                {
+					secondaryQuests += "\n    ";
+				}
 				secondaryQuests += secondaryQuestList[i].GetQuestDescription().ToString() + "\n\n";
 			}
 		}
@@ -604,8 +639,43 @@ public class QuestSystem : RagnarComponent
         {
 			for (int i = 0; i < completedQuestList.Count; ++i)
 			{
-				completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n    ";
-				//completedQuests += completedQuestList[i].GetQuestDescription().ToString() + "\n\n";
+				completedQuests += completedQuestList[i].GetQuestName().ToString();
+				if (secondaryQuestList[i].GetQuestId() == 3)
+				{
+					completedQuests += "    (" + enemiesControlled.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 4)
+				{
+					completedQuests += "    (" + enemiesThrowingKnife.ToString() + "/5)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 5)
+				{
+					completedQuests += "    (" + enemiesDistractedStone.ToString() + "/5)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 12)
+				{
+					completedQuests += "    (" + enemiesCamouflage.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 13)
+				{
+					completedQuests += "    (" + enemiesHunterSeeker.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 14)
+				{
+					completedQuests += "    (" + enemiesGrenade.ToString() + "/4)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 21)
+				{
+					completedQuests += "    (" + enemiesTrap.ToString() + "/3)" + "\n    ";
+				}
+				else if (secondaryQuestList[i].GetQuestId() == 22)
+				{
+					completedQuests += "    (" + enemiesWhistle.ToString() + "/3)" + "\n    ";
+				}
+				else
+				{
+					completedQuests += "\n    ";
+				}
 			}
 		}
 		else
