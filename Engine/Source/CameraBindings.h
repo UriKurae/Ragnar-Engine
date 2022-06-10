@@ -208,9 +208,9 @@ MonoObject* ReturnHitpoint()
 }
 
 // Coordenadas de pantalla = projection * view *  posicionDelObjeto
-MonoObject* WorldToScreen(MonoObject* go, MonoObject* target)
+MonoObject* WorldToScreen(MonoObject* target)
 {
-	CameraComponent* cam = GetComponentMono<CameraComponent*>(go);
+	CameraComponent* cam = app->gameCam;
 	float3 tg = app->moduleMono->UnboxVector(target);
 	float4 pos(tg, 1);
 	float4 screenPos = cam->matrixProjectionFrustum.Mul(cam->matrixViewFrustum.Mul(pos));

@@ -13,6 +13,7 @@ public class Knife : RagnarComponent
 	private bool pendingToDelete = false;
 	private bool grabOnce = false;
 	GameObject circle;
+	GameObject popUp;
 	
 	public void Start()
     {
@@ -75,6 +76,7 @@ public class Knife : RagnarComponent
 		if (pendingToDelete)
 		{
 			//gameObject.UnSubmitOutlineDrawing();
+			InternalCalls.Destroy(popUp);
 			InternalCalls.Destroy(gameObject);
 		}
 
@@ -99,6 +101,10 @@ public class Knife : RagnarComponent
 
 			pendingToDelete = true;
 			canReload = false;
+		}
+		if(popUp != null)
+        {
+			popUp.GetComponent<Transform2D>().position2D = Camera.WorldToScreen(gameObject.transform.globalPosition);
 		}
 	}
 
@@ -131,6 +137,7 @@ public class Knife : RagnarComponent
 			circle.isActive = true;
 			gameObject.transform.globalRotation = Quaternion.identity;
 			particleComponent.Pause();
+			popUp = InternalCalls.InstancePrefab("PopUp", Vector3.one);
 		}
         else
         {

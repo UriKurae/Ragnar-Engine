@@ -103,6 +103,7 @@ public class DialogueTrigger : RagnarComponent
             Input.RestoreDefaultCursor();
 
             GameObject.Find("Quest System").GetComponent<QuestSystem>().SaveMissions();
+            Debug.Log("Holaaaaa");
             SceneManager.LoadScene("WinScene");
             InternalCalls.Destroy(gameObject);
         }

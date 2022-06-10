@@ -150,13 +150,14 @@ public static class SaveSystem
     }
     public static void SaveQuest(Quest quest)
     {
-        Debug.Log("hola1");
+        Debug.Log("Holaaaaaaaaaaaaaaa1");
         // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
         BinaryFormatter formatter = new BinaryFormatter();
         string path = "Library/SavedGame/Quest/" + quest.GetQuestId().ToString()+".ragnar";
         FileStream stream = new FileStream(path, FileMode.Create);
-
+        Debug.Log("Holaaaaaaaaaaaaaaa2");
         QuestData data = new QuestData(quest);
+        Debug.Log("Holaaaaaaaaaaaaaaa3");
         formatter.Serialize(stream, data);
 
         stream.Close();
