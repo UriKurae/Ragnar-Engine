@@ -438,13 +438,13 @@ public class QuestSystem : RagnarComponent
 					questBcT.position2D = position;
 					questBordT.position2D = position;
 
-					position.Set((xCorner - 679.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner - 743) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
 					mainButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner - 679.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner - 500) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
 					secondaryButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner - 320.5f) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner - 258) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 70.5f, 1000000.0f);
 					completedButton.GetComponent<Transform2D>().position2D = position;
 
 					position.Set((xCorner - 800) * actualvalue + ((1 - actualvalue) * (xCorner + 400)), yCorner - 150, 1000000.0f);
@@ -528,13 +528,13 @@ public class QuestSystem : RagnarComponent
 					questBcT.position2D = position;
 					questBordT.position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 679.5f)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 743)), yCorner - 70.5f, 1000000.0f);
 					mainButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 679.5f)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 500)), yCorner - 70.5f, 1000000.0f);
 					secondaryButton.GetComponent<Transform2D>().position2D = position;
 
-					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 320.5f)), yCorner - 70.5f, 1000000.0f);
+					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 258)), yCorner - 70.5f, 1000000.0f);
 					completedButton.GetComponent<Transform2D>().position2D = position;
 
 					position.Set((xCorner + 400) * actualvalue + ((1 - actualvalue) * (xCorner - 800)), yCorner - 150, 1000000.0f);
@@ -605,23 +605,23 @@ public class QuestSystem : RagnarComponent
 			completedQuests = "No completed quests available";
 		}
 
-		position.Set(365.5f, 69.5f, 0);
+		position.Set(242, 68.5f, 0);
 		mainButton.GetComponent<Transform2D>().SetSize(position);
 		UIButton mainButtonUI = mainButton.GetComponent<UIButton>();
 		mainButtonUI.SetTextPosition(-45, -5);
-		mainButtonUI.text = "Main Quests";
+		mainButtonUI.text = "Main";
 
-		position.Set(365.5f, 69.5f, 0);
+		position.Set(242, 68.5f, 0);
 		secondaryButton.GetComponent<Transform2D>().SetSize(position);
 		UIButton secondaryButtonUI = secondaryButton.GetComponent<UIButton>();
 		secondaryButtonUI.SetTextPosition(-45, -5);
-		secondaryButtonUI.text = "Secondary Quests";
+		secondaryButtonUI.text = "Secondary";
 
-		position.Set(365.5f, 69.5f, 0);
+		position.Set(242, 68.5f, 0);
 		completedButton.GetComponent<Transform2D>().SetSize(position);
 		UIButton completedButtonUI = completedButton.GetComponent<UIButton>();
 		completedButtonUI.SetTextPosition(-55, -5);
-		completedButtonUI.text = "Completed Quests";
+		completedButtonUI.text = "Completed";
 		
 		mainQuestNames.GetComponent<UIText>().text = mainQuests;
 		if (mainQuests == "No main quests available")
