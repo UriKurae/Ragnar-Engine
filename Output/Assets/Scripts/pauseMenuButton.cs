@@ -1670,14 +1670,14 @@ public class pauseMenuButton : RagnarComponent
 
                 if (enemies.GetComponent<EnemyManager>().enemyGOs[i].GetComponent<BasicEnemy>().controlled)
                 {
-                    
+					pos.Set(x + 95, y - 60, -10.400f);
+					UICharacterName.GetComponent<Transform2D>().position2D = pos;
 					voiceActice = true;
                     if (voiceActice != lastVoiceActice)
                     {
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Harkonnen_Soldier_HUD.png");
 						UICharacterName.GetComponent<UIText>().text = "Enemy";
-						pos.Set(x + 80, y - 60, -10.400f);
-						UICharacterName.GetComponent<Transform2D>().position2D = pos;
+						
 						lastVoiceActice = true;
 						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
 						if (actualControlOption == 0)
@@ -1704,10 +1704,11 @@ public class pauseMenuButton : RagnarComponent
 					voiceActice = true;
 					if (voiceActice != lastVoiceActice)
 					{
+						pos.Set(x + 95, y - 60, -10.400f);
+						UICharacterName.GetComponent<Transform2D>().position2D = pos;
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
 						UICharacterName.GetComponent<UIText>().text = "Enemy";
-						pos.Set(x + 80, y - 60, -10.400f);
-						UICharacterName.GetComponent<Transform2D>().position2D = pos;
+						
 						lastVoiceActice = true;
 						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
 						if (actualControlOption == 0)
@@ -1731,14 +1732,14 @@ public class pauseMenuButton : RagnarComponent
 			{
 				if (enemies.GetComponent<EnemyManager>().enemyGOs[i].GetComponent<UndistractableEnemy>().controlled)
 				{
-
+					pos.Set(x + 95, y - 60, -10.400f);
+					UICharacterName.GetComponent<Transform2D>().position2D = pos;
 					voiceActice = true;
 					if (voiceActice != lastVoiceActice)
 					{
 						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
 						UICharacterName.GetComponent<UIText>().text = "Enemy";
-						pos.Set(x + 80, y - 60, -10.400f);
-						UICharacterName.GetComponent<Transform2D>().position2D = pos;
+						
 						lastVoiceActice = true;
 						UICharBor2.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
 						if (actualControlOption == 0)
