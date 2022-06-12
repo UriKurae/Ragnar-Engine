@@ -1707,7 +1707,7 @@ public class pauseMenuButton : RagnarComponent
 					{
 						pos.Set(x + 95, y - 60, -10.400f);
 						UICharacterName.GetComponent<Transform2D>().position2D = pos;
-						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Sardaukar_Soldier_HUD.png");
+						UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/Enemy3.png");
 						UICharacterName.GetComponent<UIText>().text = "Enemy";
 						
 						lastVoiceActice = true;
