@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 239520264,
+                    "pointer": 711194512,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -50.029163360595703,
+                        -42.681301116943359,
                         0,
                         106
                     ],
                     "Quaternion": [
                         0,
-                        0.96669411659240723,
+                        0.95512866973876953,
                         0,
-                        0.25593462586402893
+                        0.29619115591049194
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.51762878894805908,
+                        0.60140478610992432,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -210,26 +210,26 @@
                     "Vertical Fov": 0.41793009638786316,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -74.770858764648438,
+                        -70.97210693359375,
                         55,
-                        149.45089721679688
+                        147.22816467285156
                     ],
                     "Type": 3,
-                    "Zoom": 16,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -50.029163360595703,
+                        -42.681301116943359,
                         0,
                         106
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 150.34205627441406,
+                    "Horizontal Angle": 145.54203796386719,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -404,7 +404,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 239524064,
+                    "pointer": 711198768,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -1925,13 +1925,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 239531056,
+                    "pointer": 711210320,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 214052520,
+                    "barrelLocations": 234499640,
                     "barrelCount": 0,
                     "stunnedHits": 0,
                     "charging": false
@@ -24229,7 +24229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 549968352,
+                    "pointer": 639079752,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -25447,68 +25447,70 @@
             ]
         },
         {
-            "UUID": 1528664251,
+            "UUID": 2143263803,
             "Parent UUID": 417171234,
-            "Name": "ShieldBar",
+            "Name": "LightAreaEnemy",
             "Active": true,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "AbilityRange",
             "layer": "Default",
-            "Is Interactuable": false,
+            "Is Interactuable": true,
             "Components": [
                 {
+                    "Type": 0,
                     "Active": true,
-                    "Type": 19,
                     "Position": [
                         0,
-                        220,
-                        -10.399999618530273
+                        0,
+                        0
                     ],
-                    "Scale": [
-                        1.002500057220459,
-                        0.029999999329447746,
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
                         1
                     ],
-                    "rotationEuler": [
+                    "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
-                    "buttonWidth": 601.5,
-                    "buttonHeight": 18,
-                    "lastButtonWidth": 1296,
-                    "lastButtonHeight": 663.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
                 },
                 {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_boss_shieldbar1.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Type": 8,
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
+                    "Light Type": 2,
+                    "Position": [
                         0,
                         0,
                         0
                     ],
-                    "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0.5,
-                    "numOfAnimations": 0
+                    "Ambient": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Diffuse": [
+                        0.0055555552244186401,
+                        0.022560402750968933,
+                        0.25
+                    ],
+                    "Specular": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Intensity": 0,
+                    "Constant": 0.10000000149011612,
+                    "Linear": -0.57400000095367432,
+                    "Quadratic": 0
                 }
             ]
         }

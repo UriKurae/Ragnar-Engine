@@ -9,13 +9,14 @@ public class Voice : RagnarComponent
 	public PlayerManager playerManager;
 	NavAgent agent;
 	bool check = false;
+	Light abilityLight;
 
 	public void Start()
 	{
 		player = GameObject.Find("Player");
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-		agent = player.GetComponent<NavAgent>();	
+		agent = player.GetComponent<NavAgent>();
 	}
 	public void Update()
 	{
@@ -32,7 +33,9 @@ public class Voice : RagnarComponent
                 //player.GetComponent<Animation>().PlayAnimation("Ability2");
                 player.GetComponent<Player>().PlayAudioClip("WPN_VOICE");
                 EnemyCircleControl();
-                check = true;
+				EnemyLightAbility();
+
+				check = true;
             }
 			ActivateVoice();
 		}
@@ -60,8 +63,24 @@ public class Voice : RagnarComponent
         circle.transform.localRotation = new Quaternion(0, 0, 0, 0);
         circle.GetComponent<Material>().emissiveColor = new Vector3(1, 0, 0);
     }
+	private void EnemyLightAbility()
+	{
+		GameObject light = GameObject.Find("LightAreaEnemy");
+		light.GetParent().EraseChild(light);
+		selectedEnemy.AddChild(light);
 
-    public GameObject EnemyFound()
+		if (selectedEnemy.name.Contains("Basic"))
+			selectedEnemy.GetComponent<BasicEnemy>().abilityLight = light.GetComponent<Light>();
+		else if (selectedEnemy.name.Contains("Undistractable"))
+			selectedEnemy.GetComponent<UndistractableEnemy>().abilityLight = light.GetComponent<Light>();
+		else if (selectedEnemy.name.Contains("Tank"))
+			selectedEnemy.GetComponent<TankEnemy>().abilityLight = light.GetComponent<Light>();
+
+		light.transform.localPosition = new Vector3(0, 0, 0);
+		light.transform.localRotation = new Quaternion(0, 0, 0, 0);
+	}
+
+	public GameObject EnemyFound()
 	{
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 15)

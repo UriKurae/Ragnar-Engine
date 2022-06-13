@@ -69,6 +69,7 @@ public class TankEnemy : RagnarComponent
     public GameObject circle;
     GameObject pointCharacter;
     Light pointerLight;
+    public Light abilityLight;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -178,7 +179,7 @@ public class TankEnemy : RagnarComponent
             }
             else
             {
-                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && !backstab)
                 {
                     if (agents.CalculatePath(agents.hitPosition).Length > 0)
                     {
@@ -196,16 +197,18 @@ public class TankEnemy : RagnarComponent
                 if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
                 {
                     backstab = true;
-                    //area de luz
+                    abilityLight.intensity = 1;
                 }
-                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && backstab)
                 {
                     Debug.Log("BackStab enemy");
                     InternalCalls.InstancePrefab("BackStabEnemy", Vector3.zero);
+                    abilityLight.intensity = 0;
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
                 {
+                    abilityLight.intensity = 0;
                     backstab = false;
                 }
                 buffTemp = controlledCooldown;
@@ -215,6 +218,7 @@ public class TankEnemy : RagnarComponent
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN && players.Length > 1) || (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN && players.Length > 2))
                 {
                     pointerLight.intensity = 0;
+                    abilityLight.intensity = 0;
                     controlled = false;
                     returning = true;
                     gameObject.EraseChild(circle);
@@ -225,6 +229,7 @@ public class TankEnemy : RagnarComponent
                 if (controlledCooldown < 0)
                 {
                     pointerLight.intensity = 0;
+                    abilityLight.intensity = 0;
                     controlledCooldown = 0f;
                     buffCounter.text = "";
                     controlled = false;
