@@ -146,19 +146,128 @@ public class PlayerManager : RagnarComponent
             if (players[characterSelected].GetComponent<Player>().controled)
             {
                 AbilityStateChanger();
-                if (buffered && players[bufferedCharacter].GetComponent<Animation>().HasFinished())
-                {
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
-                    buffered = false;
-                }
+                IfBuffered();
             }
 
             /*Contador de cooldown para cada habilidad
             Funciona en todos los casos con todos los pjs.*/
             CooldownCounter();
-
         }
 
+    }
+
+    private void IfBuffered()
+    {
+        if (buffered)
+        {
+            switch (bufferedCharacter)
+            {
+                case 0:
+                    if (bufferedAbility == 0)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 1f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 1)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().HasFinished())
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 2)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 1.2f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 3)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 2.5f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    break;
+                case 1:
+                    if (bufferedAbility == 0)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 1f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 1)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().HasFinished())
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 2)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().HasFinished())
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 3)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 1f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    break;
+                case 2:
+                    if (bufferedAbility == 0)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - players[bufferedCharacter].GetComponent<Animation>().GetDuration())
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 1)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 0.8f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 2)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().HasFinished())
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    if (bufferedAbility == 3)
+                    {
+                        if (players[bufferedCharacter].GetComponent<Animation>().GetLoopTime() > players[bufferedCharacter].GetComponent<Animation>().GetDuration() - 8f)
+                        {
+                            InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
+                            buffered = false;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void CooldownCounter()
