@@ -37,8 +37,6 @@ public class PlayerManager : RagnarComponent
     GameObject stunner;
     GameObject circle;
 
-    private Transform camera;
-
     private int bufferedCharacter;
     private int bufferedAbility;
     private bool buffered = false;

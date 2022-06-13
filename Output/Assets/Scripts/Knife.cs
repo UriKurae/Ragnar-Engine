@@ -102,10 +102,6 @@ public class Knife : RagnarComponent
 			pendingToDelete = true;
 			canReload = false;
 		}
-		if(popUp != null)
-        {
-			popUp.GetComponent<Transform2D>().position2D = Camera.WorldToScreen(gameObject.transform.globalPosition);
-		}
 	}
 
 	private Vector3 HitEnemy(NavAgent agent, GameObject player)
@@ -138,6 +134,9 @@ public class Knife : RagnarComponent
 			gameObject.transform.globalRotation = Quaternion.identity;
 			particleComponent.Pause();
 			popUp = InternalCalls.InstancePrefab("PopUp", Vector3.one);
+			popUp.GetComponent<PopUp>().target = gameObject;
+			popUp.childs[1].GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+			popUp.childs[2].GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_crysknife.png");
 		}
         else
         {
