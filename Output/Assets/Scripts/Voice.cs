@@ -9,7 +9,6 @@ public class Voice : RagnarComponent
 	public PlayerManager playerManager;
 	NavAgent agent;
 	bool check = false;
-	Light abilityLight;
 
 	public void Start()
 	{
