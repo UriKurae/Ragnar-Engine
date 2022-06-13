@@ -495,6 +495,11 @@ public class Player : RagnarComponent
                 PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(14);
         }
+        // Boss ==============================================================
+        if (other.gameObject.name == "BossTrigger")
+        {
+            GameObject.Find("Boss").GetComponent<Boss>().SetBattle();
+        }
         // ===================================================================
     }
 

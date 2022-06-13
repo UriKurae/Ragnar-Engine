@@ -110,6 +110,11 @@ public class Boss : RagnarComponent
 
 	string[] animations = new string[14];
 	//int indexAnim = 0;
+
+	// Boss UI
+	bool bossActive = false;
+	GameObject life;
+
 	public void Start()
 	{
 		// Get Components
@@ -117,6 +122,8 @@ public class Boss : RagnarComponent
 		stabParticles = GameObject.Find("StabParticlesBoss").GetComponent<ParticleSystem>();
 		shieldParticles = GameObject.Find("BossShieldParticles").GetComponent<ParticleSystem>();
 		rb = gameObject.GetComponent<Rigidbody>();
+
+		life = GameObject.Find("Life");
 
 		animations[0] = "CallBackup";
 		animations[1] = "Die";
@@ -191,6 +198,7 @@ public class Boss : RagnarComponent
 				{
 					GameObject.Find("Quest System").GetComponent<QuestSystem>().lastPhaseCompleted = true;
 					SceneManager.LoadScene("WinScene");
+					life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar0.png");
 					InternalCalls.Destroy(gameObject);
 				}
 				else
@@ -222,6 +230,7 @@ public class Boss : RagnarComponent
 		{
 			case BossState.PHASE2:
 				GameObject.Find("Quest System").GetComponent<QuestSystem>().firstPhaseCompleted = true;
+				life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar3.png");
 				//GenerateEnemies();
 				players = GameObject.FindGameObjectsWithTag("Player");
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
@@ -232,6 +241,7 @@ public class Boss : RagnarComponent
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.75f;
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
+				life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar2.png");
 				break;
 			case BossState.PHASE4:
 				if (!shieldInmunity)
@@ -239,6 +249,7 @@ public class Boss : RagnarComponent
 					agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 1.2f;
 					animationComponent.PlayAnimation("Run");
 					sweepAttackCooldown = 5.0f;
+					life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar1.png");
 				}
 				else state--;
 				break;
@@ -715,7 +726,7 @@ public class Boss : RagnarComponent
 
 	private void ExplodeBarrels()
 	{
-		if (stunnedHits == 3)
+		if (stunnedHits == 1)
 		{
 			if (animationComponent.HasFinished())
 			{
@@ -724,6 +735,14 @@ public class Boss : RagnarComponent
 			shieldInmunity = false;
 			shieldParticles.Pause();
 		}
+	}
+
+	public void SetBattle()
+    {
+		if (bossActive) return;
+
+		bossActive = true;
+		life.GetComponent<UIImage>().SetImageAlpha(1.0f);
 	}
 
 	private bool PerceptionCone(int angleDegrees)
@@ -806,6 +825,11 @@ public class Boss : RagnarComponent
 		Debug.Log(inmunity.ToString());
 		if (!shieldInmunity && !inmunity)
 		{
+			// Oriol aqui es lo del standup
+			//if (state == BossState.PHASE1)
+			//{
+			//	animationComponent.PlayAnimation("Standup");
+			//}
 			if (state == BossState.PHASE4)
             {
 				Debug.Log("EEEEE");
