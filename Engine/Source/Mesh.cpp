@@ -6,6 +6,7 @@
 #include "FileSystem.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
+#include "ModuleRenderer3D.h"
 
 #include "Profiling.h"
 
@@ -72,6 +73,9 @@ void Mesh::UnLoad()
 
 void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float& colorLength)
 {
+	if(!app->renderer3D->genShadows)
+		glEnable(GL_BLEND);
+
 	vao->Bind();
 	
 	if (verticesNormals)
@@ -84,6 +88,8 @@ void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, f
 	ebo->Unbind();
 
 	vao->Unbind();
+	if (!app->renderer3D->genShadows)
+		glDisable(GL_BLEND);
 }
 
 void Mesh::ShowVertexNormals(float3& colorNormal, float &normalLength)
