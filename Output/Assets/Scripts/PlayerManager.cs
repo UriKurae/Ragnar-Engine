@@ -270,25 +270,6 @@ public class PlayerManager : RagnarComponent
         }
     }
 
-    private void CooldownCounter()
-    {
-        for (int j = 0; j < characters.Length; j++)
-        {
-            for (int i = 0; i < characters[j].abilities.Length; i++)
-            {
-                if (characters[j].abilities[i].onCooldown == true)
-                {
-                    characters[j].abilities[i].counter += Time.deltaTime;
-                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
-                    {
-                        characters[j].abilities[i].onCooldown = false;
-                        characters[j].abilities[i].counter = 0f;
-                    }
-                }
-            }
-        }
-    }
-
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
@@ -336,6 +317,24 @@ public class PlayerManager : RagnarComponent
         {
             playableCharacter.state = State.CARRYING;
             players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+        }
+    }
+    private void CooldownCounter()
+    {
+        for (int j = 0; j < characters.Length; j++)
+        {
+            for (int i = 0; i < characters[j].abilities.Length; i++)
+            {
+                if (characters[j].abilities[i].onCooldown == true)
+                {
+                    characters[j].abilities[i].counter += Time.deltaTime;
+                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
+                    {
+                        characters[j].abilities[i].onCooldown = false;
+                        characters[j].abilities[i].counter = 0f;
+                    }
+                }
+            }
         }
     }
 
