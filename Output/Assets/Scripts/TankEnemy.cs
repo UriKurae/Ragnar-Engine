@@ -39,14 +39,14 @@ public class TankEnemy : RagnarComponent
     // Timers
     public float shootCooldown = 0f;
     public bool isDying = false;
-    float controlledCooldown = 10;
+    public float controlledCooldown = 10;
 
     float initialSpeed;
 
     bool distracted = false;
-    float distractedTimer = -1f;
+    public float distractedTimer = -1f;
     bool stunned = false;
-    float stunnedTimer = -1f;
+    public float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
@@ -70,6 +70,8 @@ public class TankEnemy : RagnarComponent
     GameObject pointCharacter;
     Light pointerLight;
     public Light abilityLight;
+
+    GameObject timerSlider;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -265,7 +267,13 @@ public class TankEnemy : RagnarComponent
     public void SetControled(bool flag)
     {
         controlled = flag;
-        if (flag) controlledCooldown = 10;
+        if (flag){ 
+            
+            controlledCooldown = 10;
+
+            timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -340,6 +348,8 @@ public class TankEnemy : RagnarComponent
                 distracted = true;
                 distractedTimer = 5f;
                 Distraction(other.gameObject.transform.globalPosition);
+                timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+                timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, enemyType, "distractedTimer");
             }
 
             //// Chani =======================================
@@ -551,5 +561,7 @@ public class TankEnemy : RagnarComponent
         stunned = true;
         stunnedTimer = timeStunned;
         animation.PlayAnimation("Stun");
+        timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
     }
 }

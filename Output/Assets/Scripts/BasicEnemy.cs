@@ -49,14 +49,14 @@ public class BasicEnemy : RagnarComponent
     // Timers
     public float shootCooldown = 0f;
     public bool isDying = false;
-    float controlledCooldown = 10;
+    public float controlledCooldown = 10;
 
     float initialSpeed;
 
     bool distracted = false;
-    float distractedTimer = -1f;
+    public float distractedTimer = -1f;
     bool stunned = false;
-    float stunnedTimer = -1f;
+    public float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
@@ -80,6 +80,8 @@ public class BasicEnemy : RagnarComponent
     GameObject pointCharacter;
     Light pointerLight;
     public Light abilityLight;
+
+    GameObject timerSlider;
     public void Start()
     {
         // Get all Components
@@ -182,6 +184,7 @@ public class BasicEnemy : RagnarComponent
                 if (distractedTimer >= 0)
                 {
                     distractedTimer -= Time.deltaTime;
+                    
                     if (distractedTimer < 0)
                     {
                         distracted = false;
@@ -238,6 +241,7 @@ public class BasicEnemy : RagnarComponent
                 }
 
                 controlledCooldown -= Time.deltaTime;
+                
                 if (controlledCooldown < 0)
                 {
                     pointerLight.intensity = 0;
@@ -361,9 +365,12 @@ public class BasicEnemy : RagnarComponent
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
                 distractedTimer = 5f;
+                
                 Distraction(other.gameObject.transform.globalPosition);
                 if (enterDistract)
                 {
+                    timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+                    timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, enemyType, "distractedTimer");
                     GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesDistractedStone++;
                     enterDistract = false;
                 }
@@ -520,7 +527,12 @@ public class BasicEnemy : RagnarComponent
     public void SetControled(bool flag)
     {
         controlled = flag;
-        if (flag) controlledCooldown = 10;
+        if (flag){
+            controlledCooldown = 10;
+            timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+        }
+        
     }
 
     private void Shoot()
@@ -614,5 +626,7 @@ public class BasicEnemy : RagnarComponent
         stunned = true;
         stunnedTimer = timeStunned;
         animationComponent.PlayAnimation("Stun");
+        timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
     }
 }

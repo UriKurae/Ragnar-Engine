@@ -21,7 +21,7 @@ public class UndistractableEnemy : RagnarComponent
 
     // Timers
     public float stoppedTime = 0f;
-    float controlledCooldown = 10;
+    public float controlledCooldown = 10;
 
     // Player tracker
     public GameObject[] players;
@@ -46,8 +46,8 @@ public class UndistractableEnemy : RagnarComponent
     bool stunned = false;
     public bool backstab = false;
     
-    float distractedTimer = -1f;
-    float stunnedTimer = -1f;
+    public float distractedTimer = -1f;
+    public float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
@@ -69,6 +69,8 @@ public class UndistractableEnemy : RagnarComponent
     GameObject pointCharacter;
     Light pointerLight;
     public Light abilityLight;
+
+    GameObject timerSlider;
     public void Start()
     {
         offset = gameObject.GetSizeAABB();
@@ -269,7 +271,12 @@ public class UndistractableEnemy : RagnarComponent
     public void SetControled(bool flag)
     {
         controlled = flag;
-        if (flag) controlledCooldown = 10;
+        if (flag){ 
+            
+            controlledCooldown = 10;
+            timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -551,5 +558,8 @@ public class UndistractableEnemy : RagnarComponent
         stunned = true;
         stunnedTimer = timeStunned;
         animation.PlayAnimation("Stun");
+
+        timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
     }
 }
