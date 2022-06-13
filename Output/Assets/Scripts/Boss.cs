@@ -118,6 +118,7 @@ public class Boss : RagnarComponent
 
 	float coneTimer = 0.0f;
 	float coneMaxTime = 0.5f;
+	int frames = 0;
 
 	public void Start()
 	{
@@ -172,6 +173,7 @@ public class Boss : RagnarComponent
 	}
 	public void Update()
 	{
+		frames++;
 		if (Input.GetKey(KeyCode.N) == KeyState.KEY_DOWN)
 		{
 			state += 1;
@@ -353,57 +355,58 @@ public class Boss : RagnarComponent
 
 			sweepAttackCooldown -= Time.deltaTime;
 
-			if(PerceptionCone(90))
+			if(frames % 4 == 0)
             {
-				coneTimer += Time.deltaTime;
-				if (!jumping && sweepAttackCooldown <= 0.0f && coneTimer >= coneMaxTime)
-                {
-					float furthest = 1000.0f;
-
-					for (int i = 0; i < players.Length; ++i)
-					{
-						// Calculate closest player
-						float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
-						if (distance < furthest)
-						{
-							indexPlayerTarget = i;
-							furthest = distance;
-						}
-					}
-					jumping = true;
-					agent.speed = 25.0f;
-					animationComponent.PlayAnimation("Run");
-				}
-				else if (jumping && !attacking)
+				if (PerceptionCone(90))
 				{
-					if (players[indexPlayerTarget] != null)
+					coneTimer += Time.deltaTime * 4;
+					if (!jumping && sweepAttackCooldown <= 0.0f && coneTimer >= coneMaxTime)
 					{
-						agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
-						if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+						float furthest = 1000.0f;
+
+						for (int i = 0; i < players.Length; ++i)
 						{
-							// Play sweep attack animation
+							// Calculate closest player
+							float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
+							if (distance < furthest)
+							{
+								indexPlayerTarget = i;
+								furthest = distance;
+							}
+						}
+						jumping = true;
+						agent.speed = 25.0f;
+						animationComponent.PlayAnimation("Run");
+					}
+					else if (jumping && !attacking)
+					{
+						if (players[indexPlayerTarget] != null)
+						{
+							agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
+							if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+							{
+								// Play sweep attack animation
 
-							// Play sweep attack sound
-							// Hit player, lower his HP
-							players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
+								// Play sweep attack sound
+								// Hit player, lower his HP
+								players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
 
-							players[indexPlayerTarget].GetComponent<Player>().stunned = true;
-							players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
-							agent.ClearPath();
-							// TODO: Needs attack animation
-							animationComponent.PlayAnimation("Shield");
-							attacking = true;
+								players[indexPlayerTarget].GetComponent<Player>().stunned = true;
+								players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
+								agent.ClearPath();
+								// TODO: Needs attack animation
+								animationComponent.PlayAnimation("Shield");
+								attacking = true;
+							}
 						}
 					}
 				}
-			}
-            else
-            {
-				coneTimer -= Time.deltaTime;
-				if (coneTimer < 0) coneTimer = 0;
-			}
-
-			
+				else
+				{
+					coneTimer -= Time.deltaTime * 4;
+					if (coneTimer < 0) coneTimer = 0;
+				}
+			}			
 
 			if (attacking && animationComponent.HasFinished())
             {
