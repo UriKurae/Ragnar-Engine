@@ -168,6 +168,10 @@ public class BasicEnemy : RagnarComponent
                     if (stunnedTimer < 0)
                     {
                         stunPartSys.Pause();
+                        if (waypoints.Count != 0)
+                            animationComponent.PlayAnimation("Walk");
+                        else
+                            animationComponent.PlayAnimation("Idle");
                         stunned = false;
                         stunnedTimer = -1f;
                         enterStunner = true;
@@ -323,6 +327,14 @@ public class BasicEnemy : RagnarComponent
                 if (!isDying)
                 {
                     isDying = true;
+                    for (int i = 0; i < childs.Length; ++i)
+                    {
+                        if (childs[i].name == "StabParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
+                    }
                     animationComponent.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
@@ -514,6 +526,7 @@ public class BasicEnemy : RagnarComponent
         {
             //TODO_AUDIO
             audioComponent.PlayClip("EBASIC_SHOTGUN");
+            //animationComponent.PlayAnimation("Shoot");
             canShoot = false;
             shootCooldown = 1f;
             Vector3 pos = gameObject.transform.globalPosition;
@@ -540,7 +553,7 @@ public class BasicEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
+        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
         animationComponent.PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Count;
@@ -595,6 +608,6 @@ public class BasicEnemy : RagnarComponent
     {
         stunned = true;
         stunnedTimer = timeStunned;
-        animationComponent.PlayAnimation("Idle");
+        animationComponent.PlayAnimation("Stun");
     }
 }

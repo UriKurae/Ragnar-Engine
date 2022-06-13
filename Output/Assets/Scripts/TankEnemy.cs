@@ -82,10 +82,10 @@ public class TankEnemy : RagnarComponent
             {
                 GotoNextPoint();
                 patrol = false;
-            } 
+            }
         }
 
-        initialSpeed = 6;
+            initialSpeed = 6;
 
         childs = gameObject.childs;
 
@@ -156,6 +156,10 @@ public class TankEnemy : RagnarComponent
                     if (stunnedTimer < 0)
                     {
                         stunPartSys.Pause();
+                        if (waypoints.Count != 0)
+                            animation.PlayAnimation("Walk");
+                        else
+                            animation.PlayAnimation("Idle");
                         stunned = false;
                         stunnedTimer = -1f;
                         enterStunner = true;
@@ -301,6 +305,14 @@ public class TankEnemy : RagnarComponent
                 if (!isDying)
                 {
                     isDying = true;
+                    for (int i = 0; i < childs.Length; ++i)
+                    {
+                        if (childs[i].name == "StabParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
+                    }
                     animation.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
@@ -451,6 +463,7 @@ public class TankEnemy : RagnarComponent
         {
             //TODO_AUDIO
             audioSource.PlayClip("EBASIC_SHOTGUN");
+            //animation.PlayAnimation("Shoot");
             canShoot = false;
             shootCooldown = 1f;
             Vector3 pos = gameObject.transform.globalPosition;
@@ -532,6 +545,6 @@ public class TankEnemy : RagnarComponent
     {
         stunned = true;
         stunnedTimer = timeStunned;
-        animation.PlayAnimation("Idle");
+        animation.PlayAnimation("Stun");
     }
 }

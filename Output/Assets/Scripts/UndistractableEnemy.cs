@@ -76,11 +76,15 @@ public class UndistractableEnemy : RagnarComponent
 
         if (state != EnemyState.DEATH)
         {
-            animation.PlayAnimation("Idle");
+            animation.PlayAnimation("Walk");
             if (waypoints.Count != 0)
             {
                 GotoNextPoint();
                 patrol = false;
+            }
+            else
+            {
+                animation.PlayAnimation("Idle");
             }
         }
 
@@ -155,6 +159,10 @@ public class UndistractableEnemy : RagnarComponent
                     if (stunnedTimer < 0)
                     {
                         stunPartSys.Pause();
+                        if (waypoints.Count != 0)
+                            animation.PlayAnimation("Walk");
+                        else
+                            animation.PlayAnimation("Idle");
                         stunned = false;
                         stunnedTimer = -1f;
                         enterStunner = true;
@@ -315,6 +323,14 @@ public class UndistractableEnemy : RagnarComponent
                 if (!isDying)
                 {
                     isDying = true;
+                    for (int i = 0; i < childs.Length; ++i)
+                    {
+                        if (childs[i].name == "StabParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
+                    }
                     animation.PlayAnimation("Dying");
                     QuestSystem system = GameObject.Find("Quest System").GetComponent<QuestSystem>();
                     system.hasKilledEnemies = true;
@@ -447,6 +463,7 @@ public class UndistractableEnemy : RagnarComponent
         {
             //TODO_AUDIO
             audioSource.PlayClip("EBASIC_SHOTGUN");
+            //animation.PlayAnimation("Shoot");
             canShoot = false;
             shootCooldown = 1f;
             Vector3 pos = gameObject.transform.globalPosition;
@@ -473,7 +490,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        audioSource.PlayClip("FOOTSTEPS");
+        //audioSource.PlayClip("FOOTSTEPS");
         animation.PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Count;
@@ -528,6 +545,6 @@ public class UndistractableEnemy : RagnarComponent
     {
         stunned = true;
         stunnedTimer = timeStunned;
-        animation.PlayAnimation("Idle");
+        animation.PlayAnimation("Stun");
     }
 }
