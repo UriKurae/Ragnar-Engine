@@ -116,6 +116,9 @@ public class Boss : RagnarComponent
 	GameObject life;
 	GameObject shieldBar;
 
+	float coneTimer = 0.0f;
+	float coneMaxTime = 0.5f;
+
 	public void Start()
 	{
 		// Get Components
@@ -350,46 +353,57 @@ public class Boss : RagnarComponent
 
 			sweepAttackCooldown -= Time.deltaTime;
 
-			if (PerceptionCone(90) && !jumping && sweepAttackCooldown <= 0.0f)
-			{
-				float furthest = 1000.0f;
+			if(PerceptionCone(90))
+            {
+				coneTimer += Time.deltaTime;
+				if (!jumping && sweepAttackCooldown <= 0.0f && coneTimer >= coneMaxTime)
+                {
+					float furthest = 1000.0f;
 
-				for (int i = 0; i < players.Length; ++i)
-				{
-					// Calculate closest player
-					float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
-					if (distance < furthest)
+					for (int i = 0; i < players.Length; ++i)
 					{
-						indexPlayerTarget = i;
-						furthest = distance;
+						// Calculate closest player
+						float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
+						if (distance < furthest)
+						{
+							indexPlayerTarget = i;
+							furthest = distance;
+						}
+					}
+					jumping = true;
+					agent.speed = 25.0f;
+					animationComponent.PlayAnimation("Run");
+				}
+				else if (jumping && !attacking)
+				{
+					if (players[indexPlayerTarget] != null)
+					{
+						agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
+						if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+						{
+							// Play sweep attack animation
+
+							// Play sweep attack sound
+							// Hit player, lower his HP
+							players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
+
+							players[indexPlayerTarget].GetComponent<Player>().stunned = true;
+							players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
+							agent.ClearPath();
+							// TODO: Needs attack animation
+							animationComponent.PlayAnimation("Shield");
+							attacking = true;
+						}
 					}
 				}
-				jumping = true;
-				agent.speed = 25.0f;
-				animationComponent.PlayAnimation("Run");
 			}
-			else if (jumping && !attacking)
-			{
-				if (players[indexPlayerTarget] != null)
-				{
-					agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
-					if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
-					{
-						// Play sweep attack animation
+            else
+            {
+				coneTimer -= Time.deltaTime;
+				if (coneTimer < 0) coneTimer = 0;
+			}
 
-						// Play sweep attack sound
-						// Hit player, lower his HP
-						players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
-						
-						players[indexPlayerTarget].GetComponent<Player>().stunned = true;
-						players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
-						agent.ClearPath();
-						// TODO: Needs attack animation
-						animationComponent.PlayAnimation("Shield");
-						attacking = true;
-					}
-				}
-			}
+			
 
 			if (attacking && animationComponent.HasFinished())
             {
@@ -769,7 +783,8 @@ public class Boss : RagnarComponent
 		Vector3 bossForward = gameObject.transform.forward;
 		Vector3 initPos = new Vector3(bossPos.x + (bossForward.x * offset.x * 0.6f), bossPos.y + 0.1f, bossPos.z + (bossForward.z * offset.z * 0.6f));
 
-		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length, "Collider", Time.deltaTime);
+		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length, "Collider", coneTimer / coneMaxTime);
+		if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
 		return (index == -1) ? false : true;
 	}
 
