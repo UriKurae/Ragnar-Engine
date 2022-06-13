@@ -129,7 +129,9 @@ public class Boss : RagnarComponent
 		rb = gameObject.GetComponent<Rigidbody>();
 
 		life = GameObject.Find("Life");
+		life.GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 70, 0);
 		shieldBar = GameObject.Find("ShieldBar");
+		shieldBar.GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 90, 0);
 
 		animations[0] = "CallBackup";
 		animations[1] = "Die";
