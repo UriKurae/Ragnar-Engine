@@ -114,6 +114,7 @@ public class Boss : RagnarComponent
 	// Boss UI
 	bool bossActive = false;
 	GameObject life;
+	GameObject shieldBar;
 
 	public void Start()
 	{
@@ -124,6 +125,7 @@ public class Boss : RagnarComponent
 		rb = gameObject.GetComponent<Rigidbody>();
 
 		life = GameObject.Find("Life");
+		shieldBar = GameObject.Find("ShieldBar");
 
 		animations[0] = "CallBackup";
 		animations[1] = "Die";
@@ -241,7 +243,11 @@ public class Boss : RagnarComponent
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.75f;
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
+				
 				life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar2.png");
+				shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar1.png");
+				shieldBar.GetComponent<UIImage>().SetImageAlpha(1.0f);
+
 				break;
 			case BossState.PHASE4:
 				if (!shieldInmunity)
@@ -316,12 +322,18 @@ public class Boss : RagnarComponent
 			// Move to new location as soon as phase 2 starts
 			Vector3 destination = waypoints[2].transform.globalPosition;
 
-			if (animationComponent.HasFinished()) animationComponent.PlayAnimation("WalkNormal");
+			if (animationComponent.HasFinished())
+            {
+				animationComponent.PlayAnimation("Run");
+				agent.speed = 15.0f;
+			}
 			agent.MoveTo(destination);
 
 			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f)
 			{
 				Debug.Log("INmunity false phase 2");
+				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
+				animationComponent.PlayAnimation("WalkNormal");
 				inmunity = false;
 				phase2Location = true;
 			}
@@ -403,15 +415,19 @@ public class Boss : RagnarComponent
             // Move to new location as soon as phase 3 starts
             Vector3 destination = new Vector3(0.0f, 9.24f, -58.0f);
 
-           if(animationComponent.HasFinished()) animationComponent.PlayAnimation("WalkNormal");
-
-            agent.MoveTo(destination);
+			if (animationComponent.HasFinished())
+			{
+				animationComponent.PlayAnimation("Run");
+				agent.speed = 15.0f;
+			}
+			agent.MoveTo(destination);
 
 			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 2.0f)
 			{
 				Debug.Log("INmunity false phase 3");
 				inmunity = false;
 				phase3Location = true;
+				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
 			}
 
             shieldInmunity = true;
@@ -513,6 +529,7 @@ public class Boss : RagnarComponent
 				if (shieldCooldown <= 0.0f)
 				{
 					shieldCooldown = 10.0f;
+					shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar1.png");
 					shieldInmunity = true;
 					shieldParticles.Play();
 					stunnedHits = 0;
@@ -733,6 +750,7 @@ public class Boss : RagnarComponent
 				animationComponent.PlayAnimation("ShieldDestroy");
 			}
 			shieldInmunity = false;
+			shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar0.png");
 			shieldParticles.Pause();
 		}
 	}
@@ -839,6 +857,11 @@ public class Boss : RagnarComponent
             {
 				Debug.Log("BACKSTABBED");
 				animationComponent.PlayAnimation("Die");
+			}
+
+			if (state == BossState.PHASE3)
+            {
+				shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar0.png");
 			}
 			stabParticles.Play();
 			hitted = true;
