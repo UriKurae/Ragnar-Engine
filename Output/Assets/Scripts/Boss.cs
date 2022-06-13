@@ -849,6 +849,8 @@ public class Boss : RagnarComponent
 			// Reset Cooldown
 			sweepAttackCooldown = 5.0f;
 
+			InternalCalls.RequestDamageFeedback();
+
 			bossAttack = true;
 		}
 	}
