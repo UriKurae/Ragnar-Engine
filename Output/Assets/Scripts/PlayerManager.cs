@@ -169,6 +169,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 1)
@@ -177,6 +178,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 2)
@@ -185,6 +187,8 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
+                            SubstractCharges(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 3)
@@ -193,6 +197,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     break;
@@ -203,6 +208,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 1)
@@ -211,6 +217,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 2)
@@ -219,6 +226,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 3)
@@ -227,6 +235,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     break;
@@ -237,6 +246,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 1)
@@ -245,6 +255,12 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
+                            SubstractCharges(bufferedAbility);
+                            if (playableCharacter.abilities[bufferedAbility].charges == 0)
+                            {
+                                GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
+                            }
                         }
                     }
                     if (bufferedAbility == 2)
@@ -253,6 +269,8 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
+                            SubstractCharges(bufferedAbility);
                         }
                     }
                     if (bufferedAbility == 3)
@@ -261,6 +279,7 @@ public class PlayerManager : RagnarComponent
                         {
                             InternalCalls.InstancePrefab(playableCharacter.abilities[bufferedAbility].prefabPath, playableCharacter.pos);
                             buffered = false;
+                            StartCooldown(bufferedAbility);
                         }
                     }
                     break;
@@ -566,11 +585,8 @@ public class PlayerManager : RagnarComponent
                 players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
             }
 
-
             if (playableCharacter.pickedEnemy == null)
             {
-                // Instancia la habilidad en cuesti�n.
-                //InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath, playableCharacter.pos);
                 buffered = true;
                 bufferedAbility = (int)playableCharacter.state - 1;
                 bufferedCharacter = characterSelected;
@@ -632,19 +648,6 @@ public class PlayerManager : RagnarComponent
                         }
                         break;
                 }
-
-                // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
-                if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
-                {
-                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges--;
-                    if (playableCharacter.name == "Stilgar" && playableCharacter.abilities[(int)State.ABILITY_2 - 1].charges == 0)
-                    {
-                        GameObject.Find("Quest System").GetComponent<QuestSystem>().completeStunner = true;
-                    }
-                }
-
-                // Pone la habilidad en cooldown y el player en estado de NONE
-                playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
                 playableCharacter.state = State.NONE;
 
                 // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
@@ -674,8 +677,21 @@ public class PlayerManager : RagnarComponent
             }
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
-            lightHab.GetComponent<Light>().intensity = 0f;
+            lightHab.GetComponent<Light>().intensity = 0f;     
         }
+    }
+
+    private void SubstractCharges(int ability)
+    {
+        if (playableCharacter.abilities[ability].charges != -1 && playableCharacter.abilities[ability].charges != 0)
+        {
+            playableCharacter.abilities[ability].charges--;
+        }
+    }
+
+    private void StartCooldown(int ability)
+    {
+        playableCharacter.abilities[ability].onCooldown = true;
     }
 
     private void PlayerCases()
