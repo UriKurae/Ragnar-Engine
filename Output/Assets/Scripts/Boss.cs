@@ -283,7 +283,6 @@ public class Boss : RagnarComponent
 	{
 		animationComponent.PlayAnimation("CallBackup");
 
-
 		if (GameObject.Find("Basic Enemy 15") == null)
 		{
 			GameObject enemy1 = InternalCalls.InstancePrefab("Basic Enemy 15", new Vector3(5.56f, 9.34f, -53.60f));
@@ -471,7 +470,7 @@ public class Boss : RagnarComponent
 
 			if (shieldInmunity)
 			{
-				if (!charging && !attacking)
+				if (!charging && !attacking && !barrelHit)
 				{
 					//FollowPlayer();
 					//Vector3 lastPos = playerPos;
@@ -524,8 +523,8 @@ public class Boss : RagnarComponent
 						agent.speed = players[0].GetComponent<NavAgent>().speed * 0.75f;
 
 						players[0].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
-						
-						players[0].GetComponent<Player>().stunned = true;
+
+						players[0].GetComponent<Player>().GetHit(1);
 						players[0].GetComponent<NavAgent>().ClearPath();
 						attacking = true;
 						animationComponent.PlayAnimation("Attack");
@@ -545,9 +544,7 @@ public class Boss : RagnarComponent
 
 				if (attacking && animationComponent.HasFinished())
                 {
-					players[0].GetComponent<Player>().stunned = false;
-					attacking = false;
-					players[0].GetComponent<Player>().GetHit(1);
+					attacking = false;	
 				}
 			}
 			else
@@ -779,6 +776,8 @@ public class Boss : RagnarComponent
 			{
 				animationComponent.PlayAnimation("SprintHit");
 				barrelHit = true;
+				charging = false;
+				attacking = false;
 			}
 			else if (barrelHit && animationComponent.HasFinished())
 			{
@@ -786,6 +785,7 @@ public class Boss : RagnarComponent
 				shieldInmunity = false;
 				shieldParticles.Pause();
 				stunnedHits = 0;
+				cooldownCharge = 4.0f;
 			}
 		}
 	}
