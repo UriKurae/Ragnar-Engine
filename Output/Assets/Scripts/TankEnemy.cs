@@ -276,6 +276,7 @@ public class TankEnemy : RagnarComponent
         if (isDying)
         {
             state = EnemyState.IS_DYING;
+            stunPartSys.Pause();
             if (animation.HasFinished())
             {
                 audioSource.PlayClip("EMALE_DEATH4");

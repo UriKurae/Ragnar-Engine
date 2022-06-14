@@ -293,6 +293,7 @@ public class BasicEnemy : RagnarComponent
         if (isDying)
         {
             state = EnemyState.IS_DYING;
+            stunPartSys.Pause();
             if (animationComponent.HasFinished())
             {
                 isDying = false;
