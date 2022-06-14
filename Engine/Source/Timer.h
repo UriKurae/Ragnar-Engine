@@ -1,8 +1,5 @@
-#ifndef __TIMER_H__
-#define __TIMER_H__
-
-#include "Globals.h"
-#include "SDL\include\SDL.h"
+#pragma once
+#include "SDL_stdinc.h"
 
 class Timer
 {
@@ -22,5 +19,3 @@ private:
 	Uint32	startedAt;
 	Uint32	stoppedAt;
 };
-
-#endif //__TIMER_H__

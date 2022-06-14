@@ -1,17 +1,20 @@
 #include "HierarchyMenu.h"
-
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
-#include "GameObject.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+#include "FileSystem.h"
+
+#include "PrefabManager.h"
 
 #include "Profiling.h"
 
-HierarchyMenu::HierarchyMenu() : Menu(true)
+HierarchyMenu::HierarchyMenu() : Menu(true, "Hierarchy")
 {
 	gameObjectOptions = false;
-	createGameObject = false;
+	confirmPanel = false;
 }
 
 HierarchyMenu::~HierarchyMenu()
@@ -20,17 +23,14 @@ HierarchyMenu::~HierarchyMenu()
 
 bool HierarchyMenu::Update(float dt)
 {
-	ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
-	if (ImGui::Button("+"))
-	{
-		createGameObject = true;
-	}
+	RG_PROFILING_FUNCTION("Hierarchy Menu Update");
 
-	int size = app->scene->GetGameObjectsList().size();
-	GameObject* root = app->scene->GetRoot();
+	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
+
+	GameObject* root = app->sceneManager->GetCurrentScene()->GetRoot();
 	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();
-	ImGuiTreeNodeFlags flags = ((selected == root) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags flags = SetFlags(root) | ImGuiTreeNodeFlags_DefaultOpen;
 	if (ImGui::TreeNodeEx(root, flags, root->GetName()))
 	{
 		if (ImGui::BeginDragDropTarget())
@@ -39,7 +39,7 @@ bool HierarchyMenu::Update(float dt)
 			if (go)
 			{
 				uint goUuid = *(const uint*)(go->Data);
-				app->scene->ReparentGameObjects(goUuid, root);
+				app->sceneManager->GetCurrentScene()->ReparentGameObjects(goUuid, root);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -55,11 +55,11 @@ bool HierarchyMenu::Update(float dt)
 
 	if (gameObjectOptions)
 	{
-		ImGui::OpenPopup("GameObject");
+		ImGui::OpenPopup(ICON_FA_CUBE" GameObject");
 
-		if (ImGui::BeginPopup("GameObject"))
+		if (ImGui::BeginPopup(ICON_FA_CUBE" GameObject"))
 		{
-			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
+			if (ImGui::Button(ICON_FA_ARROW_UP" Move Up", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -67,11 +67,11 @@ bool HierarchyMenu::Update(float dt)
 				}
 				else
 				{
-					app->scene->MoveGameObjectUp(selected);
+					app->sceneManager->GetCurrentScene()->MoveGameObjectUp(selected);
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_ARROW_DOWN" Move Down", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -79,11 +79,11 @@ bool HierarchyMenu::Update(float dt)
 				}
 				else
 				{
-					app->scene->MoveGameObjectDown(selected);
+					app->sceneManager->GetCurrentScene()->MoveGameObjectDown(selected);
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_MINUS" Delete", ImVec2(100.0f, 30.0f)))
 			{
 				
 				if (selected && selected->GetComponent<CameraComponent>() == nullptr)
@@ -93,9 +93,8 @@ bool HierarchyMenu::Update(float dt)
 						if (selected == (*i))
 						{
 							selectedParent->GetChilds().erase(i);
-							if (selected == app->scene->GetRecalculateGO()) app->scene->RecalculateAABB(nullptr);
 							RELEASE(selected);
-							app->scene->ResetQuadtree();
+
 							break;
 						}
 					}
@@ -103,53 +102,70 @@ bool HierarchyMenu::Update(float dt)
 				app->editor->SetGO(nullptr);
 				gameObjectOptions = false;
 			}
+			else if (ImGui::Button(ICON_FA_BOX_OPEN" Prefab", ImVec2(100.0f, 30.0f)))
+			{
+				if (app->fs->Exists(selected->prefabPath.c_str()) != 0)
+				{
+					confirmPanel = true;
+					gameObjectOptions = false;
+				}
+				else
+				{
+					PrefabManager::GetInstance()->SavePrefab(selected, 1);
+					gameObjectOptions = false;
+				}
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
-				/*app->editor->SetSelected(nullptr);
-				app->editor->SetSelectedParent(nullptr);*/
 				gameObjectOptions = false;
 			}
+
+			if (selected != nullptr && selected->prefabPath != "None")
+			{
+				if (ImGui::Button(ICON_FA_BOX_OPEN" UnPrefab", ImVec2(100.0f, 30.0f)))
+				{
+					selected->prefabPath = "None";
+					selected->UnPrefab();
+
+					for (std::vector<GameObject*>::iterator it = selected->GetChilds().begin(); it != selected->GetChilds().end(); ++it)
+					{
+						(*it)->prefabPath = "None";
+					}
+
+					gameObjectOptions = false;
+				}
+			}
+
 			ImGui::EndPopup();
 		}
 	}
-	else if (createGameObject)
+
+	if (confirmPanel)
 	{
-		ImGui::OpenPopup("Create GameObject");
-		if (ImGui::BeginPopup("Create GameObject"))
+		ImGui::OpenPopup("Confirm");
+
+		if (ImGui::BeginPopup("Confirm"))
 		{
-			if (ImGui::Selectable("Create Empty Object"))
+			ImGui::Text("There's an existing prefab");
+			ImGui::Text("with the same name: ");
+
+			if (ImGui::Button("Overwrite", ImVec2(150.0f, 30.0f)))
 			{
-				if (selected != nullptr) app->scene->CreateGameObject(selected);
-				else app->scene->CreateGameObject(nullptr);
-				createGameObject = false;
+				PrefabManager::GetInstance()->SavePrefab(selected, 2);
+				confirmPanel = false;
 			}
-			else if (ImGui::Selectable("Create Cube"))
+			else if (ImGui::Button("Create new prefab", ImVec2(150.0f, 30.0f)))
 			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
-				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
-				createGameObject = false;
+				PrefabManager::GetInstance()->SavePrefab(selected, 3);
+				confirmPanel = false;
 			}
-			else if (ImGui::Selectable("Create Pyramide"))
+			else if (ImGui::Button("Cancel", ImVec2(150.0f, 30.0f)))
 			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
-				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable("Create Sphere"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
-				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable("Create Cylinder"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
-				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
-				createGameObject = false;
+				confirmPanel = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
-				createGameObject = false;
+				confirmPanel = false;
 			}
 			ImGui::EndPopup();
 		}
@@ -162,13 +178,12 @@ bool HierarchyMenu::Update(float dt)
 
 void HierarchyMenu::ShowChildren(GameObject* parent)
 {
-	
 	GameObject* selected = app->editor->GetGO();
 	for (int i = 0; i < parent->GetChilds().size(); ++i)
 	{
 		GameObject* obj = parent->GetChilds()[i];
 		ImGui::PushID(obj->GetName());
-		ImGuiTreeNodeFlags flags = ((selected == obj) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
+		ImGuiTreeNodeFlags flags = SetFlags(obj);
 		bool opened = false;
 		if (obj != nullptr)
 		{
@@ -176,21 +191,24 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 			opened = ImGui::TreeNodeEx((void*)obj, flags, obj->GetName());
 			if (ImGui::BeginDragDropSource())
 			{
+				ImGui::Text("Moving \"%s\"", obj->name.c_str());
 				ImGui::SetDragDropPayload("HierarchyItem", &uuid, sizeof(uint));
+				//ImGui::SetDragDropPayload("HierarchyItemGameObject", &uuid, sizeof(uint));
 
 				ImGui::EndDragDropSource();
 			}
+
 			if (ImGui::BeginDragDropTarget())
 			{
 				const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItem");
 				if (go)
 				{
 					uint goUuid = *(const uint*)(go->Data);
-					app->scene->ReparentGameObjects(goUuid, obj);
+					app->sceneManager->GetCurrentScene()->ReparentGameObjects(goUuid, obj);
 				}
 				ImGui::EndDragDropTarget();
 			}
-			if (ImGui::IsItemClicked())
+			if (ImGui::IsMouseReleased(0) && ImGui::IsItemHovered())
 			{
 				app->editor->SetGO(obj);
 				app->editor->SetSelectedParent(parent);
@@ -216,4 +234,19 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 		}
 		ImGui::PopID();
 	}
+}
+ImGuiTreeNodeFlags HierarchyMenu::SetFlags(GameObject* node)
+{
+	// This flags allow to open the tree if you click on arrow or doubleClick on object, by default the tree is open  
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+	// If GameObject doesn't childrens = no collapsing and no arrow
+	if (node->GetChilds().size() == 0)
+		flags |= ImGuiTreeNodeFlags_Leaf;
+
+	// If GameObject is selected = activeModeSelected
+	if (node == app->editor->GetGO())
+		flags |= ImGuiTreeNodeFlags_Selected;
+
+	return flags;
 }

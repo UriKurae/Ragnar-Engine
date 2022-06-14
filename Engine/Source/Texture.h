@@ -1,9 +1,15 @@
 #pragma once
-
 #include "Resource.h"
-#include <string>
 
 typedef unsigned char GLubyte;
+
+enum class TextureType
+{
+	NONE = -1,
+	DIFFUSE,
+	EMISSIVE = 4, // Because of assimp textures
+	NORMAL = 6, // Because of assimp textures
+};
 
 struct TextureParameters
 {
@@ -32,7 +38,7 @@ public:
 
 	void DrawOnEditor() override;
 
-	void Bind();
+	void Bind(unsigned int index = 0);
 	void Unbind();
 
 	inline const std::string& GetPath() const { return path; }
@@ -50,6 +56,5 @@ private:
 
 	std::string path;
 	GLubyte* data;
-
 	TextureParameters parameters;
 };

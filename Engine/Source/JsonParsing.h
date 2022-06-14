@@ -1,9 +1,8 @@
 #pragma once
-
 #include "json/parson.h"
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/float4.h"
-#include "MathGeoLib/src/Math/Quat.h"
+#include "Math/float3.h"
+#include "Math/float4.h"
+#include "Math/Quat.h"
 
 class JsonParsing
 {
@@ -21,6 +20,7 @@ public:
 	JSON_Status SetNewJsonNumber(JSON_Object* node, const char* name, double number) const;
 	JSON_Status SetNewJson3Number(JsonParsing& node, const char* name, float3 number) const;
 	JSON_Status SetNewJson4Number(JsonParsing& node, const char* name, Quat number) const;
+	JSON_Status SetNewJson4Number(JsonParsing& node, const char* name, float4 number) const;
 	JSON_Status SetNewJsonBool(JSON_Object* node, const char* name, bool boolean) const;
 	JSON_Array* SetNewJsonArray(JSON_Value* parent, const char* name) const;
 	JSON_Status SetValueToArray(JSON_Array* jsonArray, JSON_Value* value);

@@ -1,9 +1,12 @@
 #pragma once
-
 #include <AK/SoundEngine/Win32/AkFilePackageLowLevelIOBlocking.h>
-#include "AudioReverbZoneComponent.h"
+
 #include <vector>
-#include "AudioSourceComponent.h"
+#include <string>
+
+class AudioReverbZoneComponent;
+class AudioSourceComponent;
+class TransformComponent;
 
 struct WwiseData
 {
@@ -13,7 +16,6 @@ struct WwiseData
 	std::vector<std::string> banks;
 };
 
-class TransformComponent;
 
 class AudioManager
 {
@@ -52,6 +54,8 @@ public:
 
 	inline std::vector<std::string> GetEventsList() const { return wwiseInfo.events; }
 	inline std::vector<std::string> GetBussesList() const { return wwiseInfo.busses; }
+
+	void ImportToLibrary();
 
 private:
 	AudioManager();

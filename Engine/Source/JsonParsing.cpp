@@ -1,5 +1,5 @@
-#include "Globals.h"
 #include "JsonParsing.h"
+#include "Globals.h"
 
 #include "Profiling.h"
 
@@ -37,7 +37,7 @@ size_t JsonParsing::Save(char** buf)
 size_t JsonParsing::SaveFile(const char* name)
 {
 	size_t written = json_serialization_size(rootObject);
-	json_serialize_to_file(rootObject, name);
+	json_serialize_to_file_pretty(rootObject, name);
 	return written;
 }
 
@@ -88,6 +88,17 @@ JSON_Status JsonParsing::SetNewJson4Number(JsonParsing& node, const char* name, 
 	return json_array_append_number(array, number.w);
 }
 
+JSON_Status JsonParsing::SetNewJson4Number(JsonParsing& node, const char* name, float4 number) const
+{
+	JSON_Array* array = SetNewJsonArray(node.GetRootValue(), name);
+
+	json_array_append_number(array, number.x);
+	json_array_append_number(array, number.y);
+	json_array_append_number(array, number.z);
+
+	return json_array_append_number(array, number.w);
+}
+
 JSON_Status JsonParsing::SetNewJsonBool(JSON_Object* node, const char* name, bool boolean) const
 {
 	return json_object_set_boolean(node, name, boolean);
@@ -114,6 +125,9 @@ JsonParsing JsonParsing::SetChild(JSON_Value* parent, const char* name)
 
 size_t JsonParsing::ParseFile(const char* fileName)
 {
+	if (rootObject)
+		json_value_free(rootObject);
+
 	JSON_Value* config = json_parse_file(fileName);
 	rootObject = config;
 	

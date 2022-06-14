@@ -257,6 +257,7 @@ static		void		doCleanupLogOnFirstRun();
 
 static	void	log(const char *format, ...)
 {
+#ifndef DIST
 	// Cleanup the log?
 
 	if (cleanupLogOnFirstRun) doCleanupLogOnFirstRun();
@@ -283,12 +284,14 @@ static	void	log(const char *format, ...)
 
 	fprintf(fp, "%s\r\n", buffer);
 	fclose(fp);
+#endif
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 
 static	void	doCleanupLogOnFirstRun()
 {
+#ifndef DIST
 	if (cleanupLogOnFirstRun)
 	{
 		_unlink(memoryLogFile);
@@ -326,6 +329,8 @@ static	void	doCleanupLogOnFirstRun()
 		log("");
 		log("--------------------------------------------------------------------------------");
 	}
+
+#endif
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------
@@ -531,6 +536,7 @@ static	void	dumpAllocations(FILE *fp)
 // ---------------------------------------------------------------------------------------------------------------------------------
 static	void	dumpLeakReport()
 {
+#ifndef DIST
 	// Open the report file
 
 	FILE	*fp = fopen(memoryLeakLogFile, "w+b");
@@ -583,6 +589,7 @@ static	void	dumpLeakReport()
 	}
 
 	fclose(fp);
+#endif
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------

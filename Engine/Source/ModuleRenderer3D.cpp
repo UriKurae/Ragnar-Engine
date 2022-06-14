@@ -1,21 +1,37 @@
+#include "ModuleRenderer3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleRenderer3D.h"
 
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "ModuleUI.h"
+#include "Physics3D.h"
+
+#include "LightComponent.h"
+#include "CameraComponent.h"
+#include "TransformComponent.h"
+#include "NavAgentComponent.h"
+#include "MeshComponent.h"
+
+#include "ResourceManager.h"
+#include "Scene.h"
+#include "Lights.h"
 #include "Framebuffer.h"
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "NavMeshBuilder.h"
+#include "GameView.h"
+#include "Viewport.h"
 
-#include "glew/include/GL/glew.h"
-
-#include "Imgui/imgui.h"
+#include "GL/glew.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
-
 #include "Imgui/ImguiStyle.h"
-
 #include "IL/ilut.h"
 
 #include "Profiling.h"
@@ -25,7 +41,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	name = "Renderer";
 	context = NULL;
 	fbo = nullptr;
-	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -36,12 +51,14 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	blending = false;
 	wireMode = false;
 	vsync = false;
+	rayCast = false;
+	navMesh = false;
+	drawGrid = false;
 }
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
 {
-	RELEASE(mainCameraFbo);
 }
 
 // Called before render is available
@@ -69,13 +86,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-		ilutRenderer(ILUT_OPENGL);
-
 		//Use Vsync
 		vsync = node.GetJsonBool("vsync");
 		if(SDL_GL_SetSwapInterval(vsync) < 0)
 			DEBUG_LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
+#ifndef DIST
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); 
@@ -88,33 +104,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
 		ImGui_ImplOpenGL3_Init();
-
+#endif
+		
 		DEBUG_LOG("Vendor: %s", glGetString(GL_VENDOR));
 		DEBUG_LOG("Renderer: %s", glGetString(GL_RENDERER));
 		DEBUG_LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 		DEBUG_LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
-		//Initialize Projection Matrix
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-
-		//Check for error
-		GLenum error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
-
-		//Initialize Modelview Matrix
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		//Check for error
-		error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
 		
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
@@ -122,28 +117,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		//Initialize clear color
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
-		//Check for error
-		error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
-		
-		GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-		
-		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		lights[0].SetPos(0.0f, 0.0f, 2.5f);
-		lights[0].Init();
-		
-		GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
-
-		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -153,8 +126,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		stencil = node.GetJsonBool("stencil");
 		blending = node.GetJsonBool("blending");
 		wireMode = node.GetJsonBool("wire mode");
-
-		lights[0].Active(true);
+		drawGrid = node.GetJsonBool("draw grid");
 		
 		if (depthTest) SetDepthTest();
 		if (cullFace) SetCullFace();
@@ -163,29 +135,95 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (texture2D) SetTexture2D();
 		if (stencil) SetStencil();
 		if (blending) SetBlending();
-		if (wireMode) SetWireMode();
-
-		// set stencil
-		/*glEnable(GL_DEPTH_TEST);
-		glEnable(GL_STENCIL_TEST);*/
-		
+		if (wireMode) SetWireMode();		
 	}
-
-	//// Projection matrix for
+	
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
-
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
 	mainCameraFbo = new Framebuffer(w, h, 0);
-	mainCameraFbo->Unbind();
+	mainCameraFbo->Unbind();	
+
+//#ifdef DIST
+	distVao = new VertexArray();
+
+	float vertices[] =
+	{
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f
+	};
 	
+	unsigned int indices[] = { 0,1,2,2,3,0 };
 
-	grid = new PGrid(200, 200);
+	distVbo = new VertexBuffer();
+	distVbo->SetData(vertices, sizeof(vertices), false);
+	distVbo->SetLayout({
+		{ShaderDataType::VEC3F, "position"},
+		{ShaderDataType::VEC2F, "texCoords"},
+	});
+	distVao->AddVertexBuffer(*distVbo);
 
+	distIbo = new IndexBuffer(indices, 6);
+	distVao->SetIndexBuffer(*distIbo);
+
+//#else
+	grid.SetPos(0, 0, 0);
+	grid.constant = 0;
+	grid.axis = true;
+//#endif
+
+	dirLight = new DirectionalLight();
+	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
+	goDirLight->SetName("Directional Light");
+
+	TransformComponent* tr = goDirLight->GetComponent<TransformComponent>();
+	tr->SetPosition({ 50,50,50 });
+	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
+	lightComp->SetLight(dirLight);
+
+
+	conesVao = new VertexArray();
+	conesVbo = new VertexBuffer();
+	conesVbo->SetLayout({
+		{ShaderDataType::VEC3F, "position"},
+		{ShaderDataType::VEC4F, "color"},
+	});
+	conesVao->AddVertexBuffer(*conesVbo);
+
+
+	genShadows = true;
+
+
+	glGenFramebuffers(1, &shadowsFbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glGenTextures(1, &shadowsDepthTexture);
+	glBindTexture(GL_TEXTURE_2D, shadowsDepthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowsDepthTexture, 0);
+
+	dmgFeedbackRequested = false;
+	
 	return ret;
+}
+
+bool ModuleRenderer3D::Start()
+{
+	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
+	coneShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/basic.shader")));
+	textureShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/texture.shader")));
+	colorShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/color.shader")));
+
+	damageTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/damage.png")));
+	whiteTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+
+	return true;
 }
 
 bool ModuleRenderer3D::PreUpdate(float dt)
@@ -198,49 +236,17 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// Editor Camera FBO
-	fbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-
-	grid->Draw();
 	std::set<GameObject*> objects;
+
 	// TODO: wtf quadtree man.
-	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
-
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilMask(0xFF);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera, 1.75f);
 	
-	if (app->camera->visualizeFrustum)
-	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->Draw();
-		}
-	}
-	else
-	{
-		app->scene->Draw();
-	}
+	AABB shadowsAABB;
+#ifndef DIST
 
-	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
-	{
-		glColor3f(0.25f, 0.87f, 0.81f);
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
-		app->editor->GetGO()->DrawOutline();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 
-		glStencilMask(0xFF);
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		if (depthTest) glEnable(GL_DEPTH_TEST);
-		glColor3f(1.0f, 1.0f, 1.0f);
-	}
+	if(drawGrid) grid.Render();
 
 	if (rayCast)
 	{
@@ -255,44 +261,229 @@ bool ModuleRenderer3D::PostUpdate()
 		glEnd();
 		glLineWidth(1.0f);
 	}
+	PushCamera(float4x4::identity, float4x4::identity);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
 
-	fbo->Unbind();
-
-	// Camera Component FBO
-
-	mainCameraFbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
-
-	grid->Draw();
-
-	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	// Shadow Pass ===================================
+	
+	if (dirLight->generateShadows && allShadowsEnabled)
 	{
-		(*it)->Draw();
+		GenerateShadows(objects, nullptr, shadowsAABB);
 	}
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	// Scene Pass ====================================
+	fbo->Bind();	
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers);
+
+	GameObject* objSelected = app->editor->GetGO();
+
+	glEnable(GL_BLEND);
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if ((*it) != objSelected)
+				(*it)->Draw(nullptr);
+		}
+	}
+	else app->sceneManager->GetCurrentScene()->Draw();
+	// Scene Pass ====================================
+	glDisable(GL_BLEND);
+
+	for (auto& p : gosToDrawOutline)
+	{
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		p.first->DrawOutline(nullptr, p.second);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		//glColor3f(1.0f, 1.0f, 1.0f);
+		p.first->Draw(nullptr);
+	}
+
+	DebugDraw(objSelected);
+	
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	fbo->Unbind();
+
+#else
+
+	// Solves the bug of the shadow checkbox
+	static bool state = false;
+	if (!state)
+	{
+		state = true;
+		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera, shadowsAABB);
+		return true;
+	}
+	// ====================================
+#endif
+
+	if (dirLight->generateShadows && allShadowsEnabled)
+	{
+		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera, shadowsAABB);
+	}
+
+	// Scene Pass ====================================
+	mainCameraFbo->Bind();
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+#ifdef DIST
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+#endif
+	glDrawBuffers(2, drawBuffers);
+
+	std::vector<GameObject*> gos;
+	gos.resize(gosToDrawOutline.size());
+	for (int i = 0; i < gosToDrawOutline.size(); ++i)
+		gos.push_back(gosToDrawOutline[i].first);
+
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	{
+		if (std::find(gos.begin(), gos.end(), *it) == gos.end())
+			(*it)->Draw(cam);
+	}
+
+	for (auto& p : gosToDrawOutline)
+	{
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		p.first->DrawOutline(cam, p.second);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		p.first->Draw(cam);
+	}
+
+
+	conesVbo->SetData(enemyCones.data(), sizeof(ConeTriangle) * enemyCones.size(), true);
+
+	glEnable(GL_BLEND);
+	coneShader->Bind();
+	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
+	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
+
+	conesVao->Bind();
+	conesVbo->Bind();
+	glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
+	conesVbo->Unbind();
+	conesVao->Unbind();
+	coneShader->Unbind();
+
+	frames++;
+	if((frames + 1) % 4 == 0) // 4 must be to retardedFrames on EnemyManager.cs
+		enemyCones.clear();
+	glDisable(GL_BLEND);
+
+#ifndef DIST 
+	app->userInterface->Draw();
+#endif
 
 	mainCameraFbo->Unbind();
 
-	// Draw both buffers
+#ifdef DIST
+	
+	// Inside each function there is a comprobation so it does not get resized each frame
+	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
+	// OnResize gets called when an SDL event of window resize is triggered
+	//OnResize(size.x, size.y);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
+
+	glDisable(GL_DEPTH_TEST);
+	postProcessingShader->Bind();
+	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetColorId());
+	GLuint textLoc1 = glGetUniformLocation(postProcessingShader->GetId(), "colorTexture");
+	glUniform1i(textLoc1, 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetNormalId());
+	GLuint textLoc2 = glGetUniformLocation(postProcessingShader->GetId(), "normalTexture");
+	glUniform1i(textLoc2, 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetDepthId());
+	GLuint textLoc3 = glGetUniformLocation(postProcessingShader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 2);
+
+	distVao->Bind();
+	distIbo->Bind();
+
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	
+	postProcessingShader->Unbind();
+
+	if (dmgFeedbackRequested)
+	{
+		DrawDamageFeedback();
+	}
+
+	// When a new ability is discovered, screen gets gray
+	if (screenRectRequested)
+	{
+		glEnable(GL_BLEND);
+		colorShader->Bind();
+		colorShader->SetUniformVec4f("color", screenRectColor);
+		glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+		colorShader->Unbind();
+		glDisable(GL_BLEND);
+	}
+
+	distIbo->Unbind();
+	distVao->Unbind();
+
+
+#else
 	app->editor->Draw(fbo, mainCameraFbo);
+#endif
+
+#ifdef DIST
+	
+	glEnable(GL_BLEND);
+	app->userInterface->Draw();
+	
+	if (app->sceneManager->IsSceneChanging())
+	{
+		textureShader->Bind();
+		textureShader->SetUniform1f("alpha", app->sceneManager->GetTransitionAlpha());
+		textureShader->SetUniformVec3f("color", { 0,0,0 });
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, whiteTexture->GetId());
+		GLuint textLoc1 = glGetUniformLocation(whiteTexture->GetId(), "tex");
+		glUniform1i(textLoc1, 0);
+
+		distVao->Bind();
+		distIbo->Bind();
+
+		glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+		
+		distVao->Unbind();
+		distIbo->Unbind();
+	}
+
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+#endif
 
 	SDL_GL_SwapWindow(app->window->window);
+	
+	//glDisable(GL_BLEND);
 
 	return true;
 }
@@ -302,14 +493,36 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
+	RELEASE(dirLight);
+	RELEASE(conesVbo);
+	RELEASE(conesVao);
+	//RELEASE(defaultShader);
+	RELEASE(distVao);
+	RELEASE(distVbo);
+	RELEASE(distIbo);
 
+	for(auto& pl : pointLights)
+	{
+		RELEASE(pl);
+	}
+	pointLights.clear();
+
+	for (auto& pl : spotLights)
+	{
+		RELEASE(pl);
+	}
+	spotLights.clear();
+
+#ifndef DIST
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-
+#else
+	RELEASE(distVao);
+	RELEASE(distVbo);
+#endif
 	SDL_GL_DeleteContext(context);
 
 	return true;
@@ -326,8 +539,11 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	stencil = node.GetJsonBool("stencil");
 	blending = node.GetJsonBool("blending");
 	wireMode = node.GetJsonBool("wire mode");
+	navMesh = node.GetJsonBool("navmesh");
+	drawGrid = node.GetJsonBool("draw grid");
+	allShadowsEnabled = node.GetJsonBool("shadows");
 
-	SetVsync();
+	SetVsync(vsync);
 	SetDepthTest();
 	SetCullFace();
 	SetLighting();
@@ -340,7 +556,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
+bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 {
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "vsync", vsync);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depth test", depthTest);
@@ -351,6 +567,9 @@ bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "stencil", stencil);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "navmesh", navMesh);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "draw grid", drawGrid);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "shadows", allShadowsEnabled);
 
 	return true;
 }
@@ -420,9 +639,9 @@ void ModuleRenderer3D::SetWireMode()
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void ModuleRenderer3D::SetVsync()
+void ModuleRenderer3D::SetVsync(bool newValue)
 {
-	SDL_GL_SetSwapInterval(vsync);
+	SDL_GL_SetSwapInterval(newValue);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()
@@ -493,4 +712,197 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+Material* ModuleRenderer3D::GetDefaultMaterial()
+{
+	return defaultMaterial;
+}
+
+uint ModuleRenderer3D::GetDefaultShader()
+{
+	return defaultShader;
+}
+
+void ModuleRenderer3D::AddMaterial(Material* material)
+{
+	materials.emplace_back(material);
+}
+
+void ModuleRenderer3D::AddPointLight(PointLight* pl)
+{
+	pointLights.push_back(pl);
+}
+
+void ModuleRenderer3D::AddSpotLight(SpotLight* sl)
+{
+	spotLights.push_back(sl);
+}
+
+void ModuleRenderer3D::ClearPointLights()
+{
+	pointLights.clear();
+}
+
+void ModuleRenderer3D::ClearSpotLights()
+{
+	spotLights.clear();
+}
+
+void ModuleRenderer3D::RemovePointLight(PointLight* light)
+{
+	for (std::vector<PointLight*>::iterator it = pointLights.begin(); it != pointLights.end(); ++it)
+	{
+		if (*it == light)
+		{
+			//RemoveSpotLight same?
+			pointLights.erase(it);
+			break;
+		}
+	}
+}
+
+void ModuleRenderer3D::RemoveSpotLight(SpotLight* light)
+{
+	for (std::vector<SpotLight*>::iterator it = spotLights.begin(); it != spotLights.end(); ++it)
+	{
+		if ((*it) == light)
+		{
+			light->intensity = 0;
+			(*it)->toDelete = false;
+			break;
+		}
+	}
+}
+
+void ModuleRenderer3D::RequestDamageFeedback()
+{
+	damageTextureAlpha = 0.6f;
+	dmgFeedbackRequested = true;
+}
+
+void ModuleRenderer3D::RequestScreenRectangle(float4 color)
+{
+	screenRectRequested = true;
+	screenRectColor = color;
+}
+
+void ModuleRenderer3D::EndRequestScreenRectangle()
+{
+	screenRectRequested = false;
+}
+
+void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(proj.Transposed().ptr());
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(view.Transposed().ptr());
+}
+
+void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
+{
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	if (app->sceneManager->GetCurrentScene()->GetDebugDrawQuadtree())
+		app->sceneManager->GetCurrentScene()->GetQuadtree().DebugDraw();
+
+	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	{
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+		if (objSelected)
+		{
+			NavAgentComponent* navMesh = navMesh = objSelected->GetComponent<NavAgentComponent>();
+			if (navMesh) app->navMesh->GetPathfinding()->RenderPath(navMesh);
+		}
+	}
+
+	if (app->physics->GetDebugMode())
+		app->physics->DebugDraw();
+
+	PushCamera(float4x4::identity, float4x4::identity);
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		//glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline(nullptr, { 0.25, 0.87, 0.81, });
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		objSelected->Draw(nullptr);
+	}
+}
+
+void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, CameraComponent* gameCam, AABB& shadAABB)
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glDrawBuffers(0, nullptr);
+
+	GameObject* objSelected = app->editor->GetGO();
+
+	glCullFace(GL_FRONT);
+	genShadows = true;
+
+	AABB shadowsAABB = shadAABB;
+	shadowsAABB.SetNegativeInfinity();
+
+	std::vector<GameObject*> gos;
+	if (!gameCam)
+	{
+		if (app->camera->visualizeFrustum)
+		{
+			for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+			{
+				(*it)->Draw(nullptr);
+			}
+		}
+		else app->sceneManager->GetCurrentScene()->Draw();
+	}
+	else
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if ((*it)->GetComponent<MeshComponent>())
+				(*it)->Draw(gameCam);
+		}
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glCullFace(GL_BACK);
+	genShadows = false;
+}
+
+void ModuleRenderer3D::DrawDamageFeedback()
+{
+	damageTextureAlpha -= 0.5 * app->sceneManager->GetGameDeltaTime();
+	if (damageTextureAlpha < 0)
+	{
+		damageTextureAlpha = 0.6;
+		dmgFeedbackRequested = false;
+		return;
+	}
+
+	textureShader->Bind();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, damageTexture->GetId());
+	GLuint textLoc1 = glGetUniformLocation(textureShader->GetId(), "tex");
+	glUniform1i(textLoc1, 0);
+
+	glEnable(GL_BLEND);
+	textureShader->SetUniform1f("alpha", damageTextureAlpha);
+	textureShader->SetUniformVec3f("color", { 1,1,1 });
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	damageTexture->Unbind();
+	textureShader->Unbind();
 }

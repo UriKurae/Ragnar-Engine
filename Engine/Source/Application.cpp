@@ -1,15 +1,23 @@
 #include "Application.h"
 #include "Globals.h"
+#include "Module.h"
+
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "MonoManager.h"
+#include "Physics3D.h"
+#include "ModuleNavMesh.h"
+#include "ModuleUI.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "Profiling.h"
 
@@ -17,10 +25,14 @@ Application::Application()
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
-	scene = new ModuleScene();
+	physics = new Physics3D();
+	sceneManager = new ModuleSceneManager();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
+	moduleMono = new MonoManager(this);
 	editor = new ModuleEditor();
+	navMesh = new ModuleNavMesh();
+	userInterface = new ModuleUI();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
 
@@ -31,16 +43,22 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
+	AddModule(physics);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(navMesh);
+	AddModule(moduleMono);
 	
 	// Scenes
-	AddModule(scene);
+	AddModule(sceneManager);
+#ifndef DIST
 	AddModule(editor);
+#endif
+	AddModule(userInterface);
 
 	AddModule(renderer3D);
 
-	loadRequested = false;
+	loadRequested = true;
 	saveRequested = false;
 }
 
@@ -48,14 +66,22 @@ Application::~Application()
 {
 	std::list<Module*>::reverse_iterator item;
 
+	ResourceManager::ReleaseInstance();
+
 	for (item = listModules.rbegin(); item != listModules.rend(); ++item)
 	{
 		RELEASE(*item);
 	}
 
 	RELEASE(fs);
-	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
+	PrefabManager::ReleaseInstance();
+	DialogueSystem::ReleaseInstance();
+	
+#ifdef DIST
+	RELEASE(editor);
+#endif
+
 
 	listModules.clear();
 }
@@ -73,6 +99,7 @@ bool Application::Init()
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
 
 		engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+		app->sceneManager->GetTimer().ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "Game"));
 		std::list<Module*>::iterator item;
 
 		for (item = listModules.begin(); item != listModules.end() && ret; ++item)
@@ -160,6 +187,10 @@ bool Application::CleanUp()
 		ret = (*item)->CleanUp();
 	}
 
+#ifdef DIST
+	editor->CleanUp();
+#endif
+
 	return ret;
 }
 
@@ -197,6 +228,7 @@ void Application::SaveConfig()
 	JsonParsing jsonFile;
 
 	engineTimer.SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), "App"));
+	app->sceneManager->GetTimer().SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), "Game"));
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
@@ -230,7 +262,7 @@ void Application::LoadConfig()
 		JsonParsing jsonFile((const char*)buffer);
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
 
-		engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+		//engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
 
 		std::list<Module*>::iterator item;
 
@@ -243,4 +275,17 @@ void Application::LoadConfig()
 	}
 
 	loadRequested = false;
+}
+
+bool Application::StringCmp(const char* str1, const char* str2)
+{
+	size_t size = strlen(str1);
+	if (size != strlen(str2))
+		return false;
+
+	for (uint i = 0; i < size; ++i) {
+		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+			return false;
+	}
+	return true;
 }

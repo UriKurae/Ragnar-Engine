@@ -1,11 +1,132 @@
 Event	ID	Name			Wwise Object Path	Notes
-	799949012	ActivateBgMusic			\Default Work Unit\ActivateBgMusic	
+	28688078	SmokeGrenade_Explosion			\Default Work Unit\Consumable\SmokeGrenade_Explosion	
+	208878047	EUndestructable_Scream			\Default Work Unit\Enemies\EUndestructable_Scream	
+	270836377	ESniper_Scream			\Default Work Unit\Enemies\ESniper_Scream	
+	441803396	Stilgar_WalkCrouchRock			\Default Work Unit\Characters\Stilgar_WalkCrouchRock	
+	472448368	EDrone_Shoot			\Default Work Unit\Enemies\EDrone_Shoot	
+	653809901	Chani_Death			\Default Work Unit\Characters\Chani_Death	
+	679407082	EDrone_Flying			\Default Work Unit\Enemies\EDrone_Flying	
+	763572001	Stilgar_SandSteps			\Default Work Unit\Characters\Stilgar_SandSteps	
+	860891740	Stilgar_Crouch			\Default Work Unit\Characters\Stilgar_Crouch	
+	883688884	Paul_Crouch			\Default Work Unit\Characters\Paul_Crouch	
+	902258357	General_PutDownCorpse			\Default Work Unit\Characters\General_PutDownCorpse	
+	929873671	Paul_WalkSand			\Default Work Unit\Characters\Paul_WalkSand	
+	961245090	Stilgar_WalkRock			\Default Work Unit\Characters\Stilgar_WalkRock	
+	972585674	EBoss_HitGround			\Default Work Unit\Enemies\EBoss_HitGround	
+	1042690572	SmokeGrenade_Smoke			\Default Work Unit\Consumable\SmokeGrenade_Smoke	
+	1205645828	MusicPlay			\Default Work Unit\MusicPlay	
+	1300182179	Chani_Crouch			\Default Work Unit\Characters\Chani_Crouch	
+	1357264117	ETank_WalkRock			\Default Work Unit\Enemies\ETank_WalkRock	
+	1364511203	Chani_DragCorpse			\Default Work Unit\Characters\Chani_DragCorpse	
+	1448343584	EBasic_Scream			\Default Work Unit\Enemies\EBasic_Scream	
+	1531151863	EBasic_WalkRock			\Default Work Unit\Enemies\EBasic_WalkRock	
+	1706601129	General_DropBody			\Default Work Unit\Characters\General_DropBody	
+	2156606911	General_HideOnSand			\Default Work Unit\Characters\General_HideOnSand	
+	2270399770	Paul_WalkRock			\Default Work Unit\Characters\Paul_WalkRock	
+	2390870270	EBasic_BulletHit			\Default Work Unit\Enemies\EBasic_BulletHit	
+	2484112549	EBoss_ThrowObject			\Default Work Unit\Enemies\EBoss_ThrowObject	
+	2537079668	Stilgar_Death			\Default Work Unit\Characters\Stilgar_Death	
+	2704666868	Chani_TalkToEnemy			\Default Work Unit\Characters\Chani_TalkToEnemy	
+	2705668120	Stilgar_WalkCity			\Default Work Unit\Characters\Stilgar_WalkCity	
+	2732026490	General_ShieldActivate			\Default Work Unit\Characters\General_ShieldActivate	
+	2736105534	ETank_GetHit			\Default Work Unit\Enemies\ETank_GetHit	
+	2744267913	Bandage			\Default Work Unit\Consumable\Bandage	
+	2840685171	General_OutOfSand			\Default Work Unit\Characters\General_OutOfSand	
+	2888318849	General_BulletHit			\Default Work Unit\Characters\General_BulletHit	
+	2974935085	Grenade_Explosion			\Default Work Unit\Consumable\Grenade_Explosion	
+	3091390216	ETank_WalkSand			\Default Work Unit\Enemies\ETank_WalkSand	
+	3158574636	Paul_Death			\Default Work Unit\Characters\Paul_Death	
+	3273458416	Chani_WalkSand			\Default Work Unit\Characters\Chani_WalkSand	
+	3313001124	EDrone_Destroyed			\Default Work Unit\Enemies\EDrone_Destroyed	
+	3406590098	EBasic_WalkSand			\Default Work Unit\Enemies\EBasic_WalkSand	
+	3421079763	EBasic_Shotgun			\Default Work Unit\Enemies\EBasic_Shotgun	
+	3653823867	Grenade_Activate			\Default Work Unit\Consumable\Grenade_Activate	
+	3772265801	EBasic_WalkCity			\Default Work Unit\Enemies\EBasic_WalkCity	
+	3850762336	Chani_PutDownCorpse			\Default Work Unit\Characters\Chani_PutDownCorpse	
+	3937164446	General_BulletHitShield			\Default Work Unit\Characters\General_BulletHitShield	
+	4005464906	SmokeGrenade_Activate			\Default Work Unit\Consumable\SmokeGrenade_Activate	
+	4014823024	Paul_WalkCity			\Default Work Unit\Characters\Paul_WalkCity	
+	4026708851	Chani_WalkCity			\Default Work Unit\Characters\Chani_WalkCity	
+	4068135307	General_ShieldDeActivate			\Default Work Unit\Characters\General_ShieldDeActivate	
+	4097624863	ESniper_Shoot			\Default Work Unit\Enemies\ESniper_Shoot	
+	4110419675	ETank_WalkCity			\Default Work Unit\Enemies\ETank_WalkCity	
+	4167292897	Chani_DressUp			\Default Work Unit\Characters\Chani_DressUp	
+	4167310634	EMale_Death4			\Default Work Unit\Enemies\EMale_Death4	
+	4167310636	EMale_Death2			\Default Work Unit\Enemies\EMale_Death2	
+	4167310637	EMale_Death3			\Default Work Unit\Enemies\EMale_Death3	
+	4167310639	EMale_Death1			\Default Work Unit\Enemies\EMale_Death1	
+	4199356530	EDrone_GetDamage			\Default Work Unit\Enemies\EDrone_GetDamage	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	3991942870	Music			\Default Work Unit\Music	
+
+State	ID	Name	State Group			Notes
+	706284710	Level1_Base	Music			
+	748895195	None	Music			
+	3604647259	MainMenu	Music			
+	3739419631	Level1_Battle	Music			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	1908158473	Pitch			\Default Work Unit\Pitch	
 	2415836739	Volume			\Default Work Unit\Volume	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	192247659	oriol	C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\.cache\Windows\SFX\oriol_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ReverbAudioMixer\MusicSequence\oriol		5308480
-	919001556	lucas	C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\.cache\Windows\SFX\lucas_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ReverbAudioMixer\MusicSequence\lucas		5308480
+	15534167	char_stilgar_sandsteps	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_sandsteps_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_sandsteps		128672
+	16442463	char_chani_death	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_death_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_death		170048
+	38158366	mainmenu_music	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\mainmenu_music_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MainMenu\mainmenu_music\mainmenu_music		17287344
+	77273793	consumable_smokegranade_activate	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_smokegranade_activate_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_smokegranade_activate		49928
+	88308321	enemy_gunshot	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_gunshot_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_gunshot		263524
+	98133405	consumable_smokegranade_explosion	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_smokegranade_explosion_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_smokegranade_explosion		995048
+	99765215	char_chani_walk_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_walk_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_walk_city		120896
+	128218371	enemy_male_death2	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_male_death2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDeaths\enemy_male_death2		220036
+	153588860	char_stilgar_death	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_death_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_death		260320
+	157690958	enemy_male_death1	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_male_death1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDeaths\enemy_male_death1		346296
+	194308402	char_chani_dressup	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_dressup_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_dressup		525112
+	201032356	enemy_bullethit	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_bullethit_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_bullethit		128876
+	229104605	char_chani_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_walk_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_walk_sand		94612
+	241386943	char_general_dropbody_rock_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_dropbody_rock_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_dropbody_rock_city		209444
+	247976966	enemy_drone_destroied	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_destroied_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_destroied		352360
+	286668354	char_general_shieldeactivate	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_shieldeactivate_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_shieldeactivate		369736
+	292959931	char_paul_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_walk_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_walk_sand		113600
+	325241364	consumable_smokegranade_smoke	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_smokegranade_smoke_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_smokegranade_smoke		1411264
+	330418600	enemy_drone_flying	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_flying_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_flying		1144864
+	332929919	char_chani_putdowncorpse_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_putdowncorpse_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_putdowncorpse_sand		124012
+	340100191	enemy_tank_walkrock	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_tank_walkrock_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyTank\enemy_tank_walkrock		103768
+	370101064	chani_talktoenemy	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\chani_talktoenemy_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\chani_talktoenemy		41658
+	376459162	consumable_bandage	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_bandage_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_bandage		336064
+	470470188	level1_music	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\level1_music_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Music\Level1_Base\level1_music\level1_music		4618540
+	532392836	char_stilgar_walk_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_walk_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_walk_city		91652
+	538431545	enemy_undistractable_scream	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_undistractable_scream_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyTank\enemy_undistractable_scream		54480
+	555033912	char_stilgar_walk_rock	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_walk_rock_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_walk_rock		108860
+	566287277	enemy_tank_gethit	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_tank_gethit_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyTank\enemy_tank_gethit		196776
+	568193672	enemy_basic_walkcity	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_basic_walkcity_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_basic_walkcity		68484
+	593933077	enemy_boss_hitground	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_boss_hitground_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBoss\enemy_boss_hitground		131284
+	615312907	enemy_boss_throwobject	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_boss_throwobject_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBoss\enemy_boss_throwobject		77364
+	639073334	enemy_basic_walkrock	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_basic_walkrock_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_basic_walkrock		143480
+	710741448	level1_battle_music	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\level1_battle_music_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Music\Level1_Battle\level1_battle_music\level1_battle_music		3079048
+	714965375	char_general_bullethit	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_bullethit_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_bullethit		228128
+	719599117	char_general_hideonsand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_hideonsand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_hideonsand		155712
+	738145204	enemy_drone_getdamage	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_getdamage_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_getdamage		269076
+	756668009	char_paul_crouch	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_crouch_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_crouch		153672
+	756885809	enemy_basic_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_basic_walk_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_basic_walk_sand		206008
+	801959511	enemy_drone_shoot	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_shoot_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_shoot		294768
+	804361737	enemy_male_death3	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_male_death3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDeaths\enemy_male_death3		657820
+	815629418	char_paul_death	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_death_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_death		209968
+	850855542	consumable_granade_explosion	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_granade_explosion_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_granade_explosion		451648
+	859371764	char_general_outofsnad	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_outofsnad_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_outofsnad		123908
+	906559682	char_general_shield_deactivate	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_shield_deactivate_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_shield_deactivate		507552
+	911266700	enemy_basic_scream	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_basic_scream_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyBasic\enemy_basic_scream		46272
+	920634880	enemy_male_death4	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_male_death4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDeaths\enemy_male_death4		180880
+	924310825	enemy_tank_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_tank_walk_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyTank\enemy_tank_walk_sand		114704
+	947848096	char_chani_dragcorpse_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_dragcorpse_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_dragcorpse_sand		124728
+	948655400	enemy_sniper_scream	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_sniper_scream_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemySniper\enemy_sniper_scream		35904
+	961405315	char_chani_crouch	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_crouch_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_crouch		133184
+	961917892	char_paul_walk_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_walk_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_walk_city		133184
+	966010004	consumable_granade_activate	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_granade_activate_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_granade_activate		323104
+	980343335	char_general_putdowncorpse_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_putdowncorpse_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_putdowncorpse_sand		120616
+	985573734	enemy_snipershot	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_snipershot_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemySniper\enemy_snipershot		630324
+	987031176	enemy_tank_walk_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_tank_walk_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyTank\enemy_tank_walk_city		41460
+	1014564753	char_paul_walk_rock	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_walk_rock_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_walk_rock		100144
+	1024361378	char_stilgar_crouch	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_crouch_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_crouch		153656
+	1035328202	char_stilgar_walkcrouch_rock	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_stilgar_walkcrouch_rock_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Stilgar_Char\char_stilgar_walkcrouch_rock		110188
+	1063242255	char_general_bullethit_shield	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_bullethit_shield_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_bullethit_shield		97028
 

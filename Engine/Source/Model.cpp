@@ -1,13 +1,11 @@
 #include "Model.h"
-
 #include "Globals.h"
-#include "ModelImporter.h"
 
+#include "ModelImporter.h"
 #include "ResourceManager.h"
 #include "Mesh.h"
 
 #include "Imgui/imgui.h"
-
 #include "Profiling.h"
 
 Model::Model(uint uid, std::string& assets, std::string& library) : parameters({}), Resource(uid, ResourceType::MODEL, assets, library)

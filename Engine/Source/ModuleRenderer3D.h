@@ -1,17 +1,33 @@
 #pragma once
 #include "Module.h"
 
-#include "Light.h"
+#include "Shapes.h"
+#include "SDL_video.h"
+#include "Geometry/AABB.h"
+
+#include "ConeTriangle.h"
 
 #include <vector>
-#include "Primitive.h"
-#include "SDL.h"
+#include <set>
+#include <utility>
 
 #define MAX_LIGHTS 8
 
-typedef unsigned int GLuint;
-
+class VertexArray;
+class VertexBuffer;
+class IndexBuffer;
 class Framebuffer;
+class TextureBuffer;
+class Material;
+class Shader;
+class Texture;
+class GameObject;
+class CameraComponent;
+
+class PointLight;
+class SpotLight;
+class DirectionalLight;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -19,12 +35,13 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init(JsonParsing& node) override;
+	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	void OnResize(int width, int height);
 
@@ -36,7 +53,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
-	void SetVsync();
+	void SetVsync(bool newValue);
 
 	inline bool* GetDepthTest() { return &depthTest; }
 	inline bool* GetCullFace() { return &cullFace; }
@@ -48,13 +65,46 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 	inline bool* GetVsync() { return &vsync; }
 	inline bool* GetRayCast() { return &rayCast; }
+	inline bool* GetNavMesh() { return &navMesh; }
+	inline bool* GetDrawGrid() { return &drawGrid; }
 
 	void DrawCubeDirectMode();
 
-public:
-	PGrid* grid;
+	Material* GetDefaultMaterial();
+	unsigned int GetDefaultShader();
 
-	Light lights[MAX_LIGHTS];
+	void AddMaterial(Material* material);
+	inline const std::vector<Shader*>& GetShaders() { return shaders; }
+
+	void AddPointLight(PointLight* pl);
+	inline std::vector<PointLight*>& GetPointLights() { return pointLights; }
+
+	void AddSpotLight(SpotLight* sl);
+	inline const std::vector<SpotLight*>& GetSpotLights() { return spotLights; }
+
+	void ClearPointLights();
+	void ClearSpotLights();
+
+	void RemovePointLight(PointLight* light);
+	void RemoveSpotLight(SpotLight* light);
+
+	void RequestDamageFeedback();
+	void RequestScreenRectangle(float4 color);
+	void EndRequestScreenRectangle();
+
+private:
+	void PushCamera(const float4x4& proj, const float4x4& view);
+	void DebugDraw(GameObject* objSelected);
+	void GenerateShadows(const std::set<GameObject*>& objects, CameraComponent* gameCam, AABB& shadowsAABB);
+
+	void DrawDamageFeedback();
+
+public:
+	PPlane grid;
+	unsigned int shadowsDepthTexture;
+	std::vector<std::pair<GameObject*, float3>> gosToDrawOutline;
+
+	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	Mat4x4 projectionMatrix;
 
@@ -71,4 +121,46 @@ public:
 	bool wireMode;
 	bool vsync;
 	bool rayCast;
+	bool navMesh;
+	bool drawGrid;
+
+	GameObject* goDirLight;
+	DirectionalLight* dirLight;
+
+	std::vector<PointLight*> pointLights;
+	std::vector<SpotLight*> spotLights;
+
+	std::vector<ConeTriangle> enemyCones;
+	
+	bool genShadows;
+	bool allShadowsEnabled = true;
+	int frames = 0;
+private:
+	Material* defaultMaterial;
+	unsigned int defaultShader;
+
+	std::vector<Shader*> shaders;
+	std::vector<Material*> materials;
+
+	VertexArray* distVao;
+	VertexBuffer* distVbo;
+	IndexBuffer* distIbo;
+	std::shared_ptr<Shader> postProcessingShader;
+	
+	std::shared_ptr<Shader> textureShader;
+	std::shared_ptr<Shader> colorShader;
+	std::shared_ptr<Texture> damageTexture;
+	std::shared_ptr<Texture> whiteTexture;
+
+	VertexArray* conesVao;
+	VertexBuffer* conesVbo;
+	std::shared_ptr<Shader> coneShader;
+
+	unsigned int shadowsFbo;
+	
+	bool dmgFeedbackRequested;
+	float damageTextureAlpha = 0.f;
+
+	bool screenRectRequested = false;
+	float4 screenRectColor;
 };

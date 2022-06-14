@@ -1,18 +1,17 @@
 #include "TextureImporter.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
-#include "ResourceManager.h"
+
+#include "FileSystem.h"
 #include "Component.h"
 #include "Texture.h"
 
-#include "IL/il.h"
 #include "IL/ilu.h"
 #include "ResourceManager.h"
-#include "glew/include/GL/glew.h"
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "GL/glew.h"
 
+#include <assimp/material.h>
+#include <string>
 #include "Profiling.h"
 
 void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path)
@@ -29,7 +28,7 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)assetsPath.c_str());
+		ilLoadImage(assetsPath.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
 		std::string libraryPath;
@@ -39,7 +38,11 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
 		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", libraryPath.c_str());
 
-		SaveTexture(libraryPath);
+		if(type == aiTextureType::aiTextureType_NORMALS)
+			SaveTexture(libraryPath, false);
+		else
+			SaveTexture(libraryPath);
+
 		ilDeleteImages(1, &image);
 	}
 }
@@ -55,13 +58,15 @@ void TextureImporter::ImportTexture(std::string& fileName)
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)fileName.c_str());
+		ilLoadImage(fileName.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		std::string libraryPath;
 
 		ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, fileName, libraryPath);
-
-		SaveTexture(libraryPath);
+		if (fileName.find("normal") != std::string::npos)
+			SaveTexture(libraryPath, false);
+		else	
+			SaveTexture(libraryPath);
 		ilDeleteImages(1, &image);
 	}
 }
@@ -71,20 +76,27 @@ void TextureImporter::ImportTexture2(std::string& fileName)
 	ILuint image;
 	ilGenImages(1, &image);
 	ilBindImage(image);
-	ilLoadImage((const wchar_t*)fileName.c_str());
+	ilLoadImage(fileName.c_str());
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	app->fs->GetFilenameWithoutExtension(fileName);
 	std::string libraryPath = SETTINGS_FOLDER + std::string("EngineResources/") + fileName + ".rgtexture";
 
-	SaveTexture(libraryPath);
+	if (fileName.find("normal") != std::string::npos)
+		SaveTexture(libraryPath, false);
+	else
+		SaveTexture(libraryPath);
+
 	ilDeleteImages(1, &image);
 }
 
-void TextureImporter::SaveTexture(std::string& fileName)
+void TextureImporter::SaveTexture(std::string& fileName, bool compress)
 {
 	ILuint size;
 	ILubyte* data;
-	ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+	
+	if(compress)
+		ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+	
 	size = ilSaveL(IL_DDS, nullptr, 0);
 
 	if (size > 0)

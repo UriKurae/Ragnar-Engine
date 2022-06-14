@@ -1,10 +1,7 @@
 #pragma once
-
 #include "Component.h"
 
 class TransformComponent;
-class IndexBuffer;
-class VertexBuffer;
 
 class ListenerComponent : public Component
 {
@@ -17,8 +14,10 @@ public:
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
+
+	inline void ChangePosition() { changePosition = true; }
 private:
 	TransformComponent* transform;
-
+	bool changePosition;
 	bool activeListener;
 };

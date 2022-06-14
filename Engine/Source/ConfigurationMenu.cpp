@@ -1,15 +1,18 @@
+#include "ConfigurationMenu.h"
 #include "Application.h"
+
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
-#include "ConfigurationMenu.h"
 
+#include "SDL_cpuinfo.h"
+#include "SDL_version.h"
 #include <GL\glew.h>
 
 #include "Profiling.h"
 
-ConfigurationMenu::ConfigurationMenu() : Menu(false)
+ConfigurationMenu::ConfigurationMenu() : Menu(false, "Configuration")
 {
 	memoryCount = 0;
 
@@ -25,6 +28,8 @@ ConfigurationMenu::~ConfigurationMenu()
 
 bool ConfigurationMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Configuration Menu Update");
+
 	static sMStats stats = m_getMemoryStatistics();
 	++memoryCount;
 	if (memoryCount > 15)
@@ -62,13 +67,13 @@ bool ConfigurationMenu::Update(float dt)
 
 	ImGui::Begin("Configuration", &active);
 
-	if (ImGui::BeginMenu("Options"))
+	if (ImGui::BeginMenu(ICON_FA_WRENCH" Options"))
 	{
-		if (ImGui::MenuItem("Load"))
+		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Load"))
 		{
 			app->LoadConfigRequest();
 		}
-		if (ImGui::MenuItem("Save"))
+		if (ImGui::MenuItem(ICON_FA_SAVE" Save"))
 		{
 			app->SaveConfigRequest();
 		}
@@ -143,7 +148,7 @@ bool ConfigurationMenu::Update(float dt)
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Full desktop", app->window->GetWindowFullscreenDesktop()))
 		{
-			app->window->SetFullscreenDesktop();
+			app->window->SetFullscreenDesktop(app->window->GetWindowFullscreenDesktop());
 		}
 	}
 	ImGui::PushID(this);
@@ -179,7 +184,7 @@ bool ConfigurationMenu::Update(float dt)
 	{
 		if (ImGui::Checkbox("VSync", app->renderer3D->GetVsync()))
 		{
-			app->renderer3D->SetVsync();
+			app->renderer3D->SetVsync(app->renderer3D->GetVsync());
 		}
 	}
 	if (ImGui::CollapsingHeader("Input"))

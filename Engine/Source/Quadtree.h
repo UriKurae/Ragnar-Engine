@@ -1,9 +1,7 @@
 #pragma once
-
-#include "MathGeoLib/src/Geometry/AABB.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
-
+#include "Geometry/AABB.h"
 #include <set>
+#include <stack>
 
 class GameObject;
 class CameraComponent;
@@ -51,9 +49,14 @@ public:
 	
 	void Intersect(std::vector<GameObject*>& gos, Ray primitive);
 	
-	void Intersect(std::set<GameObject*>& gos, CameraComponent* frustum);
-	void CollectGo(std::vector<GameObject*>& gos);
+	void Intersect(std::set<GameObject*>& gos, CameraComponent* frustum, float scaleFactor = 1);
+	void CollectGo(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes);
+	void CollectGoOnlyStatic(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes);
+	void CollectGoByTag(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes, std::string tag);
+	void CollectNodes(std::stack<QuadtreeNode*>& nodes, LineSegment ray);
 	void DebugDraw();
+
+	QuadtreeNode* getRoot() const { return root; }
 
 private:
 	QuadtreeNode* root;
