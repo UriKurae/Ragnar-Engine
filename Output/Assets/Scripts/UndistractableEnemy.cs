@@ -115,7 +115,7 @@ public class UndistractableEnemy : RagnarComponent
         stunPartSys.Pause();
         retardedFrames = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().retardedFrames;
 
-        buffCounter = GameObject.Find("UIB").GetComponent<UIText>();
+        buffCounter = GameObject.Find("UIBVoiceNum").GetComponent<UIText>();
 
         pointCharacter = GameObject.Find("PlayerReminder").childs[3];
         pointerLight = pointCharacter.GetComponent<Light>();
