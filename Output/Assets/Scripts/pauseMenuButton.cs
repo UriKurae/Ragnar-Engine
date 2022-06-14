@@ -2433,7 +2433,7 @@ public class pauseMenuButton : RagnarComponent
             {
                 players[w].GetComponent<Player>().paused = true;
 			}
-            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP || Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP)
+            if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP)
             {
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
