@@ -45,9 +45,9 @@ public class AirEnemy : RagnarComponent
     float initialSpeed;
 
     bool distracted = false;
-    float distractedTimer = -1f;
+    public float distractedTimer = -1f;
     bool stunned = false;
-    float stunnedTimer = -1f;
+    public float stunnedTimer = -1f;
 
     float coneTimer = 0.0f;
     int coneMaxTime = 1;
@@ -59,6 +59,7 @@ public class AirEnemy : RagnarComponent
     public bool canLookOut = false;
     int retardedFrames;
 
+    GameObject timerSlider;
     public void Start()
     {
         // Get components
@@ -353,5 +354,7 @@ public class AirEnemy : RagnarComponent
         stunned = true;
         stunnedTimer = timeStunned;
         animationComponent.PlayAnimation("Idle");
+        timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, (int)enemyType, "stunnedTimer");
     }
 }
