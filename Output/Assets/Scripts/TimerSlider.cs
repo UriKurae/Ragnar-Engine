@@ -65,6 +65,7 @@ public class TimerSlider : RagnarComponent
                         time = enemy.GetComponent<EnemyBoss>().controlledCooldown;
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
+                    if (enemy.GetComponent<EnemyBoss>().state == EnemyState.DEATH) time = 0;
                     break;
 
                 case (int)EnemyType.BASIC:
@@ -83,7 +84,7 @@ public class TimerSlider : RagnarComponent
                         time = enemy.GetComponent<BasicEnemy>().controlledCooldown;
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
-                    
+                    if (enemy.GetComponent<BasicEnemy>().state == EnemyState.DEATH) time = 0;
                     break;
                 case (int)EnemyType.TANK:
                     if (theAction == "distractedTimer")
@@ -103,7 +104,7 @@ public class TimerSlider : RagnarComponent
                         time = enemy.GetComponent<TankEnemy>().controlledCooldown;
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
-                    
+                    if (enemy.GetComponent<TankEnemy>().state == EnemyState.DEATH) time = 0;
                     break;
                 case (int)EnemyType.UNDISTRACTABLE:
                     if (theAction == "distractedTimer")
@@ -115,6 +116,7 @@ public class TimerSlider : RagnarComponent
                     else if (theAction == "stunnedTimer")
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().stunnedTimer;
+                       
                         Newposition = enemy.GetComponent<Transform>().globalPosition;
                         
                         SetTimer(time, Newposition);
@@ -122,8 +124,10 @@ public class TimerSlider : RagnarComponent
                     else if (theAction == "controlledCooldown")
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().controlledCooldown;
+                        
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
+                    if (enemy.GetComponent<UndistractableEnemy>().state==EnemyState.DEATH) time = 0;
                     break;
                 
 
@@ -133,6 +137,7 @@ public class TimerSlider : RagnarComponent
                 InternalCalls.Destroy(gameObject);
             }
         }
+        
     }
 
 }
