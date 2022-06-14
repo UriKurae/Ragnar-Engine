@@ -303,11 +303,12 @@ void SetEmissiveColor(MonoObject* go, MonoObject* color)
 void SetDirectionalLightShadowsEnabled(MonoBoolean* value)
 {
 	app->renderer3D->dirLight->generateShadows = value;
+	app->renderer3D->allShadowsEnabled = value;
 }
 
 MonoBoolean GetDirectionalLightShadowsEnabled()
 {
-	return app->renderer3D->dirLight->generateShadows;
+	return app->renderer3D->allShadowsEnabled;
 }
 
 float GetLightIntensity(MonoObject* go)
