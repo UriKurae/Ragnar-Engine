@@ -443,8 +443,15 @@ public class UndistractableEnemy : RagnarComponent
             else
             {
                 agents.speed = initialSpeed;
-                coneTimer -= Time.deltaTime * retardedFrames;
-                if (coneTimer < 0) coneTimer = 0;
+                if (coneTimer < 0)
+                {
+                    coneTimer = 0;
+                    if (waypoints.Count != 0)
+                        animation.PlayAnimation("Walk");
+                    else
+                        animation.PlayAnimation("Idle");
+                }
+                else if (coneTimer > 0) coneTimer -= Time.deltaTime * retardedFrames;
             }
             if (!canShoot && shootCooldown >= 0)
             {
@@ -497,7 +504,7 @@ public class UndistractableEnemy : RagnarComponent
         {
             //TODO_AUDIO
             audioSource.PlayClip("EBASIC_SHOTGUN");
-            //animation.PlayAnimation("Shoot");
+            animation.PlayAnimation("Shoot");
             canShoot = false;
             shootCooldown = 1f;
             Vector3 pos = gameObject.transform.globalPosition;

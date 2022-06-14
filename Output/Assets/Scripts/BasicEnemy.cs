@@ -470,8 +470,15 @@ public class BasicEnemy : RagnarComponent
             else
             {
                 agents.speed = initialSpeed;
-                coneTimer -= Time.deltaTime * frames;
-                if (coneTimer < 0) coneTimer = 0;
+                if (coneTimer < 0)
+                {
+                    coneTimer = 0;
+                    if (waypoints.Count != 0)
+                        animationComponent.PlayAnimation("Walk");
+                    else
+                        animationComponent.PlayAnimation("Idle");
+                }
+                else if (coneTimer > 0) coneTimer -= Time.deltaTime * retardedFrames;
             }
             if (!canShoot && shootCooldown >= 0)
             {
@@ -566,7 +573,7 @@ public class BasicEnemy : RagnarComponent
         {
             //TODO_AUDIO
             audioComponent.PlayClip("EBASIC_SHOTGUN");
-            //animationComponent.PlayAnimation("Shoot");
+            animationComponent.PlayAnimation("Shoot");
             canShoot = false;
             shootCooldown = 1f;
             Vector3 pos = gameObject.transform.globalPosition;
