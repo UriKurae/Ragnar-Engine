@@ -73,7 +73,9 @@ public class TimerSlider : RagnarComponent
                     else if (theAction == "stunnedTimer")
                     {
                         time = enemy.GetComponent<TankEnemy>().stunnedTimer;
-                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+                        Newposition = enemy.GetComponent<Transform>().globalPosition;
+                        Newposition.y = Newposition.y + 40;
+                        SetTimer(time, Newposition);
                     }
                     else if (theAction == "controlledCooldown")
                     {
@@ -87,11 +89,14 @@ public class TimerSlider : RagnarComponent
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().distractedTimer;
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+
                     }
                     else if (theAction == "stunnedTimer")
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().stunnedTimer;
-                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+                        Newposition = enemy.GetComponent<Transform>().globalPosition;
+                        Newposition.y = Newposition.y + 40;
+                        SetTimer(time, Newposition);
                     }
                     else if (theAction == "controlledCooldown")
                     {
