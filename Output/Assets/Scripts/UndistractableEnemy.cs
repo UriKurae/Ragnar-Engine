@@ -296,7 +296,7 @@ public class UndistractableEnemy : RagnarComponent
             
             controlledCooldown = 10;
             timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, (int)enemyType, "controlledCooldown");
         }
     }
 
@@ -581,6 +581,6 @@ public class UndistractableEnemy : RagnarComponent
         animation.PlayAnimation("Stun");
 
         timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, (int)enemyType, "stunnedTimer");
     }
 }

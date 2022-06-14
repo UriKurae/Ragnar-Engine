@@ -8,7 +8,7 @@ public class TimerSlider : RagnarComponent
     Vector3 Newposition;
     GameObject enemy=null;
     float lastX = 100;
-    EnemyType typeOfEnemy=0;
+    int typeOfEnemy=0;
     string theAction;
     public void Start()
     {
@@ -26,12 +26,12 @@ public class TimerSlider : RagnarComponent
 
         //gameObject.GetComponent<Transform>() = position;
         Newposition = Camera.WorldToScreen(position);
-        Newposition.y= Newposition.y + 70;
+        Newposition.y= Newposition.y + 100;
         Newposition.x = Newposition.x-(x/2);
         gameObject.GetComponent<Transform2D>().position2D= Newposition;
         gameObject.GetComponent<Transform2D>().SetSize(newBounds);
     }
-    public void getGa(GameObject obj,float time,EnemyType enemyTy,string action)
+    public void getGa(GameObject obj,float time,int enemyTy,string action)
     {
         enemy = obj;
         typeOfEnemy = enemyTy;
@@ -46,7 +46,7 @@ public class TimerSlider : RagnarComponent
             float time=0;
             switch (typeOfEnemy)
             {
-                case EnemyType.BASIC:
+                case (int)EnemyType.BASIC:
                     if(theAction== "distractedTimer")
                     {
                         time = enemy.GetComponent<BasicEnemy>().distractedTimer;
@@ -64,7 +64,7 @@ public class TimerSlider : RagnarComponent
                     }
                     
                     break;
-                case EnemyType.TANK:
+                case (int)EnemyType.TANK:
                     if (theAction == "distractedTimer")
                     {
                         time = enemy.GetComponent<TankEnemy>().distractedTimer;
@@ -84,7 +84,7 @@ public class TimerSlider : RagnarComponent
                     }
                     
                     break;
-                case EnemyType.UNDISTRACTABLE:
+                case (int)EnemyType.UNDISTRACTABLE:
                     if (theAction == "distractedTimer")
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().distractedTimer;
@@ -101,6 +101,26 @@ public class TimerSlider : RagnarComponent
                     else if (theAction == "controlledCooldown")
                     {
                         time = enemy.GetComponent<UndistractableEnemy>().controlledCooldown;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+                    }
+                    break;
+                case -1:
+                    if (theAction == "distractedTimer")
+                    {
+                        time = enemy.GetComponent<EnemyBoss>().distractedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+
+                    }
+                    else if (theAction == "stunnedTimer")
+                    {
+                        time = enemy.GetComponent<EnemyBoss>().stunnedTimer;
+                        Newposition = enemy.GetComponent<Transform>().globalPosition;
+                        //Newposition.y = Newposition.y + 40;
+                        SetTimer(time, Newposition);
+                    }
+                    else if (theAction == "controlledCooldown")
+                    {
+                        time = enemy.GetComponent<EnemyBoss>().controlledCooldown;
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     break;

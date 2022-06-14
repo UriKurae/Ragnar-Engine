@@ -392,7 +392,7 @@ public class BasicEnemy : RagnarComponent
                 if (enterDistract)
                 {
                     timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-                    timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, enemyType, "distractedTimer");
+                    timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, (int)enemyType, "distractedTimer");
                     GameObject.Find("Quest System").GetComponent<QuestSystem>().enemiesDistractedStone++;
                     enterDistract = false;
                 }
@@ -552,7 +552,7 @@ public class BasicEnemy : RagnarComponent
         if (flag){
             controlledCooldown = 10;
             timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, (int)enemyType, "controlledCooldown");
         }
         
     }
@@ -649,6 +649,6 @@ public class BasicEnemy : RagnarComponent
         stunnedTimer = timeStunned;
         animationComponent.PlayAnimation("Stun");
         timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, (int)enemyType, "stunnedTimer");
     }
 }

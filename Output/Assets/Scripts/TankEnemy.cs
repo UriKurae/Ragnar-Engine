@@ -292,7 +292,7 @@ public class TankEnemy : RagnarComponent
             controlledCooldown = 10;
 
             timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, enemyType, "controlledCooldown");
+            timerSlider.GetComponent<TimerSlider>().getGa(gameObject, controlledCooldown, (int)enemyType, "controlledCooldown");
         }
     }
 
@@ -369,7 +369,7 @@ public class TankEnemy : RagnarComponent
                 distractedTimer = 5f;
                 Distraction(other.gameObject.transform.globalPosition);
                 timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-                timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, enemyType, "distractedTimer");
+                timerSlider.GetComponent<TimerSlider>().getGa(gameObject, distractedTimer, (int)enemyType, "distractedTimer");
             }
 
             //// Chani =======================================
@@ -582,6 +582,6 @@ public class TankEnemy : RagnarComponent
         stunnedTimer = timeStunned;
         animation.PlayAnimation("Stun");
         timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, enemyType, "stunnedTimer");
+        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, (int)enemyType, "stunnedTimer");
     }
 }
