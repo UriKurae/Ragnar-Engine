@@ -82,6 +82,11 @@ public class BasicEnemy : RagnarComponent
     public Light abilityLight;
 
     GameObject timerSlider;
+
+    GameObject Ability1Bg;
+    GameObject Ability2Bg;
+    GameObject Ability3Bg;
+    GameObject Ability4Bg;
     public void Start()
     {
         // Get all Components
@@ -133,6 +138,12 @@ public class BasicEnemy : RagnarComponent
 
         pointCharacter = GameObject.Find("PlayerReminder").childs[3];
         pointerLight = pointCharacter.GetComponent<Light>();
+
+
+        Ability1Bg = GameObject.Find("Ability1Bg");
+        Ability2Bg = GameObject.Find("Ability2Bg");
+        Ability3Bg = GameObject.Find("Ability3Bg");
+        Ability4Bg = GameObject.Find("Ability4Bg");
     }
     public void OnCreation()
     {
@@ -230,6 +241,13 @@ public class BasicEnemy : RagnarComponent
                 buffTemp = (float)Math.Round((double)buffTemp, 0);
                 buffCounter.text = buffTemp.ToString();
 
+                Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+                Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+                Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+                Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(255, 0, 0);
+                GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = false;
+                GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility4 = false;
+
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN && players.Length > 1) || (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN && players.Length > 2))
                 {
                     pointerLight.intensity = 0;
@@ -238,6 +256,8 @@ public class BasicEnemy : RagnarComponent
                     returning = true;
                     gameObject.EraseChild(circle);
                     buffCounter.text = "";
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility4 = true;
                 }
 
                 controlledCooldown -= Time.deltaTime;
@@ -249,6 +269,8 @@ public class BasicEnemy : RagnarComponent
                     Mathf.dir = 0;
                     controlledCooldown = 0f;
                     buffCounter.text = "";
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility3 = true;
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().canDoAbility4 = true;
                     controlled = false;
                     gameObject.EraseChild(circle);
                     GameObject.Find("PlayerManager").GetComponent<PlayerManager>().ChangeCharacter(0);
