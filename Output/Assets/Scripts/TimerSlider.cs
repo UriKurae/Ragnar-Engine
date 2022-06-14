@@ -22,7 +22,7 @@ public class TimerSlider : RagnarComponent
         float newBound = mult * 100;
 
         float x=lastX - newBound;
-        newBounds.Set(newBound, 15, 0);
+        newBounds.Set(newBound, 7, 0);
 
         //gameObject.GetComponent<Transform>() = position;
         Newposition = Camera.WorldToScreen(position);
@@ -43,53 +43,68 @@ public class TimerSlider : RagnarComponent
     {
         if (enemy != null)
         {
+            float time=0;
             switch (typeOfEnemy)
             {
                 case EnemyType.BASIC:
                     if(theAction== "distractedTimer")
                     {
-                        SetTimer(enemy.GetComponent<BasicEnemy>().distractedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<BasicEnemy>().distractedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
+
                     }else if(theAction == "stunnedTimer")
                     {
-                        SetTimer(enemy.GetComponent<BasicEnemy>().stunnedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<BasicEnemy>().stunnedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     else if(theAction == "controlledCooldown")
                     {
-                        SetTimer(enemy.GetComponent<BasicEnemy>().controlledCooldown, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<BasicEnemy>().controlledCooldown;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     
                     break;
                 case EnemyType.TANK:
                     if (theAction == "distractedTimer")
                     {
-                        SetTimer(enemy.GetComponent<TankEnemy>().distractedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<TankEnemy>().distractedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     else if (theAction == "stunnedTimer")
                     {
-                        SetTimer(enemy.GetComponent<TankEnemy>().stunnedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<TankEnemy>().stunnedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     else if (theAction == "controlledCooldown")
                     {
-                        SetTimer(enemy.GetComponent<TankEnemy>().controlledCooldown, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<TankEnemy>().controlledCooldown;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     
                     break;
                 case EnemyType.UNDISTRACTABLE:
                     if (theAction == "distractedTimer")
                     {
-                        SetTimer(enemy.GetComponent<UndistractableEnemy>().distractedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<UndistractableEnemy>().distractedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     else if (theAction == "stunnedTimer")
                     {
-                        SetTimer(enemy.GetComponent<UndistractableEnemy>().stunnedTimer, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<UndistractableEnemy>().stunnedTimer;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     else if (theAction == "controlledCooldown")
                     {
-                        SetTimer(enemy.GetComponent<UndistractableEnemy>().controlledCooldown, enemy.GetComponent<Transform>().globalPosition);
+                        time = enemy.GetComponent<UndistractableEnemy>().controlledCooldown;
+                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     break;
             }
-            
+            if (time <= 0)
+            {
+                InternalCalls.Destroy(gameObject);
+
+            }
         }
     }
 
