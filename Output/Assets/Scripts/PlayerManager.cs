@@ -929,12 +929,15 @@ public class PlayerManager : RagnarComponent
                 if (playableCharacter.abilities[abilityID].onCooldown || !canDoAbility3)
                     ability3Bg.SetImageGeneralColor(128, 128, 128);
 
+                if (playableCharacter.name == "Paul Atreides" && playableCharacter.abilities[abilityID].charges <= 0)
+                    ability3Bg.SetImageGeneralColor(128, 128, 128);
+
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd3.text = "";
 
                 if (!playableCharacter.abilities[abilityID].onCooldown && canDoAbility3)
                 {
-                    if (playableCharacter.name == "Paul Atreides")
+                    if (playableCharacter.name == "Paul Atreides" && playableCharacter.abilities[abilityID].charges > 0)
                     {
                         ability3Bg.SetImageGeneralColor(11, 212, 0);
                     }
