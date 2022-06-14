@@ -175,6 +175,8 @@ public class pauseMenuButton : RagnarComponent
 	GameObject AbilityRight;
 	GameObject MissButton;
 
+	GameObject SpaceText;
+
 	GameObject enemies;
 	Camera camera;
 
@@ -392,6 +394,7 @@ public class pauseMenuButton : RagnarComponent
 		AbilityRight = GameObject.Find("AbilityRight");
 		MissButton = GameObject.Find("MissButton");
 		enemies= GameObject.Find("EnemyManager");
+		SpaceText = GameObject.Find("SpaceText");
 		GameData load = SaveSystem.LoadGameConfig();
 		if (load != null)
 		{
@@ -2440,20 +2443,22 @@ public class pauseMenuButton : RagnarComponent
 				break;
 		}
 
-
-        if (abiltyfocused != 0)
+		SpaceText.isActive = false;
+		if (abiltyfocused != 0)
         {
 			camera.lockCam = true;
 			FocusedAbilityActivate(selectedPlayer.name, abiltyfocused, y);
             //if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
             GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
 			InternalCalls.RequestScreenRectangle(new Quaternion(0.5f, 0.5f, 0.5f, 0.5f));
-
-            for (int w = 0; w < players.Length; w++)
+			SpaceText.isActive = true;
+			pos.Set(-160, y + 320, -10.400f);
+			SpaceText.GetComponent<Transform2D>().position2D = pos;
+			for (int w = 0; w < players.Length; w++)
             {
                 players[w].GetComponent<Player>().paused = true;
 			}
-            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP || Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP)
+            if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP)
             {
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;

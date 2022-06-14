@@ -76,7 +76,7 @@ public class Boss : RagnarComponent
 	bool grabbedPaul = false;
 	bool throwedPaul = false;
 	bool reachedMiddleLocation = false;
-	float waitToStart = 4.0f;
+	float waitToStart = 2.5f;
 	Vector3 paulLocation;
 	Vector3 throwingLocation;
 	Vector3 throwingLocationMiddle;
@@ -114,6 +114,11 @@ public class Boss : RagnarComponent
 	// Boss UI
 	bool bossActive = false;
 	GameObject life;
+	GameObject shieldBar;
+
+	float coneTimer = 0.0f;
+	float coneMaxTime = 0.5f;
+	int frames = 0;
 
 	public void Start()
 	{
@@ -124,6 +129,9 @@ public class Boss : RagnarComponent
 		rb = gameObject.GetComponent<Rigidbody>();
 
 		life = GameObject.Find("Life");
+		life.GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 70, 0);
+		shieldBar = GameObject.Find("ShieldBar");
+		shieldBar.GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 90, 0);
 
 		animations[0] = "CallBackup";
 		animations[1] = "Die";
@@ -143,7 +151,7 @@ public class Boss : RagnarComponent
 		throwingLocation = new Vector3(0.0f, 9.14f, -63.49f);
 		paulLocation = new Vector3(0.0f, 9.14f, -26.24f);
 		throwingLocationMiddle = new Vector3(0.0f, 9.14f, -39.74f);
-		newBossLocation = new Vector3(0.0f, 9.14f, -65.90f);
+		newBossLocation = new Vector3(0.0f, 9.14f, -70.80f);
 		colliders = GameObject.FindGameObjectsWithTag("Collider");
 		material = gameObject.GetComponent<Material>();
 		state = BossState.PHASE1;
@@ -167,6 +175,7 @@ public class Boss : RagnarComponent
 	}
 	public void Update()
 	{
+		frames++;
 		if (Input.GetKey(KeyCode.N) == KeyState.KEY_DOWN)
 		{
 			state += 1;
@@ -241,7 +250,11 @@ public class Boss : RagnarComponent
 				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.75f;
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
+				
 				life.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_lifebar2.png");
+				shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar1.png");
+				shieldBar.GetComponent<UIImage>().SetImageAlpha(1.0f);
+
 				break;
 			case BossState.PHASE4:
 				if (!shieldInmunity)
@@ -316,12 +329,18 @@ public class Boss : RagnarComponent
 			// Move to new location as soon as phase 2 starts
 			Vector3 destination = waypoints[2].transform.globalPosition;
 
-			if (animationComponent.HasFinished()) animationComponent.PlayAnimation("WalkNormal");
+			if (animationComponent.HasFinished())
+            {
+				animationComponent.PlayAnimation("Run");
+				agent.speed = 15.0f;
+			}
 			agent.MoveTo(destination);
 
 			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 1.0f)
 			{
 				Debug.Log("INmunity false phase 2");
+				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
+				animationComponent.PlayAnimation("WalkNormal");
 				inmunity = false;
 				phase2Location = true;
 			}
@@ -338,46 +357,58 @@ public class Boss : RagnarComponent
 
 			sweepAttackCooldown -= Time.deltaTime;
 
-			if (PerceptionCone(90) && !jumping && sweepAttackCooldown <= 0.0f)
-			{
-				float furthest = 1000.0f;
-
-				for (int i = 0; i < players.Length; ++i)
+			if(frames % 4 == 0)
+            {
+				if (PerceptionCone(90))
 				{
-					// Calculate closest player
-					float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
-					if (distance < furthest)
+					coneTimer += Time.deltaTime * 4;
+					if (!jumping && sweepAttackCooldown <= 0.0f && coneTimer >= coneMaxTime)
 					{
-						indexPlayerTarget = i;
-						furthest = distance;
+						float furthest = 1000.0f;
+
+						for (int i = 0; i < players.Length; ++i)
+						{
+							// Calculate closest player
+							float distance = Math.Abs(players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude);
+							if (distance < furthest)
+							{
+								indexPlayerTarget = i;
+								furthest = distance;
+							}
+						}
+						jumping = true;
+						agent.speed = 25.0f;
+						animationComponent.PlayAnimation("Run");
+					}
+					else if (jumping && !attacking)
+					{
+						if (players[indexPlayerTarget] != null)
+						{
+							agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
+							if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+							{
+								// Play sweep attack animation
+
+								// Play sweep attack sound
+								// Hit player, lower his HP
+								players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
+
+								players[indexPlayerTarget].GetComponent<Player>().stunned = true;
+								players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
+								agent.ClearPath();
+								// TODO: Needs attack animation
+								animationComponent.PlayAnimation("Shield");
+								attacking = true;
+							}
+						}
 					}
 				}
-				jumping = true;
-				agent.speed = 25.0f;
-				animationComponent.PlayAnimation("Run");
-			}
-			else if (jumping && !attacking)
-			{
-				if (players[indexPlayerTarget] != null)
+				else
 				{
-					agent.MoveTo(players[indexPlayerTarget].transform.globalPosition);
-					if (Math.Abs(players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
-					{
-						// Play sweep attack animation
-
-						// Play sweep attack sound
-						// Hit player, lower his HP
-						players[indexPlayerTarget].GetComponent<Rigidbody>().SetBodyPosition(gameObject.transform.globalPosition + (gameObject.transform.forward * 1.5f));
-						
-						players[indexPlayerTarget].GetComponent<Player>().stunned = true;
-						players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
-						agent.ClearPath();
-						// TODO: Needs attack animation
-						animationComponent.PlayAnimation("Shield");
-						attacking = true;
-					}
+					coneTimer -= Time.deltaTime * 4;
+					if (coneTimer < 0) coneTimer = 0;
 				}
-			}
+			}			
 
 			if (attacking && animationComponent.HasFinished())
             {
@@ -403,15 +434,19 @@ public class Boss : RagnarComponent
             // Move to new location as soon as phase 3 starts
             Vector3 destination = new Vector3(0.0f, 9.24f, -58.0f);
 
-           if(animationComponent.HasFinished()) animationComponent.PlayAnimation("WalkNormal");
-
-            agent.MoveTo(destination);
+			if (animationComponent.HasFinished())
+			{
+				animationComponent.PlayAnimation("Run");
+				agent.speed = 15.0f;
+			}
+			agent.MoveTo(destination);
 
 			if (Math.Abs((gameObject.transform.localPosition - destination).magnitude) < 2.0f)
 			{
 				Debug.Log("INmunity false phase 3");
 				inmunity = false;
 				phase3Location = true;
+				agent.speed = GameObject.Find("Player").GetComponent<NavAgent>().speed * 0.5f;
 			}
 
             shieldInmunity = true;
@@ -513,6 +548,7 @@ public class Boss : RagnarComponent
 				if (shieldCooldown <= 0.0f)
 				{
 					shieldCooldown = 10.0f;
+					shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar1.png");
 					shieldInmunity = true;
 					shieldParticles.Play();
 					stunnedHits = 0;
@@ -665,6 +701,7 @@ public class Boss : RagnarComponent
 							players[0].GetComponent<Player>().stunned = false;
 							finishedCinematic = true;
 							inmunity = false;
+							InternalCalls.InstancePrefab("BossColliderPhase4", new Vector3(-0.18f, 12.55f, -66.08f));
 						}
 						waitToStart -= Time.deltaTime;
 					}
@@ -733,6 +770,7 @@ public class Boss : RagnarComponent
 				animationComponent.PlayAnimation("ShieldDestroy");
 			}
 			shieldInmunity = false;
+			shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar0.png");
 			shieldParticles.Pause();
 		}
 	}
@@ -751,7 +789,8 @@ public class Boss : RagnarComponent
 		Vector3 bossForward = gameObject.transform.forward;
 		Vector3 initPos = new Vector3(bossPos.x + (bossForward.x * offset.x * 0.6f), bossPos.y + 0.1f, bossPos.z + (bossForward.z * offset.z * 0.6f));
 
-		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length, "Collider", Time.deltaTime);
+		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length, "Collider", coneTimer / coneMaxTime);
+		if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
 		return (index == -1) ? false : true;
 	}
 
@@ -816,6 +855,8 @@ public class Boss : RagnarComponent
 			// Reset Cooldown
 			sweepAttackCooldown = 5.0f;
 
+			InternalCalls.RequestDamageFeedback();
+
 			bossAttack = true;
 		}
 	}
@@ -839,6 +880,11 @@ public class Boss : RagnarComponent
             {
 				Debug.Log("BACKSTABBED");
 				animationComponent.PlayAnimation("Die");
+			}
+
+			if (state == BossState.PHASE3)
+            {
+				shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar0.png");
 			}
 			stabParticles.Play();
 			hitted = true;

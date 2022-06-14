@@ -38,7 +38,7 @@ public class Trap : RagnarComponent
         if (canReload) ReloadTrap();
         if (pendingToDelete)
         {
-            InternalCalls.Destroy(popUp);
+            if (popUp != null) InternalCalls.Destroy(popUp);
             InternalCalls.Destroy(gameObject);
         }
     }
