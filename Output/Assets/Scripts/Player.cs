@@ -184,6 +184,7 @@ public class Player : RagnarComponent
 
                         if (abilityState == State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && !stunned)
                         {
+                            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().buffered = false;
                             if (agent.CalculatePath(agent.hitPosition).Length > 0)
                             {
                                 pointCharacter.transform.globalPosition = agent.hitPosition;

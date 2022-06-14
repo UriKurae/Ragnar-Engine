@@ -30,6 +30,7 @@ public class PlayerManager : RagnarComponent
     public bool canDoAbility2 = true;
     public bool canDoAbility3 = true;
     public bool canDoAbility4 = true;
+    public bool canMove = true;
 
     public float radius;
 
@@ -39,7 +40,9 @@ public class PlayerManager : RagnarComponent
 
     private int bufferedCharacter;
     private int bufferedAbility;
-    private bool buffered = false;
+    public bool buffered = false;
+
+    public Vector3 tempPosition;
     public void Start()
     {
         foreach (Characters c in characters)
@@ -529,6 +532,14 @@ public class PlayerManager : RagnarComponent
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
             Input.SetCursorState((int)CursorState.NORMAL);
+            GameObject levelManager = GameObject.Find("LevelManager");
+
+            if (levelManager.GetComponent<Level_1>().ToString() == "Level_1")
+                tempPosition = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+            else if (levelManager.GetComponent<Level_2>().ToString() == "Level_2")
+                tempPosition = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
+            else
+                tempPosition = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
 
             if (playableCharacter.state == State.CARRYING)
             {
