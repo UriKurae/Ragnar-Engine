@@ -22,70 +22,51 @@ public class DialogueTrigger : RagnarComponent
         switch (dialogueId)
         {
             case 0:
-                if (isUsed)
-                    if (dialogueManager.GetEndDialogue())
-                    {
-                        isUsed = false;
-                        ActiveDialoguebyID(2);
-                    }
-                    break;
+                
+                break;
             case 1:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
+                
                 break;
             case 2:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
-                break;
-            case 3:
-                if (isUsed)
-                    if (dialogueManager.GetEndDialogue())
-                    {
-                        isUsed = false;
-                        ActiveDialoguebyID(4);
-                    }
-                break;
-            case 4:
                 if (isUsed)
                     LoadSceneWin();
                 break;
+            case 3:
+                
+                break;
+            case 4:
+               
             case 5:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
+                if (isUsed)
+                    LoadSceneWin();
                 break;
             case 6:
-                if (dialogueManager.GetEndDialogue())
-                {
-                    isUsed = false;
-                    ActiveDialoguebyID(7);
-                }
+             
                 break;
             case 7:
-                if (dialogueManager.GetEndDialogue())
-                {
-                    isUsed = false;
-                    ActiveDialoguebyID(8);
-                }
+               
                 break;
             case 8:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
+                
                 break;
             case 9:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
-                break;
-            case 10:
                 if (isUsed)
                     LoadSceneWin();
                 break;
+            case 10:
+              
             case 11:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
+                
                 break;
             case 12:
                 // Gameplay
-                InternalCalls.Destroy(gameObject);
+                
                 break;
             default:
                 break;
@@ -105,7 +86,7 @@ public class DialogueTrigger : RagnarComponent
             GameObject.Find("Quest System").GetComponent<QuestSystem>().SaveMissions();
             Debug.Log("Holaaaaa");
             SceneManager.LoadScene("WinScene");
-            InternalCalls.Destroy(gameObject);
+            
         }
     }
     public void ActiveDialogue()
@@ -129,3 +110,10 @@ public class DialogueTrigger : RagnarComponent
     public bool GetUsed() { return isUsed; }
     public void SetUsed(bool used) { isUsed = used; }
 }
+
+
+
+/* ESTO DEBE ESTAR EN EL CÓDIGO DEL BOSS CUANDO MUERA
+   GameObject.Find("Quest System").GetComponent<QuestSystem>().levelFinished = true;
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(9);
+ */
