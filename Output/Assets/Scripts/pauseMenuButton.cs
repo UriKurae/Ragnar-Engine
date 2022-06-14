@@ -131,7 +131,6 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject UIBVoiceNum;
 	GameObject UIBCamoNum;
-	GameObject UIBVoiceImg;
 	GameObject UIBCamoImg;
 
 	GameObject UICharPhoto;
@@ -338,7 +337,6 @@ public class pauseMenuButton : RagnarComponent
 
 		UIBVoiceNum = GameObject.Find("UIBVoiceNum");
 		UIBCamoNum = GameObject.Find("UIBCamoNum");
-		UIBVoiceImg = GameObject.Find("UIBVoiceImg");
 		UIBCamoImg = GameObject.Find("UIBCamoImg");
 
 		AbilityBord = GameObject.Find("AbilImage");
@@ -1397,7 +1395,6 @@ public class pauseMenuButton : RagnarComponent
 			UICrouch.isActive = false;
 			UIBVoiceNum.isActive = false;
 			UIBCamoNum.isActive = false;
-			UIBVoiceImg.isActive = false;
 			UIBCamoImg.isActive = false;
 		}
         else
@@ -1437,8 +1434,7 @@ public class pauseMenuButton : RagnarComponent
 			cd3.isActive = true;
 			cd4.isActive = true;
 			UIBVoiceNum.isActive = true;
-			UIBCamoNum.isActive = false;
-			UIBVoiceImg.isActive = true;
+			UIBCamoNum.isActive = true;
 			UIBCamoImg.isActive = false;
 		}
 
@@ -1556,11 +1552,11 @@ public class pauseMenuButton : RagnarComponent
 		pos.Set(-61.5f, y - 60, -10.400f);
 		AbilityBG2.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-65f, y + 35, -10.400f);
-		UIBVoiceNum.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-69f, y + 25, -10.400f);
+		UIBCamoNum.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-61.5f, y + 38, -10.400f);
-		UIBVoiceImg.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-62f, y + 32, -10.400f);
+		UIBCamoImg.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(46.5f, y - 60, -10.400f);
 		AbilityBG3.GetComponent<Transform2D>().position2D = pos;
