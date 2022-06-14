@@ -76,7 +76,7 @@ public class Boss : RagnarComponent
 	bool grabbedPaul = false;
 	bool throwedPaul = false;
 	bool reachedMiddleLocation = false;
-	float waitToStart = 4.0f;
+	float waitToStart = 2.5f;
 	Vector3 paulLocation;
 	Vector3 throwingLocation;
 	Vector3 throwingLocationMiddle;
@@ -151,7 +151,7 @@ public class Boss : RagnarComponent
 		throwingLocation = new Vector3(0.0f, 9.14f, -63.49f);
 		paulLocation = new Vector3(0.0f, 9.14f, -26.24f);
 		throwingLocationMiddle = new Vector3(0.0f, 9.14f, -39.74f);
-		newBossLocation = new Vector3(0.0f, 9.14f, -65.90f);
+		newBossLocation = new Vector3(0.0f, 9.14f, -70.80f);
 		colliders = GameObject.FindGameObjectsWithTag("Collider");
 		material = gameObject.GetComponent<Material>();
 		state = BossState.PHASE1;
@@ -701,6 +701,7 @@ public class Boss : RagnarComponent
 							players[0].GetComponent<Player>().stunned = false;
 							finishedCinematic = true;
 							inmunity = false;
+							InternalCalls.InstancePrefab("BossColliderPhase4", new Vector3(-0.18f, 12.55f, -66.08f));
 						}
 						waitToStart -= Time.deltaTime;
 					}
