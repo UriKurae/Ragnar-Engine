@@ -58,8 +58,6 @@ public class AirEnemy : RagnarComponent
     ParticleSystem deathPartSys;
     public bool canLookOut = false;
     int retardedFrames;
-
-    GameObject timerSlider;
     public void Start()
     {
         // Get components
@@ -354,7 +352,5 @@ public class AirEnemy : RagnarComponent
         stunned = true;
         stunnedTimer = timeStunned;
         animationComponent.PlayAnimation("Idle");
-        timerSlider = InternalCalls.InstancePrefab("TimerP", gameObject.transform.globalPosition);
-        timerSlider.GetComponent<TimerSlider>().getGa(gameObject, stunnedTimer, (int)enemyType, "stunnedTimer");
     }
 }

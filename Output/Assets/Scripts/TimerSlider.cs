@@ -125,22 +125,7 @@ public class TimerSlider : RagnarComponent
                         SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
                     }
                     break;
-                case (int)EnemyType.AIR:
-
-                    if (theAction == "distractedTimer")
-                    {
-                        time = enemy.GetComponent<AirEnemy>().distractedTimer;
-                        SetTimer(time, enemy.GetComponent<Transform>().globalPosition);
-
-                    }
-                    else if (theAction == "stunnedTimer")
-                    {
-                        time = enemy.GetComponent<AirEnemy>().stunnedTimer;
-                        Newposition = enemy.GetComponent<Transform>().globalPosition;
-                        
-                        SetTimer(time, Newposition);
-                    }
-                    break;
+                
 
             }
             if (time <= 0)
