@@ -67,6 +67,7 @@ public class Boss : RagnarComponent
 	float barrelCooldown = 0.0f;
 	bool shieldInmunity = false;
 	bool phase3Location = false;
+	bool barrelHit = false;
 
 	private int destPoint = 0;
 
@@ -87,6 +88,7 @@ public class Boss : RagnarComponent
 	float shieldCooldown = 10.0f;
 	float tiredCooldown = 10.0f;
 	float throwRockTiming = 2.5f;
+	
 	bool rocksAvailable = false;
 	bool rocksFalling = false;
 	bool throwingRocks = false;
@@ -109,7 +111,7 @@ public class Boss : RagnarComponent
 	bool attacking = false;
 
 	string[] animations = new string[14];
-	//int indexAnim = 0;
+	int indexAnim = 0;
 
 	// Boss UI
 	bool bossActive = false;
@@ -133,20 +135,25 @@ public class Boss : RagnarComponent
 		shieldBar = GameObject.Find("ShieldBar");
 		shieldBar.GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 90, 0);
 
-		animations[0] = "CallBackup";
-		animations[1] = "Die";
-		animations[2] = "Execdie";
-		animations[3] = "Exhausted";
-		animations[4] = "HitGround";
-		animations[5] = "Ntoa";
-		animations[6] = "Run";
-		animations[7] = "Shield";
-		animations[8] = "ShieldDestroy";
-		animations[9] = "ShotCrazy";
-		animations[10] = "SitIdle";
-		animations[11] = "Throw";
-		animations[12] = "WalkAngry";
-		animations[13] = "WalkNormal";
+		animations[0] = "Attack";
+		animations[1] = "ChargeStart";
+		animations[2] = "ChargeIdle";
+		animations[3] = "SprintHit";
+		animations[4] = "Hit";
+		animations[5] = "Idle";
+		animations[6] = "Standup";
+		//animations[3] = "Exhausted";
+		//animations[4] = "HitGround";
+		//animations[5] = "Ntoa";
+		//animations[6] = "Run";
+		//animations[7] = "Shield";
+		//animations[8] = "ShieldDestroy";
+		//animations[9] = "ShotCrazy";
+		//animations[10] = "SitIdle";
+		//animations[11] = "Throw";
+		//animations[12] = "WalkAngry";
+		//animations[13] = "WalkNormal";
+		//animations[13] = "";
 
 		throwingLocation = new Vector3(0.0f, 9.14f, -63.49f);
 		paulLocation = new Vector3(0.0f, 9.14f, -26.24f);
@@ -218,18 +225,18 @@ public class Boss : RagnarComponent
 			}
 		}
 
-		//if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
-		//{
-		//	string anim = animations[indexAnim];
-		//	gameObject.GetComponent<Animation>().PlayAnimation(anim);
-		//	indexAnim++;
-		//	//GenerateEnemies();
-		//	if (indexAnim == 14)
-		//	{
-		//		indexAnim = 0;
-		//	}
+		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
+		{
+			string anim = animations[indexAnim];
+			gameObject.GetComponent<Animation>().PlayAnimation(anim);
+			indexAnim++;
+			//GenerateEnemies();
+			if (indexAnim == 7)
+			{
+				indexAnim = 0;
+			}
 
-		//}
+		}
 
 	}
 
@@ -397,7 +404,7 @@ public class Boss : RagnarComponent
 								players[indexPlayerTarget].GetComponent<NavAgent>().ClearPath();
 								agent.ClearPath();
 								// TODO: Needs attack animation
-								animationComponent.PlayAnimation("Shield");
+								animationComponent.PlayAnimation("Attack");
 								attacking = true;
 							}
 						}
@@ -485,7 +492,7 @@ public class Boss : RagnarComponent
 						{
 							charging = true;
 							agent.speed = 30.0f;
-							animationComponent.PlayAnimation("Run");
+							animationComponent.PlayAnimation("ChargeStart");
 							agent.CalculatePath(playerPos);
 						}
 					//}
@@ -496,7 +503,7 @@ public class Boss : RagnarComponent
 				}
 				else if (charging && !attacking)
 				{
-					
+					if (animationComponent.HasFinished()) animationComponent.PlayAnimation("ChargeIdle");
 					agent.MovePath();
 					//agent.MoveTo(playerPos);
 					Vector3 playerCurrentPos = players[0].transform.globalPosition;
@@ -521,7 +528,7 @@ public class Boss : RagnarComponent
 						players[0].GetComponent<Player>().stunned = true;
 						players[0].GetComponent<NavAgent>().ClearPath();
 						attacking = true;
-						animationComponent.PlayAnimation("Shield");
+						animationComponent.PlayAnimation("Attack");
 					}
 					playerPos.y = 0;
 					if (Math.Abs((playerPos - bossCurrentPos).magnitude) <= 1.2f)
@@ -531,6 +538,7 @@ public class Boss : RagnarComponent
 						agent.speed = players[0].GetComponent<NavAgent>().speed * 0.75f;
 						charging = false;
 						agent.ClearPath();
+						animationComponent.PlayAnimation("ChargeEnd");
 						cooldownCharge = 4.0f;	
 					}
 				}
@@ -607,25 +615,27 @@ public class Boss : RagnarComponent
             }
 			else if (tired == false && throwedRocks < 5 && rocksAvailable == false && !throwing)
 			{
-				if (nextRock == null)
-				{
-					for (int i = 0; i < 5; ++i)
+				
+					if (nextRock == null)
 					{
-						string rockPrefab = "Rock" + (i + 1);
-						nextRock = GameObject.Find(rockPrefab);
-						if (nextRock != null)
+						for (int i = 0; i < 5; ++i)
 						{
-							animationComponent.PlayAnimation("WalkAngry");
-							break;
+							string rockPrefab = "Rock" + (i + 1);
+							nextRock = GameObject.Find(rockPrefab);
+							if (nextRock != null)
+							{
+								animationComponent.PlayAnimation("WalkAngry");
+								break;
+							}
 						}
 					}
-				}
-				else
-				{
-					Vector3 dest = nextRock.transform.localPosition;
-					dest.y = gameObject.transform.localPosition.y;
-					agent.MoveTo(dest);
-				}
+					else
+					{
+						Vector3 dest = nextRock.transform.localPosition;
+						dest.y = gameObject.transform.localPosition.y;
+						agent.MoveTo(dest);
+					} 
+				
 			}
 			else if (tired == false && throwedRocks == 5)
             {
@@ -765,13 +775,18 @@ public class Boss : RagnarComponent
 	{
 		if (stunnedHits == 1)
 		{
-			if (animationComponent.HasFinished())
+			if (!barrelHit && animationComponent.HasFinished())
+			{
+				animationComponent.PlayAnimation("SprintHit");
+				barrelHit = true;
+			}
+			else if (barrelHit && animationComponent.HasFinished())
 			{
 				animationComponent.PlayAnimation("ShieldDestroy");
+				shieldInmunity = false;
+				shieldParticles.Pause();
+				stunnedHits = 0;
 			}
-			shieldInmunity = false;
-			shieldBar.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_boss_shieldbar0.png");
-			shieldParticles.Pause();
 		}
 	}
 
@@ -806,7 +821,7 @@ public class Boss : RagnarComponent
 		{
 			Debug.Log("Stopped");
 			bossStop = true;
-			animationComponent.PlayAnimation("Shield");
+			animationComponent.PlayAnimation("Idle");
 		}
 		else if (!bossStop)
 		{
@@ -847,7 +862,7 @@ public class Boss : RagnarComponent
 		if (players[0] != null && Math.Abs((players[0].transform.globalPosition - gameObject.transform.globalPosition).magnitude) <= 1.5f)
 		{
 			// Play sweep attack animation
-			animationComponent.PlayAnimation("Shield");
+			animationComponent.PlayAnimation("Attack");
 			// Play sweep attack sound
 			Debug.Log("SWEEP ATTACK");
 			// Hit player, lower his HP
@@ -866,12 +881,11 @@ public class Boss : RagnarComponent
 		Debug.Log(inmunity.ToString());
 		if (!shieldInmunity && !inmunity)
 		{
-			// Oriol aqui es lo del standup
-			//if (state == BossState.PHASE1)
-			//{
-			//	animationComponent.PlayAnimation("Standup");
-			//}
-			if (state == BossState.PHASE4)
+			if (state == BossState.PHASE1)
+			{
+				animationComponent.PlayAnimation("Standup");
+			}
+			else if (state == BossState.PHASE4)
             {
 				Debug.Log("EEEEE");
 				animationComponent.PlayAnimation("Execdie");
@@ -879,7 +893,7 @@ public class Boss : RagnarComponent
 			else
             {
 				Debug.Log("BACKSTABBED");
-				animationComponent.PlayAnimation("Die");
+				animationComponent.PlayAnimation("Hit");
 			}
 
 			if (state == BossState.PHASE3)
@@ -895,7 +909,7 @@ public class Boss : RagnarComponent
 		if (other.gameObject.name == "BackStab" && !shieldInmunity)
 		{
 			state++;
-			animationComponent.PlayAnimation("Die");
+			animationComponent.PlayAnimation("Hit");
 			hitted = true;
 			if (state == BossState.PHASE4)
 			{

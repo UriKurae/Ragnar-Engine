@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 796243992,
+                    "pointer": 437267752,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -10.138480186462402,
+                        -11.614737510681152,
                         0,
-                        82.523361206054688
+                        86.241012573242188
                     ],
                     "Quaternion": [
                         0,
-                        0.95512866973876953,
+                        0.98219245672225952,
                         0,
-                        0.29619115591049194
+                        0.18787769973278046
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.60140478610992432,
+                        0.37800183892250061,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -207,12 +207,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 230,
-                    "Vertical Fov": 0.40506687760353088,
+                    "Vertical Fov": 0.41793009638786316,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -38.429286956787109,
+                        -30.068428039550781,
                         55,
-                        123.75152587890625
+                        132.71243286132813
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -222,14 +222,14 @@
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -10.138480186462402,
+                        -11.614737510681152,
                         0,
-                        82.523361206054688
+                        86.241012573242188
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 145.54203796386719,
+                    "Horizontal Angle": 158.34208679199219,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -370,7 +370,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -404,7 +404,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 796242320,
+                    "pointer": 437264560,
                     "type": 4,
                     "componentTable": 0,
                     "isOptions": false,
@@ -446,7 +446,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -585,7 +585,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -724,7 +724,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -863,7 +863,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -929,7 +929,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -995,7 +995,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1061,7 +1061,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1200,7 +1200,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1607,7 +1607,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1678,7 +1678,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1749,7 +1749,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1820,7 +1820,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1855,764 +1855,6 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1724506246,
-            "Parent UUID": 417171234,
-            "Name": "Boss",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        4,
-                        9.2446231842041016,
-                        -58
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/CharacterTex\/nme_boss_basecolor.png",
-                    "Normal Map Path": "Assets\/Resources\/CharacterTex\/nme_boss_nomal2.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/nme_boss_walknormal__Mesh.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Boss",
-                    "pointer": 796258128,
-                    "type": 4,
-                    "componentTable": 0,
-                    "state": 0,
-                    "index": 0,
-                    "colliders": 0,
-                    "barrelLocations": 197865016,
-                    "barrelCount": 0,
-                    "stunnedHits": 0,
-                    "charging": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "fActivation": true,
-                    "Mass": 70,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "Radius": 0.5,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "WalkNormal",
-                    "Animations": [
-                        {
-                            "State": "CallBackup",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_callbackup__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Die",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_die__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Execdie",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_execdie__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Exhausted",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_exhausted__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "HitGround",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_hitground__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Ntoa",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_ntoa__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Run",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_run__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shield",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shield__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "ShieldDestroy",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shielddestroy__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "ShotCrazy",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shotcrazy__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "SitIdle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sitidle__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Throw",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_throw__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "WalkAngry",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_walkangry__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "WalkNormal",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_walknormal__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 787600465,
-            "Parent UUID": 1724506246,
-            "Name": "StabParticlesBoss",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        2.1957550048828125,
-                        -0.30602645874023438
-                    ],
-                    "Quaternion": [
-                        -0.7083771824836731,
-                        0,
-                        0,
-                        0.70583409070968628
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1.0000005960464478,
-                        1.0000005960464478
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        4,
-                        11.440378189086914,
-                        -58.306026458740234
-                    ],
-                    "MaxDuration": 0.78899997472763062,
-                    "Looping": false,
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 200,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.004999999888241291,
-                            "Emitter: Current Timer": 0.004999999888241291,
-                            "Emitter: Is Cubical": false,
-                            "Cubical: Spread on X": 2,
-                            "Cubical: Spread on Y": 2,
-                            "Cubical: Spread on Z": 2,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0.10000000149011612,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 1,
-                            "Tiles: X": 1,
-                            "Tiles: Y": 1,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.10000000149011612,
-                                    "PES: End size": 1,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                },
-                                {
-                                    "PEShape: Offset X": 0,
-                                    "PEShape: Offset Y": 0,
-                                    "PEShape: Offset Z": 0,
-                                    "PEShape: Shape Type": 2,
-                                    "PESpawnCone: Radius": 0.5,
-                                    "PESpawnCone: Height": 1,
-                                    "Effect Type": 4
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 50,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.019999999552965164,
-                            "Emitter: Current Timer": 0.0039999987930059433,
-                            "Emitter: Is Cubical": false,
-                            "Cubical: Spread on X": 2,
-                            "Cubical: Spread on Y": 2,
-                            "Cubical: Spread on Z": 2,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0.10000000149011612,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 1,
-                            "Tiles: X": 1,
-                            "Tiles: Y": 1,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.10000000149011612,
-                                    "PES: End size": 1,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                },
-                                {
-                                    "PEShape: Offset X": 0,
-                                    "PEShape: Offset Y": 0,
-                                    "PEShape: Offset Z": 0,
-                                    "PEShape: Shape Type": 2,
-                                    "PESpawnCone: Radius": 0.5,
-                                    "PESpawnCone: Height": 1,
-                                    "Effect Type": 4
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 200,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.004999999888241291,
-                            "Emitter: Current Timer": 0.004999999888241291,
-                            "Emitter: Is Cubical": false,
-                            "Cubical: Spread on X": 2,
-                            "Cubical: Spread on Y": 2,
-                            "Cubical: Spread on Z": 2,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0.10000000149011612,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 1,
-                            "Tiles: X": 1,
-                            "Tiles: Y": 1,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.10000000149011612,
-                                    "PES: End size": 1,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                },
-                                {
-                                    "PEShape: Offset X": 0,
-                                    "PEShape: Offset Y": 0,
-                                    "PEShape: Offset Z": 0,
-                                    "PEShape: Shape Type": 2,
-                                    "PESpawnCone: Radius": 0.5,
-                                    "PESpawnCone: Height": 1,
-                                    "Effect Type": 4
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 50,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.019999999552965164,
-                            "Emitter: Current Timer": 0.0039999987930059433,
-                            "Emitter: Is Cubical": false,
-                            "Cubical: Spread on X": 2,
-                            "Cubical: Spread on Y": 2,
-                            "Cubical: Spread on Z": 2,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0.10000000149011612,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 1,
-                            "Tiles: X": 1,
-                            "Tiles: Y": 1,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.10000000149011612,
-                                    "PES: End size": 1,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        1,
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                },
-                                {
-                                    "PEShape: Offset X": 0,
-                                    "PEShape: Offset Y": 0,
-                                    "PEShape: Offset Z": 0,
-                                    "PEShape: Shape Type": 2,
-                                    "PESpawnCone: Radius": 0.5,
-                                    "PESpawnCone: Height": 1,
-                                    "Effect Type": 4
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 2019833962,
-            "Parent UUID": 1724506246,
-            "Name": "BossShieldParticles",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        1.1375083923339844,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        4,
-                        10.382131576538086,
-                        -58
-                    ],
-                    "MaxDuration": 0,
-                    "Looping": true,
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 100,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.0099999997764825821,
-                            "Emitter: Current Timer": 0.0099999997764825821,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 0.60000002384185791,
-                            "Cubical: Spread on Y": 1.7999999523162842,
-                            "Cubical: Spread on Z": 0.60000002384185791,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 0.10000000149011612,
-                            "Tiles: X": 5,
-                            "Tiles: Y": 2,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.5,
-                                    "PES: End size": 0.5,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0.5675055980682373,
-                                        1,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0.92448520660400391,
-                                        1,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 200,
-                            "Emitter: Particles Per Second": 100,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.0099999997764825821,
-                            "Emitter: Current Timer": 0.0099999997764825821,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 0.60000002384185791,
-                            "Cubical: Spread on Y": 1.7999999523162842,
-                            "Cubical: Spread on Z": 0.60000002384185791,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Direction": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 1,
-                            "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 0.10000000149011612,
-                            "Tiles: X": 5,
-                            "Tiles: Y": 2,
-                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0.5,
-                                    "PES: End size": 0.5,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0.5675055980682373,
-                                        1,
-                                        1
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0.92448520660400391,
-                                        1,
-                                        1
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        }
-                    ]
                 }
             ]
         },
@@ -2688,7 +1930,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2754,7 +1996,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2820,7 +2062,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2959,7 +2201,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3025,7 +2267,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3164,7 +2406,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3303,7 +2545,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3369,7 +2611,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3508,7 +2750,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3574,7 +2816,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3713,7 +2955,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3779,7 +3021,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3867,7 +3109,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3955,7 +3197,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4043,7 +3285,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4114,7 +3356,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4185,7 +3427,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4210,7 +3452,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4298,7 +3540,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4323,7 +3565,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4411,7 +3653,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4436,7 +3678,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4524,7 +3766,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4549,7 +3791,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4637,7 +3879,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4797,7 +4039,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4868,7 +4110,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4939,7 +4181,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5010,7 +4252,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5149,7 +4391,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5288,7 +4530,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5427,7 +4669,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5566,7 +4808,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5705,7 +4947,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5844,7 +5086,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5983,7 +5225,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6122,7 +5364,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6261,7 +5503,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6400,7 +5642,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6539,7 +5781,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6678,7 +5920,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6817,7 +6059,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6956,7 +6198,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7095,7 +6337,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7234,7 +6476,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7373,7 +6615,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7512,7 +6754,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7651,7 +6893,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7790,7 +7032,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7929,7 +7171,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8068,7 +7310,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8207,7 +7449,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8346,7 +7588,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8742,7 +7984,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        5.1778945922851562,
+                        5.1778945922851563,
                         9.5877904891967773,
                         31.956098556518555
                     ],
@@ -9614,7 +8856,7 @@
                     "Position": [
                         4.8114080429077148,
                         1.1470737457275391,
-                        54.863174438476562
+                        54.863174438476563
                     ],
                     "Quaternion": [
                         0,
@@ -9680,7 +8922,7 @@
                     "Position": [
                         -4.7900114059448242,
                         1.1470737457275391,
-                        54.863174438476562
+                        54.863174438476563
                     ],
                     "Quaternion": [
                         0,
@@ -9981,7 +9223,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        28.913650512695312,
+                        28.913650512695313,
                         10.299989700317383,
                         -18.574617385864258
                     ],
@@ -10049,7 +9291,7 @@
                     "Position": [
                         24.906341552734375,
                         10.299989700317383,
-                        -14.350418090820312
+                        -14.350418090820313
                     ],
                     "Quaternion": [
                         0,
@@ -10724,7 +9966,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -0.22806167602539062,
+                        -0.22806167602539063,
                         -17.336030960083008,
                         86.821784973144531
                     ],
@@ -11875,7 +11117,7 @@
                     "Position": [
                         -24.159458160400391,
                         10.213509559631348,
-                        -24.447463989257812
+                        -24.447463989257813
                     ],
                     "Quaternion": [
                         0,
@@ -12441,7 +11683,7 @@
                     "Active": true,
                     "Position": [
                         13.904697418212891,
-                        1.1811904907226562,
+                        1.1811904907226563,
                         27.098545074462891
                     ],
                     "Quaternion": [
@@ -12640,7 +11882,7 @@
                     "Position": [
                         -14.74965763092041,
                         1.1811902523040771,
-                        56.314773559570312
+                        56.314773559570313
                     ],
                     "Quaternion": [
                         0,
@@ -13537,7 +12779,7 @@
                     "Position": [
                         11.011082649230957,
                         5.0660724639892578,
-                        15.840469360351562
+                        15.840469360351563
                     ],
                     "Quaternion": [
                         0,
@@ -13603,7 +12845,7 @@
                     "Position": [
                         -11.547697067260742,
                         5.0660724639892578,
-                        15.840469360351562
+                        15.840469360351563
                     ],
                     "Quaternion": [
                         0,
@@ -13735,7 +12977,7 @@
                     "Position": [
                         -11.547697067260742,
                         5.0660724639892578,
-                        50.571853637695312
+                        50.571853637695313
                     ],
                     "Quaternion": [
                         0,
@@ -13801,7 +13043,7 @@
                     "Position": [
                         4.8026103973388672,
                         5.0660724639892578,
-                        50.839370727539062
+                        50.839370727539063
                     ],
                     "Quaternion": [
                         0,
@@ -13867,7 +13109,7 @@
                     "Position": [
                         -4.7988085746765137,
                         5.0660724639892578,
-                        50.839370727539062
+                        50.839370727539063
                     ],
                     "Quaternion": [
                         0,
@@ -14368,7 +13610,7 @@
                     "Position": [
                         -13.440224647521973,
                         -8.455164909362793,
-                        95.714553833007812
+                        95.714553833007813
                     ],
                     "Quaternion": [
                         0,
@@ -14500,7 +13742,7 @@
                     "Position": [
                         13.68184757232666,
                         -8.3912687301635742,
-                        79.078811645507812
+                        79.078811645507813
                     ],
                     "Quaternion": [
                         0,
@@ -14896,7 +14138,7 @@
                     "Position": [
                         6.3273811340332031,
                         -8.3912677764892578,
-                        100.46560668945312
+                        100.46560668945313
                     ],
                     "Quaternion": [
                         0,
@@ -15331,7 +14573,7 @@
                     "Position": [
                         -8.9245595932006836,
                         8.734562873840332,
-                        -39.351455688476562
+                        -39.351455688476563
                     ],
                     "Quaternion": [
                         0,
@@ -15397,7 +14639,7 @@
                     "Position": [
                         8.5180120468139648,
                         8.734562873840332,
-                        -39.351455688476562
+                        -39.351455688476563
                     ],
                     "Quaternion": [
                         0,
@@ -15661,7 +14903,7 @@
                     "Position": [
                         17.758607864379883,
                         8.734562873840332,
-                        -10.346023559570312
+                        -10.346023559570313
                     ],
                     "Quaternion": [
                         0,
@@ -16030,7 +15272,7 @@
                     "Position": [
                         13.440780639648438,
                         -8.1791505813598633,
-                        98.176101684570312
+                        98.176101684570313
                     ],
                     "Quaternion": [
                         0,
@@ -16529,8 +15771,8 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        20.695449829101562,
-                        6.2069473266601562,
+                        20.695449829101563,
+                        6.2069473266601563,
                         -1.2541694641113281
                     ],
                     "Quaternion": [
@@ -16662,7 +15904,7 @@
                     "Active": true,
                     "Position": [
                         -20.984922409057617,
-                        6.2069473266601562,
+                        6.2069473266601563,
                         -1.2541694641113281
                     ],
                     "Quaternion": [
@@ -17361,7 +16603,7 @@
                     "Active": true,
                     "Position": [
                         4,
-                        7.5712661743164062,
+                        7.5712661743164063,
                         -30.038213729858398
                     ],
                     "Quaternion": [
@@ -17602,7 +16844,7 @@
                     "Position": [
                         0.014296293258666992,
                         6.3631048202514648,
-                        27.177322387695312
+                        27.177322387695313
                     ],
                     "Quaternion": [
                         0.20323620736598969,
@@ -17670,7 +16912,7 @@
                     "Active": true,
                     "Position": [
                         -16.322591781616211,
-                        11.167984008789062,
+                        11.167984008789063,
                         -51.987155914306641
                     ],
                     "Quaternion": [
@@ -18015,7 +17257,7 @@
                     "Active": true,
                     "Position": [
                         15.827630043029785,
-                        11.167984008789062,
+                        11.167984008789063,
                         -51.911434173583984
                     ],
                     "Quaternion": [
@@ -18625,7 +17867,7 @@
                     "Position": [
                         4.0927610397338867,
                         0.65302383899688721,
-                        -107.35366821289062
+                        -107.35366821289063
                     ],
                     "Quaternion": [
                         0,
@@ -18757,7 +17999,7 @@
                     "Position": [
                         -9.5718059539794922,
                         -16.852100372314453,
-                        119.78079223632812
+                        119.78079223632813
                     ],
                     "Quaternion": [
                         0,
@@ -18889,7 +18131,7 @@
                     "Position": [
                         9.5806884765625,
                         -16.852100372314453,
-                        119.78079223632812
+                        119.78079223632813
                     ],
                     "Quaternion": [
                         0,
@@ -19613,7 +18855,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        128.16616821289062,
+                        128.16616821289063,
                         11.613473892211914,
                         -177.00230407714844
                     ],
@@ -19679,7 +18921,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        96.605117797851562,
+                        96.605117797851563,
                         -14.798437118530273,
                         -78.913764953613281
                     ],
@@ -20075,7 +19317,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -67.510330200195312,
+                        -67.510330200195313,
                         -12.989230155944824,
                         -5.9658794403076172
                     ],
@@ -20141,7 +19383,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -85.630081176757812,
+                        -85.630081176757813,
                         -14.565145492553711,
                         110.31975555419922
                     ],
@@ -20487,7 +19729,7 @@
                         0
                     ],
                     "Scale": [
-                        1.5000381469726562,
+                        1.5000381469726563,
                         1.5000001192092896,
                         1.5000002384185791
                     ]
@@ -20561,7 +19803,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 813806968,
+                    "pointer": 875844824,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -20630,7 +19872,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20769,7 +20011,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20908,7 +20150,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -20979,7 +20221,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21050,7 +20292,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21121,7 +20363,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21192,7 +20434,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21263,7 +20505,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21334,7 +20576,7 @@
                     "buttonWidth": 732,
                     "buttonHeight": 495,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21400,7 +20642,7 @@
                     "buttonWidth": 732.5,
                     "buttonHeight": 492,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21466,7 +20708,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21605,7 +20847,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21676,7 +20918,7 @@
                     "buttonWidth": 601.5,
                     "buttonHeight": 18,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21879,7 +21121,7 @@
                     "buttonWidth": 601.5,
                     "buttonHeight": 18,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -21984,7 +21226,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22055,7 +21297,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22121,7 +21363,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22187,7 +21429,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22253,7 +21495,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22392,7 +21634,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22531,7 +21773,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22670,7 +21912,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22809,7 +22051,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22875,7 +22117,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -22941,7 +22183,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23007,7 +22249,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23073,7 +22315,7 @@
                     "buttonWidth": 513,
                     "buttonHeight": 214,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23139,7 +22381,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23205,7 +22447,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23271,7 +22513,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23337,7 +22579,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23403,7 +22645,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23474,7 +22716,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23540,7 +22782,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23606,7 +22848,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23745,7 +22987,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23811,7 +23053,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23877,7 +23119,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -23943,7 +23185,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24009,7 +23251,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24075,7 +23317,7 @@
                     "buttonWidth": 123,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24141,7 +23383,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24207,7 +23449,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24273,7 +23515,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24339,7 +23581,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24405,7 +23647,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24476,7 +23718,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24547,7 +23789,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24618,7 +23860,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24684,7 +23926,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24750,7 +23992,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24816,7 +24058,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24921,7 +24163,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -24992,7 +24234,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25063,7 +24305,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25134,7 +24376,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25205,7 +24447,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25271,7 +24513,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25337,7 +24579,7 @@
                     "buttonWidth": 75,
                     "buttonHeight": 75,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25403,7 +24645,7 @@
                     "buttonWidth": 99,
                     "buttonHeight": 119,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25510,6 +24752,77 @@
             ]
         },
         {
+            "UUID": 1557616995,
+            "Parent UUID": 1906815624,
+            "Name": "UIB",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/UIB.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1296,
+                    "lastButtonHeight": 663.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1,
+                    "Outline Normals Thickness": 1
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
             "UUID": 711071816,
             "Parent UUID": 1906815624,
             "Name": "SpaceText",
@@ -25542,7 +24855,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
+                    "lastButtonHeight": 663.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -25577,253 +24890,6 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1430630614,
-            "Parent UUID": 1906815624,
-            "Name": "UIB",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/UIB.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1557616995,
-            "Parent UUID": 1430630614,
-            "Name": "UIBVoiceNum",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/UIB.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1097434237,
-            "Parent UUID": 1430630614,
-            "Name": "UIBCamoNum",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 613666708,
-            "Parent UUID": 1430630614,
-            "Name": "UIBCamoImg",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.066666670143604279,
-                        0.066666670143604279,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 40,
-                    "buttonHeight": 40,
-                    "lastButtonWidth": 1296,
-                    "lastButtonHeight": 642.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/UI_powerup_skill.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Color Multiplier": 1,
-                    "Outline Normals Thickness": 1
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
                 }
             ]
         },
@@ -25884,7 +24950,7 @@
                     "Position": [
                         -9.0825481414794922,
                         11.776886940002441,
-                        -65.880996704101562
+                        -65.880996704101563
                     ],
                     "Quaternion": [
                         0,
@@ -25953,7 +25019,7 @@
                     "Position": [
                         8.6621675491333008,
                         11.776886940002441,
-                        -65.880996704101562
+                        -65.880996704101563
                     ],
                     "Quaternion": [
                         0,
@@ -26091,7 +25157,7 @@
                     "Position": [
                         -0.48860001564025879,
                         13.261276245117188,
-                        -92.449844360351562
+                        -92.449844360351563
                     ],
                     "Quaternion": [
                         0,
@@ -26643,7 +25709,7 @@
                     "Position": [
                         21.414457321166992,
                         14.26667594909668,
-                        -32.094253540039062
+                        -32.094253540039063
                     ],
                     "Quaternion": [
                         0,
@@ -26781,7 +25847,7 @@
                     "Position": [
                         29.62696647644043,
                         14.26667594909668,
-                        -31.055374145507812
+                        -31.055374145507813
                     ],
                     "Quaternion": [
                         0,
@@ -27795,6 +26861,1243 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1724506246,
+            "Parent UUID": 417171234,
+            "Name": "Boss",
+            "Active": true,
+            "Static": false,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Boss.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        4.1392278671264648,
+                        9.2446231842041016,
+                        -58.209587097167969
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/CharacterTex\/nme_boss_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/CharacterTex\/nme_boss_nomal2.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Color Multiplier": 1,
+                    "Outline Normals Thickness": 1
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Animations\/nme_boss_walknormal__Mesh.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Boss",
+                    "pointer": 437254984,
+                    "type": 4,
+                    "componentTable": 0,
+                    "state": 0,
+                    "index": 0,
+                    "colliders": 0,
+                    "barrelLocations": 81079920,
+                    "barrelCount": 0,
+                    "stunnedHits": 0,
+                    "charging": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 0.30000001192092896,
+                    "Height": 1.6000000238418579,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "fActivation": true,
+                    "Mass": 70,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 20,
+                    "Active": true,
+                    "Radius": 0.5,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 6,
+                    "AngularSpeed": 180,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "SprintHit",
+                    "Animations": [
+                        {
+                            "State": "CallBackup",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_callbackup__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Die",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_die__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Execdie",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_execdie__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Exhausted",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_exhausted__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "HitGround",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_hitground__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Ntoa",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_ntoa__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Run",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_run__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Shield",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shield__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "ShieldDestroy",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shielddestroy__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "ShotCrazy",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_shotcrazy__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "SitIdle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sitidle__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Throw",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_throw__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "WalkAngry",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_walkangry__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Standup",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_standup__nme_boss_standup|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Attack",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_slam__nme_boss_slam|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "ChargeStart",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sprintinit__nme_boss_sprintinit|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "ChargeIdle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sprintidle__nme_boss_sprintidle|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "ChargeEnd",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sprintend__nme_boss_sprintend|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Hit",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_hit1__nme_boss_hit1|Armature|hit1|BaseLayer.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_idle__nme_boss_idle|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "SprintHit",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/nme_boss_sprinthitwall__nme_boss_sprinthitwall|Armature|Take 001|BaseLayer.fbx",
+                            "Loop": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 787600465,
+            "Parent UUID": 1724506246,
+            "Name": "StabParticlesBoss",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        2.1957550048828125,
+                        -0.30602645874023438
+                    ],
+                    "Quaternion": [
+                        -0.7083771824836731,
+                        0,
+                        0,
+                        0.70583409070968628
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1.0000005960464478,
+                        1.0000005960464478
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        10,
+                        10,
+                        10
+                    ],
+                    "Offset": [
+                        4.1392278671264648,
+                        11.440378189086914,
+                        -58.515613555908203
+                    ],
+                    "MaxDuration": 0.78899997472763062,
+                    "Looping": false,
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 200,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.004999999888241291,
+                            "Emitter: Current Timer": 0.004999999888241291,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 50,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.019999999552965164,
+                            "Emitter: Current Timer": 0.0039999987930059433,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 200,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.004999999888241291,
+                            "Emitter: Current Timer": 0.004999999888241291,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 50,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.019999999552965164,
+                            "Emitter: Current Timer": 0.0039999987930059433,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 200,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.004999999888241291,
+                            "Emitter: Current Timer": 0.004999999888241291,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 50,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.019999999552965164,
+                            "Emitter: Current Timer": 0.0039999987930059433,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 200,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.004999999888241291,
+                            "Emitter: Current Timer": 0.004999999888241291,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodsmall.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 50,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.019999999552965164,
+                            "Emitter: Current Timer": 0.0039999987930059433,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.10000000149011612,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_bloodmain.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 1,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                },
+                                {
+                                    "PEShape: Offset X": 0,
+                                    "PEShape: Offset Y": 0,
+                                    "PEShape: Offset Z": 0,
+                                    "PEShape: Shape Type": 2,
+                                    "PESpawnCone: Radius": 0.5,
+                                    "PESpawnCone: Height": 1,
+                                    "Effect Type": 4
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 2019833962,
+            "Parent UUID": 1724506246,
+            "Name": "BossShieldParticles",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.1375083923339844,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        10,
+                        10,
+                        10
+                    ],
+                    "Offset": [
+                        4.1392278671264648,
+                        10.382131576538086,
+                        -58.209587097167969
+                    ],
+                    "MaxDuration": 0,
+                    "Looping": true,
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 100,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.0099999997764825821,
+                            "Emitter: Current Timer": 0.0099999997764825821,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 0.60000002384185791,
+                            "Cubical: Spread on Y": 1.7999999523162842,
+                            "Cubical: Spread on Z": 0.60000002384185791,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0.10000000149011612,
+                            "Tiles: X": 5,
+                            "Tiles: Y": 2,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.5,
+                                    "PES: End size": 0.5,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
+                                        0.5675055980682373,
+                                        1,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        0,
+                                        0.92448520660400391,
+                                        1,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 100,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.0099999997764825821,
+                            "Emitter: Current Timer": 0.0099999997764825821,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 0.60000002384185791,
+                            "Cubical: Spread on Y": 1.7999999523162842,
+                            "Cubical: Spread on Z": 0.60000002384185791,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0.10000000149011612,
+                            "Tiles: X": 5,
+                            "Tiles: Y": 2,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.5,
+                                    "PES: End size": 0.5,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
+                                        0.5675055980682373,
+                                        1,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        0,
+                                        0.92448520660400391,
+                                        1,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 100,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.0099999997764825821,
+                            "Emitter: Current Timer": 0.0099999997764825821,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 0.60000002384185791,
+                            "Cubical: Spread on Y": 1.7999999523162842,
+                            "Cubical: Spread on Z": 0.60000002384185791,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0.10000000149011612,
+                            "Tiles: X": 5,
+                            "Tiles: Y": 2,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.5,
+                                    "PES: End size": 0.5,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
+                                        0.5675055980682373,
+                                        1,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        0,
+                                        0.92448520660400391,
+                                        1,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 100,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.0099999997764825821,
+                            "Emitter: Current Timer": 0.0099999997764825821,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 0.60000002384185791,
+                            "Cubical: Spread on Y": 1.7999999523162842,
+                            "Cubical: Spread on Z": 0.60000002384185791,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0.10000000149011612,
+                            "Tiles: X": 5,
+                            "Tiles: Y": 2,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_electric_destroy.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.5,
+                                    "PES: End size": 0.5,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
+                                        0.5675055980682373,
+                                        1,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        0,
+                                        0.92448520660400391,
+                                        1,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
